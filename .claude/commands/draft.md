@@ -2,16 +2,18 @@
 
 해당 챕터의 특정 섹션 초고를 작성한다.
 
-## 실행 단계
+## 실행 단계 (최소 읽기 원칙)
 
-1. `chapters/chNN-xxx.md`에서 해당 섹션의 outline 계획을 읽는다.
-2. 관련 재료를 읽는다:
-   - `deep-research/DR-N.N-xxx.md` (해당 챕터 배정 DR)
-   - `experiments/axis-N/ENN-xxx.md` (관련 실험 로그)
-   - `evidence/case-studies/` (관련 사례 노트)
-   - `field-dispatches/` (관련 태그 dispatch)
-3. 섹션을 작성한다.
-4. 작성 후 사용자에게 보여주고 피드백을 기다린다.
+1. `chapters/chNN-xxx.md`에서 **섹션 N의 outline 블록만** 읽는다.
+   (파일 전체가 아니라 해당 섹션 항목만)
+2. 해당 섹션 outline에 **명시된** 재료만 읽는다:
+   - DR: outline에 "DR-N.N" 이 적혀 있을 때만
+   - 실험: outline에 "ENN" 이 적혀 있을 때만
+   - 기타 파일: outline에 명시된 것만
+3. **명시되지 않은 파일은 읽지 않는다** (추측으로 파일 읽기 금지)
+4. 섹션을 작성한다.
+5. 작성 완료 후 반드시 멈추고 피드백을 기다린다.
+   → "섹션 N 완성. 피드백 주시면 섹션 N+1로 넘어갑니다."
 
 ## 작성 규칙
 

@@ -2,13 +2,16 @@
 
 해당 챕터의 section outline을 생성한다.
 
-## 실행 단계
+## 실행 단계 (조건부 읽기)
 
-1. `chapter-map.md`에서 해당 챕터의 핵심 메시지, 학습 결과를 읽는다.
-2. `writing-plan.md`에서 해당 챕터의 "핵심 구성" 섹션을 읽는다.
-3. `deep-research/README.md`에서 해당 챕터에 배정된 DR 목록을 확인한다.
-4. `deep-research/` 에서 관련 DR 결과를 읽는다 (있으면).
-5. `experiments/`에서 관련 실험 결과를 읽는다 (있으면).
+1. `chapter-map.md`에서 해당 챕터 항목만 읽는다 (파일 전체 X).
+2. `writing-plan.md`에서 해당 챕터의 "핵심 구성" 섹션만 읽는다.
+3. `deep-research/README.md`에서 챕터 배정 DR 목록을 확인한다 (목록만 확인, 파일 내용은 읽지 않음).
+4. `experiments/scenario-master.md`에서 해당 챕터 실험 ID만 확인한다.
+5. Outline을 생성한다 — 각 섹션에 필요한 DR/실험 ID를 명시한다.
+   (이 ID가 `/draft` 단계의 최소 읽기 지침이 된다)
+
+**DR/실험 파일 내용은 outline 단계에서 읽지 않는다. `/draft` 단계에서 섹션별로 필요할 때만 읽는다.**
 
 ## 출력 형식
 

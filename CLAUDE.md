@@ -6,12 +6,7 @@
 Beta 마감: 2026-05-13. 한국어 초고 → 영어 번역.
 
 ## 글쓰기 원칙
-- Voice: builder-operator. 연구실이 아니라 현장의 톤.
-- 정확하되 딱딱하지 않게. 국제 독자 고려. hype 금지.
-- 한 문장 40자 이하. 한 단락 3~5문장. 하나의 생각 = 하나의 단락.
-- "~하는 것이다" 같은 회피 표현 줄이기. 직접 말하기.
-- 관찰 → 측정 → 해석 → 시사점 순서로 서술.
-- 구체적 수치. "성능 저하" 대신 "tool call 성공률 87%→54%".
+Builder-operator voice. 현장의 톤. hype 금지. 수치 없는 성능 서술 금지. 상세 규칙은 `/draft` skill 참고.
 
 ## 핵심 원칙
 1. 교리집이 아니라 실험서. 결과가 예상과 다르면 결과를 기록.
@@ -45,3 +40,11 @@ Ch.4 의도적 실패 20개 | Ch.5 실험 결과 분석 | Ch.6 Fieldkit | Ch.7 S
 
 ## 팀
 Lead: Kiwon (Ch.1/3/6/7). Exp A (E01-08). Exp B (E09-16). Exp C (E17-22).
+
+## 토큰 절약 정책 (Token Policy)
+- 세션 시작 시 `/begin [chNN] [section_N]`으로 현재 위치 확인
+- 섹션 하나 완료 후 피드백 없이 다음 섹션으로 넘어가지 않는다
+- 대화가 10턴 이상이면 `/compact "voice rules, chapter outline, current section progress 유지"` 실행
+- 챕터 전환 시 `/clear` — 다음 챕터는 새 세션에서 시작
+- `/cost` 로 토큰 현황 수시 확인
+- 상세 정책: `token-policy.md` 참고
