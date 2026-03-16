@@ -105,19 +105,17 @@
 - 풍선 효과는 어떤 패턴으로 나타나는가?
 
 **핵심 구성**:
-- 축 1 (E01-E04): 모델을 바꾸면 무엇이 달라지는가
-- 축 2 (E05-E08): Harness와 surface를 바꾸면 무엇이 달라지는가
-- 축 3 (E09-E14): 제약 환경에서 가장 먼저 드러나는 병목
-- 축 4 (E15-E17): Operator intervention의 효과
-- 축 5 (E18-E20): AgentOps 기능의 harness 내재화 가능성
-- 반례 (E21-E22): Task design 문제, Compute saturation 문제
+- 1막 (E01-E07): 무엇이 실패를 만드는가 — 모델·harness·surface 변수 조작
+- 2막 (E08-E12): 자원 제약 하에서 self-immune이 가능한 harness의 최소 조건
+- 3막 (E13-E18): 개입은 반복 가능한가, 그리고 내재화될 수 있는가
+- 반례 (E19-E20): Task design 문제, Compute saturation 문제
 
 **학습 결과**:
 - 자신의 환경에서 의도적 실패 실험을 설계하고 실행할 수 있다.
 - 이 챕터의 실험 설계를 벤치마크하여 학술적 실험을 구축할 수 있다.
 
 **관련 DR**: DR-4.1, DR-4.2, DR-4.3, DR-4.4
-**관련 실험**: E01~E22 전체
+**관련 실험**: E01~E20 전체
 
 ---
 
@@ -145,7 +143,7 @@
 - AgentOps 실무를 이해하고, computation 요구사항을 산정하며, 실험 결과에서 학술적 확장 가능성을 식별할 수 있다.
 
 **관련 DR**: DR-5.1, DR-5.2, DR-5.3
-**관련 실험**: E01~E22 분석
+**관련 실험**: E01~E20 분석
 
 ---
 
@@ -195,8 +193,8 @@
 **학습 결과**:
 - Harness engineering이 Agent-2 전환에 왜 필수적인지 설명할 수 있다.
 
-**관련 DR**: DR-7.1, DR-7.2
-**관련 실험**: E20 (mini self-immune)
+**관련 DR**: DR-7.1, DR-7.2, DR-3.4(§9)
+**관련 실험**: E18 (mini self-immune), E12 (self-immune overhead)
 
 ---
 
