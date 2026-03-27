@@ -22,7 +22,7 @@ Ch.4의 22개 실험에서 추출하는 패턴은 세 단계의 번역을 거쳐
 ## 집필 노트
 
 - 관련 DR: DR-5.1 (실패 패턴 분석), DR-5.2 (compute cost 최적화), DR-5.3 (VM 리소스 관리)
-- 관련 실험: E01~E22 전체 분석 (Ch.4 실험 완료 후 작성)
+- 관련 실험: E01~E20 전체 분석 (Ch.4 실험 완료 후 작성)
 - Ch.4와의 관계: Ch.4가 실행과 기록이라면, 이 챕터는 confirmatory analysis와 exploratory 발견을 구분하면서 분석한다. Ch.4에서 결과를 보고하고 이 챕터에서 해석한다.
 
 **3단계 번역 체계 (조작적):**
@@ -91,7 +91,7 @@ Ch.4의 22개 실험에서 추출하는 패턴은 세 단계의 번역을 거쳐
 6. **Token efficiency를 운영 규율로**
    - Fig 4 (Token Budget Depletion Curve): TCR이 급락하는 budget threshold 측정
    - 운영 규율: token budget을 HOR 관리와 연결하는 실무 기준
-   - E22 (compute saturation) 반례가 규율 설계에 주는 시사점: HOR 상한을 어디에 두어야 하는가
+   - E20 (compute saturation) 반례가 규율 설계에 주는 시사점: HOR 상한을 어디에 두어야 하는가
    - Token efficiency가 운영 규율이 되는 조건: agent가 장기 자율 루프로 실행될 때
 
 7. **Scaling과 temporal stability: 이 결과는 언제까지 유효한가**

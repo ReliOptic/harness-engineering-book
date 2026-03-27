@@ -35,7 +35,7 @@ OpenRouter base URL: `https://openrouter.ai/api/v1` (OpenAI SDK 호환)
 3. E03 실행 — mid-run switching
 4. E04 실행 — harness on/off baseline (가장 중요한 실험)
 5. E05, E06 실행
-6. E07 실행
+6. E07 실행 — **[2026-03-27 우선순위 재검토]**: E07 가설은 "CLI vs API surface가 에이전트 성능에 영향을 준다"인데, Claude Code Computer Use 출시로 surface 변수가 플랫폼 레이어로 흡수되는 방향이 확인됨. 이 맥락에서 E07은 surface 변수가 완전히 추상화되기 이전 시점의 경계 관찰로 의미를 재정의한다 — "surface가 흡수될 때 남는 병목이 harness임을 보여주는 대조 실험"으로. 가설 서술은 design-specification.md §E07에서 이 관점을 반영해 업데이트 요망.
 7. B의 E03, E05, E06 교차검증 요청
 
 ### Experimenter B (E08~E12)

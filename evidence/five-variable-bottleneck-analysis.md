@@ -28,8 +28,8 @@
 | E18 | Harness (내재화) | TBD | TBD | TBD |
 | E19 | Harness (내재화) | TBD | TBD | TBD |
 | E20 | Harness (내재화) | TBD | TBD | TBD |
-| E21 | Task design | TBD | TBD | TBD |
-| E22 | Compute (극단) | TBD | TBD | TBD |
+| E19 | Task design | TBD | TBD | TBD |
+| E20 | Compute (극단) | TBD | TBD | TBD |
 
 ---
 

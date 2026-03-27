@@ -14,8 +14,8 @@
 
 ## 이전 챕터에서 오는 것 / 다음 챕터로 보내는 것
 
-- **이전 Ch.4에서 오는 것**: 22개 실험의 원시 결과. Confirmatory/exploratory 레이블. 반례 조건(E21, E22). Figure 1~8 데이터.
-- **다음 Ch.6으로 보내는 것**: Component ablation 결과와 marginal ROI 순위(Ch.6 Fieldkit 도구화 우선순위의 근거). Optimal HOR 구간. "도구화하면 안 되는 것"의 조건(E21, E22에서 확인된 항목).
+- **이전 Ch.4에서 오는 것**: 22개 실험의 원시 결과. Confirmatory/exploratory 레이블. 반례 조건(E19, E20). Figure 1~8 데이터.
+- **다음 Ch.6으로 보내는 것**: Component ablation 결과와 marginal ROI 순위(Ch.6 Fieldkit 도구화 우선순위의 근거). Optimal HOR 구간. "도구화하면 안 되는 것"의 조건(E19, E20에서 확인된 항목).
 
 ---
 
@@ -49,7 +49,7 @@
 - `deep-research/DR-5.3-vm-resource-management.md`
 - `experiments/design-specification.md` — §4 (Statistical analysis plan)
 - `evidence/tables/bottleneck-by-condition.md`
-- **실험 데이터**: E01~E22 전체 분석
+- **실험 데이터**: E01~E20 전체 분석
 - **Figure 분석 책임**: Fig 1~2, 4~5, 8~12
 
 ---

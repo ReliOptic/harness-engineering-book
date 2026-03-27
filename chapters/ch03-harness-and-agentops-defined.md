@@ -35,7 +35,7 @@ Harness는 failure를 제거하지 않는다. Harness가 하는 것은 failure�
 - HOR = (harness가 추가하는 token 수) / (base task token 수) × 100%
 - HOR은 운영 비용의 직접 구성요소: Cost_compute = Cost_compute_base × (1 + HOR/100)
 - HOR × RSuccR trade-off에 optimal point가 존재한다는 가설을 Ch.4에서 검증.
-- HOR이 과도하면 token budget을 잠식하고 TCR이 오히려 감소한다 (E22 반례 예고).
+- HOR이 과도하면 token budget을 잠식하고 TCR이 오히려 감소한다 (E20 반례 예고).
 
 **Pre-registration 원칙:**
 - Ch.4의 실험은 이 챕터 말미에서 가설과 판단 기준을 announce한다.
@@ -82,7 +82,7 @@ Harness는 failure를 제거하지 않는다. Harness가 하는 것은 failure�
 5. **HOR (Harness Overhead Ratio) — harness의 비용을 측정하는 방법**
    - HOR 정의: token overhead 비율. Harness가 도입하는 운영 비용의 1차 지표.
    - HOR × RSuccR trade-off: optimal point가 존재하는가 (Ch.4 실험 가설)
-   - HOR = 0은 harness 없음. HOR 과도 → token budget 잠식 → TCR 감소 (E22 예고).
+   - HOR = 0은 harness 없음. HOR 과도 → token budget 잠식 → TCR 감소 (E20 예고).
    - 이 trade-off를 실험적으로 측정하는 것이 Fig 8 (Cost-Reliability Frontier)의 역할
 
 6. **AgentOps란 무엇인가 — profession으로서의 정의**

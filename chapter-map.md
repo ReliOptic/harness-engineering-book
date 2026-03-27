@@ -150,7 +150,7 @@
 - 3막 (E09-E14): 제약 환경의 병목 — compute saturation, multi-agent coordination
 - 4막 (E15-E17): Operator intervention의 효과 — intervention timing, codification
 - 5막 (E18-E20): AgentOps 내재화 — token monitoring, failure detection, mini self-immune
-- 반례 (E21-E22): Task design 문제, Compute saturation 문제
+- 반례 (E19~E20): Task design 문제, Compute saturation 문제
 
 **학습 결과**:
 - Pre-registration 원칙을 적용한 deliberate failure experiment를 설계하고 실행할 수 있다.
@@ -158,7 +158,7 @@
 - Confirmatory analysis와 exploratory 발견을 구분하여 보고할 수 있다.
 
 **관련 DR**: DR-4.1, DR-4.2, DR-4.3, DR-4.4
-**관련 실험**: E01~E22 전체
+**관련 실험**: E01~E20 전체
 **관련 Figure**: Fig 1~8 (데이터 생성 책임)
 **Pre-registration 파일**: `experiments/design-specification.md`
 
@@ -193,7 +193,7 @@
 - Scaling과 temporal stability 결과를 해석할 수 있다.
 
 **관련 DR**: DR-5.1, DR-5.2, DR-5.3
-**관련 실험**: E01~E22 분석
+**관련 실험**: E01~E20 분석
 **관련 Figure**: Fig 1~2, 4~5, 8~12 (분석 책임)
 
 ---

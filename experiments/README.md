@@ -24,7 +24,7 @@
 | 3. 제약 환경 병목 | `axis-3-constraint-bottleneck/` | E09~E14 |
 | 4. Operator intervention | `axis-4-operator-intervention/` | E15~E17 |
 | 5. AgentOps 내재화 | `axis-5-harness-internalization/` | E18~E20 |
-| 반례 | `counterexamples/` | E21~E22 |
+| 반례 | `counterexamples/` | E19~E20 |
 | 교차검증 | `cross-validation/` | xval 로그 |
 
 ---
@@ -34,7 +34,7 @@
 ```
 Experimenter A: E01~E08 실행 → B가 E03, E05 교차검증
 Experimenter B: E09~E16 실행 → A가 E11, E14 교차검증
-Experimenter C: E17~E22 실행 → B가 E19, E20 교차검증
+Experimenter C: E17~E20 실행 → B가 E19, E20 교차검증
 ```
 
 ---

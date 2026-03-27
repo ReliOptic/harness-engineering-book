@@ -1,4 +1,4 @@
-# Ch.4 — 의도적 실패 실험: 22개 시나리오
+# Ch.4 — 의도적 실패 실험: 20개 시나리오
 
 > 상태: 🔲 skeleton only
 > 담당: Kiwon (narrative) + Experimenter A/B/C (실험)
@@ -8,7 +8,7 @@
 
 ## 핵심 메시지
 
-의도적으로 실패시키는 것이 이 챕터의 방법론이다. 22개 시나리오는 pre-registration 원칙 하에 설계되었다 — 가설, 판단 기준, 검정 방법이 데이터 수집 전에 `experiments/design-specification.md`에 고정되었다. 이것이 Ch.5의 분석을 post-hoc rationalization이 아닌 confirmatory analysis로 만드는 구조적 조건이다. 실험은 5변수 프레임워크의 각 변수를 격리하여 조작하고, 어떤 변수가 어떤 조건에서 1차 병목이 되는가를 측정한다.
+의도적으로 실패시키는 것이 이 챕터의 방법론이다. 20개 시나리오는 pre-registration 원칙 하에 설계되었다 — 가설, 판단 기준, 검정 방법이 데이터 수집 전에 `experiments/design-specification.md`에 고정되었다. 이것이 Ch.5의 분석을 post-hoc rationalization이 아닌 confirmatory analysis로 만드는 구조적 조건이다. 실험은 5변수 프레임워크의 각 변수를 격리하여 조작하고, 어떤 변수가 어떤 조건에서 1차 병목이 되는가를 측정한다.
 
 ## 학습 결과
 
@@ -22,12 +22,12 @@
 ## 집필 노트
 
 - 관련 DR: DR-4.1 (chaos engineering), DR-4.2 (GCP 무료 티어 제약), DR-4.3 (token budget), DR-4.4 (compute benchmarks)
-- 관련 실험: E01~E22 전체
+- 관련 실험: E01~E20 전체
 - **Pre-registration 파일**: `experiments/design-specification.md` — 이 챕터의 모든 가설과 판단 기준의 원천. 이 파일이 챕터 집필 전에 완성된 상태여야 한다.
 - **이 챕터는 실험 실행 완료 후 작성 가능.** 서술 구조(§1 pre-registration 선언, §2 환경, §3~§8 축별 결과)는 지금 확정.
 - **Confirmatory vs. exploratory 구분 원칙**: pre-registration에 있는 가설 검증 → confirmatory. 실험 중 발견된 예상 밖 패턴 → exploratory. 챕터 내에서 명시적으로 레이블링.
 - **풍선 효과 기록**: 한 변수를 제어하면 다른 변수가 1차 병목으로 부상하는 패턴. 발견되면 exploratory 발견으로 기록.
-- **반례 실험(E21, E22) 서술 원칙**: 이 두 실험의 결론은 "따라서 harness가 필요하다"가 아니다. "harness가 해결하지 못하는 조건이 존재한다"이다. 결론을 선언하지 않고 조건을 기술한다.
+- **반례 실험(E19, E20) 서술 원칙**: 이 두 실험의 결론은 "따라서 harness가 필요하다"가 아니다. "harness가 해결하지 못하는 조건이 존재한다"이다. 결론을 선언하지 않고 조건을 기술한다.
 
 **Figure 매핑 (데이터 생성 책임):**
 | Figure | 실험 | 가설 |
@@ -97,11 +97,11 @@
    - Bayesian optimization over harness configuration: optimal HOR 탐색 (Fig 8 기반)
    - Confirmatory: optimal HOR이 존재한다는 가설 검증
 
-8. **반례 — task design과 compute saturation (E21~E22): harness의 구조적 한계**
-   - E21: Task 자체가 모호할 때 harness는 무엇을 할 수 있고 무엇을 할 수 없는가
+8. **반례 — task design과 compute saturation (E19~E20): harness의 구조적 한계**
+   - E19: Task 자체가 모호할 때 harness는 무엇을 할 수 있고 무엇을 할 수 없는가
      - IFR은 instruction의 명시적 constraint를 측정한다. 암묵적 constraint는 측정하지 않는다.
      - Harness가 통과시킨 모든 tool call이 올바른데 전체 결과가 잘못된 조건이 가능하다.
-   - E22: Compute saturation — HOR이 token budget을 초과할 때의 failure mode
+   - E20: Compute saturation — HOR이 token budget을 초과할 때의 failure mode
      - Harness overhead가 실험 비용이 되는 조건 — "harness가 harness를 필요로 하는" 상황
    - 이 두 실험이 보여주는 것: harness의 설계 범위와 범위 밖에 있는 것들
 
@@ -121,5 +121,5 @@
 - `experiments/axis-3-constraint-bottleneck/` (E09~E14)
 - `experiments/axis-4-operator-intervention/` (E15~E17)
 - `experiments/axis-5-harness-internalization/` (E18~E20)
-- `experiments/counterexamples/` (E21~E22)
+- `experiments/counterexamples/` (E19~E20)
 - `evidence/tables/bottleneck-by-condition.md`

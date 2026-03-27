@@ -9,7 +9,7 @@
 | **Lead author / Concept owner** | Kiwon | 논제, 챕터 논리, 최종 voice, Ch.1/3/6/7 primary writing |
 | **Experimenter A** | TBD | E01~E08 primary, E09~E14 cross-validation |
 | **Experimenter B** | TBD | E09~E16 primary, E01~E08 cross-validation |
-| **Experimenter C** | TBD | E17~E22 primary, E15~E16 cross-validation |
+| **Experimenter C** | TBD | E17~E20 primary, E15~E16 cross-validation |
 
 ---
 
@@ -18,7 +18,7 @@
 ```
 Experimenter A: E01~E08 실행 → Experimenter B가 E03, E05 교차검증
 Experimenter B: E09~E16 실행 → Experimenter A가 E11, E14 교차검증
-Experimenter C: E17~E22 실행 → Experimenter B가 E19, E20 교차검증
+Experimenter C: E17~E20 실행 → Experimenter B가 E19, E20 교차검증
 ```
 
 ---

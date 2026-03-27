@@ -1,6 +1,6 @@
 # E-meta: 집필 과정의 메타 실험
 
-> **번호**: E-meta (E01~E22 외부. Appendix A 별도 섹션)
+> **번호**: E-meta (E01~E20 외부. Appendix A 별도 섹션)
 > **목적**: 집필 과정 자체를 AgentOps 데이터로 기록하여 Ch.5 cost metric 번역 사례와 Ch.7 §9 내용을 실증
 > **기간**: 2026-03-19 ~ 베타 마감 (2026-05-13)
 > **배치**: Ch.5 §cost-translation(3-A 1~2문단), Ch.7 §9(3-A/B/C 종합), Appendix A(로그 템플릿)

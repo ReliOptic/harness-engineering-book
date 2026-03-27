@@ -57,7 +57,7 @@ Self-immune system이란 agent가 외부 harness의 규칙 없이도 자신의 A
 2. **현 세대 harness가 아직 풀 수 없는 문제**
    - 규칙 기반 방어의 구조적 한계: 알려진 failure pattern만 차단한다
    - ARCC가 cliff threshold 근처에서 운영되는 agent에 대한 harness의 한계
-   - E21 반례가 남긴 질문: task의 암묵적 constraint는 harness가 검증할 수 없다
+   - E19 반례가 남긴 질문: task의 암묵적 constraint는 harness가 검증할 수 없다
 
 3. **AgentOps → Harness → Agent 내재화: 점진적 경로**
    - 외부 운영자의 AgentOps 실무가 harness component로 구현되고, 그것이 agent 내부로 주입되는 경로
@@ -85,7 +85,7 @@ Self-immune system이란 agent가 외부 harness의 규칙 없이도 자신의 A
    - Agent-1: 외부 harness가 관찰하고 개입한다. Operator intervention이 필요하다.
    - Agent-2: agent가 스스로 ARCC를 monitoring하고 복구 경로를 실행한다.
    - 전환의 충분조건: ARCC가 self-monitoring threshold를 초과하고, temporal stability가 운영 horizon 내에서 유지된다
-   - 전환의 필요조건: task 자체의 모호성이 제거된다 (E21이 보여준 harness의 한계)
+   - 전환의 필요조건: task 자체의 모호성이 제거된다 (E19이 보여준 harness의 한계)
    - DR-3.4 (ontology 내재화)와의 연결: Agent-2 상태에서 agent가 자신의 context 구조를 유지하는 방법
 
 8. **이 책 이후: 미해결 질문들**
@@ -112,7 +112,7 @@ Self-immune system이란 agent가 외부 harness의 규칙 없이도 자신의 A
 
 Failure budget이 재배분된 방향은 일관됐다. Tool call failure와 output format error처럼 구조적으로 감지 가능한 failure는 harness-on 조건에서 recovery attempted 범주로 이동했다. E05부터 E08에 걸친 harness 변수 조작 실험에서, failure 6축 radar의 형태가 변했다 — 면적은 유사하게 유지되었으나 silent logical drift의 비율이 줄고 recovery succeeded의 비율이 늘었다. Harness는 failure를 제거하지 않는다. Failure를 더 비싸지 않은 유형으로 교환한다.
 
-재배분이 일어나지 않은 failure들의 목록은 다른 성격을 띤다. 에이전트가 각 단계를 올바른 절차대로 밟으면서도 전체 방향이 틀린 경우 — 이것은 ARCC sub-components 중 IFR(Instruction Following Rate)의 decay가 단계별로는 감지되지 않다가 task 수준에서 누적되는 패턴이다. E21에서 task 자체를 모호하게 설계했을 때 드러난 것이 이것이다. Harness는 각 tool call의 schema validity를 검증하지만, tool call sequence 전체가 instruction의 암묵적 constraint를 충족하는지는 검증하지 않는다. IFR이 threshold 아래로 내려가는 것을 외부에서 감지하려면, 이미 충분히 낮아진 이후다.
+재배분이 일어나지 않은 failure들의 목록은 다른 성격을 띤다. 에이전트가 각 단계를 올바른 절차대로 밟으면서도 전체 방향이 틀린 경우 — 이것은 ARCC sub-components 중 IFR(Instruction Following Rate)의 decay가 단계별로는 감지되지 않다가 task 수준에서 누적되는 패턴이다. E19에서 task 자체를 모호하게 설계했을 때 드러난 것이 이것이다. Harness는 각 tool call의 schema validity를 검증하지만, tool call sequence 전체가 instruction의 암묵적 constraint를 충족하는지는 검증하지 않는다. IFR이 threshold 아래로 내려가는 것을 외부에서 감지하려면, 이미 충분히 낮아진 이후다.
 
 Operator intervention이 가장 효과적이었던 시점은 failure 직후가 아니라 IFR decay가 시작되는 시점이었다. 이것은 MTTR 최소화의 문제다. Failure가 발생한 이후에 개입하면 recovery는 가능하지만 MTTR이 이미 높아진 상태다. IFR decay가 시작되는 시점은 외부에서 바라보면 정상 출력처럼 보인다 — 문법적으로 완결되고 tool call도 schema를 통과한다. 방향 이탈은 구조적으로 감지 가능하지 않다.
 

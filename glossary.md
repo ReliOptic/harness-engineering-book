@@ -39,7 +39,7 @@ MLOps/DevOps에서 파생되었으나 그것보다 넓다.
 
 **Compute (컴퓨트)**
 5변수 중 하나. VM 사양, token budget, API 비용, 네트워크 지연 등 실행 환경의 물리적 제약.
-Compute saturation은 모델이나 harness가 문제가 아닐 때도 실패를 유발한다 — 반례 2(E22).
+Compute saturation은 모델이나 harness가 문제가 아닐 때도 실패를 유발한다 — 반례 2(E20).
 
 ---
 

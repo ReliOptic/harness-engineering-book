@@ -18,7 +18,7 @@
 | E09~E14 | `experiments/axis-3-constraint-bottleneck/` |
 | E15~E17 | `experiments/axis-4-operator-intervention/` |
 | E18~E20 | `experiments/axis-5-harness-internalization/` |
-| E21~E22 | `experiments/counterexamples/` |
+| E19~E20 | `experiments/counterexamples/` |
 
 ## 필수 필드
 

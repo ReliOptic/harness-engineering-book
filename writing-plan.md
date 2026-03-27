@@ -468,14 +468,14 @@ Ch.1에서 도입, Ch.7에서 Agent-1→2 전환에 집중.
 
 | # | 시나리오 | 조작 변수 | 예상 관찰 |
 | --- | --- | --- | --- |
-| E21 | 모호한 task 정의로 실행 (task design 문제 반례) | Task design | Harness/모델과 무관한 실패 |
-| E22 | 완벽한 harness + SOTA 모델이지만 VM 1코어 (compute 반례) | Resource | 모든 것이 좋아도 compute가 부족하면 실패 |
+| E19 | 모호한 task 정의로 실행 (task design 문제 반례) | Task design | Harness/모델과 무관한 실패 |
+| E20 | 완벽한 harness + SOTA 모델이지만 VM 1코어 (compute 반례) | Resource | 모든 것이 좋아도 compute가 부족하면 실패 |
 
 ### 실험 로그 템플릿
 
 | 필드 | 설명 |
 | --- | --- |
-| Experiment ID | E01~E22 |
+| Experiment ID | E01~E20 |
 | Date | 실행 날짜 |
 | Task | 구체적 task 설명 |
 | 조작 변수 | 5변수 중 무엇을 조작했는가 |
@@ -508,7 +508,7 @@ Ch.1에서 도입, Ch.7에서 Agent-1→2 전환에 집중.
 | **Lead author / Concept owner** | Kiwon | 논제, 챕터 논리, 최종 voice, Ch.1/3/6/7 primary writing |
 | **Experimenter A** | TBD | E01~E08 primary, E09~E14 cross-validation |
 | **Experimenter B** | TBD | E09~E16 primary, E01~E08 cross-validation |
-| **Experimenter C** | TBD | E17~E22 primary, E15~E16 cross-validation |
+| **Experimenter C** | TBD | E17~E20 primary, E15~E16 cross-validation |
 
 ### 교차검증 설계
 
@@ -518,7 +518,7 @@ Ch.1에서 도입, Ch.7에서 Agent-1→2 전환에 집중.
 ```
 Experimenter A: E01~E08 실행 → Experimenter B가 E03, E05 교차검증
 Experimenter B: E09~E16 실행 → Experimenter A가 E11, E14 교차검증
-Experimenter C: E17~E22 실행 → Experimenter B가 E19, E20 교차검증
+Experimenter C: E17~E20 실행 → Experimenter B가 E19, E20 교차검증
 ```
 
 ### 팀 성장 원칙
@@ -582,13 +582,13 @@ Experimenter C: E17~E22 실행 → Experimenter B가 E19, E20 교차검증
 **해야 하는 일:**
 - Deep research DR-4.1~4.4 실행
 - E09~E16 실행 (Experimenter B primary)
-- E17~E22 실행 (Experimenter C primary)
+- E17~E20 실행 (Experimenter C primary)
 - 교차검증: A→E11/E14, B→E19/E20
-- 반례 실험 E21, E22 실행
+- 반례 실험 E19, E20 실행
 - 풍선 효과 관찰 및 기록
 - Chapter 4 초고 작성
 
-**산출물:** Ch.4 draft, E09~E22 전체 로그, 풍선 효과 기록
+**산출물:** Ch.4 draft, E09~E20 전체 로그, 풍선 효과 기록
 
 ---
 

@@ -35,8 +35,8 @@ Fieldkit은 HOR × RSuccR trade-off의 pareto frontier를 따라 점진적으로
 - 순차적 추가가 pareto frontier를 따라 이동하는 전략이다.
 
 **"도구화하면 안 되는 것"의 기준:**
-- E21 (task 모호성): IFR이 낮은 이유가 instruction 자체의 암묵적 constraint 부재일 때, harness component를 추가해도 IFR이 개선되지 않는다. 도구화가 아니라 task 재설계가 필요한 경우.
-- E22 (compute saturation): HOR이 이미 token budget의 임계점에 근접했을 때 새 component 추가는 TCR을 낮춘다. 도구를 더하는 것이 아니라 줄이는 것이 처방이다.
+- E19 (task 모호성): IFR이 낮은 이유가 instruction 자체의 암묵적 constraint 부재일 때, harness component를 추가해도 IFR이 개선되지 않는다. 도구화가 아니라 task 재설계가 필요한 경우.
+- E20 (compute saturation): HOR이 이미 token budget의 임계점에 근접했을 때 새 component 추가는 TCR을 낮춘다. 도구를 더하는 것이 아니라 줄이는 것이 처방이다.
 
 ---
 
@@ -47,7 +47,7 @@ Fieldkit은 HOR × RSuccR trade-off의 pareto frontier를 따라 점진적으로
 1. **Ch.4-5에서 추출한 반복 실패 패턴 → 도구화 후보 식별**
    - Failure taxonomy(6축) 중 반복 빈도가 높고 도구화 marginal ROI가 높은 것
    - Fig 10 (Harness Ablation) 순위를 도구화 우선순위로 전환하는 기준
-   - 도구화 대상이 아닌 것: task 자체의 모호함(E21), compute saturation(E22) — 이것들을 도구로 해결하려 하면 HOR만 높아진다
+   - 도구화 대상이 아닌 것: task 자체의 모호함(E19), compute saturation(E20) — 이것들을 도구로 해결하려 하면 HOR만 높아진다
    - "도구화 이전": 먼저 수동으로 몇 번 반복한 이후에 도구화한다. 한 번도 해보지 않은 것을 미리 자동화하지 않는다.
 
 2. **Operational Fieldkit 설계 원칙**

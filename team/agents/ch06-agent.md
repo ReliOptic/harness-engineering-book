@@ -14,7 +14,7 @@ Fieldkit은 HOR × RSuccR trade-off의 pareto frontier를 따라 점진적으로
 
 ## 이전 챕터에서 오는 것 / 다음 챕터로 보내는 것
 
-- **이전 Ch.5에서 오는 것**: Component ablation marginal ROI 순위(도구화 우선순위의 근거). Optimal HOR 구간. "도구화하면 안 되는 것"의 조건(E21, E22).
+- **이전 Ch.5에서 오는 것**: Component ablation marginal ROI 순위(도구화 우선순위의 근거). Optimal HOR 구간. "도구화하면 안 되는 것"의 조건(E19, E20).
 - **다음 Ch.7로 보내는 것**: Fieldkit을 통해 주입 가능한 agent 능력의 한계. 점진적 도구화가 도달하는 상한 — 그 상한 너머에서 self-immune system 논의가 시작된다.
 
 ---
@@ -32,7 +32,7 @@ Fieldkit은 HOR × RSuccR trade-off의 pareto frontier를 따라 점진적으로
 ## 이 챕터의 서술 제약
 
 - **"도구화하기 전에 먼저 수동으로 해본다"** 원칙을 명시한다. 한 번도 해보지 않은 것을 미리 자동화하지 않는다.
-- **E21, E22를 언급할 때**: 이 두 케이스는 "harness가 해결하지 못하는 것"의 예시다. "따라서 task 재설계가 필요하다"는 선언 대신 "harness component 추가가 IFR을 개선하지 못한 조건"을 기술한다.
+- **E19, E20를 언급할 때**: 이 두 케이스는 "harness가 해결하지 못하는 것"의 예시다. "따라서 task 재설계가 필요하다"는 선언 대신 "harness component 추가가 IFR을 개선하지 못한 조건"을 기술한다.
 - **CLI-Anything 비교(§5)**: "독립적 수렴"의 증거로만 사용. "CLI-Anything이 더 낫다"거나 "이 책의 접근이 더 낫다"는 주장을 하지 않는다. 수렴 지점과 차이 지점을 함께 기술한다.
 - **Fig 8(Cost-Reliability Frontier) 참조**: Bayesian optimization 결과가 제안하는 component 추가 순서를 시각화의 원천으로 사용한다.
 - 이 챕터는 5변수 중 "intervention" 변수가 가장 크게 부각되는 챕터다.
