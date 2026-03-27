@@ -12,69 +12,74 @@
 
 ---
 
-## Ch.1 — 지금 무슨 일이 일어나고 있는가
+## Ch.1 — 2026년 상반기: agent 기술의 현재 지형
 
 **파일**: `chapters/ch01-what-is-happening-now.md`
-**핵심 메시지**: Agent-friendly product surface의 초기 형태가 부상하는 시점을 기록한다.
+**핵심 메시지**: Agent 기술이 어디까지 왔는가. 플랫폼이 해결한 것과 운영자에게 남겨진 것의 경계를 기록한다.
+
+**서사 방향**: 실패담이 아닌 기술 고도화 소개. 무엇이 부서졌는가가 아니라 무엇이 가능해졌고 무엇이 아직 열린 문제인가.
 
 **탐구 질문**:
-- 2026년 상반기 agent runtime 현장은 어떤 상태인가?
-- OpenClaw는 무엇을 가능하게 했고 무엇이 아직 모자란가?
-- TeamClaws/PicoClaw 실패는 무엇을 보여주는가?
+- 2026년 상반기 agent 기술 지형은 어떤 상태인가?
+- OpenClaw와 생태계는 무엇을 가능하게 했는가?
+- 플랫폼 레이어가 수렴하면 운영자에게 남는 문제는 무엇인가?
 
 **핵심 구성**:
 1. 2026년 상반기: agent 운영의 현재 풍경
-2. OpenClaw — 무엇이 특별하고 무엇이 아직 모자란가
+2. OpenClaw — 무엇이 가능해졌고 무엇이 아직 설계되지 않았는가
 3. 생태계 스냅샷: OpenClaw 주변 프로젝트들
-4. TeamClaws/PicoClaw — 이 책을 쓰게 된 이유
-5. 왜 지금이 중요한가 — harness engineering 초기에 알 수 있는 것
+4. harness 없는 장기 운용 — 이 책을 쓰게 된 이유 (기술적 관찰, 실패담 아님)
+5. 왜 지금이 중요한가 — harness engineering 초기에 관찰 가능한 것
 6. 5변수 프레임워크 소개
 7. Agent-1 ~ Agent-5 방향 설정
-8. AIE shout-out (Chip Huyen, AI Engineering, 2025)
+8. 이 책의 좌표: Chip Huyen *AI Engineering*(2025) 이후
 
 **학습 결과**:
-- 현재 agent 생태계를 파악하고, 왜 이 시점에서 harness engineering이 필요한지 설명할 수 있다.
+- 현재 agent 기술 지형과 플랫폼 레이어 수렴 방향을 설명할 수 있다.
 - 5변수 프레임워크의 기본 개념을 이해한다.
-- ARCC와 Capability Cliff의 개념을 예비적으로 이해한다.
+- Agent-Relevant Capability Composite와 Capability Cliff의 개념을 예비적으로 이해한다.
 - Agent-1 ~ Agent-5 스펙트럼에서 현재 배포된 agent가 Agent-1에 머무는 구조적 이유를 설명할 수 있다.
 
 **관련 DR**: DR-1.1, DR-1.2, DR-1.3
 **관련 실험**: (없음 — 관찰 및 사례 중심)
-**관련 증거**: `evidence/case-studies/openclaw-anchor.md`, `evidence/case-studies/teamclaws-picoclaw-postmortem.md`
 **관련 dispatch**: `FD-2026-03-17-002-cli-renaissance.md`, `FD-2026-03-17-002-wide-survey.md`
 
 ---
 
-## Ch.2 — Agent가 모델로부터 무엇을 물려받는가
+## Ch.2 — Agent 성능을 어떻게 측정할 것인가
 
 **파일**: `chapters/ch02-nature-agent-inherits.md`
-**핵심 메시지**: Agent는 중립적이지 않다. 모델별 행동 차이를 정량적으로 측정하고, Capability Cliff가 존재한다는 것을 관찰한다.
+**핵심 메시지**: 기존 벤치마크는 단일 호출 품질을 측정한다. Agent가 실제로 수행하는 multi-step 연속 실행에서 무엇이 다르게 필요한지를 벤치마크 역사를 통해 보여주고, 그 공백을 채우는 측정 방법으로 Agent-Relevant Capability Composite를 도입한다.
+
+**서사 방향**: 리뷰 논문 스타일. 기존 기술의 역사와 한계를 먼저 정리하고, 그 자연스러운 다음 단계로 새 개념을 소개한다. Agent-Relevant Capability Composite는 앞선 맥락 없이 등장하지 않는다.
 
 **탐구 질문**:
+- LLM 평가 지표는 어떻게 발전해왔고 왜 매번 새로운 기준이 필요했는가?
+- 기존 agent 벤치마크가 운영 관점에서 놓치는 차원은 무엇인가?
 - 동일한 task에서 모델을 바꾸면 무엇이 어떻게 달라지는가?
-- "Agent-Viable Minimum"은 task별로 어떤 capability 수준에서 형성되는가?
-- 양자화와 distillation은 agent capability를 어떻게 다르게 깎는가?
+- 양자화와 distillation은 agent 성능을 어떻게 다르게 깎는가?
 
 **핵심 구성**:
-1. 물려받는 경향: reasoning, tool use, consistency, confidence
-2. ARCC (Agent-Relevant Capability Composite) — 모델을 vendor tier가 아닌 연속 capability spectrum으로 측정하는 방법
-   - TCA (Tool Call Accuracy), IFR (Instruction Following Rate), MSRD_n (Multi-Step Reasoning Depth), CUE (Context Utilization Efficiency)
-3. Capability Cliff — TCR이 특정 ARCC 이하에서 선형이 아닌 급락하는 패턴. task별 cliff position이 다르다.
-4. Quantization Tax Curve — 동일 base model의 FP16→Q8→Q4→Q2 경로에서 agent capability가 깎이는 비율
-5. Distillation Efficiency Frontier — 동일 parameter budget에서 distillation vs. quantization의 agent viability 비교
-6. Mid-run model switching의 context continuity 붕괴 패턴 (E03)
-7. 5변수 중 "모델" 변수가 1차 병목이 되는 조건
+1. **[신규] LLM 평가의 역사**: MMLU(2021) → HumanEval(2021) → BIG-Bench(2022) → SWE-bench(2023) → AgentBench / WebArena / GAIA(2024~2025) — 매번 새 기준이 필요했던 이유와 각각이 측정하는 것
+2. **[신규] Agent 운용 관점의 측정 공백** — multi-step chain, 연속 도구 호출, long-horizon 실행에서 기존 지표가 포착하지 못하는 차원
+3. 모델이 agent runtime에 도입하는 행동 성향 네 가지 *(이전 §1 내용)*
+4. Agent-Relevant Capability Composite — 네 차원의 설계 근거와 측정 방법 *(이전 §2 내용, 이제 §4에 위치)*
+5. Capability Cliff — 비선형 급락이 발생하는 조건
+6. 양자화와 distillation이 agent 성능을 깎는 방식
+7. 실행 중 모델 교체의 맥락 연속성 문제
+8. 모델 변수가 1차 병목이 되는 조건
 
 **핵심 Figure**:
-- **Fig 1 — Agent Capability Cliff** (E01 확장): ARCC scatter plot, task-conditional sigmoid fit, cliff position per task type. harness-off 조건 기준.
+- **Fig 1 — Agent Capability Cliff** (E01): Task Completion Rate scatter plot, task-conditional sigmoid fit, cliff position per task type. harness-off 조건 기준.
 
 **핵심 지표**:
-- ARCC (TCA, IFR, MSRD_n, CUE의 weighted composite)
-- TCR (Task Completion Rate) per task type (T1/T2/T3)
-- ARCC Construct Validation: holdout R² ≥ 0.65 → ARCC 유효
+- Agent-Relevant Capability Composite (Tool Call Accuracy, Instruction Following Rate, Multi-Step Reasoning Depth, Context Utilization Efficiency의 가중 합산)
+- Task Completion Rate per task type (T1/T2/T3)
+- Construct validation: holdout R² ≥ 0.65 기준
 
 **학습 결과**:
-- 모델 원인의 취약성을 식별하고, ARCC 기반으로 자신의 환경에서 유사한 측정을 설계할 수 있다.
+- LLM 벤치마크의 발전 역사와 각 세대의 측정 한계를 설명할 수 있다.
+- Agent-Relevant Capability Composite의 네 차원이 기존 벤치마크와 다른 이유를 설명할 수 있다.
 - Capability Cliff의 존재를 이해하고, "이 양자화 모델로 이 task는 된다"를 판단하는 근거를 갖는다.
 
 **관련 DR**: DR-2.1, DR-2.2, DR-2.3
@@ -98,7 +103,7 @@
 3. Harness를 guardrails, scaffolding, orchestration과 구분
 4. AgentOps란 무엇인가 — profession으로서의 정의
 5. 5변수 프레임워크에서 harness와 AgentOps의 위치
-6. Harness 부재의 비용: TeamClaws/PicoClaw 사후 분석 (반례 2)
+6. Harness 부재의 비용: 초기 운용 관찰 사후 분석
 7. CLI-Anything HARNESS.md — 독립적 수렴 사례
 8. Ch.4-5에서 실험할 것에 대한 프레임 설정
 
