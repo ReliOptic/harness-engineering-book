@@ -1,7 +1,7 @@
 # DR-3.4Ch.3: Agent Ontology — 구조화된 메모리와 Schema Validation의 부상 (2025-2026)
 
 **작성일**: 2026-03-17
-**관련 챕터**: Ch.3 (Harness and AgentOps Defined), Ch.6 (From Observation to Fieldkit), Ch.7 (Self-Immune → §9)
+**관련 챕터**: Ch.3 (Harness and AgentOps Defined), Ch.6 (From Observation to Operational Compiler), Ch.7 (Self-Immune → §9)
 **연구 동기**: AI agent 시스템에서 ontology가 단순한 지식 표현 도구를 넘어 harness의 핵심 구성요소로 부상하고 있다. Harness가 "agent의 행동 범위와 기억을 규율하는 운영 구조"라면, ontology는 그 구조가 기댈 수 있는 typed schema — 세계의 형태를 agent에게 알려주는 언어다.
 
 ---
@@ -141,7 +141,7 @@ ACP(Agent Client Protocol)나 MCP(Model Context Protocol) 같은 표준화 레�
 
 ## 8. 이 리서치가 책에서 가지는 의미
 
-이 내용은 Ch.3(Harness 정의)에서 ontology를 harness의 의미론적 기반으로 소개하는 데 활용할 수 있다. 동시에 Ch.6(Fieldkit)에서 구체적인 도구 — Cognee, TrustGraph — 를 실험 맥락으로 연결할 수 있다.
+이 내용은 Ch.3(Harness 정의)에서 ontology를 harness의 의미론적 기반으로 소개하는 데 활용할 수 있다. 동시에 Ch.6(Operational Compiler)에서 구체적인 도구 — Cognee, TrustGraph — 를 실험 맥락으로 연결할 수 있다.
 
 주의: 이 영역은 2025-2026년에 급격히 성장 중이다. Cognee의 MCP 통합, TrustGraph의 Context Core 개념은 현재 진행형이며, 책의 Beta 마감(2026-05-13) 시점까지 생태계가 더 바뀔 수 있다. 스냅샷임을 명시하고 쓰는 것이 맞다.
 

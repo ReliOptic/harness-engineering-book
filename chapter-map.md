@@ -189,7 +189,7 @@
 **학습 결과**:
 - 실험실 metric → 운영 metric → 비용 metric 번역 체계를 이해하고 적용할 수 있다.
 - HOR × RSuccR optimal point를 판단하는 방법을 이해한다.
-- Component ablation 순위에서 Fieldkit 구성 우선순위를 도출할 수 있다.
+- Component ablation 순위에서 Operational Compiler 구성 우선순위를 도출할 수 있다.
 - Scaling과 temporal stability 결과를 해석할 수 있다.
 
 **관련 DR**: DR-5.1, DR-5.2, DR-5.3
@@ -198,26 +198,26 @@
 
 ---
 
-## Ch.6 — 관찰에서 도구로: Operational Fieldkit
+## Ch.6 — 관찰에서 도구로: Operational Compiler
 
-**파일**: `chapters/ch06-from-observation-to-fieldkit.md`
-**핵심 메시지**: Fieldkit은 HOR × RSuccR pareto frontier를 따라 점진적으로 구성된다. Ch.5 ablation marginal ROI 순서가 도구화 우선순위를 결정한다. "한 번에 전체 harness"는 HOR을 최적점 이상으로 높인다.
+**파일**: `chapters/ch06-from-observation-to-operational-compiler.md`
+**핵심 메시지**: Operational Compiler는 HOR × RSuccR pareto frontier를 따라 점진적으로 구성된다. Ch.5 ablation marginal ROI 순서가 운영 규칙 컴파일의 우선순위를 결정한다. "한 번에 전체 harness"는 HOR을 최적점 이상으로 높인다.
 
 **탐구 질문**:
 - Ch.5 ablation 결과에서 어떤 component를 먼저 도구화해야 하는가?
-- HOR × MTTR trade-off를 어떻게 관리하면서 점진적으로 Fieldkit을 구성하는가?
+- HOR × MTTR trade-off를 어떻게 관리하면서 점진적으로 Operational Compiler를 구성하는가?
 - 도구화해야 할 것과 도구화하면 안 되는 것의 기준은?
 - Skill로 쓸 수 있는 능력을 어떻게 극대화하는가?
 
 **핵심 구성**:
 1. Ch.4-5에서 추출한 반복 실패 패턴 → 도구화 후보 식별 (marginal ROI 기준)
-2. Operational Fieldkit 설계 원칙 (HOR 관리 포함)
+2. Operational Compiler 설계 원칙 (HOR 관리 포함)
 3. 점진적 업데이트 원칙: pareto frontier를 따라 이동하는 전략
 4. Skill로 쓸 수 있는 능력의 극대화
 5. CLI-Anything 방법론 비교: 독립적 수렴의 의미
 
 **학습 결과**:
-- Ablation 결과에서 Fieldkit 도구화 우선순위를 결정할 수 있다.
+- Ablation 결과에서 Operational Compiler 구성 우선순위를 결정할 수 있다.
 - HOR × MTTR trade-off를 관리하는 점진적 업데이트 전략을 설계할 수 있다.
 - 도구화 대상이 아닌 것(task 모호성, compute saturation)을 구분할 수 있다.
 

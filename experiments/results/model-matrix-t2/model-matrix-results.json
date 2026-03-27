@@ -1,0 +1,162 @@
+{
+  "meta": {
+    "generated_at_utc": "2026-03-20T16:12:43.458522+00:00",
+    "runs_per_model": 1,
+    "models": [
+      "nvidia/nemotron-3-super-120b-a12b",
+      "openai/gpt-5.4-nano",
+      "qwen/qwen3.5-9b",
+      "google/gemini-3.1-flash-lite-preview"
+    ],
+    "tasks": [
+      "T2_multi_step"
+    ],
+    "harness": "none",
+    "difficulty": "MODERATE",
+    "note": "Pilot matrix for model-size/vendor differentiation (agent-oriented tasks)."
+  },
+  "results": [
+    {
+      "task_type": "T2_multi_step",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "n_runs": 1,
+      "successes": 1,
+      "partials": 0,
+      "failures": 0,
+      "tcr_continuous": 1.0,
+      "tca": 0.0,
+      "ifr": 0.0,
+      "rsucc_r": null,
+      "ttff_mean": 1.0,
+      "hor_mean": 0.0,
+      "failure_types": {
+        "none": 1
+      }
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model": "openai/gpt-5.4-nano",
+      "n_runs": 1,
+      "successes": 1,
+      "partials": 0,
+      "failures": 0,
+      "tcr_continuous": 1.0,
+      "tca": 1.0,
+      "ifr": 0.2,
+      "rsucc_r": null,
+      "ttff_mean": null,
+      "hor_mean": 0.0,
+      "failure_types": {
+        "none": 1
+      }
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model": "qwen/qwen3.5-9b",
+      "n_runs": 1,
+      "successes": 0,
+      "partials": 0,
+      "failures": 1,
+      "tcr_continuous": 0.0,
+      "tca": 0.0,
+      "ifr": 0.0,
+      "rsucc_r": 0.0,
+      "ttff_mean": 1.0,
+      "hor_mean": 0.0,
+      "failure_types": {
+        "silent_logical_drift": 1
+      }
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model": "google/gemini-3.1-flash-lite-preview",
+      "n_runs": 1,
+      "successes": 1,
+      "partials": 0,
+      "failures": 0,
+      "tcr_continuous": 1.0,
+      "tca": 1.0,
+      "ifr": 0.2,
+      "rsucc_r": null,
+      "ttff_mean": null,
+      "hor_mean": 0.0,
+      "failure_types": {
+        "none": 1
+      }
+    }
+  ],
+  "pairwise_tests": [
+    {
+      "task_type": "T2_multi_step",
+      "model_a": "nvidia/nemotron-3-super-120b-a12b",
+      "model_b": "openai/gpt-5.4-nano",
+      "success_rate_a": 1.0,
+      "success_rate_b": 1.0,
+      "delta_success_rate": 0.0,
+      "z": 0.0,
+      "p_value": 1.0,
+      "p_holm": 1.0,
+      "significant_0_05": false
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model_a": "nvidia/nemotron-3-super-120b-a12b",
+      "model_b": "qwen/qwen3.5-9b",
+      "success_rate_a": 1.0,
+      "success_rate_b": 0.0,
+      "delta_success_rate": 1.0,
+      "z": 1.414213562373095,
+      "p_value": 0.15729920705028522,
+      "p_holm": 0.9437952423017113,
+      "significant_0_05": false
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model_a": "nvidia/nemotron-3-super-120b-a12b",
+      "model_b": "google/gemini-3.1-flash-lite-preview",
+      "success_rate_a": 1.0,
+      "success_rate_b": 1.0,
+      "delta_success_rate": 0.0,
+      "z": 0.0,
+      "p_value": 1.0,
+      "p_holm": 1.0,
+      "significant_0_05": false
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model_a": "openai/gpt-5.4-nano",
+      "model_b": "qwen/qwen3.5-9b",
+      "success_rate_a": 1.0,
+      "success_rate_b": 0.0,
+      "delta_success_rate": 1.0,
+      "z": 1.414213562373095,
+      "p_value": 0.15729920705028522,
+      "p_holm": 0.9437952423017113,
+      "significant_0_05": false
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model_a": "openai/gpt-5.4-nano",
+      "model_b": "google/gemini-3.1-flash-lite-preview",
+      "success_rate_a": 1.0,
+      "success_rate_b": 1.0,
+      "delta_success_rate": 0.0,
+      "z": 0.0,
+      "p_value": 1.0,
+      "p_holm": 1.0,
+      "significant_0_05": false
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model_a": "qwen/qwen3.5-9b",
+      "model_b": "google/gemini-3.1-flash-lite-preview",
+      "success_rate_a": 0.0,
+      "success_rate_b": 1.0,
+      "delta_success_rate": -1.0,
+      "z": -1.414213562373095,
+      "p_value": 0.15729920705028522,
+      "p_holm": 0.9437952423017113,
+      "significant_0_05": false
+    }
+  ]
+}

@@ -101,7 +101,7 @@
 
 ## Lesson Learned
 
-[핵심 교훈 — Fieldkit 도구화 후보 여부 포함]
+[핵심 교훈 — Operational Compiler 컴파일 후보 여부 포함]
 
 ---
 

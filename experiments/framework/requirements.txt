@@ -1,4 +1,6 @@
-anthropic>=0.40.0
+openai>=1.50.0
 numpy>=1.26.0
 scipy>=1.12.0
 scikit-learn>=1.4.0
+# embedding.py: OpenRouter /embeddings endpoint 사용 (별도 패키지 불필요)
+# judge.py: openai client 재사용

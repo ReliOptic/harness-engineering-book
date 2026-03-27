@@ -1,4 +1,4 @@
-# 집필계획서 v4 — *Harness Engineering and AgentOps*
+# 집필계획서 v5 — *Harness Engineering and AgentOps*
 
 ## 0. 프로젝트 개요
 
@@ -11,28 +11,22 @@
 **도입부 시간 앵커**
 2026년 3월 13일 (도입 내러티브 기준일. 챕터 제목에는 넣지 않음.)
 
-**책의 성격: 스냅샷이자 실험서**
-이 책은 2026년 상반기에 agent runtime을 운영하며 관찰한 것들의 스냅샷이다.
-동시에, 체계적 실험을 통해 "agent 시스템이 어떤 조건에서 무엇 때문에 작동하고, 무엇 때문에 깨지는가"를 기록하는 실험서이다.
-심층 학문 해석이 아니라, 정직한 관찰과 측정을 다음 단계의 profoundation(실천적 토대)으로 남기는 것이 목적이다.
+**책의 성격: 연구 분석 기반 실험서**
+이 책은 2026년 상반기 harness engineering 실무 연구를 분석하고, 그 연구가 제시하는 원칙들을 실제 제약 환경에서 실험으로 검증한 기록이다.
+OpenAI 팀이 정의한 harness engineering 프레임워크 — Context Engineering, Architectural Constraints, Entropy Management — 를 출발점으로 삼아, 그 프레임워크가 어떤 조건에서 작동하고 어떤 조건에서 1차 병목이 다른 변수로 이동하는지를 22개 실험 시나리오로 관찰한다.
+심층 학문 해석이 아니라, 정직한 관찰과 측정을 다음 단계의 실천적 토대로 남기는 것이 목적이다.
 
 **레퍼런스**
-Chip Huyen, *AI Engineering* (2025).
-AIE는 foundation model 위에 application을 만드는 전 과정을 다룬다.
-이 책은 AIE가 다루는 영역의 다음 레이어 — agent runtime의 운영 구조, harness 설계, AgentOps — 를 기록한다.
-AIE에 대한 shout-out과 함께, 같은 맥락 위에 있는 이야기임을 밝힌다.
+- OpenAI, *Harness Engineering: Leveraging Codex in an Agent-First World* (2026). 이 책이 실험으로 검증하는 1차 연구.
+- Chip Huyen, *AI Engineering* (2025). Foundation model 위에 application을 만드는 전 과정. 이 책은 AIE가 다루는 영역의 다음 레이어 — agent runtime의 운영 구조, harness 설계, AgentOps — 를 실험으로 기록한다.
 
 **원고 마일스톤**
 
 | 마일스톤 | 목표일 |
 | --- | --- |
-| Beta manuscript (7챕터 초고) | 2026년 5월 13일 |
-| Polished release manuscript | 2026년 6월 30일 |
+| Beta manuscript (7챕터 초고) | 2026년 3월 25일 |
+| Polished release manuscript (납기) | 2026년 4월 1일 |
 
-**주간 투입량**
-- Lead author: ~12시간/주
-- Experimenter 3명: 각 ~8시간/주
-- 총 팀 투입: ~36시간/주
 
 **책의 근본 자세**
 이 책은 교리집이 아니라 실험서이다.
@@ -41,11 +35,104 @@ AIE에 대한 shout-out과 함께, 같은 맥락 위에 있는 이야기임을 �
 
 ---
 
+## 집필 맥락 및 핵심 결정 (AI 협업 / 인수인계용)
+
+> 이 섹션은 다른 AI 또는 다른 환경에서 이 프로젝트를 이어받을 때
+> 맥락을 완전히 복원하기 위한 결정 로그다.
+> 이 writing-plan을 처음 읽는 AI는 이 섹션을 먼저 읽어야 한다.
+
+---
+
+### 이 책은 무엇인가
+
+OpenAI 팀이 정의한 harness engineering 프레임워크(Context Engineering, Architectural Constraints, Entropy Management)를 분석하고, 그 원칙들이 실제 제약 환경에서 어떤 조건에서 작동하고 어디서 무너지는지를 22개 실험으로 검증한 기록이다.
+
+**이 책이 아닌 것:**
+- 개인 실패 경험 기록이 아니다
+- 저자의 독자적 프레임워크를 주장하는 책이 아니다
+- OpenAI와 경쟁하거나 대안을 제시하는 책이 아니다
+
+**저자의 역할:** 연구자 + 실험자. OpenAI의 연구를 분석하고, 그것을 제약 환경에서 실험하여 관찰을 기록한다.
+
+---
+
+### 핵심 결정 로그
+
+| 날짜 | 결정 | 이유 |
+| --- | --- | --- |
+| 2026-03-20 | 개인 서사 완전 제거 (TeamClaws/PicoClaw 포함) | 감정적 서술 제거. 연구 분석이 책의 권위. 개인 경험은 어떤 형태로도 챕터에 등장하지 않는다 |
+| 2026-03-20 | OpenAI 명시적 인용 결정 | 모호하게 쓰지 않는다. OpenAI 연구가 이 책의 1차 검증 대상임을 명확히 |
+| 2026-03-20 | 5변수 = 조작적 분석 구조 (귀납 도출 아님) | 저자가 경험에서 귀납한 것이 아니라 OpenAI 연구를 실험으로 비교하기 위한 분석 구조 |
+| 2026-03-20 | TCR을 공통 측정 단위로 확정 | 5변수가 이질적 단위를 가짐. "1차 병목" 비교는 TCR(Task Completion Rate) 기준으로 통일 |
+| 2026-03-20 | harness_engineering_glossary.md → DR reference로 재정의 | OpenAI 논문 기반 용어집. 책의 backbone glossary가 아니라 검증 대상 프레임워크의 원전 용어 스냅샷 |
+
+---
+
+### 파일 구조
+
+```
+harness-engineering-book/
+├── CLAUDE.md              # AI 협업 지침 + voice rules (필수 참조)
+├── writing-plan.md        # 이 파일. 마스터 집필 계획서
+├── chapter-map.md         # 챕터별 상세 아웃라인
+├── token-policy.md        # 토큰 사용 정책
+│
+├── chapters/              # 챕터 초고
+│   ├── preface.md
+│   ├── ch01-what-is-happening-now.md
+│   ├── ch02-nature-agent-inherits.md
+│   ├── ch03-harness-and-agentops-defined.md
+│   ├── ch04-deliberate-failure-experiments.md
+│   ├── ch05-lessons-from-experiments.md
+│   ├── ch06-from-observation-to-operational-compiler.md
+│   └── ch07-harness-to-agent-self-immune.md
+│
+├── deep-research/         # DR reference 파일들 (외부 연구 스냅샷, 정의 출처 아님)
+│   ├── harness_engineering_glossary.md  # OpenAI 프레임워크 용어집 [DR reference]
+│   ├── DR-1.1 ~ DR-7.2    # 챕터별 deep research 결과물
+│   └── README.md          # DR 목록 및 상태 추적
+│
+├── evidence/              # 사례 연구, 외부 관찰 기록
+├── field-dispatches/      # FD series (현장 관찰 노트)
+├── experiments/           # 실험 로그 (E01~E22)
+├── operational-compiler/  # Operational Compiler 설계
+├── diagrams/              # 그림, 도표
+└── references/            # 참고문헌
+```
+
+---
+
+### 챕터 현재 상태
+
+| 챕터 | 파일 | 상태 | 잔여 작업 |
+| --- | --- | --- | --- |
+| Preface | preface.md | 🟡 재작성 v0.2 (2026-03-19) | 핵심 framing과 외부 사례 연결 정리 |
+| Ch.1 | ch01-what-is-happening-now.md | 🔴 초고 v0.1 (2026-03-18) | OpenAI framing과 사례 인용 정합성 점검 |
+| Ch.2 | ch02-nature-agent-inherits.md | 🔴 초고 v0.1 (2026-03-20) | `[X]` 플레이스홀더 실험 수치 보완 |
+| Ch.3 | ch03-harness-and-agentops-defined.md | 🔴 초고 v0.1 (2026-03-18) | Harness/AgentOps 정의 정합성 및 외부 사례 연결 |
+| Ch.4 | ch04-deliberate-failure-experiments.md | 🔴 초고 v0.1 (2026-03-18) | §3~§8 마커 채움, 수치 `[X]` 보완 |
+| Ch.5 | ch05-lessons-from-experiments.md | 🔲 scaffold (2026-03-18) | Ch.4 수치 기반 분석 본문 작성 |
+| Ch.6 | ch06-from-observation-to-operational-compiler.md | 🔴 초고 v0.1 (2026-03-18) | Operational Compiler 설계 원칙 완성 |
+| Ch.7 | ch07-harness-to-agent-self-immune.md | 🔴 초고 v0.1 (2026-03-18) | §3~§9 신규 본문 보완 |
+
+---
+
+### 이 프로젝트를 이어받는 AI에게
+
+1. **writing-plan.md가 단일 진실의 원천이다.** CLAUDE.md는 voice rules와 AI 협업 지침을, writing-plan.md는 집필 전략과 결정 사항을 담는다.
+2. **5변수 프레임워크는 실험 분석 구조다.** 저자 경험에서 귀납한 것이 아니라 OpenAI 연구를 TCR 기준으로 비교 실험하기 위한 조작적 정의다.
+3. **개인 서사 금지.** TeamClaws, PicoClaw, 저자의 개인 실패 경험은 어떤 형태로도 챕터에 등장하지 않는다.
+4. **OpenAI는 명시적으로 인용한다.** "전문가 그룹"처럼 모호하게 쓰지 않는다.
+5. **Voice rules는 CLAUDE.md에 있다.** AI 문체 금지 8대 원칙 포함. 초고 작성 시 반드시 참조.
+6. **Deep-research 파일들은 인용 출처가 아니다.** DR이 인용한 원문을 확인하여 그 원문을 인용한다.
+
+---
+
 ## 1. 핵심 탐구 질문과 개념 정의
 
 ### 한 줄 논제
 
-Harness engineering은 agent-first 시스템이 실제 제약 조건 아래에서 무엇을 보호하고, 무엇을 가능하게 하며, 어떻게 취약성을 줄이는지를 다루는 설계 및 운영 분야이다.
+OpenAI 팀이 정의한 harness engineering 원칙들은 최적 환경에서 도출되었다. 이 책은 동일한 원칙들이 실제 제약 환경 — 제한된 compute, 불완전한 surface, 다양한 모델 capability — 아래에서 어떤 조건에 따라 작동하고 어디서 무너지는지를 5변수 프레임워크로 실험한다.
 
 ### 왜 지금이 중요한 시점인가
 
@@ -55,10 +142,9 @@ agent가 어떤 요소로 구성되는지, 모델과 harness와 surface와 리�
 이것을 지금 알면, agent가 나중에 고도화되었을 때 그것이 어떻게 통제되어야 하는지를 역설적으로 알 수 있다.
 그것이 엔지니어링이고, 그것을 할 수 있는 좋은 시점이 바로 지금이다.
 
-### 5변수 프레임워크: 이원론을 넘어서
+### 5변수 프레임워크: 병목 비교를 위한 분석 구조
 
-Agent 시스템의 실용적 품질은 "모델 vs. 운영 구조"의 이원론으로 설명되지 않는다.
-최소 다음 5개 변수의 상호작용으로 결정된다:
+OpenAI 프레임워크의 Harness 변수를 포함하여, agent runtime의 실질적 병목을 구성하는 변수들을 이 책은 다음 5개로 조작적으로 정의한다. 이원론("모델 vs. 운영 구조")이 아니라, 어떤 조건에서 무엇이 1차 병목이 되는가를 TCR(Task Completion Rate) 기준으로 비교하기 위한 실험 분석 구조다.
 
 | 변수 | 설명 |
 | --- | --- |
@@ -94,7 +180,7 @@ Agent 시스템의 실용적 품질은 "모델 vs. 운영 구조"의 이원론�
 어떤 실패는 harness나 모델 문제가 아니라 task 자체가 불안정한 경우이다. 질문이 흔들리면 runtime을 아무리 튜닝해도 흔들린다.
 
 **반례 2 — Compute saturation 문제:**
-어떤 실패는 모델이나 harness가 아니라 compute 포화 문제이다. VM 과부하, CPU 불안정, agent 충돌이 그 예이다. TeamClaws/PicoClaw 실패는 이 반례의 직접적 사례이다. 이 경우 AgentOps는 observability만이 아니라 resource governance여야 한다.
+어떤 실패는 모델이나 harness가 아니라 compute 포화 문제이다. VM 과부하, CPU 불안정, agent 충돌이 그 예이다. 이 경우 AgentOps는 observability만이 아니라 resource governance여야 한다.
 
 ### 핵심 용어 정의
 
@@ -112,11 +198,11 @@ Agent가 input을 안정적으로 해석하고 구조화된 feedback을 받을 �
 현재 인류가 알고 있는 가장 효과적인 형태는 CLI이다.
 그러나 CLI를 대체하거나 확장할 수 있는 더 나은 형태가 있지 않을까? — 이 질문을 열어둔다.
 
-**Operational Fieldkit**
-제약 실험에서 반복적으로 확인된 실패 패턴과 운영 교훈을 범용 도구로 구체화한 CLI 유틸리티 레이어.
+**Operational Compiler**
+제약 실험에서 반복적으로 확인된 failure pattern과 intervention rule을 실행 가능한 운영 규칙으로 컴파일하는 구조.
 **Harness에 직접 한 번에 embedding하는 것이 아니다.**
-Lesson learned를 통해 Fieldkit이 계속 업데이트되고, CLI만 업데이트하면 더 나은 self-immune 시스템으로 올라갈 수 있다.
-이 제품을 개발함으로써 skill로 쓸 수 있는 능력들을 어떻게 극대화할 수 있는지를 harness engineering으로 알아보는 것이 중요하다.
+Lesson learned가 누적될수록 Operational Compiler는 업데이트되고, 그 업데이트가 더 정교한 self-immune system의 외부 전단을 형성한다.
+이 구조를 개발함으로써 skill로 쓸 수 있는 능력들을 어떻게 극대화할 수 있는지를 harness engineering으로 확인하는 것이 중요하다.
 **한 번에 implement하는 것이 아니라, 점진적으로 발전시키는 것이 조건이다.**
 
 ---
@@ -149,11 +235,11 @@ LLM, tool use, agent workflow 실무 수준 전제. ML 연구 전문성 미전�
 
 ### 이 책의 정체
 
-- Agent runtime 현실의 스냅샷이자 실험서
-- 5변수 상호작용을 실험으로 관찰하는 field book
-- Harness engineering과 AgentOps의 윤곽을 관찰에 기반하여 그리는 초기 시도
-- 관찰 → 측정 → 실패 기록 → Fieldkit 도구화 → agent 내재화의 방법론 경로
-- Ch.4-5의 실험 결과가 학술적 실험 설계의 벤치마크가 될 수 있는 수준
+- OpenAI harness engineering 프레임워크의 독립적 실험 검증 기록
+- 제약 환경에서 5변수 병목을 TCR 기준으로 비교한 field book
+- Harness engineering과 AgentOps의 실험적 정의 — 관찰에 기반하여 경계를 그린 초기 시도
+- 관찰 → 측정 → 도구화 → agent 내재화의 방법론 경로
+- Ch.4-5의 실험 설계가 후속 학술 연구의 벤치마크가 될 수 있는 수준
 
 ### 이 책이 아닌 것
 
@@ -175,15 +261,17 @@ CLI는 현재 가장 효과적인 agent-first surface이다. 그러나 더 나�
 
 2026년 상반기에 벌어지는 일의 스냅샷을 정직하게 기록한다.
 
-### Anchor case: OpenClaw
+### 연구 출발점: OpenAI harness engineering 프레임워크
 
-OpenClaw가 해준 것은 MCP 연결, skills 통합, gateway 아키텍처를 하나의 운영 가능한 시스템으로 엮어준 것이다.
-그 시스템을 운영하면서 "모자란 무언가를 채우는 것"이 harness engineering이다.
+OpenAI 팀이 정의한 harness engineering — Context Engineering, Architectural Constraints, Entropy Management 3-pillar — 이 책이 실험으로 검증하는 원전 프레임워크다.
+이 프레임워크는 최적 환경(내부 엔지니어, 충분한 compute)에서 도출되었다.
+이 책의 질문: 제약 환경에서 동일한 원칙들이 어떻게 작동하는가. 어떤 조건에서 병목이 harness 외부 변수로 이동하는가.
 
-### 실패 사례: TeamClaws/PicoClaw
+### 실험 환경: OpenClaw
 
-Multi-agent orchestration 시도. CPU 과부하, 리소스 과다, agent 충돌로 실패.
-이 실패는 **반례 2 (compute saturation)**의 직접적 사례이며, 이 책을 쓰게 된 동기이다.
+OpenClaw는 이 책의 실험이 수행된 agent runtime 환경이다.
+MCP 연결, skills 통합, gateway 아키텍처를 하나의 운영 가능한 시스템으로 제공한다.
+OpenAI 프레임워크의 원칙들을 이 환경에서 격리 조작하여 실험한다.
 
 ### 생태계 스냅샷
 
@@ -209,7 +297,7 @@ Ch.4  의도적 실패 실험: 20개 시나리오
 Ch.5  실험 결과에서 배운 것: AgentOps와 Harness의 실무
       (Ch.4 실험의 분석, 패턴 추출, computation 요구사항)
   ↓
-Ch.6  관찰에서 도구로: Operational Fieldkit (도구화 방법론)
+Ch.6  관찰에서 도구로: Operational Compiler (운영 규칙 컴파일 방법론)
   ↓
 Ch.7  Harness → Agent 내재화 → Self-Immune System
 ```
@@ -224,10 +312,10 @@ Ch.7  Harness → Agent 내재화 → Self-Immune System
 
 **핵심 구성:**
 1. 2026년 상반기: agent 운영의 현재 풍경
-2. OpenClaw — 무엇이 특별하고 무엇이 아직 모자란가
-3. 생태계 스냅샷: OpenClaw 주변 프로젝트들
-4. TeamClaws/PicoClaw — 이 책을 쓰게 된 이유
-5. 왜 지금이 중요한가 — harness engineering 초기에 알 수 있는 것
+2. OpenAI harness engineering 연구 — 이 책의 실험이 검증하는 원전 프레임워크
+3. OpenClaw — 무엇이 특별하고 무엇이 아직 모자란가
+4. 생태계 스냅샷: OpenClaw 주변 프로젝트들
+5. 왜 지금이 중요한가 — harness engineering 초기에 관찰 가능한 것
 6. 5변수 프레임워크 소개
 7. Agent-1 ~ Agent-5 방향 설정
 8. AIE shout-out
@@ -269,12 +357,12 @@ Ch.7  Harness → Agent 내재화 → Self-Immune System
 1. Harness engineering이란 무엇인가 — operational envelope 정의
 2. 보호와 enablement의 이중 구조
 3. Harness를 guardrails, scaffolding, orchestration과 구분
-4. AgentOps란 무엇인가 — profession으로서의 정의
+4. OpenAI 3-pillar와 이 책의 Harness 변수의 관계 — 어디서 겹치고 어디서 확장되는가
+5. AgentOps란 무엇인가 — profession으로서의 정의
    - AgentOps operator가 하는 일의 구체적 목록
    - Resource governance가 AgentOps의 핵심 일부임을 명시
-5. 5변수 프레임워크에서 harness와 AgentOps의 위치
-6. Harness 부재의 비용: TeamClaws/PicoClaw 사후 분석 (반례 2)
-7. CLI-Anything HARNESS.md — 독립적 수렴 사례
+6. 5변수 프레임워크에서 harness와 AgentOps의 위치
+7. CLI-Anything HARNESS.md — 독립적 수렴 사례 (외부 검증)
 8. Ch.4-5에서 실험할 것에 대한 프레임 설정: "무엇을 의도적으로 실패시킬 것인가"
 
 **필요한 deep research:**
@@ -335,14 +423,14 @@ Ch.7  Harness → Agent 내재화 → Self-Immune System
 
 ---
 
-### Chapter 6. 관찰에서 도구로: Operational Fieldkit
+### Chapter 6. 관찰에서 도구로: Operational Compiler
 
-**핵심 메시지:** 먼저 직접 써보고, 실패하고, 기록하고, 그 히스토리를 점진적으로 도구로 만든다.
+**핵심 메시지:** 반복 실패 패턴 중 ROI가 검증된 항목만 운영 규칙으로 컴파일한다. 전체 harness를 한 번에 세우는 접근은 HOR을 과도하게 높여 보호 구조 자체를 1차 병목으로 바꾼다.
 
 **핵심 구성:**
 1. Ch.4-5에서 추출한 반복 실패 패턴 → 도구 후보 식별
-2. Operational Fieldkit 설계 원칙
-3. **점진적 업데이트 원칙:** Fieldkit은 harness에 한 번에 embedding되는 것이 아니다. CLI로 제공되어 계속 업데이트되고, 그 업데이트가 self-immune 능력을 점진적으로 향상시킨다.
+2. Operational Compiler 설계 원칙
+3. **점진적 업데이트 원칙:** Operational Compiler는 harness에 한 번에 embedding되는 구조가 아니다. CLI layer에서 시작해 측정 가능한 기여를 보인 component만 유지하고, 그 업데이트가 self-immune 능력을 점진적으로 향상시킨다.
 4. Skill로 쓸 수 있는 능력의 극대화 — harness engineering으로 탐색
 5. CLI-Anything 방법론 비교
 
@@ -350,7 +438,7 @@ Ch.7  Harness → Agent 내재화 → Self-Immune System
 - `DR-6.1`: "Developer CLI tool design patterns" — 성공적인 CLI 도구의 설계 패턴.
 - `DR-6.2`: "Incremental capability injection in agent systems" — agent에 능력을 점진적으로 주입하는 기존 접근.
 
-**학습 결과:** 독자는 실험 로그에서 도구화 후보를 식별하고, 점진적 Fieldkit 업데이트 전략을 설계할 수 있다.
+**학습 결과:** 독자는 실험 로그에서 운영 규칙 컴파일 후보를 식별하고, 점진적 Operational Compiler 업데이트 전략을 설계할 수 있다.
 
 ---
 
@@ -365,7 +453,7 @@ Ch.7  Harness → Agent 내재화 → Self-Immune System
 4. Self-immune system 초기 설계
 5. Agent-1 → Agent-2: infinite learning이 가능해지는 조건
 6. 이 책 이후: AI agent가 연구와 기록을 자율적으로 수행하는 미래
-7. 집필 과정 자체가 agent와의 협업이었다는 메타 관찰
+7. 메타 관찰: 이 책의 집필 워크플로 자체를 harness-agent 협업 실험으로 운영한 결과 — E-meta (token 배분, coordination overhead, Chapter 집필 TCR)
 
 **필요한 deep research:**
 - `DR-7.1`: "Self-healing and self-recovering AI agent architectures" — 기존 self-healing agent 연구.
@@ -402,12 +490,12 @@ Ch.1에서 도입, Ch.7에서 Agent-1→2 전환에 집중.
 
 | 챕터 | 1차 증거 | Deep research |
 | --- | --- | --- |
-| Ch.1 | OpenClaw anchor, TeamClaws 실패, 생태계 survey | DR-1.1, DR-1.2, DR-1.3 |
+| Ch.1 | OpenClaw anchor, OpenAI 연구 분석, 생태계 survey | DR-1.1, DR-1.2, DR-1.3 |
 | Ch.2 | 모델 교체 실험 (Cluster A) | DR-2.1, DR-2.2, DR-2.3 |
-| Ch.3 | Cluster C, D + TeamClaws postmortem + CLI-Anything | DR-3.1~3.4 |
+| Ch.3 | Cluster C, D + CLI-Anything + harness 부재 사례 | DR-3.1~3.4 |
 | Ch.4 | **20개 의도적 실패 실험** | DR-4.1~4.4 |
 | Ch.5 | Ch.4 결과 분석 + computation 측정 | DR-5.1~5.3 |
-| Ch.6 | 반복 실패 패턴 → Fieldkit 설계 | DR-6.1, DR-6.2 |
+| Ch.6 | 반복 실패 패턴 → Operational Compiler 설계 | DR-6.1, DR-6.2 |
 | Ch.7 | 전체 종합 + self-recovery 초기 실험 | DR-7.1, DR-7.2 |
 
 ---
@@ -446,7 +534,7 @@ Ch.1에서 도입, Ch.7에서 Agent-1→2 전환에 집중.
 | E11 | VM CPU를 1코어로 제한하고 복합 task 실행 | Resource | Compute saturation 발생 조건 |
 | E12 | VM RAM을 512MB로 제한 | Resource | OOM 발생 패턴, agent 충돌 양상 |
 | E13 | 네트워크 지연을 인위적으로 추가 (API latency 시뮬레이션) | Resource | Timeout 처리, 재시도 행동 |
-| E14 | 동시에 2개 agent를 같은 VM에서 실행 | Resource | 충돌, 리소스 경쟁 (TeamClaws 재현) |
+| E14 | 동시에 2개 agent를 같은 VM에서 실행 | Resource | 충돌, 리소스 경쟁 패턴 관찰 |
 
 #### 축 4: Operator intervention의 효과 (Ch.5 주력)
 
@@ -551,7 +639,7 @@ Experimenter C: E17~E22 실행 → Experimenter B가 E19, E20 교차검증
 
 **해야 하는 일:**
 - OpenClaw 생태계 deep research (DR-1.1) 완료
-- OpenClaw anchor notes + TeamClaws 실패 기록 정리
+- OpenClaw anchor notes 정리
 - Chapter 1 초고 작성
 - 모델 교체 실험 E01~E04 실행 (Experimenter A primary)
 - Deep research DR-2.1~2.3 실행
@@ -567,7 +655,7 @@ Experimenter C: E17~E22 실행 → Experimenter B가 E19, E20 교차검증
 **해야 하는 일:**
 - Deep research DR-3.1~3.4 실행
 - Harness engineering 정의 + AgentOps 정의 작성
-- TeamClaws/PicoClaw 사후 분석 (반례 2 포함)
+- Harness 부재 사례 분석 (반례 2 실험 설계)
 - CLI-Anything HARNESS.md 분석
 - Harness 다이어그램 제작
 - E05~E08 실행 (Experimenter A primary), E05 교차검증 (Experimenter B)
@@ -608,18 +696,18 @@ Experimenter C: E17~E22 실행 → Experimenter B가 E19, E20 교차검증
 
 ---
 
-### Phase 6: Fieldkit과 미래 방향 (Ch.6, Ch.7)
+### Phase 6: Operational Compiler와 미래 방향 (Ch.6, Ch.7)
 
 **해야 하는 일:**
 - Deep research DR-6.1~6.2, DR-7.1~7.2 실행
-- 반복 실패 패턴 → Fieldkit 도구 후보 매핑
-- Operational Fieldkit 설계 노트 작성
+- 반복 실패 패턴 → Operational Compiler 규칙 후보 매핑
+- Operational Compiler 설계 노트 작성
 - Chapter 6 초고 작성
 - 전체 교훈 종합, self-immune system 초기 서술
 - Agent-1→2 전환 논증
 - Chapter 7 초고 작성
 
-**산출물:** Ch.6 draft, Ch.7 draft, Fieldkit 설계 노트
+**산출물:** Ch.6 draft, Ch.7 draft, Operational Compiler 설계 노트
 
 ---
 
@@ -676,7 +764,7 @@ Experimenter C: E17~E22 실행 → Experimenter B가 E19, E20 교차검증
 3. Harness를 설계하는 방법을 이해하고 first-pass harness를 구축할 수 있다
 4. 의도적 실패 실험을 자신의 환경에서 설계하고 실행할 수 있다
 5. 실험 결과에서 학술적 확장 가능성을 식별할 수 있다
-6. Operational Fieldkit의 점진적 개발 전략을 이해한다
+6. Operational Compiler의 점진적 개발 전략을 이해한다
 7. Agent에 AgentOps 기능을 주입하는 것의 의미와 초기 접근법을 이해한다
 
 ### Beta 성공 기준
@@ -700,7 +788,7 @@ Experimenter C: E17~E22 실행 → Experimenter B가 E19, E20 교차검증
 | Ch.4-5가 데이터 부족 | 20개 시나리오 + 교차검증으로 충분한 양 확보 |
 | 학문적 해석에 빠짐 | 스냅샷 원칙: 기록하되 과도하게 해석하지 않음 |
 | 팀 동기화 실패 | 교차검증이 자연스러운 sync 포인트 역할 |
-| Fieldkit을 한 번에 완성하려 함 | 점진적 업데이트 원칙 명시 |
+| Operational Compiler를 한 번에 완성하려 함 | 점진적 업데이트 원칙 명시 |
 
 ---
 
@@ -745,7 +833,163 @@ Experimenter C: E17~E22 실행 → Experimenter B가 E19, E20 교차검증
 20개의 의도적 실패 실험을 통해 agent 시스템이 어디서 깨지는지를 기록하고,
 그 기록에서 harness engineering과 AgentOps의 윤곽을 그린다.
 
-그리고 그 교훈을 Operational Fieldkit으로 점진적으로 도구화하여,
+그리고 그 교훈을 Operational Compiler로 점진적으로 컴파일하여,
 궁극적으로 agent 자체가 self-immune system을 갖추는 경로를 탐색한다.
 
 이 스냅샷이 다음 단계의 profoundation이 된다.
+
+## 17. 직원형 기술서 집필 에이전트 운영안 (신규)
+
+### 목적
+
+이 프로젝트는 "질문에 답하는 AI"가 아니라, **지속적으로 원고를 생산하는 직원형 에이전트**를 둔다.
+핵심은 한 번 잘 쓰는 것이 아니라, 매일 같은 품질로 누적 생산하는 운영 구조다.
+
+**운영 목표:**
+- 매일 최소 1개 섹션 초고 생산
+- 주당 최소 1개 챕터의 "리뷰 가능한 상태" 달성
+- 사실 검증 누락 0건(출처 미기재 문장 금지)
+
+---
+
+### 직원형 에이전트 정의
+
+직원형 에이전트는 다음 4개 역할을 분리하여 수행한다.
+
+1. **Managing Editor Agent**
+   - 입력: 책의 전체 아웃라인, 이번 주 목표, 기존 원고 상태
+   - 출력: 당일 작업 배치표(무엇을 누구가 쓸지)
+   - 책임: 범위 통제, 우선순위, 데드라인 관리
+
+2. **Chapter Writer Agent**
+   - 입력: 챕터 목표, 핵심 주장, 실험 로그/레퍼런스
+   - 출력: 섹션 초고 + 주장-증거 매핑 표
+   - 책임: 본문 생산
+
+3. **Evidence Checker Agent**
+   - 입력: 초고, references, experiments, deep-research 원문 링크
+   - 출력: 사실 검증 리포트(확정/불확실/삭제권고)
+   - 책임: "그럴듯한 허위" 제거
+
+4. **Style & Cohesion Agent**
+   - 입력: 확정된 본문, voice rules, glossary
+   - 출력: 문체/용어 정합성 수정본
+   - 책임: 챕터 간 일관성 유지
+
+---
+
+### 운영 원칙
+
+1. **분리 원칙:** 집필(생산)과 검증(판정)을 같은 에이전트에 맡기지 않는다.
+2. **증거 우선 원칙:** 근거 없는 일반화 문장은 삭제한다.
+3. **소단위 누적 원칙:** "챕터 완성"이 아니라 "검증 가능한 섹션" 단위로 전진한다.
+4. **동결 원칙:** 검증 통과 전까지 문체 polish를 과도하게 하지 않는다.
+5. **재시작 원칙:** 같은 오류를 2회 반복하면 컨텍스트를 초기화하고 지시문을 재작성한다.
+
+---
+
+### 일일 실행 루프 (직원 근무 루틴)
+
+1. **09:00-09:20 — 배치 회의 (Managing Editor)**
+   - 당일 목표 1~3개 확정
+   - 범위/출력 형식/완료 기준 명시
+
+2. **09:20-12:00 — 초고 생산 (Chapter Writer)**
+   - 지정 섹션 작성
+   - 각 단락에 출처 후보 주석 남김
+
+3. **13:00-14:00 — 사실 검증 (Evidence Checker)**
+   - 수치/연도/주장 검증
+   - "검증 실패 문장" 별도 표기
+
+4. **14:00-15:00 — 정합성 편집 (Style & Cohesion)**
+   - 용어 통일, 문체 통일, 중복 제거
+
+5. **15:00-15:30 — 납품 판정 (Managing Editor)**
+   - Done 기준 통과 여부 체크
+   - 통과: 챕터 파일 반영 / 미통과: 다음 슬롯 재작업
+
+---
+
+### 섹션 단위 Done 기준
+
+아래 6개를 모두 만족해야 "완료"로 본다.
+
+1. 섹션의 핵심 주장 1~3개가 문장으로 명시됨
+2. 각 주장에 대응하는 근거(실험/문헌/관찰)가 연결됨
+3. 수치/날짜/고유명사의 출처 확인됨
+4. 용어가 glossary와 일치함
+5. 다음 섹션으로 넘어가는 연결 문장 포함
+6. 독자가 "무엇을 이해해야 하는지" 3문장 이내로 요약 가능
+
+---
+
+### 파일/산출물 규약
+
+- 초고: `chapters/chXX-*.md`
+- 검증 리포트: `evidence/chXX-section-YY-verification.md`
+- 수정 로그: `field-dispatches/fd-*.md`
+- 용어 기준: `glossary.md`
+- 최종 기준 문서: `writing-plan.md` (이 파일)
+
+검증 리포트에는 최소 다음 3개 열을 포함한다.
+- 문장/주장
+- 검증 결과(확정/보류/삭제권고)
+- 근거 링크 또는 실험 ID
+
+---
+
+### Claude Code 기준 구현 가이드
+
+직원형 운영을 Claude Code에서 구현할 때 최소 구성을 아래처럼 둔다.
+
+1. **Subagents** (`.claude/agents/`)
+   - `managing-editor.md`
+   - `chapter-writer.md`
+   - `evidence-checker.md`
+   - `style-editor.md`
+
+2. **Skills** (`.claude/skills/`)
+   - `/draft-section` : 섹션 초고 생성
+   - `/verify-claims` : 주장-근거 검증표 생성
+   - `/normalize-terms` : 용어 정합성 정리
+   - `/daily-publish-check` : Done 기준 자동 체크
+
+3. **Hooks** (`.claude/settings.json`)
+   - `PostToolUse(Edit|Write)` 이후 markdown lint/링크 검사
+   - `Stop` 시 "오늘 완료/미완료" 요약 자동 출력
+
+4. **권한 모드 운영**
+   - 탐색/설계: `plan`
+   - 집필 라운드: `acceptEdits` 또는 `auto`
+   - 검증 라운드: `plan` + 제한된 allowlist
+
+---
+
+### 즉시 적용할 첫 주 운영 실험
+
+**실험명:** E-meta-W1 "직원형 집필 루프"
+
+- 목표: 5일 동안 매일 1섹션 납품
+- 측정:
+  - 납품 섹션 수
+  - 검증 실패 문장 비율
+  - 재작업 횟수
+  - 섹션당 소요 시간
+- 성공 조건:
+  - 5개 중 4개 이상 섹션 Done 통과
+  - 검증 실패 문장 비율 5% 미만
+
+---
+
+### 채택 선언
+
+이 프로젝트는 "좋은 아이디어를 모으는 작업"이 아니라,
+**직원형 에이전트가 매일 원고를 납품하는 운영 시스템**으로 전환한다.
+
+앞으로의 품질은 모델 성능보다,
+- 역할 분리,
+- 검증 절차,
+- 반복 가능한 근무 루틴
+의 설계 품질로 결정된다.
+

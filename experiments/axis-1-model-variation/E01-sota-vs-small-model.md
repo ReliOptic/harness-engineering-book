@@ -1,11 +1,11 @@
 # E01 — 동일 task를 SOTA vs. 소형 모델로 실행
 
 **Experiment ID**: E01
-**Date**: (미정)
+**Date**: 2026-03-20~2026-03-21 (pilot)
 **Experimenter**: A
 **Cross-validator**: B (E03, E05)
 **Target chapter**: Ch.2 (§3 Capability Cliff), Ch.4 (1막)
-**Status**: [ ] 계획 / [ ] 진행중 / [ ] 완료 / [ ] 교차검증 완료
+**Status**: [ ] 계획 / [x] 진행중 / [ ] 완료 / [ ] 교차검증 완료
 
 ---
 
@@ -21,7 +21,7 @@ Task 정의: `experiments/design-specification.md §1` 기준.
 | 변수 | 설정 |
 |------|------|
 | **조작 변수** | 모델 (SOTA vs. 소형) |
-| **모델** | SOTA: `google/gemini-2.5-pro` / 소형: `google/gemini-2.5-flash-lite` (OpenRouter) |
+| **모델** | 운영 라인업 기준: `google/gemini-3.1-flash-lite-preview`(SOTA), `google/gemini-2.5-flash-lite`(소형), `openai/gpt-5.4-nano`(MID), `qwen/qwen3.5-9b`(소형 proxy) |
 | **Harness config** | harness=OFF (baseline, harness-off 조건) |
 | **Surface** | CLI |
 | **Compute environment** | GCP e2-micro (free tier) |
@@ -45,36 +45,54 @@ Task 정의: `experiments/design-specification.md §1` 기준.
 ## 실행 기록
 
 ### Tool usage
-- 사용한 tool: (실행 후 기록)
-- tool call 횟수:
-- tool call 성공률:
+- 사용한 tool: OpenRouter chat completions (tool-call 없음)
+- tool call 횟수: 0 (pilot 시나리오 기준)
+- tool call 성공률: N/A
 
 ### 실행 로그 요약
-(실행 후 기록)
+- 2026-03-20 pilot(T1/T2): `results/model-matrix*/model-matrix-results.md`
+- 2026-03-21 rerun(T2, sandbox): DNS 제한으로 `api_error` 발생 (token=0)
+- 2026-03-21 rerun(T1+T2, network 승격): `results/e01-pilot-r2/model-matrix-results.md` (유효 결과)
+- 2026-03-21 SOTA vs 소형 2모델 비교: `results/e01-sota-small-r2/model-matrix-results.md`
 
 ---
 
 ## 결과
 
-**Success / Failure**: [ ] 성공 / [ ] 실패 / [ ] 부분 성공
+**Success / Failure**: [ ] 성공 / [ ] 실패 / [x] 부분 성공
 
-**Failure type**:
+**Failure type**: `task_failure`(주로 qwen/qwen3.5-9b), `partial_quality_degradation`(일부 모델 T1)
 
 **TCR (T1)**:
+- nvidia/nemotron-3-super-120b-a12b: 0.750 (1 success, 1 partial)
+- openai/gpt-5.4-nano: 0.500 (2 partial)
+- google/gemini-3.1-flash-lite-preview: 0.250 (1 partial, 1 fail)
+- google/gemini-2.5-flash-lite: 0.750 (1 success, 1 partial)
+- qwen/qwen3.5-9b: 0.000 (2/2 fail)
+
 **TCR (T2)**:
-**ARCC (SOTA)**:
-**ARCC (소형)**:
+- nvidia/nemotron-3-super-120b-a12b: 1.000 (2/2 success)
+- openai/gpt-5.4-nano: 1.000 (2/2 success)
+- google/gemini-3.1-flash-lite-preview: 1.000 (2/2 success)
+- google/gemini-2.5-flash-lite: 1.000 (2/2 success)
+- qwen/qwen3.5-9b: 0.000 (2/2 fail)
+
+**ARCC (SOTA)**: 미계산 (MSRD_n/CUE/T3 데이터 미수집)
+**ARCC (소형)**: 미계산 (MSRD_n/CUE/T3 데이터 미수집)
 
 ---
 
 ## 분석
 
 ### Primary bottleneck
-**1차 병목**:
+**1차 병목**: 모델 성능의 task-conditional 변동 + T3 fixture 부재
 **근거**:
+- qwen proxy는 T1/T2 모두 0.000으로 하한을 형성
+- gemini-3.1(SOTA) vs gemini-2.5(소형) 비교에서 T1은 소형이 높고(TCR 0.75 vs 0.25), T2는 동률(1.0)
+- `framework/tasks.py`의 T3는 `make_t3_repo()` 전제인데 실구현 fixture가 없음
 
 ### Balloon effect
-[ ] 관찰됨 / [ ] 관찰 안 됨
+[ ] 관찰됨 / [x] 관찰 안 됨 (pilot 표본이 작아 확정 불가)
 
 ---
 
@@ -82,32 +100,41 @@ Task 정의: `experiments/design-specification.md §1` 기준.
 
 | 지표 | SOTA | 소형 |
 |------|------|------|
-| Token usage (input) | | |
-| Token usage (output) | | |
-| 실행 시간 | | |
-| 비용 (API) | | |
-| TCA | | |
-| IFR | | |
-| MSRD_n | | |
-| CUE | | |
+| Token usage (input) | gemini-3.1 기준 T1/T2 평균 약 7.1K/0.6K | gemini-2.5 기준 T1/T2 평균 약 4.3K/0.7K |
+| Token usage (output) | 별도 분리 미기록 (현재 러너 한계) | 별도 분리 미기록 |
+| 실행 시간 | run 완료(steps 1~4) | run 완료(steps 1~4) |
+| 비용 (API) | 정상 호출 비용 발생 (세부 비용 미집계) | 정상 호출 비용 발생 |
+| TCA | T1: 0.000 / T2: 1.000 (gemini-3.1) | T1: 0.000 / T2: 0.000 (gemini-2.5) |
+| IFR | T1: 0.125 / T2: 0.600 (gemini-3.1) | T1: 0.400 / T2: 0.000 (gemini-2.5) |
+| MSRD_n | 미측정 | 미측정 |
+| CUE | 미측정 | 미측정 |
 
 ---
 
 ## Human Intervention
 
-**개입 여부**: [ ] 없음 / [ ] 있음
+**개입 여부**: [x] 없음 / [ ] 있음
 
 ---
 
 ## Recovery
 
-**복구 시도**: [ ] 없음 / [ ] 있음
+**복구 시도**: [ ] 없음 / [x] 있음 (sandbox 실패 후 network 승격 재실행)
 
 ---
 
 ## Lesson Learned
 
-(실행 후 기록)
+- E01 완료 조건은 단순 TCR 집계가 아니라 ARCC 구성요소(TCA/IFR/MSRD_n/CUE) 동시 계측이다.
+- 현 상태는 T1/T2 pilot만 존재하고 T3 데이터가 없어 Capability Cliff 위치를 확정할 수 없다.
+- sandbox 네트워크 모드에서는 API 오류가 섞일 수 있어, 실행 모드(승격/비승격)를 실험 메타데이터로 기록해야 한다.
+
+---
+
+## Blockers (2026-03-21)
+
+1. T3 long-horizon 측정을 위한 repo fixture 생성 루틴(`make_t3_repo`)이 코드베이스에 없음.
+2. pilot은 token budget 2000으로 수행되어 본래 E01 스펙(32K/64K)과 다름.
 
 ---
 

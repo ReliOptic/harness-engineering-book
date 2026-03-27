@@ -26,7 +26,7 @@
 
 ### 책과의 관계
 
-**기존 챕터 보강.** Ch.1 생태계 스냅샷, Ch.3 surface 변수 정의, Ch.6 Fieldkit. 상세 인용 초고는 `FD-2026-03-17-002-citations.md` [Ch.3 인용 A], [Ch.3 인용 B] 참조.
+**기존 챕터 보강.** Ch.1 생태계 스냅샷, Ch.3 surface 변수 정의, Ch.6 Operational Compiler. 상세 인용 초고는 `FD-2026-03-17-002-citations.md` [Ch.3 인용 A], [Ch.3 인용 B] 참조.
 
 ---
 
@@ -130,7 +130,7 @@ GN#348에서 가장 밀도 있는 비기술 클러스터. 다섯 가지 관찰�
 
 ### 책과의 관계
 
-**혼합.** Symphony/Paperclip → Ch.7 (자율 운영의 가능성과 한계). Claude Code recall → Ch.6 Fieldkit (세션 간 메모리 도구). zvec → Ch.6 (경량 벡터 검색 패턴). Anthropic Courses / Qwen3.5 파인튜닝 가이드 → Ch.2 또는 부록 참고자료. 이 중 Symphony/Paperclip은 Ch.7의 self-immune 전환 이후 시나리오와 직접 연결되므로 Karpathy Autoresearch와 함께 묶어 다루는 것이 효율적이다.
+**혼합.** Symphony/Paperclip → Ch.7 (자율 운영의 가능성과 한계). Claude Code recall → Ch.6 Operational Compiler (세션 간 메모리 도구). zvec → Ch.6 (경량 벡터 검색 패턴). Anthropic Courses / Qwen3.5 파인튜닝 가이드 → Ch.2 또는 부록 참고자료. 이 중 Symphony/Paperclip은 Ch.7의 self-immune 전환 이후 시나리오와 직접 연결되므로 Karpathy Autoresearch와 함께 묶어 다루는 것이 효율적이다.
 
 ---
 

@@ -2,9 +2,50 @@
 실험 설정 dataclass 모음.
 HarnessConfig: ablation 제어용 컴포넌트 on/off
 ExperimentConfig: 실험 조건 명세
+
+API: OpenRouter (https://openrouter.ai)
+OPENROUTER_API_KEY 환경변수 필요.
+base_url = "https://openrouter.ai/api/v1"
 """
 from dataclasses import dataclass, field
 from typing import Literal, Optional
+
+
+# ── Model Lineup (OpenRouter IDs, 2026-03) ──────────────────────────────────
+# 모든 모델은 tool use / function calling 지원.
+# 2026-03-19 업데이트: GPT-5.4 Nano + Gemini 3.1 Flash Lite Preview로 축 재편.
+
+# SOTA tier: Gemini 3.1 Flash Lite Preview — Gemini 2.5 Flash 수준 접근, 1M ctx
+MODEL_SOTA     = "google/gemini-3.1-flash-lite-preview"  # $0.25/$1.50 per MTok, 1M ctx
+MODEL_SOTA_OAI = "openai/gpt-5.2"                        # $1.75/$14.00 per MTok, 400K ctx (reference)
+
+# MID tier: GPT-5.4 Nano — GPT-5.4 family 경량, 400K ctx, sub-agent 실행 최적화
+MODEL_MID      = "openai/gpt-5.4-nano"                   # $0.20/$1.25 per MTok, 400K ctx
+
+# SMALL tier: 경량 모델, Capability Cliff 측정용 (이전 세대 기준점 유지)
+MODEL_SMALL    = "google/gemini-2.5-flash-lite"          # $0.10/$0.40 per MTok, 1M ctx
+MODEL_SMALL_OAI = "openai/gpt-5-mini"                    # $0.25/$2.00 per MTok, 400K ctx
+
+# Judge model: ground truth 검증
+MODEL_JUDGE    = "google/gemini-3.1-flash-lite-preview"  # $0.25/$1.50 per MTok
+
+# Pricing table (per million tokens): {model_id: (input_$/M, output_$/M)}
+MODEL_PRICING = {
+    "google/gemini-3.1-flash-lite-preview": (0.25,  1.50),
+    "openai/gpt-5.2":                       (1.75, 14.00),
+    "openai/gpt-5.4-nano":                  (0.20,  1.25),
+    "google/gemini-2.5-flash":              (0.30,  2.50),
+    "google/gemini-2.5-flash-lite":         (0.10,  0.40),
+    "openai/gpt-5-mini":                    (0.25,  2.00),
+    "google/gemini-2.5-pro":               (1.25, 10.00),
+}
+
+def compute_cost(model: str, input_tokens: int, output_tokens: int) -> float:
+    """OpenRouter 기준 API 비용 계산 (USD)."""
+    if model not in MODEL_PRICING:
+        raise ValueError(f"Unknown model pricing: {model}")
+    in_rate, out_rate = MODEL_PRICING[model]
+    return (input_tokens * in_rate + output_tokens * out_rate) / 1_000_000
 
 
 # ── Harness Component Configuration (Figure 10 ablation 제어) ──────────────
@@ -109,7 +150,7 @@ class ExperimentConfig:
     """
     experiment_id: str              # E04, E08 등
     run_id: int                     # 동일 조건 반복 실행 번호 (1~N)
-    model: str                      # anthropic model id
+    model: str                      # OpenRouter model id (예: "google/gemini-2.5-flash")
     harness: HarnessConfig
     task: TaskConfig
     surface: SurfaceType = "CLI"
@@ -144,6 +185,8 @@ class RunLog:
     """단일 run 전체 기록. 모든 StepLog + 최종 결과."""
     config: ExperimentConfig
     steps: list[StepLog] = field(default_factory=list)
+    tool_call_log: list[dict] = field(default_factory=list)
+    instruction_compliance: list[dict] = field(default_factory=list)
     final_verdict: Optional[Literal["success", "failure", "partial"]] = None
     failure_type: Optional[str] = None
     recovered: bool = False

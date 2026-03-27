@@ -39,13 +39,13 @@ Analyze → Design → Implement → Plan Tests → Write Tests → Document →
 | **적용 타겟** | 개별 GUI 소프트웨어 (GIMP, Blender 등) | 에이전트 프로세스 전체 (메모리, 자원, 스케줄러, 관찰) |
 | **상태 관리 주체** | harness 인스턴스 (REPL 세션 내 상태 기계) | harness + Watchdog 조합 (프로세스 경계에서 관리) |
 | **결정론성 달성 방법** | JSON 출력 강제 + 상태 모델 추상화 | 자원 경계(RSS/CPU 상한) + 재현 가능한 게이트 통과 기준 |
-| **점진성 원칙** | `refine` 명령으로 비파괴적 CLI 커버리지 확장 | 6-Gate 단계적 통과 (Fieldkit 점진적 원칙) |
+| **점진성 원칙** | `refine` 명령으로 비파괴적 CLI 커버리지 확장 | 6-Gate 단계적 통과 (Operational Compiler 점진적 원칙) |
 | **핵심 문제 의식** | GUI → CLI 번역의 인지 오버헤드 | harness=None 상태에서의 자원 고갈·상태 오염 |
 
 ### 교차점 (두 정의가 수렴하는 지점)
 
 1. **결정론성:** 양쪽 모두 에이전트 실행 레이어에서 확률적 LLM의 한계를 구조로 보완해야 한다는 결론 도달.
-2. **점진성:** "한 번에 완성하지 않는다" — CLI-Anything의 `refine` 반복과 이 책의 Fieldkit 점진적 원칙은 동일한 설계 철학의 독립 표현.
+2. **점진성:** "한 번에 완성하지 않는다" — CLI-Anything의 `refine` 반복과 이 책의 Operational Compiler 점진적 원칙은 동일한 설계 철학의 독립 표현.
 3. **관찰 가능성:** JSON 출력 (CLI-Anything) / heartbeat + 로그 강제 (이 책) — 표현이 다르지만 "harness가 에이전트 상태를 외부에서 읽을 수 있어야 한다"는 전제 공유.
 
 ### 차이점 (두 정의가 갈라지는 지점)

@@ -3,6 +3,7 @@
 
 # API keys / secrets
 experiments/API.txt
+secret_keys/
 
 # Python bytecode
 __pycache__/

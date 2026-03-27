@@ -63,11 +63,16 @@ def validate_t1(
     matched_gt = set()
     for rep in reported:
         rep_line = rep.get("line_number", rep.get("line", -1))
-        rep_type = rep.get("bug_type", rep.get("type", ""))
+        rep_type = str(rep.get("bug_type", rep.get("type", ""))).strip().lower()
+        rep_severity = str(rep.get("severity", "")).strip().lower()
         for i, gt in enumerate(ground_truth_bugs):
             if i in matched_gt:
                 continue
-            if abs(rep_line - gt.line_number) <= line_tolerance:
+            if (
+                abs(rep_line - gt.line_number) <= line_tolerance
+                and rep_type == gt.bug_type.strip().lower()
+                and rep_severity == gt.severity.strip().lower()
+            ):
                 tp += 1
                 matched_gt.add(i)
                 break
@@ -97,7 +102,7 @@ def validate_t1(
 
 def validate_t2(
     agent_plan: str,
-    constraints: list[dict],
+    constraints: list[dict] | dict,
     resources: Optional[dict] = None,
 ) -> ValidationResult:
     """
@@ -117,30 +122,55 @@ def validate_t2(
             details={"error": "plan is not valid JSON"},
         )
 
+    constraint_list = constraints.get("constraints", []) if isinstance(constraints, dict) else constraints
+    required_actions = set(constraints.get("required_actions", [])) if isinstance(constraints, dict) else set()
+    optional_actions = set(constraints.get("optional_actions", [])) if isinstance(constraints, dict) else set()
+
     violations = []
     valid_steps = 0
     action_order = [step.get("action", "") for step in plan]
+    actions_seen = set(action_order)
 
-    for c in constraints:
+    if not required_actions:
+        for c in constraint_list:
+            if c.get("type") == "dependency":
+                required_actions.add(c["before"])
+                required_actions.add(c["after"])
+
+    for c in constraint_list:
         if c["type"] == "dependency":
             before, after = c["before"], c["after"]
-            if before in action_order and after in action_order:
-                if action_order.index(before) > action_order.index(after):
-                    violations.append(f"dependency violated: {before} must precede {after}")
-                else:
-                    valid_steps += 1
+            if before not in actions_seen or after not in actions_seen:
+                violations.append(f"dependency missing action: {before} -> {after}")
+            elif action_order.index(before) > action_order.index(after):
+                violations.append(f"dependency violated: {before} must precede {after}")
+            else:
+                valid_steps += 1
         elif c["type"] == "resource":
             # 동시 실행 resource 사용량 체크 (단순화: sequential 가정)
             item, limit = c["item"], c["limit"]
-            if resources and resources.get(item, 0) <= limit:
+            if resources is None:
+                sequential_plan = all(
+                    isinstance(step.get("step"), int) for step in plan
+                ) and len({step.get("step") for step in plan}) == len(plan)
+                if sequential_plan and limit >= 1:
+                    valid_steps += 1
+                else:
+                    violations.append(f"resource unchecked: {item} limit={limit}")
+            elif resources.get(item, 0) <= limit:
                 valid_steps += 1
-            elif not resources:
-                valid_steps += 1  # resource info 없으면 pass
+            else:
+                violations.append(f"resource violated: {item}>{limit}")
 
-    if not constraints:
+    missing_required = sorted(a for a in required_actions if a not in actions_seen and a not in optional_actions)
+    for action in missing_required:
+        violations.append(f"required action missing: {action}")
+
+    if not constraint_list and not required_actions:
         score = 1.0 if plan else 0.0
     else:
-        score = valid_steps / len(constraints) if constraints else 0.0
+        denominator = len(constraint_list) + len(missing_required)
+        score = valid_steps / denominator if denominator else 0.0
 
     verdict = "pass" if not violations and score >= 1.0 else \
               "partial" if score > 0 else "fail"
@@ -151,7 +181,8 @@ def validate_t2(
         details={
             "violations": violations,
             "valid_constraints": valid_steps,
-            "total_constraints": len(constraints),
+            "total_constraints": len(constraint_list),
+            "missing_required_actions": missing_required,
             "plan_steps": len(plan),
         },
     )

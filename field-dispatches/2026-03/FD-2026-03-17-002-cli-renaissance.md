@@ -85,9 +85,9 @@ Ch.7 (self-immune system, Agent-2 전환)의 맥락에서: 에이전트가 외�
 **Ch.4/5 (실험 및 결과 분석):**
 - GitHub 프롬프트 인젝션 사례 → harness 없는 에이전트 운영의 보안 비용 실증 사례 (E-시리즈 중 보안 실험 설계 시 참조)
 
-**Ch.6 (Fieldkit):**
+**Ch.6 (Operational Compiler):**
 - Context Mode 98% 절감 → compute 제약을 harness로 완화하는 구체적 패턴
-- `--dry-run`, `--output json` 같은 점진적 도입 권고는 Fieldkit 설계 원칙과 직접 일치
+- `--dry-run`, `--output json` 같은 점진적 도입 권고는 Operational Compiler 설계 원칙과 직접 일치
 
 ### 책 확장 필요: 기존 챕터를 넓혀야 하는 것
 

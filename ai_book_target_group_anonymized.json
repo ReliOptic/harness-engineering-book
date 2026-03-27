@@ -1,0 +1,1416 @@
+{
+  "dataset_name": "ai_book_target_group_anonymized",
+  "version": "1.0",
+  "created_at": "2026-03-27T23:11:53Z",
+  "source_file": "AI 유저그룹.xlsx",
+  "purpose": "AI를 활용하거나 AI에 관심이 있는 참여자 그룹을 서적의 잠재 타겟 독자군으로 구조화한 익명화 JSON 데이터",
+  "audience_count": 58,
+  "sanitization": {
+    "removed_or_generalized": [
+      "구체적 회사명/기관명",
+      "실명 및 개인 식별 가능 이름",
+      "직접 식별 가능성이 높은 기수/소속 표기 일부"
+    ],
+    "method": "원문 의미는 유지하되, 회사·기관·이름은 산업/역할 단위의 일반화 표현으로 치환"
+  },
+  "schema": {
+    "record_key": "records[*]",
+    "fields": {
+      "audience_id": "익명 참여자 ID",
+      "source_row": "원본 시트 행 번호와 대응되는 순번",
+      "profile.current_background_role": "현재 역할 및 배경",
+      "profile.interests_projects_strengths": "관심사, 프로젝트, 강점",
+      "profile.collaboration_value": "협업 활용 포인트",
+      "profile.one_line_summary": "발표 한줄 요약",
+      "profile.topic_motivation": "희망 주제/문제의식",
+      "profile.suggested_role_placement": "추천 역할/배치",
+      "inferred.primary_segment_id": "추론된 1차 세그먼트 ID",
+      "inferred.primary_segment_name_ko": "추론된 1차 세그먼트명",
+      "inferred.tags": "핵심 키워드 태그"
+    }
+  },
+  "audience_segments": [
+    {
+      "segment_id": "strategy_business",
+      "segment_name_ko": "전략·사업개발형",
+      "description": "전략기획, 사업개발, 시장성/사업성 검증, PM/의사결정 지원 중심",
+      "member_count": 7,
+      "member_ids": [
+        "AUD-019",
+        "AUD-023",
+        "AUD-037",
+        "AUD-038",
+        "AUD-043",
+        "AUD-050",
+        "AUD-056"
+      ]
+    },
+    {
+      "segment_id": "product_ux_pm",
+      "segment_name_ko": "제품·UX·PM형",
+      "description": "제품기획, 서비스기획, UX/UI, 요구사항 정리, 프로토타이핑 중심",
+      "member_count": 14,
+      "member_ids": [
+        "AUD-003",
+        "AUD-004",
+        "AUD-009",
+        "AUD-016",
+        "AUD-022",
+        "AUD-026",
+        "AUD-028",
+        "AUD-030",
+        "AUD-036",
+        "AUD-040",
+        "AUD-042",
+        "AUD-044",
+        "AUD-047",
+        "AUD-054"
+      ]
+    },
+    {
+      "segment_id": "automation_ai_data",
+      "segment_name_ko": "AI 자동화·데이터형",
+      "description": "자동화, 데이터 분석, AI/AX 실험, 라벨링/시각화/운영 자동화 중심",
+      "member_count": 8,
+      "member_ids": [
+        "AUD-011",
+        "AUD-013",
+        "AUD-020",
+        "AUD-021",
+        "AUD-024",
+        "AUD-045",
+        "AUD-046",
+        "AUD-049"
+      ]
+    },
+    {
+      "segment_id": "infra_cloud_solution",
+      "segment_name_ko": "인프라·클라우드·솔루션형",
+      "description": "클라우드, 인프라, 보안, 아키텍처, 엔터프라이즈 시스템 중심",
+      "member_count": 10,
+      "member_ids": [
+        "AUD-001",
+        "AUD-002",
+        "AUD-010",
+        "AUD-018",
+        "AUD-027",
+        "AUD-029",
+        "AUD-035",
+        "AUD-039",
+        "AUD-041",
+        "AUD-052"
+      ]
+    },
+    {
+      "segment_id": "marketing_gtm_brand",
+      "segment_name_ko": "마케팅·GTM·브랜드형",
+      "description": "브랜딩, 마케팅, 세일즈, 스토리텔링, 상업화/GTM 중심",
+      "member_count": 7,
+      "member_ids": [
+        "AUD-007",
+        "AUD-012",
+        "AUD-014",
+        "AUD-031",
+        "AUD-032",
+        "AUD-034",
+        "AUD-053"
+      ]
+    },
+    {
+      "segment_id": "hr_people_org",
+      "segment_name_ko": "HR·조직·People형",
+      "description": "HR, 조직, 교육, People/인재 전략, 팀 케미 중심",
+      "member_count": 5,
+      "member_ids": [
+        "AUD-008",
+        "AUD-025",
+        "AUD-048",
+        "AUD-051",
+        "AUD-055"
+      ]
+    },
+    {
+      "segment_id": "finance_investment_ops",
+      "segment_name_ko": "재무·투자·운영형",
+      "description": "재무, 투자, FP&A, 운영/실행 관리, 손익 검토 중심",
+      "member_count": 4,
+      "member_ids": [
+        "AUD-015",
+        "AUD-017",
+        "AUD-057",
+        "AUD-058"
+      ]
+    },
+    {
+      "segment_id": "industry_founder_hybrid",
+      "segment_name_ko": "산업도메인·창업형",
+      "description": "도메인 실무, 창업/현장문제, 정책/규제, 하이브리드 문제정의 중심",
+      "member_count": 3,
+      "member_ids": [
+        "AUD-005",
+        "AUD-006",
+        "AUD-033"
+      ]
+    }
+  ],
+  "records": [
+    {
+      "audience_id": "AUD-001",
+      "source_row": 1,
+      "profile": {
+        "current_background_role": "국내 대형 물류기업 전략기획실 전략기획팀에서 전사 신사업 발굴·인큐베이팅·론칭 담당.",
+        "interests_projects_strengths": "기아 PBV 공동개발, 화물차 디지털 광고, 지역 커뮤니티 플랫폼 바로구매, 패키징 광고 등 물류 기반 신사업 경험.",
+        "collaboration_value": "물류·모빌리티·광고 BM 설계형 인재. 산업 파트너십이나 신규 수익모델 검증 팀에 배치 가치 높음.",
+        "one_line_summary": "국내 대형 물류기업 전략기획 기반으로 FMS를 직접 만들어 보려는 실행형 전략가.",
+        "topic_motivation": "바이브 코딩으로 차량관제/FMS 프로토타입 구현 후 회사 설득과 커리어 확장에 연결.",
+        "suggested_role_placement": "전략·사업개발 PM / 물류 SaaS 문제정의"
+      },
+      "inferred": {
+        "primary_segment_id": "infra_cloud_solution",
+        "primary_segment_name_ko": "인프라·클라우드·솔루션형",
+        "tags": [
+          "물류",
+          "전략/신사업",
+          "제품/PM",
+          "UX/프로토타입",
+          "마케팅/GTM",
+          "백엔드/개발"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-002",
+      "source_row": 2,
+      "profile": {
+        "current_background_role": "국내 대형 통신사 코어 네트워크 운영 15년 경험, 모바일 Core 시스템 구축·운영 배경.",
+        "interests_projects_strengths": "sLLM·RPA를 활용한 네트워크 자동화, Legacy→AI-Native 운영 전환, 안정성과 AI 혁신 동시 추구.",
+        "collaboration_value": "통신/인프라 운영형 AI 적용에 강함. 안정성 민감한 엔터프라이즈 AI 운영 자동화 과제에 적합.",
+        "one_line_summary": "국내 대형 통신사 코어인프라 팀장으로 보안사고와 AX 압박 사이에서 운영 자동화를 고민.",
+        "topic_motivation": "네트워크 운영 60% AX, 조직 축소 환경에서 실무 자동화와 생존 전략 설계.",
+        "suggested_role_placement": "인프라 도메인 오너 / 운영 자동화 요구정의"
+      },
+      "inferred": {
+        "primary_segment_id": "infra_cloud_solution",
+        "primary_segment_name_ko": "인프라·클라우드·솔루션형",
+        "tags": [
+          "통신/네트워크",
+          "전략/신사업",
+          "AI/LLM",
+          "자동화",
+          "클라우드/인프라",
+          "보안"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-003",
+      "source_row": 3,
+      "profile": {
+        "current_background_role": "디지털 헬스케어 기업 전사 사업 리드, 전사 매출 확대와 이익 개선을 이끈 사업 총괄형 리더.",
+        "interests_projects_strengths": "KEARN글로벌 컨설팅사 전략컨설팅, LG CNS Entrue, 현대차 상품전략·제품기획 등 전략/IT/사업개발 이력. '코딩은 구조화' 관점.",
+        "collaboration_value": "사업화·전략·PMI·제품기획을 잇는 허브형 인재. 팀의 방향 설정과 사업성 검증을 맡기기 좋음.",
+        "one_line_summary": "개발보다 구조화에 강한 사업총괄형으로 팀에 누가 되지 않는 사람을 강조.",
+        "topic_motivation": "IT 전환기 커리어 확장과 논리 구조 중심 프로젝트 참여.",
+        "suggested_role_placement": "사업전략·구조화·PM"
+      },
+      "inferred": {
+        "primary_segment_id": "product_ux_pm",
+        "primary_segment_name_ko": "제품·UX·PM형",
+        "tags": [
+          "전략/신사업",
+          "제품/PM",
+          "백엔드/개발"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-004",
+      "source_row": 4,
+      "profile": {
+        "current_background_role": "AI Product Manager이자 산업디자인 기반의 Product Design/UX·UI 역량 보유.",
+        "interests_projects_strengths": "구조화·시각화·슬라이드 제작, App/Web/SaaS 제작, AX 프로젝트, 프로토타이핑에 강점. 헬스케어/메디컬 AI 경험.",
+        "collaboration_value": "아이디어를 화면·명세·프로토타입으로 빠르게 바꾸는 유형. 초기 제품 정의와 데모 제작 핵심 멤버로 적합.",
+        "one_line_summary": "디자인+PM+AX 경험을 가진 프로토타입 친화형 빌더.",
+        "topic_motivation": "수익화 가능한 서비스, 고객 유치형 제품, 바이브 코딩 프로젝트.",
+        "suggested_role_placement": "UX/화면설계/프로토타입"
+      },
+      "inferred": {
+        "primary_segment_id": "product_ux_pm",
+        "primary_segment_name_ko": "제품·UX·PM형",
+        "tags": [
+          "제품/PM",
+          "UX/프로토타입",
+          "데이터/분석",
+          "AI/LLM"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-005",
+      "source_row": 5,
+      "profile": {
+        "current_background_role": "러닝 기록과 로컬 커뮤니티 지표 중심의 액티브 라이프형 자기소개.",
+        "interests_projects_strengths": "12·16·42, 27/1400, LOCAL 50, kmrunwrld 등 러닝/커뮤니티 관련 수치와 정체성이 슬라이드 핵심.",
+        "collaboration_value": "직무 정보는 제한적이나 커뮤니티·라이프스타일 서비스/습관형 제품 아이디어 논의에 연결 가능.",
+        "one_line_summary": "폐업과 회생까지 겪은 스타트업 창업가로 로컬 문제 해결과 실행력을 강조.",
+        "topic_motivation": "부산 로컬 이슈·고독사 방지 등 지역 기반 문제 해결형 서비스.",
+        "suggested_role_placement": "창업가 관점 검증 / 현장문제 집착형"
+      },
+      "inferred": {
+        "primary_segment_id": "industry_founder_hybrid",
+        "primary_segment_name_ko": "산업도메인·창업형",
+        "tags": [
+          "데이터/분석",
+          "창업/현장문제"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-006",
+      "source_row": 6,
+      "profile": {
+        "current_background_role": "기획·관리 경험을 갖춘 '능수능란 Vibe coder' 포지션.",
+        "interests_projects_strengths": "칼답, Overnight MVP, 되는 건 된다/안 되면 대안 제시 등 높은 실행 속도와 구현 집착이 강점.",
+        "collaboration_value": "해커형 빌더. 짧은 기간에 프로토타입을 뽑아야 하는 팀에서 생산성 기여가 매우 큼.",
+        "one_line_summary": "직업 공백기 동안 바이브 코딩을 많이 해본 빠른 구현형 빌더.",
+        "topic_motivation": "기획만 주어지면 빠르게 구현하고, 변화 많은 프로젝트에서 MVP 제작.",
+        "suggested_role_placement": "해커형 구현 / 초단기 MVP"
+      },
+      "inferred": {
+        "primary_segment_id": "industry_founder_hybrid",
+        "primary_segment_name_ko": "산업도메인·창업형",
+        "tags": [
+          "UX/프로토타입"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-007",
+      "source_row": 7,
+      "profile": {
+        "current_background_role": "국내 대형 플랫폼 기업 광고주 컨설팅/세일즈 배경의 사용자 관점형 실행 인재.",
+        "interests_projects_strengths": "신규사업 시딩, 부진업종 케어, 제일기획 브랜드 담당, HTML 뉴스레터 자동화, 광고문답툴 기획 등 경험.",
+        "collaboration_value": "세일즈·마케팅·콘텐츠·운영을 조율하는 시너지 메이커. 고객 접점 실험과 GTM 설계에 강함.",
+        "one_line_summary": "광고 컨설팅·세일즈 배경에서 문의 자동화 솔루션을 혼자 구상 중.",
+        "topic_motivation": "광고·마케팅 업무 자동화, 중요도 낮은 문의의 AI 응답.",
+        "suggested_role_placement": "GTM·세일즈·운영 자동화"
+      },
+      "inferred": {
+        "primary_segment_id": "marketing_gtm_brand",
+        "primary_segment_name_ko": "마케팅·GTM·브랜드형",
+        "tags": [
+          "AI/LLM",
+          "자동화",
+          "마케팅/GTM"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-008",
+      "source_row": 8,
+      "profile": {
+        "current_background_role": "글로벌 HR 컨설팅사, 글로벌 플랫폼 기업, 게임/콘텐츠 기업으로 이어지는 HR/보상/제도 기획형 문제해결사.",
+        "interests_projects_strengths": "심리학/전략학회 배경, 케이스 경쟁력, 데이터 기반 보상제도 설계, 루트코즈 탐색과 논리 전개 능력.",
+        "collaboration_value": "복잡한 조직·인사 문제를 구조화하는 데 강함. 제도 설계·People Analytics·경영진 설득형 과제에 적합.",
+        "one_line_summary": "HR/보상 전문가로 팀원 커리어·교육 자원까지 지원 가능하다고 어필.",
+        "topic_motivation": "인사/보상 지식 제공, 게임/콘텐츠 기업 교육예산·툴을 활용한 프로젝트 지원.",
+        "suggested_role_placement": "People/HR 인사이트 / 리소스 연결"
+      },
+      "inferred": {
+        "primary_segment_id": "hr_people_org",
+        "primary_segment_name_ko": "HR·조직·People형",
+        "tags": [
+          "전략/신사업",
+          "데이터/분석",
+          "마케팅/GTM",
+          "HR/조직"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-009",
+      "source_row": 9,
+      "profile": {
+        "current_background_role": "패션 플랫폼·패션 커머스 플랫폼 등에서 서비스기획(PM) 경험을 쌓은 서비스 기획자.",
+        "interests_projects_strengths": "Self-Growth Tool, Productivity Solution, Life-Friendly Solution 등 자기개발/생산성/일상 친화 서비스에 관심.",
+        "collaboration_value": "사용자 문제를 생활밀착형 서비스로 번역하는 유형. 소비자 서비스 아이디어 발굴·UX 기획에 적합.",
+        "one_line_summary": "패션·커머스 PM 배경으로 생산성·모임·일상개선형 서비스에 관심.",
+        "topic_motivation": "자기계발/운동/모임 플랫폼, 삶의 생산성 향상 도구.",
+        "suggested_role_placement": "소비자서비스 PM / UX기획"
+      },
+      "inferred": {
+        "primary_segment_id": "product_ux_pm",
+        "primary_segment_name_ko": "제품·UX·PM형",
+        "tags": [
+          "제품/PM",
+          "UX/프로토타입",
+          "백엔드/개발"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-010",
+      "source_row": 10,
+      "profile": {
+        "current_background_role": "글로벌 에너지 기업 IT Infrastructure Engineer로 10년간 에너지 산업 IT 인프라/프로젝트 관리 수행.",
+        "interests_projects_strengths": "글로벌 에너지 기업 글로벌 환경, 멀티오피스 운영, 대규모 IT 시스템 경험과 산업용 AI 적용 의지 보유.",
+        "collaboration_value": "산업 현장 문제를 실제 시스템 관점에서 다루는 엔지니어. 에너지·제조 등 리얼월드 AI 프로젝트에 유효.",
+        "one_line_summary": "에너지·플랜트·IT 인프라 실무 10년, 최근 에너지 이슈까지 연결 가능한 엔지니어.",
+        "topic_motivation": "실제 운영·서버·네트워크 경험을 활용한 산업형 AI/인프라 과제.",
+        "suggested_role_placement": "도메인 실무 / 엔터프라이즈 인프라"
+      },
+      "inferred": {
+        "primary_segment_id": "infra_cloud_solution",
+        "primary_segment_name_ko": "인프라·클라우드·솔루션형",
+        "tags": [
+          "통신/네트워크",
+          "AI/LLM",
+          "클라우드/인프라",
+          "제조/산업"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-011",
+      "source_row": 11,
+      "profile": {
+        "current_background_role": "슬라이드상 관심 산업 키워드는 외국계·IT·유통 중심.",
+        "interests_projects_strengths": "직무/경력 정보는 제한적이며, 관심 영역을 압축적으로 표현한 자기소개 형식.",
+        "collaboration_value": "현재 정보는 제한적. 산업 탐색형 대화, 커리어·시장 비교 관점의 브레인스토밍 파트너로 활용 가능.",
+        "one_line_summary": "외국계 IT유통 데이터팀 리드로 수요예측·자동화·사주 앱까지 관심을 표시.",
+        "topic_motivation": "유통 데이터 자동화, 저가형 사주 서비스 등 데이터 기반 실험.",
+        "suggested_role_placement": "데이터 리드 / 유통 분석"
+      },
+      "inferred": {
+        "primary_segment_id": "automation_ai_data",
+        "primary_segment_name_ko": "AI 자동화·데이터형",
+        "tags": [
+          "데이터/분석",
+          "자동화"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-012",
+      "source_row": 12,
+      "profile": {
+        "current_background_role": "국내 대형 전자기업 New Biz 팀의 서비스/신사업 기획 경험과 글로벌 소비재 기업 Brand Manager 이력을 가진 마케팅·사업개발 인재.",
+        "interests_projects_strengths": "스마트 냉장고 광고 솔루션, 소비재 브랜드 마케팅, 소비재·리테일 프로젝트와 마케팅 데이터 분석에 관심.",
+        "collaboration_value": "브랜드 감각과 사업기획을 함께 보유. 리테일 데이터 기반 마케팅/신사업 실험 팀에 잘 맞음.",
+        "one_line_summary": "국내 대형 전자기업 서비스기획 + 글로벌 소비재 기업 브랜드마케팅 출신의 리테일/마케팅형 인재.",
+        "topic_motivation": "광고·마케팅·리테일 분야 프로젝트.",
+        "suggested_role_placement": "브랜드·마케팅·사업기획"
+      },
+      "inferred": {
+        "primary_segment_id": "marketing_gtm_brand",
+        "primary_segment_name_ko": "마케팅·GTM·브랜드형",
+        "tags": [
+          "전략/신사업",
+          "제품/PM",
+          "데이터/분석",
+          "마케팅/GTM",
+          "백엔드/개발"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-013",
+      "source_row": 13,
+      "profile": {
+        "current_background_role": "에너지·화학 계열사 최고경영자 비서실 소속 AX(AI Transformation) 추진 담당, 화학공학·엔지니어 배경.",
+        "interests_projects_strengths": "사내 AI 과제 발굴·실행, AI/DT 교육·문화 확산, Claude Code/Open Claw 기반 프로젝트 경험.",
+        "collaboration_value": "조직 내 AX 전파와 실험을 동시에 하는 인재. 사내 적용형 AI 과제의 PM·변화관리 역할에 강함.",
+        "one_line_summary": "엔지니어 출신 AX 추진 담당으로 서버까지 직접 깔며 개인 프로젝트를 돌리는 실행형.",
+        "topic_motivation": "사내 AX 과제, Claude/OpenClaw 기반 실험, 사내 리소스를 활용한 프로젝트.",
+        "suggested_role_placement": "사내 AX PM / 기술실험"
+      },
+      "inferred": {
+        "primary_segment_id": "automation_ai_data",
+        "primary_segment_name_ko": "AI 자동화·데이터형",
+        "tags": [
+          "제품/PM",
+          "AI/LLM",
+          "제조/산업"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-014",
+      "source_row": 14,
+      "profile": {
+        "current_background_role": "뷰티·소비재 기업 Brand Manager이자 비즈니스 애널리틱스에 관심 있는 정보경영 전공자.",
+        "interests_projects_strengths": "마케팅 배경에서 AI-assisted prototyping, data-driven decision making, simple tools 제작을 탐색.",
+        "collaboration_value": "마케팅 문제를 실험 가능한 제품/데이터 질문으로 전환하는 역할에 적합.",
+        "one_line_summary": "브랜드 매니저로서 바이브 코딩을 배우며 사용자 관점 기여를 강조.",
+        "topic_motivation": "아이디어를 빠르게 프로토타입으로 만들고 사용자 관점에서 검증.",
+        "suggested_role_placement": "브랜드·사용자 관점 / 기획 보조"
+      },
+      "inferred": {
+        "primary_segment_id": "marketing_gtm_brand",
+        "primary_segment_name_ko": "마케팅·GTM·브랜드형",
+        "tags": [
+          "UX/프로토타입",
+          "데이터/분석",
+          "AI/LLM",
+          "마케팅/GTM"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-015",
+      "source_row": 15,
+      "profile": {
+        "current_background_role": "벤처투자사 근무 VC, AI 응용 사업화 영역 투자 경험 보유.",
+        "interests_projects_strengths": "투자자 시각에서 AI 사업화 가능성과 시장성 평가 역량 보유.",
+        "collaboration_value": "팀 아이디어의 투자논리·시장성·사업화 가능성을 냉정하게 점검하는 역할로 유효.",
+        "one_line_summary": "VC 시각에서 디지털·피지컬 AI 투자 사례를 본 넓고 얕은 사업화 검토자.",
+        "topic_motivation": "아이디어의 투자논리·시장성 검증.",
+        "suggested_role_placement": "투자자 관점 심사 / 사업성 체크"
+      },
+      "inferred": {
+        "primary_segment_id": "finance_investment_ops",
+        "primary_segment_name_ko": "재무·투자·운영형",
+        "tags": [
+          "전략/신사업",
+          "AI/LLM",
+          "재무/투자"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-016",
+      "source_row": 16,
+      "profile": {
+        "current_background_role": "10년차 Product Manager, 'AI와 함께하는 쿼리 노예'라고 표현한 데이터 친화형 PM.",
+        "interests_projects_strengths": "정리요정, 초록색 원클럽맨, 애개육아 등 생활/업무 밸런스와 운영형 PM 성향이 드러남.",
+        "collaboration_value": "운영·분석·정리력이 필요한 실무형 PM 포지션에 적합. 데이터 정합성 관리에 강점 예상.",
+        "one_line_summary": "국내 대형 플랫폼 기업·금융권 PM 경험을 가진 운영형 PM으로 생활 문제에도 관심이 큼.",
+        "topic_motivation": "생산성/육아/일상 문제를 다루는 서비스, 데이터 정리와 실행.",
+        "suggested_role_placement": "운영 PM / 요구사항 정리"
+      },
+      "inferred": {
+        "primary_segment_id": "product_ux_pm",
+        "primary_segment_name_ko": "제품·UX·PM형",
+        "tags": [
+          "제품/PM",
+          "데이터/분석",
+          "AI/LLM",
+          "자동화"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-017",
+      "source_row": 17,
+      "profile": {
+        "current_background_role": "대형 이커머스 기업 SCM Last-mile 운영과 FP&A를 모두 경험한 손익/운영형 인재.",
+        "interests_projects_strengths": "배송 CAPA 계획·물류비 효율화, 전사 손익관리, 실시간 데이터 기반 손익 모니터링 니즈를 명확히 제시.",
+        "collaboration_value": "현업 문제정의가 분명한 재무·운영 브릿지형 인재. 엑셀/수작업 대체형 AI 프로토타입 과제에 최적.",
+        "one_line_summary": "SCM과 재무를 모두 경험하며 유관부서 데이터 부정확성을 핵심 문제로 제시.",
+        "topic_motivation": "여러 부서 데이터를 정확히 취합해 의사결정을 돕는 AI 솔루션.",
+        "suggested_role_placement": "운영·재무 브릿지 / 실무 문제정의"
+      },
+      "inferred": {
+        "primary_segment_id": "finance_investment_ops",
+        "primary_segment_name_ko": "재무·투자·운영형",
+        "tags": [
+          "물류",
+          "UX/프로토타입",
+          "데이터/분석",
+          "AI/LLM",
+          "재무/투자"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-018",
+      "source_row": 18,
+      "profile": {
+        "current_background_role": "글로벌 엔터프라이즈 소프트웨어 기업 컨설팅·관리회계·글로벌 컨설팅사 컨설팅을 거쳐 AI Solution Architect로 전환 중.",
+        "interests_projects_strengths": "확장·속도·협업을 강조하며 분석·체계화·단순화에 강점. Human augmentation 관점이 분명함.",
+        "collaboration_value": "복잡한 업무를 구조화해 자동화 설계로 연결하는 역할에 적합. 회계·ERP·업무혁신 과제에 강함.",
+        "one_line_summary": "ERP/컨설팅 짬바로 분석·체계화·단순화를 강조한 AI 솔루션 아키텍트.",
+        "topic_motivation": "AI로 가속·확장되는 업무 구조 설계.",
+        "suggested_role_placement": "솔루션 아키텍트 / 프로세스 재설계"
+      },
+      "inferred": {
+        "primary_segment_id": "infra_cloud_solution",
+        "primary_segment_name_ko": "인프라·클라우드·솔루션형",
+        "tags": [
+          "AI/LLM",
+          "자동화",
+          "클라우드/인프라"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-019",
+      "source_row": 19,
+      "profile": {
+        "current_background_role": "유통업 10년차 리테일 마케팅 실무자, 백화점/바이어/신사업·기획/마케팅·운영 경험 보유.",
+        "interests_projects_strengths": "고객 관점·시장성·실행가능성 기준 문제 정의, 트렌드 리서치와 아이디어 구조화가 강점.",
+        "collaboration_value": "현실성 있는 신사업/리테일 아이디어를 빠르게 정제하는 실무형 멤버. 시장 검증 파트에 적합.",
+        "one_line_summary": "백화점/여행 비즈니스 경험을 바탕으로 실행 가능한 결과를 만드는 적응형 실무자.",
+        "topic_motivation": "유통·여행·신사업 아이디어의 현실화.",
+        "suggested_role_placement": "시장성 검증 / 실행 조율"
+      },
+      "inferred": {
+        "primary_segment_id": "strategy_business",
+        "primary_segment_name_ko": "전략·사업개발형",
+        "tags": [
+          "전략/신사업",
+          "마케팅/GTM"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-020",
+      "source_row": 20,
+      "profile": {
+        "current_background_role": "정량 차트와 디지털 콘텐츠 이미지를 중심으로 자신을 표현한 데이터 친화형 자기소개.",
+        "interests_projects_strengths": "TikTok/capybara 비주얼과 여러 그래프를 활용해 데이터 시각화·콘텐츠 감각을 동시에 드러냄.",
+        "collaboration_value": "상세 경력 정보는 제한적이나 플랫폼 데이터 분석·콘텐츠 실험형 과제와의 연결 가능성이 높음.",
+        "one_line_summary": "비효율을 못 견뎌 코딩을 익혀 자동 대시보드를 만든 최적화 지향형.",
+        "topic_motivation": "프로세스 최적화, 자동 리포팅/시각화.",
+        "suggested_role_placement": "자동화·데이터 시각화"
+      },
+      "inferred": {
+        "primary_segment_id": "automation_ai_data",
+        "primary_segment_name_ko": "AI 자동화·데이터형",
+        "tags": [
+          "데이터/분석",
+          "자동화",
+          "마케팅/GTM"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-021",
+      "source_row": 21,
+      "profile": {
+        "current_background_role": "패션 커머스 플랫폼 소속 Data Analyst.",
+        "interests_projects_strengths": "Business & Product Analytics, AI Automation, AI Exploration을 핵심 키워드로 제시.",
+        "collaboration_value": "분석 자동화와 제품 데이터 해석을 맡기기 좋은 정량형 인재. 실험 설계·지표 정의 역할에 적합.",
+        "one_line_summary": "패션 커머스 플랫폼 데이터분석가로 현실의 단순추출·운영헤비 업무 자동화를 강조.",
+        "topic_motivation": "DBT/MCP/자연어 분석, 이커머스 기획전 운영 자동화.",
+        "suggested_role_placement": "데이터·분석 자동화"
+      },
+      "inferred": {
+        "primary_segment_id": "automation_ai_data",
+        "primary_segment_name_ko": "AI 자동화·데이터형",
+        "tags": [
+          "데이터/분석",
+          "AI/LLM",
+          "자동화"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-022",
+      "source_row": 22,
+      "profile": {
+        "current_background_role": "Customer Experience 부문의 Product Solutions Consultant.",
+        "interests_projects_strengths": "Relator/Harmony/Deliberative/Empathy/Consistency 강점, 성장·근면·회복력·신뢰를 핵심 가치로 제시.",
+        "collaboration_value": "크로스펑션 협업과 고객/제품 개선 이슈 조율에 강점. 팀 내 갈등 비용을 낮추는 안정형 허브 역할.",
+        "one_line_summary": "구글 광고 플랫폼 컨설턴트로 프로세스 개선과 팀의 시간·목표 정렬을 중시.",
+        "topic_motivation": "프로덕트 프로세스 개선, 논리적이고 다이렉트한 협업.",
+        "suggested_role_placement": "프로세스 오너 / 대외 커뮤니케이터"
+      },
+      "inferred": {
+        "primary_segment_id": "product_ux_pm",
+        "primary_segment_name_ko": "제품·UX·PM형",
+        "tags": [
+          "마케팅/GTM"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-023",
+      "source_row": 23,
+      "profile": {
+        "current_background_role": "핀테크 증권사 브랜드 마케터이자 콘텐츠 기획·제작자.",
+        "interests_projects_strengths": "비즈니스 가치를 이야기하고 설득하는 스토리텔링, end-to-end 콘텐츠 제작, 사용자 행동 유도, 핀테크 증권사 사용자 데이터 접근이 강점.",
+        "collaboration_value": "브랜드/콘텐츠/데이터를 연결하는 인재. 사용자 메시지 설계와 내러티브 구축이 필요한 팀에 적합.",
+        "one_line_summary": "브랜드 마케터로 왜 지금 이걸 해야 하는가를 정의하고 포장하는 데 강함.",
+        "topic_motivation": "전략 메시지·콘텐츠·웰니스/라이프스타일 프로젝트.",
+        "suggested_role_placement": "전략 내러티브 / 브랜딩"
+      },
+      "inferred": {
+        "primary_segment_id": "strategy_business",
+        "primary_segment_name_ko": "전략·사업개발형",
+        "tags": [
+          "전략/신사업",
+          "데이터/분석",
+          "마케팅/GTM"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-024",
+      "source_row": 24,
+      "profile": {
+        "current_background_role": "대형 이커머스 플랫폼 Search & Discovery 팀 프로그램 매니저로 데이터 구축과 라벨링 체계를 지원.",
+        "interests_projects_strengths": "제품·엔지니어링·데이터사이언스·외부 파트너를 조율하며 ML 메트릭/분석용 데이터 준비 경험 보유.",
+        "collaboration_value": "고품질 데이터와 운영 프로세스의 중요성을 아는 PM. 데이터 파이프라인/운영체계 정비 역할에 적합.",
+        "one_line_summary": "데이터 라벨링·전처리 경력 8년으로 콘텐츠 업계에서 AI 데이터 쪽으로 전환한 인재.",
+        "topic_motivation": "ML 데이터 구축·전처리, 조용하지만 책임감 있는 서포트.",
+        "suggested_role_placement": "데이터 오퍼레이션 / 라벨링"
+      },
+      "inferred": {
+        "primary_segment_id": "automation_ai_data",
+        "primary_segment_name_ko": "AI 자동화·데이터형",
+        "tags": [
+          "제품/PM",
+          "데이터/분석",
+          "AI/LLM",
+          "마케팅/GTM"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-025",
+      "source_row": 25,
+      "profile": {
+        "current_background_role": "글로벌 전자기업 HR 팀장 경력의 조직관리·구조화 강점 보유자.",
+        "interests_projects_strengths": "프로젝트 로드맵 설계, 갈등 조율, R&R 분배, 미식모임 운영 등 사람과 구조를 함께 보는 스타일.",
+        "collaboration_value": "시간 투입 여력이 크고 피드백 속도가 빠른 운영형 리더. 팀 운영·일정 관리·조정 역할에 강함.",
+        "one_line_summary": "수업 의지가 강한 HR 리더로 사람과 관계를 잘 묶는 팀 분위기 메이커.",
+        "topic_motivation": "열심히 함께할 팀, 친밀한 협업.",
+        "suggested_role_placement": "조율·운영 / 팀 케미 메이커"
+      },
+      "inferred": {
+        "primary_segment_id": "hr_people_org",
+        "primary_segment_name_ko": "HR·조직·People형",
+        "tags": [
+          "HR/조직"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-026",
+      "source_row": 26,
+      "profile": {
+        "current_background_role": "국내 통신사에서 7년간 B2B Enterprise Business와 KPI 개발/관리를 수행한 컴공 전공자.",
+        "interests_projects_strengths": "Talent Management Strengths Coach, KPC 프로코치, Birkman Debriefer 등 코칭 전문성 보유.",
+        "collaboration_value": "성과지표 설계와 사람 이해를 함께 갖춘 유형. 팀 역학 관리와 KPI 정의를 동시에 맡기기 좋음.",
+        "one_line_summary": "컴공+코칭 자격을 바탕으로 자기성장 코칭 플랫폼을 만들고 싶다고 제시.",
+        "topic_motivation": "선택과 집중이 어려운 시대의 자기성장/학습 설계 플랫폼.",
+        "suggested_role_placement": "코칭·학습설계 / 성장제품"
+      },
+      "inferred": {
+        "primary_segment_id": "product_ux_pm",
+        "primary_segment_name_ko": "제품·UX·PM형",
+        "tags": [
+          "통신/네트워크",
+          "데이터/분석",
+          "백엔드/개발"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-027",
+      "source_row": 27,
+      "profile": {
+        "current_background_role": "글로벌 컨설팅사 Technology Transformation, 국내 대형 로펌 정보보안컨설팅을 거친 보안·전략 컨설턴트.",
+        "interests_projects_strengths": "CRM/CX 전략, 데이터 인사이트, 보안 거버넌스·규제 대응, AI 보안 관리 절차 수립 경험 보유.",
+        "collaboration_value": "의사결정이 빠르고 방향 제시가 명확한 리더형. 규제·보안이 중요한 AI 적용 과제에서 핵심 역할 가능.",
+        "one_line_summary": "제너럴리스트 배경을 보안/전략 전문성으로 정리한 속전속결형 컨설턴트.",
+        "topic_motivation": "AI 보안, 투자/의사결정 에이전트, 빠른 팀플 완결.",
+        "suggested_role_placement": "전략·보안·결정 촉진"
+      },
+      "inferred": {
+        "primary_segment_id": "infra_cloud_solution",
+        "primary_segment_name_ko": "인프라·클라우드·솔루션형",
+        "tags": [
+          "전략/신사업",
+          "데이터/분석",
+          "AI/LLM",
+          "보안",
+          "HR/조직",
+          "재무/투자"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-028",
+      "source_row": 28,
+      "profile": {
+        "current_background_role": "대기업 지주사·대기업 교육 플랫폼·컨설팅 경력을 가진 전략기획형 인재.",
+        "interests_projects_strengths": "Portfolio Mgmt, HRD Strategy, 신사업 전략, AI를 활용한 문제정의/의사결정 지원, 구조화된 프롬프트 설계 역량.",
+        "collaboration_value": "전략 문제를 AI 활용 과제로 번역하는 브리지형 인재. 탐색→정리→의사결정 구조화에 적합.",
+        "one_line_summary": "해외 자산관리까지 넘나든 전략형 인재로 회사에서 투자관리 에이전트를 요구받는 상황.",
+        "topic_motivation": "투자관리/의사결정 보조 에이전트.",
+        "suggested_role_placement": "전략기획 / 경영진 의사결정 지원"
+      },
+      "inferred": {
+        "primary_segment_id": "product_ux_pm",
+        "primary_segment_name_ko": "제품·UX·PM형",
+        "tags": [
+          "전략/신사업",
+          "AI/LLM",
+          "HR/조직",
+          "재무/투자"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-029",
+      "source_row": 29,
+      "profile": {
+        "current_background_role": "대형 건설·엔지니어링 기업 Digital Solution Group 차장, 15년차 직장인.",
+        "interests_projects_strengths": "서버/네트워크/보안 인프라 설계, 보안과 편리함의 균형, Next.js/Python API·자동화에 관심.",
+        "collaboration_value": "인프라 시각과 빌더 성향을 함께 가진 실무형 멤버. 보안·플랫폼·자동화 설계 과제에 적합.",
+        "one_line_summary": "IT로 전환한 보안 출신으로 Next.js를 만지며 미리미리와 효율적 협업을 선호.",
+        "topic_motivation": "인프라·보안·자동화, 실무자 생산성 향상.",
+        "suggested_role_placement": "IT 인프라 / 안정적 실행"
+      },
+      "inferred": {
+        "primary_segment_id": "infra_cloud_solution",
+        "primary_segment_name_ko": "인프라·클라우드·솔루션형",
+        "tags": [
+          "통신/네트워크",
+          "자동화",
+          "클라우드/인프라",
+          "보안"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-030",
+      "source_row": 30,
+      "profile": {
+        "current_background_role": "대형 의료기관 정보화실 데이터융합팀 소속, 의료정보시스템 해외 수출/구축 경험 보유.",
+        "interests_projects_strengths": "사우디·미국 병원 그룹 HIS 수출, Medical Korea 전시, HIMSS AMAM 7단계 인증 등 의료 IT 실전 경험.",
+        "collaboration_value": "헬스케어 디지털 전환의 현장형 전문가. 병원 데이터·AI 성숙도·글로벌 레퍼런스가 필요한 과제에 적합.",
+        "one_line_summary": "병원 시스템 수출·구축을 실제로 수행한 대형 프로젝트형 인재.",
+        "topic_motivation": "의료정보/공공 프로젝트, 책임감 있는 실행.",
+        "suggested_role_placement": "대형 프로젝트 PM / 헬스케어 IT"
+      },
+      "inferred": {
+        "primary_segment_id": "product_ux_pm",
+        "primary_segment_name_ko": "제품·UX·PM형",
+        "tags": [
+          "제품/PM",
+          "데이터/분석",
+          "AI/LLM",
+          "제조/산업"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-031",
+      "source_row": 31,
+      "profile": {
+        "current_background_role": "글로벌 제약사의 Senior Vaccine Product Manager.",
+        "interests_projects_strengths": "규제 승인, 시장 환경 조성, HCP engagement, forecasting, pricing/partnership, launch/execution까지 상업화 전 주기 경험.",
+        "collaboration_value": "불확실성이 큰 산업에서 전략 프레이밍과 상업 실행을 연결하는 역할에 강함.",
+        "one_line_summary": "제약사 백신 마케팅에서 규제 산업 속 혁신 프로젝트를 여러 번 런칭한 마케터.",
+        "topic_motivation": "규제산업에도 적용 가능한 이노베이티브 마케팅/이커머스.",
+        "suggested_role_placement": "규제산업 마케팅 / 상업화"
+      },
+      "inferred": {
+        "primary_segment_id": "marketing_gtm_brand",
+        "primary_segment_name_ko": "마케팅·GTM·브랜드형",
+        "tags": [
+          "전략/신사업",
+          "제품/PM",
+          "마케팅/GTM"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-032",
+      "source_row": 32,
+      "profile": {
+        "current_background_role": "광고대행사 글로벌 광고대행사 소속, '스토리텔러'이자 실행형 실무자.",
+        "interests_projects_strengths": "회의 속 많은 아이디어·정보에서 흥미로운 맥락을 찾아 presentation으로 풀어내며, 모르는 영역도 학습해 결국 해내는 성향.",
+        "collaboration_value": "아이디어를 구조화된 메시지와 발표물로 바꾸는 능력이 강점. 팀의 내러티브/데크 빌더 역할에 최적.",
+        "one_line_summary": "듣는 힘과 스토리 디벨롭 역량을 강점으로 내세운 광고대행사 스토리텔러.",
+        "topic_motivation": "남의 아이디어를 발전시켜 주는 역할, 시키는 일 성실 수행.",
+        "suggested_role_placement": "리서치·스토리텔링 / 지원형 PM"
+      },
+      "inferred": {
+        "primary_segment_id": "marketing_gtm_brand",
+        "primary_segment_name_ko": "마케팅·GTM·브랜드형",
+        "tags": [
+          "제품/PM",
+          "마케팅/GTM"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-033",
+      "source_row": 33,
+      "profile": {
+        "current_background_role": "게임 기업·넷마블 경력의 게임 사업개발 인재.",
+        "interests_projects_strengths": "게임, 파트너십, 소싱/투자, 스토리텔링을 핵심 키워드로 제시.",
+        "collaboration_value": "게임/콘텐츠/IP 사업 검토나 파트너십 발굴 과제에 적합.",
+        "one_line_summary": "게임 개발팀/콘텐츠 파트너를 발굴하는 소싱형 기획자.",
+        "topic_motivation": "재미·IP·게임 시너지 프로젝트.",
+        "suggested_role_placement": "엔터테인먼트 BD / IP 발굴"
+      },
+      "inferred": {
+        "primary_segment_id": "industry_founder_hybrid",
+        "primary_segment_name_ko": "산업도메인·창업형",
+        "tags": [
+          "전략/신사업",
+          "마케팅/GTM",
+          "재무/투자",
+          "백엔드/개발"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-034",
+      "source_row": 34,
+      "profile": {
+        "current_background_role": "지역 커뮤니티 플랫폼에서 마케팅을 담당하며 사용자를 이해하는 일에 집중하는 실무자.",
+        "interests_projects_strengths": "지역 커뮤니티 플랫폼·지역 커뮤니티 플랫폼마켓·브랜드/커뮤니티/모임/알바 등 서비스 맥락 속 pain point, creative, experience를 연결해 사고.",
+        "collaboration_value": "기술보다 사용자 이해와 시장 감각이 강점. 커뮤니티/지역 서비스 문제정의와 GTM에 적합.",
+        "one_line_summary": "지역 커뮤니티 플랫폼 서비스 전반에서 사용자 pain point를 고객 경험으로 축적하는 마케터.",
+        "topic_motivation": "재밌는 소비자 문제 해결, 사용자 이해 중심 프로젝트.",
+        "suggested_role_placement": "고객인사이트 / 크리에이티브 마케팅"
+      },
+      "inferred": {
+        "primary_segment_id": "marketing_gtm_brand",
+        "primary_segment_name_ko": "마케팅·GTM·브랜드형",
+        "tags": [
+          "AI/LLM",
+          "마케팅/GTM",
+          "HR/조직"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-035",
+      "source_row": 35,
+      "profile": {
+        "current_background_role": "경제학→영화→개발 도전→대형 IT 서비스 기업 Cloud Architect→글로벌 클라우드 기업→국내 공학·경영 교육기관로 이어지는 전환형 커리어.",
+        "interests_projects_strengths": "AI 시대에 무엇을 더 할 수 있을지 탐색하는 클라우드 아키텍트.",
+        "collaboration_value": "기술 기반은 탄탄하고 학습 민첩성이 높음. 클라우드·아키텍처와 신규 기술 접목 과제에 적합.",
+        "one_line_summary": "경제·철학·영화·개발을 거쳐 글로벌 클라우드 기업에서 자동화와 AI 활용을 다루는 전환형 클라우드 인재.",
+        "topic_motivation": "아이디어는 남이 주고, 나는 기술 자신감을 불어넣는 역할.",
+        "suggested_role_placement": "클라우드·자동화 코치 / 기술 촉매"
+      },
+      "inferred": {
+        "primary_segment_id": "infra_cloud_solution",
+        "primary_segment_name_ko": "인프라·클라우드·솔루션형",
+        "tags": [
+          "AI/LLM",
+          "자동화",
+          "클라우드/인프라",
+          "백엔드/개발"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-036",
+      "source_row": 36,
+      "profile": {
+        "current_background_role": "10년 이상 HR(채용·인력계획·HRIS) 경험을 가진 경영학 배경 인재.",
+        "interests_projects_strengths": "People Analytics에 커리어 포커스, 조직/전략·비즈니스 분석·IT경영·창업동아리 활동.",
+        "collaboration_value": "인사 데이터와 조직 전략을 함께 볼 수 있는 유형. People Analytics/HR Tech 주제에 적합.",
+        "one_line_summary": "입찰·DX·데이터 분석 경험 위에 팀플 결과가 좋았다는 레퍼런스를 전면에 둔 실행형.",
+        "topic_motivation": "DX 전략/데이터 프로젝트, 결과를 내는 팀플.",
+        "suggested_role_placement": "실행 PM / 경진대회형 추진"
+      },
+      "inferred": {
+        "primary_segment_id": "product_ux_pm",
+        "primary_segment_name_ko": "제품·UX·PM형",
+        "tags": [
+          "전략/신사업",
+          "제품/PM",
+          "데이터/분석",
+          "HR/조직",
+          "창업/현장문제"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-037",
+      "source_row": 37,
+      "profile": {
+        "current_background_role": "기자 출신으로 AI 시대에 기존 업력에 특수성을 더하고자 대학원에 진학.",
+        "interests_projects_strengths": "ChatGPT·Gemini 활용, AI와의 관계를 이미지로 표현하는 등 생성형 AI에 친숙.",
+        "collaboration_value": "콘텐츠 생산·리서치·서사 구성에 강점. 정보 수집과 맥락화가 필요한 팀에서 가치가 큼.",
+        "one_line_summary": "기자 출신으로 방향 설정과 일관된 스토리 라인을 잡아주는 길잡이 역할을 자처.",
+        "topic_motivation": "문과 기반이지만 프로젝트가 딴길로 새지 않게 잡아주는 역할.",
+        "suggested_role_placement": "문제정의·콘텐츠 / 방향성 유지"
+      },
+      "inferred": {
+        "primary_segment_id": "strategy_business",
+        "primary_segment_name_ko": "전략·사업개발형",
+        "tags": [
+          "AI/LLM",
+          "마케팅/GTM"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-038",
+      "source_row": 38,
+      "profile": {
+        "current_background_role": "국내 대형 통신사에서 현재 경영지원, 과거 전략/B2B/신규사업(IoT) 경험 보유.",
+        "interests_projects_strengths": "Family·관계와 인연·Travel·NBA·Gratitude·Nature를 핵심 가치로 제시.",
+        "collaboration_value": "전략/사업/조직 커뮤니케이션을 두루 아는 안정형 멤버. 팀 내 관계 자본 형성에 유리.",
+        "one_line_summary": "최고경영자 비서실 팀장으로 의사결정자들의 판단을 오래 관찰한 사람.",
+        "topic_motivation": "의사결정 조언, 출장/의전/관계 관리 노하우 공유.",
+        "suggested_role_placement": "의사결정 자문 / 운영 총괄"
+      },
+      "inferred": {
+        "primary_segment_id": "strategy_business",
+        "primary_segment_name_ko": "전략·사업개발형",
+        "tags": [
+          "통신/네트워크",
+          "전략/신사업"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-039",
+      "source_row": 39,
+      "profile": {
+        "current_background_role": "1,200만 명 규모 서비스의 백엔드 개발자이자 기획자, 8년 경력.",
+        "interests_projects_strengths": "금융 인증·보안 아키텍처 특화, 모바일 금융 서비스 기획/개발/운영, 뉴스 자동분석·퀀트·커뮤니티 앱 등 사이드 프로젝트 경험.",
+        "collaboration_value": "대규모 서비스와 보안을 함께 다루는 희소 인재. Fintech/인증/백엔드 핵심 문제 해결에 적합.",
+        "one_line_summary": "1200만 사용자 인증 서비스 개발 경험이 있는 실전형 백엔드·기획 겸업자.",
+        "topic_motivation": "API/배포 경험을 살린 앱·웹 프로젝트.",
+        "suggested_role_placement": "풀스택 빌더 / 배포 담당"
+      },
+      "inferred": {
+        "primary_segment_id": "infra_cloud_solution",
+        "primary_segment_name_ko": "인프라·클라우드·솔루션형",
+        "tags": [
+          "통신/네트워크",
+          "보안",
+          "제조/산업",
+          "백엔드/개발"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-040",
+      "source_row": 40,
+      "profile": {
+        "current_background_role": "보험 비즈와 IT, 서비스 기획과 개발을 연결해 온 IT Project Manager.",
+        "interests_projects_strengths": "AI와 함께 기획부터 개발까지 직접 완결하는 Builder로의 진화를 지향.",
+        "collaboration_value": "비즈니스와 개발 사이 번역 능력이 강점. 요구사항 정의와 실제 구현 사이의 간극을 줄이는 역할에 적합.",
+        "one_line_summary": "보험 비즈와 IT를 잇는 커넥터에서 직접 개발하는 빌더로 진화하고 싶다고 발표.",
+        "topic_motivation": "비즈니스와 IT를 함께 이해하는 연결형 프로젝트.",
+        "suggested_role_placement": "비즈-IT 브릿지 / PM"
+      },
+      "inferred": {
+        "primary_segment_id": "product_ux_pm",
+        "primary_segment_name_ko": "제품·UX·PM형",
+        "tags": [
+          "제품/PM",
+          "UX/프로토타입",
+          "AI/LLM",
+          "백엔드/개발"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-041",
+      "source_row": 41,
+      "profile": {
+        "current_background_role": "제조업 기반 IT 시스템 설계·컨설팅·사업개발 경험을 가진 실행형 기획자.",
+        "interests_projects_strengths": "자동차 산업 주재원 경험, 보안/프로세스 B2B 영업, 공공 AX, 글로벌·산업 B2B 사업개발 경험.",
+        "collaboration_value": "산업 현장의 문제를 기술·서비스 구조로 바꾸는 데 강함. 제조/B2B 솔루션 과제에 적합.",
+        "one_line_summary": "공공 AX와 제조업 보안·사업개발 경험을 가진 기술 기반 솔루션 컨설턴트.",
+        "topic_motivation": "제조업·보안·공공 AX 협업.",
+        "suggested_role_placement": "B2B 솔루션 / 공공·제조 도메인"
+      },
+      "inferred": {
+        "primary_segment_id": "infra_cloud_solution",
+        "primary_segment_name_ko": "인프라·클라우드·솔루션형",
+        "tags": [
+          "전략/신사업",
+          "AI/LLM",
+          "보안",
+          "마케팅/GTM",
+          "제조/산업",
+          "백엔드/개발"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-042",
+      "source_row": 42,
+      "profile": {
+        "current_background_role": "국내 대형 전자기업 Global Marketing-Tech Specialist, 국내 대형 플랫폼 기업클라우드 B2B Cloud BD 경력.",
+        "interests_projects_strengths": "대형 플랫폼 마이그레이션과 B2B 생태계 경험, 경영+컴공 융합, 다수 수상, 도시교통 최적화 알고리즘 특허, Predictive Finance AI 관심.",
+        "collaboration_value": "전략·기술·금융 예측을 함께 다루는 하이브리드 인재. 고난도 데이터/플랫폼 프로젝트에 적합.",
+        "one_line_summary": "삼성·국내 대형 플랫폼 기업클라우드·공모전/특허 경험을 가진 플랫폼/사업 결합형 인재.",
+        "topic_motivation": "수업 밖으로 들고 나갈 수 있는 실전형 프로젝트.",
+        "suggested_role_placement": "전략+기술 기획 / 확장형 PM"
+      },
+      "inferred": {
+        "primary_segment_id": "product_ux_pm",
+        "primary_segment_name_ko": "제품·UX·PM형",
+        "tags": [
+          "전략/신사업",
+          "제품/PM",
+          "데이터/분석",
+          "AI/LLM",
+          "클라우드/인프라"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-043",
+      "source_row": 43,
+      "profile": {
+        "current_background_role": "금융권 10년 경력 후 IT 회사 창업, 현재 대표이자 대학원 커뮤니티 회장.",
+        "interests_projects_strengths": "계정계·디지털혁신·플랫폼 경험, AI로 세 역할(창업/학업/커뮤니티)을 연결하는 사업기회 탐색.",
+        "collaboration_value": "조직 운영과 사업개발 감각을 갖춘 중심축 인재. 커뮤니티 구심점·실행 오너 역할로 강함.",
+        "one_line_summary": "은행 개발 10년 후 창업한 대표로 여러 의견을 모아 푸는 조정형 리더.",
+        "topic_motivation": "AI를 활용한 신규 사업기회 탐색.",
+        "suggested_role_placement": "조율형 리더 / 사업개발"
+      },
+      "inferred": {
+        "primary_segment_id": "strategy_business",
+        "primary_segment_name_ko": "전략·사업개발형",
+        "tags": [
+          "전략/신사업",
+          "AI/LLM",
+          "창업/현장문제",
+          "백엔드/개발"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-044",
+      "source_row": 44,
+      "profile": {
+        "current_background_role": "핀테크·커머스·인증/전자문서·챗봇빌더·영상/이미지 생성 등 다양한 서비스 기획 경험의 PM.",
+        "interests_projects_strengths": "서비스 구조/화면/정책 설계, 운영정책 수립, 데이터 기획·모델 검증, 정합성 검토와 개발자 커뮤니케이션이 강점.",
+        "collaboration_value": "문서·정책·UX·개발 커뮤니케이션을 잇는 PM. 복잡한 서비스 설계/운영 체계 정비에 적합.",
+        "one_line_summary": "기획·개발자 커뮤니케이션·정합성 검토를 본인 강점으로 내세운 서비스 기획자.",
+        "topic_motivation": "스펙 산정, 빈 부분 찾기, 사용성·UX 개선.",
+        "suggested_role_placement": "PM / 요구사항·정합성 관리"
+      },
+      "inferred": {
+        "primary_segment_id": "product_ux_pm",
+        "primary_segment_name_ko": "제품·UX·PM형",
+        "tags": [
+          "제품/PM",
+          "UX/프로토타입",
+          "데이터/분석",
+          "AI/LLM",
+          "제조/산업",
+          "백엔드/개발"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-045",
+      "source_row": 45,
+      "profile": {
+        "current_background_role": "에너지·화학 대기업 AX 실행팀 소속, 서비스기획→사업개발→AI 변화관리→AX PO 경력.",
+        "interests_projects_strengths": "문헌정보학+컴퓨터공학, 정밀한 의도설계(prompting), 기술언어 번역, 코드리뷰와 로직 검증 능력 보유.",
+        "collaboration_value": "현업 요구를 AI 실행 단위로 번역하는 브리지형 PM. 조직 생산성 혁신/AX 실행에 강함.",
+        "one_line_summary": "사내 AX TF 경험으로 코딩 지식이 프롬프팅·에러 수정에 도움 된다고 설명.",
+        "topic_motivation": "업무 생산성 혁신, 마케팅/고객 데이터와 결합한 AX 과제.",
+        "suggested_role_placement": "AX 기획 / 기술 번역"
+      },
+      "inferred": {
+        "primary_segment_id": "automation_ai_data",
+        "primary_segment_name_ko": "AI 자동화·데이터형",
+        "tags": [
+          "전략/신사업",
+          "제품/PM",
+          "데이터/분석",
+          "AI/LLM",
+          "마케팅/GTM",
+          "제조/산업"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-046",
+      "source_row": 46,
+      "profile": {
+        "current_background_role": "국내 통신사L에서 국제 기술규제 대응, 기술규제 분석, 글로벌 인증/수출기업 지원을 수행.",
+        "interests_projects_strengths": "IEC 국제표준 제정 활동 및 한국대표 경험, 관심 분야는 인증/기술규제/정책, AI로 자기소개 이미지를 제작.",
+        "collaboration_value": "표준·규제·인증이라는 비기술 병목을 해소할 수 있는 인재. 해외 인증/정책 이슈가 있는 팀에 유효.",
+        "one_line_summary": "표준·규제·WTO 대응 데이터를 더 효율적으로 다루고 싶다는 문제의식.",
+        "topic_motivation": "기술규제/정책 데이터 처리와 인사이트 도출.",
+        "suggested_role_placement": "정책·표준 도메인 / 데이터 정리"
+      },
+      "inferred": {
+        "primary_segment_id": "automation_ai_data",
+        "primary_segment_name_ko": "AI 자동화·데이터형",
+        "tags": [
+          "통신/네트워크",
+          "데이터/분석",
+          "AI/LLM",
+          "HR/조직",
+          "제조/산업"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-047",
+      "source_row": 47,
+      "profile": {
+        "current_background_role": "국내 대형 플랫폼 기업페이 PM/서비스 기획자로 실제 결제 서비스 출시 경험 보유.",
+        "interests_projects_strengths": "빠른 정산, 현장결제, 결제 단말기, 생체인증 페이스사인 결제를 기획·오픈. 기획→협업→출시 전 주기 경험.",
+        "collaboration_value": "실제 출시 경험이 있는 실행형 PM. 핀테크/오프라인 결제/인증 서비스 팀에 매우 적합.",
+        "one_line_summary": "국내 대형 플랫폼 기업 기획자로 결제·정산·생체인증 등 몸과 연결된 서비스에 관심.",
+        "topic_motivation": "인증 기반 서비스, 결제/리텐션 기획.",
+        "suggested_role_placement": "서비스 기획 / 핀테크"
+      },
+      "inferred": {
+        "primary_segment_id": "product_ux_pm",
+        "primary_segment_name_ko": "제품·UX·PM형",
+        "tags": [
+          "제품/PM",
+          "제조/산업"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-048",
+      "source_row": 48,
+      "profile": {
+        "current_background_role": "대기업 리서치 조직 수석연구원, HR 전략가 포지션.",
+        "interests_projects_strengths": "People Strategy, HR 마스터플랜, 조직모델/거버넌스, AI 도입 컨설팅, STEM 인재 확보·리더십 파이프라인 설계 경험.",
+        "collaboration_value": "조직 미래 설계와 인재 전략을 동시에 보는 인재. 인사/조직/미래전략 과제의 핵심 자원.",
+        "one_line_summary": "과학기술 인재 생태계와 스타트업 데이터를 실제 테스트베드로 열어둔 HR 전략가.",
+        "topic_motivation": "실제 스타트업 데이터를 활용한 AX/Analytics 실험.",
+        "suggested_role_placement": "인재전략 / 실제 데이터 제공"
+      },
+      "inferred": {
+        "primary_segment_id": "hr_people_org",
+        "primary_segment_name_ko": "HR·조직·People형",
+        "tags": [
+          "전략/신사업",
+          "데이터/분석",
+          "AI/LLM",
+          "HR/조직"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-049",
+      "source_row": 49,
+      "profile": {
+        "current_background_role": "글로벌 반도체/광학 장비기업 반도체 사업부 Application Engineer, A2A 경제와 AgentOps를 탐색 중.",
+        "interests_projects_strengths": "OPENCLAW 실험, 폐쇄형 클라우드 보안 위협 체감, agent runtime/Go/CLI-native 도구에 관심, AgentOps 팀 빌딩 의지 명확.",
+        "collaboration_value": "에이전트 운영 구조·보안·산업 현장을 연결하는 희소한 문제정의자. AgentOps 제품화 논의에 매우 적합.",
+        "one_line_summary": "반도체·디지털솔루션 배경 위에서 A2A 경제와 OpenClaw 실패를 직접 겪은 실험가.",
+        "topic_motivation": "Agent-first 도구, AgentOps, 보안과 런타임 불안정 해결.",
+        "suggested_role_placement": "에이전트 시스템 설계 / 실험 리드"
+      },
+      "inferred": {
+        "primary_segment_id": "automation_ai_data",
+        "primary_segment_name_ko": "AI 자동화·데이터형",
+        "tags": [
+          "AI/LLM",
+          "클라우드/인프라",
+          "보안",
+          "제조/산업",
+          "백엔드/개발"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-050",
+      "source_row": 50,
+      "profile": {
+        "current_background_role": "국책 기술사업화 기관 기술거래사/경영기획실 소속으로 기술사업화와 전략기획을 수행.",
+        "interests_projects_strengths": "4년간 기술이전·기술마케팅, 기관 전략 수립, MBO 관리/평가, 예산 운영 및 규정 개선 경험.",
+        "collaboration_value": "기술사업화와 조직 운영을 모두 이해. 공공기술 상용화·전략 실행형 과제에 적합.",
+        "one_line_summary": "기술사업화에서 전략기획으로 옮겨온 문과형 연구원으로 기관 의사결정 데이터에 관심.",
+        "topic_motivation": "성과·예산·경영지표 분석 지원.",
+        "suggested_role_placement": "전략·사업화 / 공공기관 지표"
+      },
+      "inferred": {
+        "primary_segment_id": "strategy_business",
+        "primary_segment_name_ko": "전략·사업개발형",
+        "tags": [
+          "전략/신사업",
+          "데이터/분석",
+          "마케팅/GTM"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-051",
+      "source_row": 51,
+      "profile": {
+        "current_background_role": "익명 참여자, 심리/뇌과학·조직문화·강점·일의 의미에 관심이 큰 인재.",
+        "interests_projects_strengths": "UC San Diego 심리학과, HR 6년 경력, 강점코치/미술심리상담사, 프리다이버·뮤지컬 배우, 감정 기록/분석 웹앱 창업 준비.",
+        "collaboration_value": "사람 이해와 제품 아이디어를 동시에 가진 인재. 웰니스/조직문화/감정데이터 서비스에 적합.",
+        "one_line_summary": "심리·HR·창업·컨설팅을 잇고 실제로 주말에 프로덕트를 만들어 본 사람.",
+        "topic_motivation": "치료센터 관리 프로그램, 사람/조직/강점 기반 제품을 실제 세상에 내놓기.",
+        "suggested_role_placement": "사람·조직 문제 설계 / 실험형 창업"
+      },
+      "inferred": {
+        "primary_segment_id": "hr_people_org",
+        "primary_segment_name_ko": "HR·조직·People형",
+        "tags": [
+          "데이터/분석",
+          "HR/조직",
+          "창업/현장문제",
+          "백엔드/개발"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-052",
+      "source_row": 52,
+      "profile": {
+        "current_background_role": "국내 대형 통신사 모바일 서비스 시스템 개발 PM, AI Agent로 요구사항 정리·기술 스펙 최적화에 도전 중.",
+        "interests_projects_strengths": "업무·육아·학업을 병행하는 초보 아빠, 글로벌 클라우드 기업 리팩토링과 개인/업무 효율화에 관심, 설계 누락 점검 의지 명확.",
+        "collaboration_value": "설계 리뷰와 요구사항 정리를 맡기기 좋은 실무형 PM. 시스템 전환/리팩토링 과제에 유효.",
+        "one_line_summary": "국내 대형 통신사 개발PM으로 요구사항을 명확히 해야 AI 산출물이 좋아진다는 점을 강조.",
+        "topic_motivation": "글로벌 클라우드 기업 전환, 육아/업무/학업 병행 속 요구사항 정제형 프로젝트.",
+        "suggested_role_placement": "개발 PM / 요구사항 품질관리"
+      },
+      "inferred": {
+        "primary_segment_id": "infra_cloud_solution",
+        "primary_segment_name_ko": "인프라·클라우드·솔루션형",
+        "tags": [
+          "통신/네트워크",
+          "제품/PM",
+          "AI/LLM",
+          "자동화",
+          "클라우드/인프라",
+          "백엔드/개발"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-053",
+      "source_row": 53,
+      "profile": {
+        "current_background_role": "익명 참여자, 국내 대형 전자기업와 국내 공학·경영 교육기관 배경이 보이는 디지털 프로필형 자기소개.",
+        "interests_projects_strengths": "LinkedIn/지역 커뮤니티 플랫폼 프로필, 매너온도, 카카오톡 감정 스티커, ChatGPT 생성 이미지 등 디지털 커뮤니케이션 요소를 적극 활용.",
+        "collaboration_value": "브랜딩·온라인 아이덴티티·사용자 커뮤니케이션 감각이 강한 유형으로 보임.",
+        "one_line_summary": "국내 대형 전자기업 반도체 해외영업 15년, 육아휴직 중 사회복지사까지 딴 관계형 세일즈 인재.",
+        "topic_motivation": "해외영업·무역을 바탕으로 사회에 도움 되는 사이드잡/창업.",
+        "suggested_role_placement": "글로벌 세일즈 / 관계 구축"
+      },
+      "inferred": {
+        "primary_segment_id": "marketing_gtm_brand",
+        "primary_segment_name_ko": "마케팅·GTM·브랜드형",
+        "tags": [
+          "마케팅/GTM",
+          "제조/산업",
+          "창업/현장문제"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-054",
+      "source_row": 54,
+      "profile": {
+        "current_background_role": "Senior Marketing Planner, CDO(Chief Dessert Officer)라고 스스로를 소개한 마케팅/아이디어형 인재.",
+        "interests_projects_strengths": "Fast Learner, Idea Factory, PPT Wizard, AI for Marketing & UX, Data Analysis & Investment에 관심.",
+        "collaboration_value": "초기 아이디어 발산과 시각화, 발표자료 제작 속도가 강점. 마케팅/UX 탐색형 팀에 적합.",
+        "one_line_summary": "광고기획자이자 아이디어·PPT·디저트 네트워크를 내세운 빠른 제작형.",
+        "topic_motivation": "Just Build It, 성향 테스트를 1시간 안에 직접 만든 실행형 실험.",
+        "suggested_role_placement": "아이디어 발산 / 발표자료·프로토타입"
+      },
+      "inferred": {
+        "primary_segment_id": "product_ux_pm",
+        "primary_segment_name_ko": "제품·UX·PM형",
+        "tags": [
+          "통신/네트워크",
+          "UX/프로토타입",
+          "데이터/분석",
+          "AI/LLM",
+          "클라우드/인프라",
+          "마케팅/GTM"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-055",
+      "source_row": 55,
+      "profile": {
+        "current_background_role": "국내 대형 통신사 소속으로 '과거 산업 조직→현대 오피스→다음 단계?'라는 질문을 던지는 자기소개.",
+        "interests_projects_strengths": "슬라이드가 일하는 방식과 조직/생산성의 진화를 시사하며, 미래 업무환경에 대한 문제의식이 중심.",
+        "collaboration_value": "조직 변화·업무 방식 혁신 주제에 대한 프레이밍 역할에 적합. 다만 세부 직무 정보는 제한적.",
+        "one_line_summary": "AI 시대 졸업을 앞둔 불안과 막막함을 솔직하게 드러내며 소박한 협업을 원함.",
+        "topic_motivation": "개인용 에이전트/자동화 역량 학습, 함께 작은 실험.",
+        "suggested_role_placement": "학습형 팀원 / 동기부여"
+      },
+      "inferred": {
+        "primary_segment_id": "hr_people_org",
+        "primary_segment_name_ko": "HR·조직·People형",
+        "tags": [
+          "통신/네트워크",
+          "AI/LLM",
+          "자동화"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-056",
+      "source_row": 56,
+      "profile": {
+        "current_background_role": "스스로를 '뷔페형 Generalist'라 정의한 대학원 커뮤니티 인재.",
+        "interests_projects_strengths": "한식/일식/중식/양식/디저트/음료로 비유해 기본기·마무리·추진력·글로벌감각·유머·융합력을 고르게 강조.",
+        "collaboration_value": "한 분야의 깊이보다 팀의 균형을 맞추는 범용 조력자. 빈틈 메우기와 분위기 환기에 강점.",
+        "one_line_summary": "뷔페형 제너럴리스트로 80점 이상의 육각형을 보장하겠다고 명확히 어필.",
+        "topic_motivation": "전략·재무·사업기획 전반에서 최적 옵션을 찾는 문제 해결.",
+        "suggested_role_placement": "전략 제너럴리스트 / 옵션 평가"
+      },
+      "inferred": {
+        "primary_segment_id": "strategy_business",
+        "primary_segment_name_ko": "전략·사업개발형",
+        "tags": [
+          "전략/신사업",
+          "재무/투자"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-057",
+      "source_row": 57,
+      "profile": {
+        "current_background_role": "글로벌 제약사 파이낸스팀에서 P&L 분석을 수행.",
+        "interests_projects_strengths": "AI와 베프가 되어 실무와 학업 역량을 키우고, 의사결정을 돕는 인사이트 제공을 목표로 함. 줌바·산책·카페 탐방 등 라이프스타일도 명확.",
+        "collaboration_value": "재무 기반의 정량 감각과 학습 의지가 강함. 의사결정 지원용 분석/리포팅 과제에 적합.",
+        "one_line_summary": "제약 파이낸스 통제에서 신약 런칭 TF로 이동하는 시점의 마지막 학기 불꽃.",
+        "topic_motivation": "파이낸스 인사이트, 실무와 학업을 잇는 AI 활용.",
+        "suggested_role_placement": "재무·사업성 검토 / 런칭 지원"
+      },
+      "inferred": {
+        "primary_segment_id": "finance_investment_ops",
+        "primary_segment_name_ko": "재무·투자·운영형",
+        "tags": [
+          "전략/신사업",
+          "데이터/분석",
+          "AI/LLM",
+          "HR/조직",
+          "재무/투자"
+        ]
+      }
+    },
+    {
+      "audience_id": "AUD-058",
+      "source_row": 58,
+      "profile": {
+        "current_background_role": "글로벌 금융미디어 플랫폼 한국 총괄로서 글로벌 금융 데이터와 뉴스 현장을 연결해 온 미디어·금융 하이브리드 인재.",
+        "interests_projects_strengths": "미국 유학 후 언론사 외신작가/기자 경력, 글로벌 이슈와 금융시장 취재, AI·AGI가 정보 생산과 금융시장에 미칠 변화에 관심.",
+        "collaboration_value": "정보·데이터·시장 서사를 잇는 고급 커뮤니케이터. 금융/미디어/AI 접점 프로젝트에 매우 유효.",
+        "one_line_summary": "글로벌 금융 데이터·뉴스·시장 의사결정을 함께 본 미디어/금융 하이브리드.",
+        "topic_motivation": "AI·데이터를 실제 시장 판단과 연결하는 흥미로운 프로젝트.",
+        "suggested_role_placement": "금융·미디어 인사이트 / 글로벌 리서치"
+      },
+      "inferred": {
+        "primary_segment_id": "finance_investment_ops",
+        "primary_segment_name_ko": "재무·투자·운영형",
+        "tags": [
+          "데이터/분석",
+          "AI/LLM",
+          "HR/조직"
+        ]
+      }
+    }
+  ]
+}

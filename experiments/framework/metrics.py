@@ -426,7 +426,7 @@ def compute_roc_data(
         fpr_list.append(fp / neg)
 
     # fpr_list는 이미 증가 순서 → [::-1] 불필요
-    auc = float(np.trapz(tpr_list, fpr_list))
+    auc = float(np.trapezoid(tpr_list, fpr_list))
 
     # DeLong-style bootstrap CI
     auc_samples = []
@@ -447,7 +447,7 @@ def compute_roc_data(
             fp = sum(1 for s, l in zip(b_scores, b_labels) if s >= t and not l)
             b_tpr.append(tp / b_pos)
             b_fpr.append(fp / b_neg)
-        auc_samples.append(float(np.trapz(b_tpr, b_fpr)))
+        auc_samples.append(float(np.trapezoid(b_tpr, b_fpr)))
 
     return {
         "thresholds": thresholds,

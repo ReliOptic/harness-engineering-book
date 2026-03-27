@@ -4,7 +4,7 @@
 **Date**: (미정)
 **Experimenter**: C
 **Cross-validator**: B (E14 교차검증)
-**Target chapter**: Ch.4 (3막), Ch.6 (Fieldkit)
+**Target chapter**: Ch.4 (3막), Ch.6 (Operational Compiler)
 **Status**: [ ] 계획 / [ ] 진행중 / [ ] 완료 / [ ] 교차검증 완료
 
 ---

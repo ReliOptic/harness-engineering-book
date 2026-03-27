@@ -1,0 +1,114 @@
+{
+  "meta": {
+    "generated_at_utc": "2026-03-20T17:12:19.737500+00:00",
+    "runs_per_model": 2,
+    "models": [
+      "google/gemini-3.1-flash-lite-preview",
+      "google/gemini-2.5-flash-lite"
+    ],
+    "tasks": [
+      "T1_code_review",
+      "T2_multi_step"
+    ],
+    "harness": "none",
+    "difficulty": "MODERATE",
+    "note": "Pilot matrix for model-size/vendor differentiation (agent-oriented tasks)."
+  },
+  "results": [
+    {
+      "task_type": "T1_code_review",
+      "model": "google/gemini-3.1-flash-lite-preview",
+      "n_runs": 2,
+      "successes": 0,
+      "partials": 1,
+      "failures": 1,
+      "tcr_continuous": 0.25,
+      "tca": 0.0,
+      "ifr": 0.125,
+      "rsucc_r": 0.0,
+      "ttff_mean": 2.0,
+      "hor_mean": 0.0,
+      "failure_types": {
+        "tool_call_failure": 1,
+        "none": 1
+      }
+    },
+    {
+      "task_type": "T1_code_review",
+      "model": "google/gemini-2.5-flash-lite",
+      "n_runs": 2,
+      "successes": 1,
+      "partials": 1,
+      "failures": 0,
+      "tcr_continuous": 0.75,
+      "tca": 0.0,
+      "ifr": 0.4,
+      "rsucc_r": null,
+      "ttff_mean": 2.0,
+      "hor_mean": 0.0,
+      "failure_types": {
+        "none": 2
+      }
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model": "google/gemini-3.1-flash-lite-preview",
+      "n_runs": 2,
+      "successes": 2,
+      "partials": 0,
+      "failures": 0,
+      "tcr_continuous": 1.0,
+      "tca": 1.0,
+      "ifr": 0.6,
+      "rsucc_r": null,
+      "ttff_mean": null,
+      "hor_mean": 0.0,
+      "failure_types": {
+        "none": 2
+      }
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model": "google/gemini-2.5-flash-lite",
+      "n_runs": 2,
+      "successes": 2,
+      "partials": 0,
+      "failures": 0,
+      "tcr_continuous": 1.0,
+      "tca": 0.0,
+      "ifr": 0.0,
+      "rsucc_r": null,
+      "ttff_mean": 1.0,
+      "hor_mean": 0.0,
+      "failure_types": {
+        "none": 2
+      }
+    }
+  ],
+  "pairwise_tests": [
+    {
+      "task_type": "T1_code_review",
+      "model_a": "google/gemini-3.1-flash-lite-preview",
+      "model_b": "google/gemini-2.5-flash-lite",
+      "success_rate_a": 0.0,
+      "success_rate_b": 0.5,
+      "delta_success_rate": -0.5,
+      "z": -1.1547005383792517,
+      "p_value": 0.24821307898992373,
+      "p_holm": 0.24821307898992373,
+      "significant_0_05": false
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model_a": "google/gemini-3.1-flash-lite-preview",
+      "model_b": "google/gemini-2.5-flash-lite",
+      "success_rate_a": 1.0,
+      "success_rate_b": 1.0,
+      "delta_success_rate": 0.0,
+      "z": 0.0,
+      "p_value": 1.0,
+      "p_holm": 1.0,
+      "significant_0_05": false
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "meta": {
+    "generated_at_utc": "2026-03-20T16:59:14.125929+00:00",
+    "runs_per_model": 2,
+    "models": [
+      "nvidia/nemotron-3-super-120b-a12b",
+      "openai/gpt-5.4-nano",
+      "qwen/qwen3.5-9b",
+      "google/gemini-3.1-flash-lite-preview"
+    ],
+    "tasks": [
+      "T2_multi_step"
+    ],
+    "harness": "none",
+    "difficulty": "MODERATE",
+    "note": "Pilot matrix for model-size/vendor differentiation (agent-oriented tasks)."
+  },
+  "results": [
+    {
+      "task_type": "T2_multi_step",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "n_runs": 2,
+      "successes": 0,
+      "partials": 0,
+      "failures": 2,
+      "tcr_continuous": 0.0,
+      "tca": 0.0,
+      "ifr": 0.0,
+      "rsucc_r": 0.0,
+      "ttff_mean": 1.0,
+      "hor_mean": null,
+      "failure_types": {
+        "api_error": 2
+      }
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model": "openai/gpt-5.4-nano",
+      "n_runs": 2,
+      "successes": 0,
+      "partials": 0,
+      "failures": 2,
+      "tcr_continuous": 0.0,
+      "tca": 0.0,
+      "ifr": 0.0,
+      "rsucc_r": 0.0,
+      "ttff_mean": 1.0,
+      "hor_mean": null,
+      "failure_types": {
+        "api_error": 2
+      }
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model": "qwen/qwen3.5-9b",
+      "n_runs": 2,
+      "successes": 0,
+      "partials": 0,
+      "failures": 2,
+      "tcr_continuous": 0.0,
+      "tca": 0.0,
+      "ifr": 0.0,
+      "rsucc_r": 0.0,
+      "ttff_mean": 1.0,
+      "hor_mean": null,
+      "failure_types": {
+        "api_error": 2
+      }
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model": "google/gemini-3.1-flash-lite-preview",
+      "n_runs": 2,
+      "successes": 0,
+      "partials": 0,
+      "failures": 2,
+      "tcr_continuous": 0.0,
+      "tca": 0.0,
+      "ifr": 0.0,
+      "rsucc_r": 0.0,
+      "ttff_mean": 1.0,
+      "hor_mean": null,
+      "failure_types": {
+        "api_error": 2
+      }
+    }
+  ],
+  "pairwise_tests": [
+    {
+      "task_type": "T2_multi_step",
+      "model_a": "nvidia/nemotron-3-super-120b-a12b",
+      "model_b": "openai/gpt-5.4-nano",
+      "success_rate_a": 0.0,
+      "success_rate_b": 0.0,
+      "delta_success_rate": 0.0,
+      "z": 0.0,
+      "p_value": 1.0,
+      "p_holm": 1.0,
+      "significant_0_05": false
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model_a": "nvidia/nemotron-3-super-120b-a12b",
+      "model_b": "qwen/qwen3.5-9b",
+      "success_rate_a": 0.0,
+      "success_rate_b": 0.0,
+      "delta_success_rate": 0.0,
+      "z": 0.0,
+      "p_value": 1.0,
+      "p_holm": 1.0,
+      "significant_0_05": false
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model_a": "nvidia/nemotron-3-super-120b-a12b",
+      "model_b": "google/gemini-3.1-flash-lite-preview",
+      "success_rate_a": 0.0,
+      "success_rate_b": 0.0,
+      "delta_success_rate": 0.0,
+      "z": 0.0,
+      "p_value": 1.0,
+      "p_holm": 1.0,
+      "significant_0_05": false
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model_a": "openai/gpt-5.4-nano",
+      "model_b": "qwen/qwen3.5-9b",
+      "success_rate_a": 0.0,
+      "success_rate_b": 0.0,
+      "delta_success_rate": 0.0,
+      "z": 0.0,
+      "p_value": 1.0,
+      "p_holm": 1.0,
+      "significant_0_05": false
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model_a": "openai/gpt-5.4-nano",
+      "model_b": "google/gemini-3.1-flash-lite-preview",
+      "success_rate_a": 0.0,
+      "success_rate_b": 0.0,
+      "delta_success_rate": 0.0,
+      "z": 0.0,
+      "p_value": 1.0,
+      "p_holm": 1.0,
+      "significant_0_05": false
+    },
+    {
+      "task_type": "T2_multi_step",
+      "model_a": "qwen/qwen3.5-9b",
+      "model_b": "google/gemini-3.1-flash-lite-preview",
+      "success_rate_a": 0.0,
+      "success_rate_b": 0.0,
+      "delta_success_rate": 0.0,
+      "z": 0.0,
+      "p_value": 1.0,
+      "p_holm": 1.0,
+      "significant_0_05": false
+    }
+  ]
+}

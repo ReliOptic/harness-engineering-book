@@ -281,7 +281,7 @@ Time series: cosine similarity vs step. Piecewise regression으로 K-step 추정
 
 ### 실무 처방 연결
 
-Figure 5C의 intervention 효과 데이터를 바탕으로 Fieldkit에 포함할 "goal guardian" module의 기본 설정 결정:
+Figure 5C의 intervention 효과 데이터를 바탕으로 Operational Compiler에 포함할 "goal guardian" module의 기본 설정 결정:
 - Re-injection 주기: K/2 step마다 (drift regime 진입 전에 예방)
 - Checkpoint 조건: Goal Fidelity Score < 0.9일 때 trigger
 - Rollback 조건: Score < 0.7이면 자동 rollback
@@ -461,9 +461,9 @@ Scatter plot: HOR vs RSuccR, Pareto frontier. 좋지만 "왜 그 점이 optimal�
 | Ablation의 순서 효과가 있지 않은가? | Full factorial ablation은 비용 과다 → Shapley value 기반 기여도 분해로 순서 독립적 추정 |
 | Cost model이 arbitrary하지 않은가? | 3가지 cost scenario (API pricing, self-hosted GPU, hybrid) 각각에서 optimal point 비교. Robust하면 결론 강화 |
 
-### Fieldkit Default Configuration 근거
+### Operational Compiler Default Configuration 근거
 
-Figure 8A의 Pareto-optimal 점 중, Figure 8C의 cost U-curve 최저점에 가장 가까운 configuration을 Fieldkit의 default로 제안. Figure 8B의 ablation 결과에 따라 "최소 이 component들은 켜야 한다"는 minimum requirement도 명시.
+Figure 8A의 Pareto-optimal 점 중, Figure 8C의 cost U-curve 최저점에 가장 가까운 configuration을 Operational Compiler의 default로 제안. Figure 8B의 ablation 결과에 따라 "최소 이 component들은 켜야 한다"는 minimum requirement도 명시.
 
 ---
 

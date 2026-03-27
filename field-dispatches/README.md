@@ -72,7 +72,7 @@
 | `#harness` | Ch.3 (harness 정의) |
 | `#compute` `#constraint` | Ch.4 (제약 실험) |
 | `#agentops` `#tooling` | Ch.5 (AgentOps 실무) |
-| `#fieldkit` | Ch.6 (Operational Fieldkit) |
+| `#operational-compiler` | Ch.6 (Operational Compiler) |
 | `#swarm` `#self-immune` `#future` | Ch.7 (self-immune, 미래) |
 
 ---

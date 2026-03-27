@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "generated_at_utc": "2026-03-20T16:59:46.265570+00:00",
+    "runs_per_model": 1,
+    "models": [
+      "openai/gpt-5.4-nano"
+    ],
+    "tasks": [
+      "T2_multi_step"
+    ],
+    "harness": "none",
+    "difficulty": "MODERATE",
+    "note": "Pilot matrix for model-size/vendor differentiation (agent-oriented tasks)."
+  },
+  "results": [
+    {
+      "task_type": "T2_multi_step",
+      "model": "openai/gpt-5.4-nano",
+      "n_runs": 1,
+      "successes": 0,
+      "partials": 0,
+      "failures": 1,
+      "tcr_continuous": 0.0,
+      "tca": 0.0,
+      "ifr": 0.0,
+      "rsucc_r": 0.0,
+      "ttff_mean": 1.0,
+      "hor_mean": null,
+      "failure_types": {
+        "api_error": 1
+      }
+    }
+  ],
+  "pairwise_tests": []
+}

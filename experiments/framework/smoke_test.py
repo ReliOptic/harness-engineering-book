@@ -5,6 +5,8 @@ Framework smoke test — API call 없이 측정 도구만 검증.
 실행: python3 -m framework.smoke_test  (experiments/ 디렉토리에서)
 """
 import sys
+import tempfile
+from types import SimpleNamespace
 import numpy as np
 
 # ── metrics.py ────────────────────────────────────────────────────────────────
@@ -175,12 +177,25 @@ def test_ground_truth():
     assert result.score > 0.9, f"T1 score should be high: {result.score}"
     print(f"  T1 F1 = {result.score:.3f} ({result.verdict})")
 
+    wrong_type = '[{"line_number": 10, "bug_type": "totally_wrong", "severity": "low"}]'
+    wrong_result = validate_t1(wrong_type, bugs)
+    assert wrong_result.verdict == "fail", "wrong bug type/severity must not pass"
+    print(f"  T1 wrong-classification verdict = {wrong_result.verdict}")
+
     # T2
     plan = '[{"step": 1, "action": "install_A"}, {"step": 2, "action": "install_B"}]'
-    constraints = [{"type": "dependency", "before": "install_A", "after": "install_B"}]
+    constraints = {
+        "constraints": [{"type": "dependency", "before": "install_A", "after": "install_B"}],
+        "required_actions": ["install_A", "install_B"],
+    }
     result = validate_t2(plan, constraints)
     assert result.verdict == "pass"
     print(f"  T2 verdict = {result.verdict} (score={result.score:.3f})")
+
+    partial_plan = '[{"step": 1, "action": "install_A"}]'
+    partial_result = validate_t2(partial_plan, constraints)
+    assert partial_result.verdict != "pass", "missing required action must not pass"
+    print(f"  T2 partial-plan verdict = {partial_result.verdict} (score={partial_result.score:.3f})")
 
     # T4
     result = validate_t4(
@@ -250,6 +265,264 @@ def test_harness():
     print("  [PASS] harness.py")
 
 
+# ── embedding.py ──────────────────────────────────────────────────────────────
+
+def test_embedding():
+    from framework.embedding import make_offline_embedding_fn, _hash_embed
+    import numpy as np
+
+    embed = make_offline_embedding_fn()
+
+    v1 = embed("refactor all magic numbers to named constants")
+    v2 = embed("refactor all magic numbers to named constants")
+    v3 = embed("the weather today is sunny and warm")
+
+    assert v1.shape == v2.shape, "embeddings must have same shape"
+    sim_same = float(np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2)))
+    sim_diff = float(np.dot(v1, v3) / (np.linalg.norm(v1) * np.linalg.norm(v3)))
+    assert sim_same > sim_diff, f"identical text should have higher similarity: {sim_same:.3f} vs {sim_diff:.3f}"
+    print(f"  sim(same)={sim_same:.3f}, sim(diff)={sim_diff:.3f}")
+    print("  [PASS] embedding.py")
+
+
+# ── tasks.py ──────────────────────────────────────────────────────────────────
+
+def test_tasks():
+    from framework.tasks import make_t1_task, make_t2_task, make_t4_task
+    from framework.ground_truth import validate_t1, validate_t2, validate_t4
+
+    for diff in ("EASY", "MODERATE", "FRONTIER"):
+        t1 = make_t1_task(diff)
+        assert t1.code, f"T1 {diff}: no code"
+        assert len(t1.ground_truth_bugs) >= 3, f"T1 {diff}: fewer than 3 bugs defined"
+        assert t1.prompt, f"T1 {diff}: no prompt"
+        print(f"  T1 {diff}: {len(t1.code.splitlines())} LOC, {len(t1.ground_truth_bugs)} bugs")
+
+    for diff in ("EASY", "MODERATE", "FRONTIER"):
+        t2 = make_t2_task(diff)
+        assert t2.constraints, f"T2 {diff}: no constraints"
+        print(f"  T2 {diff}: {len(t2.constraints)} constraints")
+
+    for diff in ("EASY", "MODERATE", "FRONTIER"):
+        t4 = make_t4_task(diff)
+        assert len(t4.documents) == 10, f"T4 {diff}: expected 10 docs"
+        assert t4.key_facts, f"T4 {diff}: no key facts"
+        print(f"  T4 {diff}: {len(t4.key_facts)} key facts, {len(t4.misleading_claims)} misleading")
+
+    # T1 ground truth round-trip (EASY: perfect answer should pass)
+    t1_easy = make_t1_task("EASY")
+    perfect_answer = "[" + ", ".join(
+        f'{{"line_number": {b.line_number}, "bug_type": "{b.bug_type}", '
+        f'"severity": "{b.severity}", "fix_suggestion": "fix it"}}'
+        for b in t1_easy.ground_truth_bugs
+    ) + "]"
+    result = validate_t1(perfect_answer, t1_easy.ground_truth_bugs)
+    assert result.score > 0.8, f"T1 perfect answer should score >0.8: {result.score}"
+    print(f"  T1 EASY perfect-answer F1 = {result.score:.3f} ({result.verdict})")
+
+    print("  [PASS] tasks.py")
+
+
+# ── judge.py ──────────────────────────────────────────────────────────────────
+
+def test_judge():
+    from framework.judge import compute_cohen_kappa, agreement_matrix
+
+    # κ = 1.0 when both raters agree perfectly
+    a = ["pass", "fail", "pass", "uncertain", "fail"]
+    b = ["pass", "fail", "pass", "uncertain", "fail"]
+    kappa = compute_cohen_kappa(a, b)
+    assert abs(kappa - 1.0) < 0.01, f"perfect agreement should give κ=1.0: {kappa}"
+    print(f"  κ(perfect)={kappa:.3f}")
+
+    # κ = 0 when raters agree only by chance
+    a2 = ["pass", "pass", "fail", "fail"]
+    b2 = ["fail", "fail", "pass", "pass"]
+    kappa2 = compute_cohen_kappa(a2, b2)
+    assert kappa2 <= 0.0, f"complete disagreement should give κ≤0: {kappa2}"
+    print(f"  κ(disagree)={kappa2:.3f}")
+
+    report = agreement_matrix(a, b)
+    assert "kappa" in report and "matrix" in report
+    print(f"  agreement_matrix: κ={report['kappa']:.3f}, {report['kappa_interpretation']}")
+
+    print("  [PASS] judge.py")
+
+
+# ── agent.py IFRTracker ────────────────────────────────────────────────────────
+
+def test_ifr_tracker():
+    from framework.agent import IFRTracker
+
+    tracker = IFRTracker("T1_code_review")
+    output = '[{"line_number": 10, "bug_type": "null_check", "severity": "high", "fix_suggestion": "use .get()"}]'
+    tracker.check(output, tool_calls=[])
+    log = tracker.compliance_log
+    assert len(log) == 5, f"T1 should have 5 instructions, got {len(log)}"
+    # JSON output + line_number + severity 준수 확인
+    json_inst = next(e for e in log if e["instruction"] == "output JSON")
+    assert json_inst["complied"], "T1 JSON output instruction should be complied"
+    print(f"  IFRTracker T1: {sum(e['complied'] for e in log)}/5 instructions complied")
+
+    tracker_t3 = IFRTracker("T3_long_horizon")
+    tracker_t3.check("nonsense", step_number=10, tool_calls=[], task_complete=False)
+    applicable = [e for e in tracker_t3.compliance_log if e.get("applicable", True)]
+    assert sum(e["complied"] for e in applicable) == 0, "nonsense output must not satisfy T3 IFR"
+    print(f"  IFRTracker T3 nonsense: {sum(e['complied'] for e in applicable)}/{len(applicable)} applicable instructions complied")
+
+    print("  [PASS] agent.py IFRTracker")
+
+
+def test_agent_local_tools():
+    from framework.agent import AgentRunner
+    from framework.config import ExperimentConfig, TaskConfig, HarnessConfig
+    from framework.harness import Harness
+
+    config = ExperimentConfig(
+        experiment_id="SMOKE_T3",
+        run_id=1,
+        model="openai/gpt-5-mini",
+        harness=HarnessConfig.none(),
+        task=TaskConfig(
+            task_type="T3_long_horizon",
+            difficulty="EASY",
+            max_steps=5,
+            token_budget=1000,
+        ),
+    )
+    runner = AgentRunner(config=config, harness=Harness(HarnessConfig.none()))
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        repo = f"{tmpdir}/repo"
+        import os
+        os.makedirs(repo, exist_ok=True)
+        sample = f"{repo}/sample.py"
+        with open(sample, "w", encoding="utf-8") as f:
+            f.write("VALUE = 1\n")
+
+        ok_read, read_text = runner._execute_local_tool(
+            "read_file",
+            {"path": "sample.py"},
+            runner._resolve_repo_root({"repo_path": repo}),
+            {"repo_path": repo},
+        )
+        assert ok_read and "VALUE = 1" in read_text
+
+        ok_edit, _ = runner._execute_local_tool(
+            "edit_file",
+            {"path": "sample.py", "old_content": "VALUE = 1", "new_content": "VALUE = 2"},
+            runner._resolve_repo_root({"repo_path": repo}),
+            {"repo_path": repo},
+        )
+        assert ok_edit
+        with open(sample, "r", encoding="utf-8") as f:
+            assert "VALUE = 2" in f.read()
+
+        ok_tests, tests_text = runner._execute_local_tool(
+            "run_tests",
+            {"test_path": "."},
+            runner._resolve_repo_root({"repo_path": repo}),
+            {"repo_path": repo, "test_command": "python3 -c \"print('ok')\""},
+        )
+        assert ok_tests and "\"returncode\": 0" in tests_text
+
+    print("  [PASS] agent.py local tools")
+
+
+def test_agent_runner_integration():
+    from framework.agent import AgentRunner
+    from framework.config import ExperimentConfig, TaskConfig, HarnessConfig
+    from framework.ground_truth import BugEntry, validate_t1
+    from framework.harness import Harness
+    import json
+    import os
+
+    def fake_response(content, tool_calls=None, prompt_tokens=10, completion_tokens=5):
+        message = SimpleNamespace(content=content, tool_calls=tool_calls or [])
+        choice = SimpleNamespace(message=message)
+        usage = SimpleNamespace(prompt_tokens=prompt_tokens, completion_tokens=completion_tokens)
+        return SimpleNamespace(choices=[choice], usage=usage)
+
+    class FakeCompletions:
+        def __init__(self, responses):
+            self.responses = list(responses)
+            self.calls = []
+
+        def create(self, **kwargs):
+            self.calls.append(kwargs["messages"])
+            return self.responses.pop(0)
+
+    class FakeClient:
+        def __init__(self, responses):
+            self.chat = SimpleNamespace(completions=FakeCompletions(responses))
+
+    # Trust-engine action should inject a verification turn.
+    trust_config = ExperimentConfig(
+        experiment_id="SMOKE_VERIFY",
+        run_id=1,
+        model="openai/gpt-5-mini",
+        harness=HarnessConfig.full(),
+        task=TaskConfig(task_type="T1_code_review", difficulty="EASY", max_steps=3, token_budget=2000),
+    )
+    trust_runner = AgentRunner(
+        config=trust_config,
+        harness=Harness(HarnessConfig.full()),
+        validator_fn=validate_t1,
+    )
+    trust_runner.client = FakeClient([
+        fake_response("CONFIDENCE: 0.2\nNeed to double-check."),
+        fake_response(
+            'CONFIDENCE: 0.9\n[{"line_number": 1, "bug_type": "null_check", "severity": "high", "fix_suggestion": "guard it"}]'
+        ),
+    ])
+    trust_log = trust_runner.run(
+        "Review this code.",
+        ground_truth=[BugEntry(line_number=1, bug_type="null_check", severity="high")],
+    )
+    second_call_messages = trust_runner.client.chat.completions.calls[1]
+    assert any(
+        "[HARNESS] Low confidence detected." in (m.get("content", "") or "")
+        for m in second_call_messages if isinstance(m, dict)
+    ), "verification prompt must be injected after low confidence"
+    assert trust_log.final_verdict == "success"
+    print("  trust-engine verification turn injected")
+
+    # T3 tool loop should carry tool state into the next model call.
+    with tempfile.TemporaryDirectory() as tmpdir:
+        repo = f"{tmpdir}/repo"
+        os.makedirs(repo, exist_ok=True)
+        with open(f"{repo}/sample.py", "w", encoding="utf-8") as f:
+            f.write("VALUE = 1\n")
+
+        tool_call = SimpleNamespace(
+            id="tc1",
+            function=SimpleNamespace(name="read_file", arguments=json.dumps({"path": "sample.py"})),
+        )
+        tool_config = ExperimentConfig(
+            experiment_id="SMOKE_TOOL_LOOP",
+            run_id=1,
+            model="openai/gpt-5-mini",
+            harness=HarnessConfig.none(),
+            task=TaskConfig(task_type="T3_long_horizon", difficulty="EASY", max_steps=3, token_budget=2000),
+        )
+        tool_runner = AgentRunner(config=tool_config, harness=Harness(HarnessConfig.none()))
+        tool_runner.client = FakeClient([
+            fake_response("", tool_calls=[tool_call]),
+            fake_response("TASK COMPLETE"),
+        ])
+        tool_log = tool_runner.run(
+            "Refactor the repo.",
+            ground_truth={"repo_path": repo, "test_command": "python3 -c \"print('ok')\""},
+        )
+        second_tool_call_messages = tool_runner.client.chat.completions.calls[1]
+        assert any(m.get("role") == "tool" for m in second_tool_call_messages if isinstance(m, dict))
+        assert any("VALUE = 1" in (m.get("content", "") or "") for m in second_tool_call_messages if isinstance(m, dict))
+        assert tool_log.final_verdict == "success"
+        print("  T3 tool state carried across turns")
+
+    print("  [PASS] agent.py integration")
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
@@ -258,10 +531,16 @@ if __name__ == "__main__":
     print("=" * 50)
 
     tests = [
-        ("metrics.py",      test_metrics),
-        ("arcc.py",         test_arcc),
-        ("ground_truth.py", test_ground_truth),
-        ("harness.py",      test_harness),
+        ("metrics.py",           test_metrics),
+        ("arcc.py",              test_arcc),
+        ("ground_truth.py",      test_ground_truth),
+        ("harness.py",           test_harness),
+        ("embedding.py",         test_embedding),
+        ("tasks.py",             test_tasks),
+        ("judge.py",             test_judge),
+        ("agent IFRTracker",     test_ifr_tracker),
+        ("agent local tools",    test_agent_local_tools),
+        ("agent integration",    test_agent_runner_integration),
     ]
 
     passed, failed = 0, 0

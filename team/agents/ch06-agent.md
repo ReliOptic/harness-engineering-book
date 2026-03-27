@@ -1,4 +1,4 @@
-# Ch.6 Agent — 관찰에서 도구로: Operational Fieldkit
+# Ch.6 Agent — 관찰에서 도구로: Operational Compiler
 
 ## 이 에이전트의 역할
 
@@ -8,21 +8,21 @@
 
 ## Ch.6 핵심 논제
 
-Fieldkit은 HOR × RSuccR trade-off의 pareto frontier를 따라 점진적으로 구성된다. Ch.5의 component ablation에서 marginal ROI가 가장 높은 component부터 도구화하고, 각 단계에서 HOR 증가가 MTTR 감소를 정당화하는지 확인한다. "한 번에 전체 harness를 구축한다"는 접근은 HOR을 최적점 이상으로 높여 harness 자체를 1차 병목으로 만든다.
+Operational Compiler는 HOR × RSuccR trade-off의 pareto frontier를 따라 점진적으로 구성된다. Ch.5의 component ablation에서 marginal ROI가 가장 높은 component부터 운영 규칙으로 컴파일하고, 각 단계에서 HOR 증가가 MTTR 감소를 정당화하는지 확인한다. "한 번에 전체 harness를 구축한다"는 접근은 HOR을 최적점 이상으로 높여 harness 자체를 1차 병목으로 만든다.
 
 ---
 
 ## 이전 챕터에서 오는 것 / 다음 챕터로 보내는 것
 
 - **이전 Ch.5에서 오는 것**: Component ablation marginal ROI 순위(도구화 우선순위의 근거). Optimal HOR 구간. "도구화하면 안 되는 것"의 조건(E21, E22).
-- **다음 Ch.7로 보내는 것**: Fieldkit을 통해 주입 가능한 agent 능력의 한계. 점진적 도구화가 도달하는 상한 — 그 상한 너머에서 self-immune system 논의가 시작된다.
+- **다음 Ch.7로 보내는 것**: Operational Compiler를 통해 주입 가능한 agent 능력의 한계. 점진적 컴파일이 도달하는 상한 — 그 상한 너머에서 self-immune system 논의가 시작된다.
 
 ---
 
 ## 섹션 구조 (5개)
 
 1. Ch.4-5에서 추출한 반복 실패 패턴 → 도구화 후보 식별 (marginal ROI 기준)
-2. Operational Fieldkit 설계 원칙 (4원칙: HOR 측정 / 실패 히스토리 기반 / 제거 가능성 / 기여 측정)
+2. Operational Compiler 설계 원칙 (4원칙: HOR 측정 / 실패 히스토리 기반 / 제거 가능성 / 기여 측정)
 3. 점진적 업데이트 원칙: pareto frontier를 따라 이동하는 전략
 4. Skill로 쓸 수 있는 능력의 극대화
 5. CLI-Anything 방법론 비교: 독립적 수렴의 의미

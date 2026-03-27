@@ -14,7 +14,7 @@ Self-immune system = agent 내부의 ARCC self-monitoring + cliff-proximity dete
 
 ## 이전 챕터에서 오는 것 / 다음 챕터로 보내는 것
 
-- **이전 Ch.6에서 오는 것**: Fieldkit이 도달하는 상한. 점진적 도구화의 논리적 끝점. "외부 harness 없이 agent가 스스로 할 수 있는 것"이라는 질문의 발생 지점.
+- **이전 Ch.6에서 오는 것**: Operational Compiler가 도달하는 상한. 점진적 컴파일의 논리적 끝점. "외부 harness 없이 agent가 스스로 할 수 있는 것"이라는 질문의 발생 지점.
 - **이후 (Appendix / 독자에게 남기는 것)**: 미해결 질문들을 측정 가능한 형태로 정의. §9에서 집필 과정 자체가 AgentOps의 E-meta(token 배분, coordination overhead)로 기록됨 — Ch.7 §9 = DR-3.4 §9.
 
 ---

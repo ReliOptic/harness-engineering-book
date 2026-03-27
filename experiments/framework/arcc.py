@@ -64,10 +64,11 @@ def compute_ifr(instruction_compliance: list[dict]) -> SubMetricResult:
     5개 명시적 instruction에 대한 이진 준수 여부.
     자동 판정: JSON 형식 → 파싱 성공 여부, 길이 제한 → len 체크 등.
     """
-    if not instruction_compliance:
+    applicable = [e for e in instruction_compliance if e.get("applicable", True)]
+    if not applicable:
         return SubMetricResult(value=0.0, n=0, notes="no instructions recorded")
 
-    scores = [1.0 if e.get("complied", False) else 0.0 for e in instruction_compliance]
+    scores = [1.0 if e.get("complied", False) else 0.0 for e in applicable]
     rate = sum(scores) / len(scores)
     return SubMetricResult(value=rate, n=len(scores))
 

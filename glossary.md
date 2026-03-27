@@ -25,6 +25,9 @@ Continuous Learner. Self-immune system을 가지며, collapse 후 자발 복구�
 Logging만이 아니라 intervention policy, permission design, recovery path, cost/latency discipline, compute overload control, self-reporting을 포함한다.
 MLOps/DevOps에서 파생되었으나 그것보다 넓다.
 
+**ARCC (Agent-Relevant Capability Composite)**
+벤치마크 점수가 포착하지 못하는 에이전트의 실질적 역량을 측정하기 위한 복합 지표. Tool Call Accuracy (TCA), Instruction Following Rate (IFR), Multi-Step Reasoning Depth (MSRD), Context Utilization Efficiency (CUE)로 구성된다.
+
 ---
 
 ## B
@@ -37,6 +40,9 @@ MLOps/DevOps에서 파생되었으나 그것보다 넓다.
 
 ## C
 
+**Capability Cliff (역량 절벽)**
+ARCC로 측정된 에이전트 역량이 특정 임계치(Threshold) 이하로 떨어질 때 작업 완료율(TCR)이 선형이 아닌 급락(비선형 감소)하는 현상.
+
 **Compute (컴퓨트)**
 5변수 중 하나. VM 사양, token budget, API 비용, 네트워크 지연 등 실행 환경의 물리적 제약.
 Compute saturation은 모델이나 harness가 문제가 아닐 때도 실패를 유발한다 — 반례 2(E22).
@@ -44,6 +50,9 @@ Compute saturation은 모델이나 harness가 문제가 아닐 때도 실패를 
 ---
 
 ## F
+
+**Failure Budget Reallocation (실패 예산 재할당)**
+하네스(Harness)가 실패 자체를 없애는 것이 아니라, 감지/복구 불가능한 실패를 감지/복구 가능한 실패로 전환하여 운영 비용의 구조를 바꾸는 현상.
 
 **Field Dispatch**
 집필 기간 중 발생하는 주목할 만한 사건을 짧고 정확하게 기록하는 현장 속보.
@@ -71,20 +80,30 @@ Memory, privacy, 권한, 핵심 context를 보호하면서 bounded capability, �
 **Harness Engineering (하네스 엔지니어링)**
 에이전트가 실제 제약 조건 아래에서 무엇을 보호하고, 무엇을 가능하게 하며, 어떻게 취약성을 줄이는지를 다루는 설계 및 운영 분야.
 
+**HOR (Harness Overhead Ratio)**
+하네스(Harness) 운영 자체가 소비하는 토큰이나 컴퓨팅 자원의 추가 비율. HOR이 너무 높으면 오히려 작업 효율성을 해칠 수 있어 최적점을 찾는 것이 중요하다.
+
+---
+
+## M
+
+**MTTR (Mean Time To Recovery)**
+장애 발생 시 시스템이 자체 복구하거나 인간 엔지니어가 개입하여 정상 상태로 되돌리는 데 걸리는 평균 시간. AgentOps의 핵심 운영 지표.
+
 ---
 
 ## O
 
-**Operational Fieldkit (운영 Fieldkit)**
-제약 실험에서 반복적으로 확인된 실패 패턴과 운영 교훈을 범용 도구로 구체화한 CLI 유틸리티 레이어.
-한 번에 harness에 embedding하는 것이 아니라 점진적으로 발전시키는 것이 조건이다.
+**Operational Compiler**
+제약 실험에서 반복적으로 확인된 failure pattern과 intervention rule을 실행 가능한 운영 규칙으로 컴파일하는 구조.
+한 번에 완결된 harness를 세우는 방식이 아니라, ROI가 검증된 component를 순차적으로 추가하는 점진적 구성이 전제다.
 
 **Operational Envelope**
 Harness가 agent에게 부여하는 행동 범위. Memory 보호, 권한 경계, 복구 경로, evaluation hook 등으로 구성된다.
 
 **Operator Intervention (운영자 개입)**
 5변수 중 하나. 인간 운영자가 agent 실행 중 개입하는 패턴, 타이밍, 효과.
-반복 가능한 개입은 Fieldkit의 도구화 후보가 된다.
+반복 가능한 개입은 Operational Compiler의 컴파일 후보가 된다.
 
 ---
 

@@ -8,6 +8,22 @@
 > - **B등급**: 주요 기술기업 공식 블로그(AWS/Google/NVIDIA/Microsoft/Netflix/OpenAI/Anthropic), 공식 GitHub 저장소, McKinsey/Gartner 보고서
 
 ---
+| 2307.13854 | WebArena | Ch.2 | A |
+| 2502.14905 | Think Inside the JSON | Ch.2 | A |
+| 2505.24478 | Cognee | Ch.3 | A |
+| 2512.13564 | Memory in the Age of AI Agents | Ch.3 | A |
+| 2601.06328 | ToolGym | Ch.2 | A |
+| 2601.09865 | Advancing Model Refinement | Ch.2 | A |
+| 2601.13671 | Orchestration of Multi-Agent Systems | Ch.3 | A |
+| 2603.05344 | Building AI Coding Agents | Ch.3 | A |
+| 2602.08412 | OpenClaw Attacks Benchmarking | Ch.1 | A |
+| 2601.08406 | WebTrap Park | Ch.1 | A |
+| 2505.00684 | Visual Test-time Scaling | Ch.1 | A |
+| 2505.12493 | GUI-Shift | Ch.1 | A |
+| 2603.05637 | Real Faults in MCP | Ch.1 | A |
+| 2603.13151 | Defensible Design for OpenClaw | 기타 | A |
+| 2603.03329 | AutoHarness | 기타 | A |
+| 2509.21361 | The Maximum Effective Context Window | 기타 | A |
 
 ## Ch.1 — 에이전트 생태계 현황
 
@@ -104,6 +120,70 @@
   URL: https://www.apple.com/newsroom/2026/02/xcode-26-point-3-unlocks-the-power-of-agentic-coding/
   요약: Apple의 agentic coding 공식 지원 선언 및 기능 명세.
 
+### 대안 아키텍처 및 인터페이스 생태계
+
+- **From Assistant to Double Agent: formalizing and benchmarking attacks on openclaw for Personalized Local AI Agent.**
+  arXiv:2602.08412
+  DR출처: DR-1.1 | 신뢰도: A
+  URL: https://arxiv.org/html/2602.08412v2
+  요약: OpenClaw 등 로컬 AI 에이전트에 대한 공격 모델 및 벤치마킹 분석.
+
+- **moltis-org/moltis: A Rust-native claw you can trust** (GitHub 공식 저장소)
+  DR출처: DR-1.1 | 신뢰도: B (1차 소스)
+  URL: https://github.com/moltis-org/moltis
+  요약: 외부 마켓플레이스를 배제하고 샌드박스를 강제하는 엔터프라이즈 게이트웨이 지향 Rust 기반 에이전트 프레임워크.
+
+- **zeroclaw-labs/zeroclaw: Fast, small, and fully autonomous AI assistant infrastructure** (GitHub 공식 저장소)
+  DR출처: DR-1.1 | 신뢰도: B (1차 소스)
+  URL: https://github.com/zeroclaw-labs/zeroclaw
+  요약: 트레이트 기반의 스왑 가능한 아키텍처를 채택하여 5MB 이하 RAM을 소모하는 초경량 에이전트 런타임.
+
+- **nearai/ironclaw: OpenClaw inspired implementation in Rust focused on privacy and security** (GitHub 공식 저장소)
+  DR출처: DR-1.1 | 신뢰도: B (1차 소스)
+  URL: https://github.com/nearai/ironclaw
+  요약: WASM 샌드박스와 기밀 유지 암호화 모델(AES-256)을 채택하여 보안을 극대화한 프레임워크.
+
+- **NevaMind-AI/memU: Memory for 24/7 proactive agents like openclaw** (GitHub 공식 저장소)
+  DR출처: DR-1.1 | 신뢰도: B (1차 소스)
+  URL: https://github.com/NevaMind-AI/memU
+  요약: 능동적 인텐트 감지와 마크다운 계층 구조를 결합한 24/7 상시 가동 에이전트용 메모리 아키텍처.
+
+- **WebTrap Park: An Automated Platform for Systematic Security Evaluation of Web Agents**
+  arXiv:2601.08406
+  DR출처: DR-1.2 | 신뢰도: A
+  URL: https://arxiv.org/html/2601.08406v1
+  요약: 웹 에이전트의 보안성을 체계적으로 평가하기 위한 자동화된 벤치마킹 플랫폼 연구.
+
+- **Visual Test-time Scaling for GUI Agent Grounding**
+  arXiv:2505.00684
+  DR출처: DR-1.2 | 신뢰도: A
+  URL: https://arxiv.org/html/2505.00684v2
+  요약: GUI 에이전트 시각적 접지 향상을 위한 테스트 타임 확장 및 동적 영역 포커스(RegionFocus) 기법.
+
+- **GUI-Shift: Enhancing VLM-Based GUI Agents through Self-supervised Reinforcement Learning**
+  arXiv:2505.12493
+  DR출처: DR-1.2 | 신뢰도: A
+  URL: https://arxiv.org/html/2505.12493v3
+  요약: 강화학습 및 자가지도 역동역학 접근법을 통해 VLM 기반 에이전트의 화면 조작 정확성을 획기적으로 향상시키는 방법론.
+
+- **Real Faults in Model Context Protocol (MCP) Software: a Comprehensive Taxonomy**
+  arXiv:2603.05637
+  DR출처: DR-1.2 | 신뢰도: A
+  URL: https://arxiv.org/html/2603.05637v1
+  요약: MCP 아키텍처가 지닌 동시성 실패, 확장성 한계 및 시스템 오동작 패턴에 대한 실제 결함 분류 연구.
+
+- **R-VLM: Region-aware vision language model for precise GUI grounding**
+  Amazon Science, 2026
+  DR출처: DR-1.2 | 신뢰도: B
+  URL: https://www.amazon.science/publications/r-vlm-region-aware-vision-language-model-for-precise-gui-grounding
+  요약: 아마존 연구팀이 제안한 정밀한 시각적 접지를 위한 영역 인지형 비전 언어 모델 연구.
+
+- **A new era of intelligence with Gemini 3**
+  Google Blog, 2026
+  DR출처: DR-1.2 | 신뢰도: B
+  URL: https://blog.google/products-and-platforms/products/gemini/gemini-3/
+  요약: 구글 제미나이 3의 발표 및 에이전틱 CLI 환경에서의 코딩 벤치마크(SWE-bench) 우수성 실증.
+
 ---
 
 ## Ch.2 — 모델 상속: 벤치마크 & 최적화
@@ -168,6 +248,19 @@
   DR출처: DR-5.1 | 신뢰도: A
   URL: https://www.researchgate.net/publication/399952170_A_Systematic_Approach_to_Causal_Reasoning_Using_Agentic_AI_in_Distributed_System_Failures
   요약: 분산 시스템 장애에서 에이전트의 인과 추론 능력의 구조적 한계. Claude 3.5 기반 RCA 11.34% 정확도.
+
+
+- **WebArena: A Realistic Web Environment for Building Autonomous Agents**
+  arXiv:2307.13854
+  DR출처: DR-2.1 | 신뢰도: A
+  URL: https://arxiv.org/html/2307.13854v4
+  요약: 실제 웹사이트를 모방하여 구축된 사실적인 자율 에이전트 평가 벤치마크.
+
+- **ToolGym: an Open-world Tool-using Environment for Scalable Agent Testing and Data Curation**
+  arXiv:2601.06328
+  DR출처: DR-2.1 | 신뢰도: A
+  URL: https://arxiv.org/html/2601.06328v1
+  요약: 확장 가능한 에이전트 테스트 및 데이터 큐레이션을 위한 오픈월드 도구 사용 환경.
 
 ### 모델 압축 & 함수 호출
 
@@ -251,7 +344,75 @@
 
 ---
 
+
+- **CallNavi, A Challenge and Empirical Study on LLM Function Calling and Routing**
+  EASE 2025
+  DR출처: DR-2.3 | 신뢰도: A
+  URL: https://jacquesklein2302.github.io/papers/2025-EASE25-CallNavi.pdf
+  요약: LLM의 함수 호출 및 라우팅 성능에 대한 실증적 연구 및 새로운 평가 프레임워크.
+
+- **Think Inside the JSON: Reinforcement Strategy for Strict LLM Schema Adherence**
+  arXiv:2502.14905
+  DR출처: DR-2.3 | 신뢰도: A
+  URL: https://arxiv.org/html/2502.14905v1
+  요약: LLM이 JSON 스키마를 엄격하게 준수하도록 훈련하는 강화학습 전략.
+
+- **Advancing Model Refinement: Muon-Optimized Distillation and Quantization for LLM Deployment**
+  arXiv:2601.09865
+  DR출처: DR-2.3 | 신뢰도: A
+  URL: https://arxiv.org/html/2601.09865v1
+  요약: LLM 배포를 위한 증류 및 양자화 최적화 기법.
+
+### Model Routing & Providers
+
+- **OpenRouter API Reference & Routing**
+  OpenRouter 공식 문서
+  DR출처: DR-2.2 | 신뢰도: B
+  URL: https://openrouter.ai/docs/guides/routing/provider-selection
+  요약: 다양한 LLM 제공자를 통합하는 다중 공급자 라우팅 구조 및 대체(fallback) 메커니즘.
+
 ## Ch.3 — Harness & AgentOps 정의
+
+
+### Agent Harness & A2A Protocols
+
+- **Building AI Coding Agents for the Terminal: Scaffolding, Harness, Context Engineering, and Lessons Learned**
+  arXiv:2603.05344
+  DR출처: DR-3.1 | 신뢰도: A
+  URL: https://arxiv.org/html/2603.05344v1
+  요약: 터미널 환경의 코딩 에이전트를 위한 하네스 및 컨텍스트 엔지니어링 설계 방법론.
+
+- **Effective harnesses for long-running agents**
+  Anthropic Engineering Blog
+  DR출처: DR-3.1 | 신뢰도: B
+  URL: https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
+  요약: 장기 실행 에이전트를 위한 효과적인 하네스 구축 사례 및 엔지니어링 가이드.
+
+- **The Orchestration of Multi-Agent Systems: Architectures, Protocols, and Enterprise Adoption**
+  arXiv:2601.13671
+  DR출처: DR-3.1 | 신뢰도: A
+  URL: https://arxiv.org/html/2601.13671v1
+  요약: 다중 에이전트 시스템의 오케스트레이션 아키텍처 및 엔터프라이즈 도입 전략.
+
+- **Linux Foundation Launches the Agent2Agent Protocol Project**
+  Linux Foundation Press, 2026
+  DR출처: DR-3.1 | 신뢰도: B
+  URL: https://www.linuxfoundation.org/press/linux-foundation-launches-the-agent2agent-protocol-project-to-enable-secure-intelligent-communication-between-ai-agents
+  요약: AI 에이전트 간의 안전하고 지능적인 통신을 지원하는 오픈소스 A2A 프로토콜 표준화 이니셔티브.
+
+### Agent Memory & Ontology
+
+- **Memory in the Age of AI Agents**
+  arXiv:2512.13564
+  DR출처: DR-3.4 | 신뢰도: A
+  URL: https://arxiv.org/abs/2512.13564
+  요약: AI 에이전트 시대의 메모리 아키텍처 및 기억 구조 모델링.
+
+- **Cognee: A Knowledge Graph Context Engine for Agentic Systems**
+  arXiv:2505.24478
+  DR출처: DR-3.4 | 신뢰도: A
+  URL: https://arxiv.org/abs/2505.24478
+  요약: 에이전트 시스템을 위한 지식 그래프 및 온톨로지 기반 컨텍스트 엔진 설계.
 
 ### AgentOps 도구 공식 문서
 
@@ -278,6 +439,123 @@
   요약: 에이전트 평가의 개념 및 Databricks Mosaic AI의 접근 방식.
 
 ---
+
+
+- **AgentOps Documentation**
+  AgentOps 공식 문서
+  DR출처: DR-3.3 | 신뢰도: B
+  URL: https://docs.agentops.ai/v2/concepts/core-concepts
+  요약: 에이전트 관측성 도구 AgentOps의 아키텍처 및 핵심 개념.
+
+- **Helicone OSS LLM Observability**
+  Helicone 공식 문서
+  DR출처: DR-3.3 | 신뢰도: B
+  URL: https://docs.helicone.ai/getting-started/platform-overview
+  요약: 오픈소스 기반 AI 게이트웨이 및 LLM 관측성 플랫폼 Helicone 구조.
+
+- **W&B Weave**
+  Weights & Biases 공식 문서
+  DR출처: DR-3.3 | 신뢰도: B
+  URL: https://docs.wandb.ai/weave
+  요약: LLM 기반 애플리케이션의 개발 및 모니터링을 위한 관측성 도구 Weave.
+
+## Ch.4 — deliberate failure 실험 설계
+
+### Chaos Engineering 방법론
+
+- **Principles of Chaos Engineering**
+  principlesofchaos.org
+  DR출처: DR-4.1 | 신뢰도: B
+  URL: https://principlesofchaos.org/
+  요약: steady-state, 실험, blast radius, 지속적 자동화라는 chaos engineering 기본 원칙.
+
+- **Netflix/chaosmonkey** (GitHub 공식 저장소)
+  DR출처: DR-4.1 | 신뢰도: B (1차 소스)
+  URL: https://github.com/Netflix/chaosmonkey
+  요약: 고전적 장애 주입 도구 구현. 실험적 failure injection의 운영 패턴 참고.
+
+- **AWS Fault Injection Service (FIS) — 공식 문서**
+  DR출처: DR-4.1 | 신뢰도: B
+  URL: https://docs.aws.amazon.com/fis/latest/userguide/what-is.html
+  요약: 클라우드 환경에서 통제된 장애 주입 실무 패턴.
+
+- **Why Do Multi-Agent LLM Systems Fail?**
+  arXiv:2503.13657
+  DR출처: DR-4.1 | 신뢰도: A
+  URL: https://arxiv.org/pdf/2503.13657
+  요약: 다중 에이전트 실패 모드 분류. deliberate failure 시나리오 설계 근거.
+
+### Compute 제약 (GCP free tier)
+
+- **Free Trial and Free Tier Services and Products**
+  Google Cloud 공식 문서
+  DR출처: DR-4.2 | 신뢰도: B
+  URL: https://cloud.google.com/free
+  요약: free-tier 리소스 범위와 과금 경계의 공식 기준.
+
+- **General-purpose machine family for Compute Engine**
+  Google Cloud 공식 문서
+  DR출처: DR-4.2 | 신뢰도: B
+  URL: https://cloud.google.com/compute/docs/general-purpose-machines
+  요약: E2 shared-core 특성 및 성능 제약.
+
+- **Persistent Disk performance overview**
+  Google Cloud 공식 문서
+  DR출처: DR-4.2 | 신뢰도: B
+  URL: https://cloud.google.com/compute/docs/disks/performance
+  요약: 디스크 타입/용량 대비 IOPS 및 throughput 한계.
+
+- **VPC Network pricing**
+  Google Cloud 공식 문서
+  DR출처: DR-4.2 | 신뢰도: B
+  URL: https://cloud.google.com/vpc/network-pricing
+  요약: egress 및 네트워크 과금 구조.
+
+### Token Budget 최적화
+
+- **LLMLingua-2: Data Distillation for Efficient and Faithful Task-Agnostic Prompt Compression**
+  ACL Findings 2024
+  DR출처: DR-4.3 | 신뢰도: A
+  URL: https://aclanthology.org/2024.findings-acl.57.pdf
+  요약: 프롬프트 압축으로 토큰 소비를 절감하면서 성능을 유지하는 방법론.
+
+- **RouteLLM: Learning to Route LLMs with Preference Data**
+  ICLR 2025 Proceedings
+  DR출처: DR-4.3 | 신뢰도: A
+  URL: https://proceedings.iclr.cc/paper_files/paper/2025/file/5503a7c69d48a2f86fc00b3dc09de686-Paper-Conference.pdf
+  요약: 난이도 기반 모델 라우팅으로 비용-성능 균형을 최적화.
+
+- **Dynamic Model Routing and Cascading for Efficient LLM Inference: A Survey**
+  arXiv:2603.04445
+  DR출처: DR-4.3 | 신뢰도: A
+  URL: https://arxiv.org/html/2603.04445v1
+  요약: 라우팅/캐스케이딩 기반 비용 절감 전략 종합.
+
+- **Lower cost and latency for AI using Amazon ElastiCache as a semantic cache with Amazon Bedrock**
+  AWS 공식 블로그
+  DR출처: DR-4.3 | 신뢰도: B
+  URL: https://aws.amazon.com/blogs/database/lower-cost-and-latency-for-ai-using-amazon-elasticache-as-a-semantic-cache-with-amazon-bedrock/
+  요약: 시맨틱 캐싱의 비용/지연 절감 실무 사례.
+
+### Runtime Compute Benchmarking
+
+- **AgentCgroup: Understanding and Controlling OS Resources of AI Agents**
+  arXiv:2602.09345
+  DR출처: DR-4.4 | 신뢰도: A
+  URL: https://arxiv.org/html/2602.09345v2
+  요약: AI agent의 도구 호출 구간 리소스 버스트와 cgroup 제어 방법론.
+
+- **GPU-Virt-Bench: A Comprehensive Benchmarking Framework for Software-Based GPU Virtualization Systems**
+  arXiv:2512.22125
+  DR출처: DR-4.4 | 신뢰도: A
+  URL: https://arxiv.org/html/2512.22125v1
+  요약: vGPU/MIG/passthrough 성능 비교 프레임워크.
+
+- **How to Reduce KV Cache Bottlenecks with NVIDIA Dynamo**
+  NVIDIA Developer Blog
+  DR출처: DR-4.4 | 신뢰도: B
+  URL: https://developer.nvidia.com/blog/how-to-reduce-kv-cache-bottlenecks-with-nvidia-dynamo/
+  요약: long-context 추론의 KV cache 병목 완화 기법.
 
 ## Ch.5 — 실험 결과 분석
 
@@ -485,6 +763,42 @@
 
 ---
 
+## 기타 참조 (최신 심층 분석 추가 문헌)
+
+### 모델 및 런타임 보안
+- **Defensible Design for OpenClaw: Securing Autonomous Tool-Invoking Agents**
+  arXiv:2603.13151
+  신뢰도: A
+  URL: https://arxiv.org/abs/2603.13151
+  요약: OpenClaw 등 자율 도구 호출 에이전트에 대한 보안 설계 및 취약점 방어 메커니즘 연구.
+
+### 하네스 및 컨텍스트 엔지니어링
+- **AutoHarness: improving LLM agents by automatically synthesizing a code harness**
+  arXiv:2603.03329
+  신뢰도: A
+  URL: https://arxiv.org/abs/2603.03329
+  요약: LLM이 외부 규칙을 검증하는 파이썬 코드를 자율적으로 합성하여 환각을 차단하는 AutoHarness 프레임워크 제안.
+
+- **The Maximum Effective Context Window for Real World Limits of LLMs**
+  arXiv:2509.21361
+  신뢰도: A
+  URL: https://arxiv.org/abs/2509.21361
+  요약: 광고된 대형 컨텍스트 창과 실제 정보 회상 능력(MECW) 간의 차이를 분석한 실증 연구.
+
+- **Effective context engineering for AI agents**
+  Anthropic Engineering Blog
+  신뢰도: B
+  URL: https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents
+  요약: 에이전트를 위한 적시(Just-in-Time) 컨텍스트 검색 및 압축 기법 가이드.
+
+- **Code execution with MCP: building more efficient AI agents**
+  Anthropic Engineering Blog
+  신뢰도: B
+  URL: https://www.anthropic.com/engineering/code-execution-with-mcp
+  요약: 에이전트가 모든 도구 정의를 로드하는 대신, 런타임 코드 실행을 통해 MCP를 제어하여 토큰 효율을 극대화하는 방법론.
+
+---
+
 ## 색인: arXiv 논문 목록
 
 | arXiv ID | 제목 요약 | 챕터 관련 | 신뢰도 |
@@ -510,8 +824,24 @@
 | 2603.00030 | SimpleTool Parallel Decoding | Ch.2 | A |
 | 2603.00040 | Attn-QAT | Ch.2 | A |
 | 2603.04445 | Dynamic Model Routing Survey | Ch.5 | A |
+| 2307.13854 | WebArena | Ch.2 | A |
+| 2502.14905 | Think Inside the JSON | Ch.2 | A |
+| 2505.24478 | Cognee | Ch.3 | A |
+| 2512.13564 | Memory in the Age of AI Agents | Ch.3 | A |
+| 2601.06328 | ToolGym | Ch.2 | A |
+| 2601.09865 | Advancing Model Refinement | Ch.2 | A |
+| 2601.13671 | Orchestration of Multi-Agent Systems | Ch.3 | A |
+| 2603.05344 | Building AI Coding Agents | Ch.3 | A |
+| 2602.08412 | OpenClaw Attacks Benchmarking | Ch.1 | A |
+| 2601.08406 | WebTrap Park | Ch.1 | A |
+| 2505.00684 | Visual Test-time Scaling | Ch.1 | A |
+| 2505.12493 | GUI-Shift | Ch.1 | A |
+| 2603.05637 | Real Faults in MCP | Ch.1 | A |
+| 2603.13151 | Defensible Design for OpenClaw | 기타 | A |
+| 2603.03329 | AutoHarness | 기타 | A |
+| 2509.21361 | The Maximum Effective Context Window | 기타 | A |
 
 ---
 
-*최종 업데이트: 2026-03-16 | 완료된 DR 기준: DR-1.1, 1.3, 1.4, 2.1, 2.3, 2.4, 3.2, 3.3, 5.1, 5.2, 5.3, 7.2*
-*미시작 DR(1.2, 2.2, 3.1, 3.4, 4.x, 6.x, 7.1) 완료 시 이 파일에 추가할 것.*
+*최종 업데이트: 2026-03-21 | 완료된 DR 기준: DR-1.1, 1.2, 1.3, 1.4, 2.1, 2.3, 2.4, 3.2, 3.3, 5.1, 5.2, 5.3, 7.2, 신규*
+*미시작 DR(2.2, 3.1, 3.4, 4.x, 6.x, 7.1) 완료 시 이 파일에 추가할 것.*

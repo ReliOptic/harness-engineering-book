@@ -20,11 +20,11 @@
 |DR-3.1|Ch.3|Harness/guardrails/scaffolding terminology 2025-2026|완료|DR-3.1-agent-system-terminology.md|
 |DR-3.2|Ch.3|CLI-Anything HARNESS.md methodology analysis|완료|DR-3.2-CLI-Anything-HARNESS.md|
 |DR-3.3|Ch.3|AgentOps landscape: existing frameworks and tools 2026|완료|DR-3.3-AgentOps-frameworks.md|
-|DR-3.4|Ch.3|Agent runtime failure taxonomies|미시작||
-|DR-4.1|Ch.4|Chaos engineering applied to AI agent systems|미시작||
-|DR-4.2|Ch.4|Google Cloud free tier constraints and failure modes|완료|DR-4.2-GCP-free-tier-constraints.md|
-|DR-4.3|Ch.4|Token budget optimization strategies for agent systems|미시작||
-|DR-4.4|Ch.4|Agent system compute requirements benchmarking|미시작||
+|DR-3.4|Ch.3|Agent runtime failure taxonomies|완료|DR-3.4-ontology-as-agent-memory-structure.md|
+|DR-4.1|Ch.4|Chaos engineering applied to AI agent systems|완료|DR-4.1-chaos-engineering.md|
+|DR-4.2|Ch.4|Google Cloud free tier constraints and failure modes|완료|DR-4.2-gcp-free-tier.md|
+|DR-4.3|Ch.4|Token budget optimization strategies for agent systems|완료|DR-4.3-token-budget.md|
+|DR-4.4|Ch.4|Agent system compute requirements benchmarking|완료|DR-4.4-compute-benchmarks.md|
 |DR-5.1|Ch.5|Agent system failure pattern analysis methodologies|완료|DR-5.1-failure-analysis-methods.md|
 |DR-5.2|Ch.5|Compute cost optimization for agent deployments|완료|DR-5.2-compute-cost-optimization.md|
 |DR-5.3|Ch.5|VM resource management for LLM-based agents|완료|DR-5.3-VM-resource-management.md|
@@ -39,4 +39,3 @@
 ## DR 프롬프트 전문
 
 writing-plan.md의 섹션 11 참조.
-

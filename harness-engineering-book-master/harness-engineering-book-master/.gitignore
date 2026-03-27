@@ -1,0 +1,9 @@
+# Windows Zone Identifier metadata files (WSL artifact)
+*.Zone.Identifier
+
+# API keys / secrets
+experiments/API.txt
+
+# Python bytecode
+__pycache__/
+*.pyc

@@ -1,0 +1,163 @@
+{
+  "meta": {
+    "generated_at_utc": "2026-03-20T16:03:27.966823+00:00",
+    "runs_per_model": 2,
+    "models": [
+      "nvidia/nemotron-3-super-120b-a12b",
+      "openai/gpt-5.4-nano",
+      "qwen/qwen3.5-9b",
+      "google/gemini-3.1-flash-lite-preview"
+    ],
+    "tasks": [
+      "T1_code_review"
+    ],
+    "harness": "none",
+    "difficulty": "MODERATE",
+    "note": "Pilot matrix for model-size/vendor differentiation (agent-oriented tasks)."
+  },
+  "results": [
+    {
+      "task_type": "T1_code_review",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "n_runs": 2,
+      "successes": 0,
+      "partials": 2,
+      "failures": 0,
+      "tcr_continuous": 0.5,
+      "tca": 0.0,
+      "ifr": 0.0,
+      "rsucc_r": null,
+      "ttff_mean": 1.0,
+      "hor_mean": 0.0,
+      "failure_types": {
+        "none": 2
+      }
+    },
+    {
+      "task_type": "T1_code_review",
+      "model": "openai/gpt-5.4-nano",
+      "n_runs": 2,
+      "successes": 2,
+      "partials": 0,
+      "failures": 0,
+      "tcr_continuous": 1.0,
+      "tca": 0.0,
+      "ifr": 0.6,
+      "rsucc_r": null,
+      "ttff_mean": 1.5,
+      "hor_mean": 0.0,
+      "failure_types": {
+        "none": 2
+      }
+    },
+    {
+      "task_type": "T1_code_review",
+      "model": "qwen/qwen3.5-9b",
+      "n_runs": 2,
+      "successes": 0,
+      "partials": 0,
+      "failures": 2,
+      "tcr_continuous": 0.0,
+      "tca": 0.0,
+      "ifr": 0.0,
+      "rsucc_r": 0.0,
+      "ttff_mean": 1.0,
+      "hor_mean": 0.0,
+      "failure_types": {
+        "silent_logical_drift": 2
+      }
+    },
+    {
+      "task_type": "T1_code_review",
+      "model": "google/gemini-3.1-flash-lite-preview",
+      "n_runs": 2,
+      "successes": 0,
+      "partials": 1,
+      "failures": 1,
+      "tcr_continuous": 0.25,
+      "tca": 0.0,
+      "ifr": 0.2,
+      "rsucc_r": 0.0,
+      "ttff_mean": null,
+      "hor_mean": 0.0,
+      "failure_types": {
+        "none": 1,
+        "tool_call_failure": 1
+      }
+    }
+  ],
+  "pairwise_tests": [
+    {
+      "task_type": "T1_code_review",
+      "model_a": "nvidia/nemotron-3-super-120b-a12b",
+      "model_b": "openai/gpt-5.4-nano",
+      "success_rate_a": 0.0,
+      "success_rate_b": 1.0,
+      "delta_success_rate": -1.0,
+      "z": -2.0,
+      "p_value": 0.04550026389635842,
+      "p_holm": 0.2730015833781505,
+      "significant_0_05": false
+    },
+    {
+      "task_type": "T1_code_review",
+      "model_a": "nvidia/nemotron-3-super-120b-a12b",
+      "model_b": "qwen/qwen3.5-9b",
+      "success_rate_a": 0.0,
+      "success_rate_b": 0.0,
+      "delta_success_rate": 0.0,
+      "z": 0.0,
+      "p_value": 1.0,
+      "p_holm": 1.0,
+      "significant_0_05": false
+    },
+    {
+      "task_type": "T1_code_review",
+      "model_a": "nvidia/nemotron-3-super-120b-a12b",
+      "model_b": "google/gemini-3.1-flash-lite-preview",
+      "success_rate_a": 0.0,
+      "success_rate_b": 0.0,
+      "delta_success_rate": 0.0,
+      "z": 0.0,
+      "p_value": 1.0,
+      "p_holm": 1.0,
+      "significant_0_05": false
+    },
+    {
+      "task_type": "T1_code_review",
+      "model_a": "openai/gpt-5.4-nano",
+      "model_b": "qwen/qwen3.5-9b",
+      "success_rate_a": 1.0,
+      "success_rate_b": 0.0,
+      "delta_success_rate": 1.0,
+      "z": 2.0,
+      "p_value": 0.04550026389635842,
+      "p_holm": 0.2730015833781505,
+      "significant_0_05": false
+    },
+    {
+      "task_type": "T1_code_review",
+      "model_a": "openai/gpt-5.4-nano",
+      "model_b": "google/gemini-3.1-flash-lite-preview",
+      "success_rate_a": 1.0,
+      "success_rate_b": 0.0,
+      "delta_success_rate": 1.0,
+      "z": 2.0,
+      "p_value": 0.04550026389635842,
+      "p_holm": 0.2730015833781505,
+      "significant_0_05": false
+    },
+    {
+      "task_type": "T1_code_review",
+      "model_a": "qwen/qwen3.5-9b",
+      "model_b": "google/gemini-3.1-flash-lite-preview",
+      "success_rate_a": 0.0,
+      "success_rate_b": 0.0,
+      "delta_success_rate": 0.0,
+      "z": 0.0,
+      "p_value": 1.0,
+      "p_holm": 1.0,
+      "significant_0_05": false
+    }
+  ]
+}
