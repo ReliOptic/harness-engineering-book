@@ -1,11 +1,15 @@
 # List of Contents — 최종본 v4
 
+> **주의**: 이 문서는 polishing 단계의 **목표 구조** (9챕터, 4 Parts)입니다.
+> 현재 작업 구조는 **7챕터** (writing-plan.md v5 + chapter-map.md 기준).
+> Beta 완성 후 v4 구조 채택 여부를 결정합니다. (2026-03-29 결정)
+
 ## *Harness Engineering and AgentOps*
 ### *Observing What Makes Agents Work — and What Breaks Them*
 
 > 2026년 상반기, agent runtime 생태계의 스냅샷이자 실험서.
 > 산업계가 축적한 실무 지식을 집대성하고, 제약 환경에서 실험으로 검증한 기록.
-> **9개 챕터 + Preface + Appendices**
+> **9개 챕터 + Preface + Appendices** (목표 구조)
 
 ---
 

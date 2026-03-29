@@ -143,7 +143,7 @@ ACP(Agent Client Protocol)나 MCP(Model Context Protocol) 같은 표준화 레�
 
 이 내용은 Ch.3(Harness 정의)에서 ontology를 harness의 의미론적 기반으로 소개하는 데 활용할 수 있다. 동시에 Ch.6(Operational Compiler)에서 구체적인 도구 — Cognee, TrustGraph — 를 실험 맥락으로 연결할 수 있다.
 
-주의: 이 영역은 2025-2026년에 급격히 성장 중이다. Cognee의 MCP 통합, TrustGraph의 Context Core 개념은 현재 진행형이며, 책의 Beta 마감(2026-05-13) 시점까지 생태계가 더 바뀔 수 있다. 스냅샷임을 명시하고 쓰는 것이 맞다.
+주의: 이 영역은 2025-2026년에 급격히 성장 중이다. Cognee의 MCP 통합, TrustGraph의 Context Core 개념은 현재 진행형이며, 책의 Beta 마감(2026-04-30) 시점까지 생태계가 더 바뀔 수 있다. 스냅샷임을 명시하고 쓰는 것이 맞다.
 
 ---
 

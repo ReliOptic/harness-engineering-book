@@ -1,6 +1,6 @@
 # 실험 프로그램 개요
 
-> 5변수 프레임워크에 기반한 20개 의도적 실패 실험.
+> 5변수 프레임워크에 기반한 22개 의도적 실패 실험.
 > Ch.4의 핵심이며, Ch.5 분석의 입력이다.
 
 ---
@@ -50,5 +50,5 @@ Experimenter C: E17~E22 실행 → B가 E19, E20 교차검증
 ## 관련 도구
 
 - `/log-experiment [ENN]` — Claude Code skill로 실험 로그 작성
-- `scenario-master.md` — 20개 시나리오 전체 목록
+- `scenario-master.md` — 22개 시나리오 전체 목록
 - `template.md` — 실험 로그 템플릿 v4

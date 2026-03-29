@@ -25,23 +25,30 @@ Continuous Learner. Self-immune system을 가지며, collapse 후 자발 복구�
 Logging만이 아니라 intervention policy, permission design, recovery path, cost/latency discipline, compute overload control, self-reporting을 포함한다.
 MLOps/DevOps에서 파생되었으나 그것보다 넓다.
 
-**ARCC (Agent-Relevant Capability Composite)**
-벤치마크 점수가 포착하지 못하는 에이전트의 실질적 역량을 측정하기 위한 복합 지표. Tool Call Accuracy (TCA), Instruction Following Rate (IFR), Multi-Step Reasoning Depth (MSRD), Context Utilization Efficiency (CUE)로 구성된다.
+**Agent Capability Composite** *(이 책의 조작적 정의, 기존 벤치마크 조합)*
+벤치마�� 점수가 포착���지 못하는 에이전트의 실질적 역량을 측정하기 위한 복합 지표. 아래 4개 기존 측정 축의 조합이다:
+- Tool Call Accuracy — Berkeley Function Calling Leaderboard, ToolBench (Qin et al., ICLR 2024)
+- Instruction Following Rate — IFEval (Zhou et al., 2023)
+- Multi-Step Reasoning Depth — GAIA (Mialon et al., 2023), AgentBench (Liu et al., ICLR 2024)
+- Context Utilization Efficiency — τ-bench (Yao et al., 2024)
+
+> 이 복합 지표는 기존 벤치마크들이 각각 측정하는 축을 하나의 스펙트럼으로 결합한 것이다. 저자가 새로 도출한 지표가 아니라, 산업계가 이미 사용하는 측정을 agent 운용 맥락에서 재조합한 것이���.
 
 ---
 
 ## B
 
-**Balloon Effect (풍선 효과)**
+**Balloon Effect (풍선 효과)** *(시스템 사고의 unintended consequence 개념)*
 한 변수를 조작하면 다른 변수에서 에러가 터지는 현상.
-5변수 프레임워크에서 변수 간 상호작용을 관찰할 때 핵심 지표.
+> 근거: 시스템 사고(Meadows, *Thinking in Systems*, 2008)에서 "fixing one problem creates another"로 설명되는 패턴. Chaos engineering (Basiri et al., IEEE Software, 2016)의 blast radius 관찰과 유사.
 
 ---
 
 ## C
 
-**Capability Cliff (역량 절벽)**
-ARCC로 측정된 에이전트 역량이 특정 임계치(Threshold) 이하로 떨어질 때 작업 완료율(TCR)이 선형이 아닌 급락(비선형 감소)하는 현상.
+**Capability Cliff (역량 절벽)** *(이 책의 관찰 용어. 관련: emergent abilities의 역방향)*
+에이전트 역량이 특정 임계치 이하로 떨어질 때 작업 완료율이 선형이 아닌 급락(비선형 감소)하는 현상. Wei et al. (NeurIPS 2022)이 보고한 emergent abilities가 "역량이 올라갈 때 갑자기 가능해지는 것"이라면, 이 책이 관찰하는 것은 그 역방향 — "역량이 내려갈 때 갑자기 불가능해지는 것"이다.
+> 참조: SWE-bench (Jimenez et al., ICLR 2024)에서도 모델 간 성능 격차가 비선형적으로 나타나는 패턴이 보고되었다.
 
 **Compute (컴퓨트)**
 5변수 중 하나. VM 사양, token budget, API 비용, 네트워크 지연 등 실행 환경의 물리적 제약.
@@ -51,8 +58,9 @@ Compute saturation은 모델이나 harness가 문제가 아닐 때도 실패를 
 
 ## F
 
-**Failure Budget Reallocation (실패 예산 재할당)**
-하네스(Harness)가 실패 자체를 없애는 것이 아니라, 감지/복구 불가능한 실패를 감지/복구 가능한 실패로 전환하여 운영 비용의 구조를 바꾸는 현상.
+**Failure Budget Reallocation (실패 예산 재할당)** *(SRE error budget 개념의 확장)*
+하네스가 실패 자체를 없애는 것이 아니라, 감지/복구 불가능한 실패를 감지/복구 가능한 실패로 전환하여 운영 비용의 구조를 바꾸는 현상.
+> 근거: Google SRE의 "error budget" (Beyer et al., *Site Reliability Engineering*, O'Reilly, 2016) 개념을 agent runtime에 적용. SRE에서 error budget은 허용 가능한 실패의 총량이지만, 이 책에서는 실패의 **유형 전환**(undetectable → detectable)에 초점을 맞춘다.
 
 **Field Dispatch**
 집필 기간 중 발생하는 주목할 만한 사건을 짧고 정확하게 기록하는 현장 속보.
@@ -80,8 +88,9 @@ Memory, privacy, 권한, 핵심 context를 보호하면서 bounded capability, �
 **Harness Engineering (하네스 엔지니어링)**
 에이전트가 실제 제약 조건 아래에서 무엇을 보호하고, 무엇을 가능하게 하며, 어떻게 취약성을 줄이는지를 다루는 설계 및 운영 분야.
 
-**HOR (Harness Overhead Ratio)**
-하네스(Harness) 운영 자체가 소비하는 토큰이나 컴퓨팅 자원의 추가 비율. HOR이 너무 높으면 오히려 작업 효율성을 해칠 수 있어 최적점을 찾는 것이 중요하다.
+**Harness Overhead Ratio** *(시스템 엔지니어링 overhead 개념의 적용)*
+하네스 운영 자체가 소비하는 토큰이나 컴퓨팅 자원의 추가 비율. 이 비율이 너무 높으면 하네스 자체가 1차 병목이 된다.
+> 근거: overhead ratio는 시스템 엔지니어링의 일반 개념. LLM 맥락에서는 Helicone, Langfuse 등 observability 도구가 측정하는 "token overhead"와 유사하다. 이 책은 이를 harness 전체의 비용 측정으로 확장한다.
 
 ---
 
@@ -94,9 +103,9 @@ Memory, privacy, 권한, 핵심 context를 보호하면서 bounded capability, �
 
 ## O
 
-**Operational Compiler**
-제약 실험에서 반복적으로 확인된 failure pattern과 intervention rule을 실행 가능한 운영 규칙으로 컴파일하는 구조.
-한 번에 완결된 harness를 세우는 방식이 아니라, ROI가 검증된 component를 순차적으로 추가하는 점진적 구성이 전제다.
+**Operational Compiler** *(이 책의 비유. 관련: CLAUDE.md/AGENTS.md 패턴의 산업적 수렴)*
+제약 실험에서 반복적으로 확인된 failure pattern과 intervention rule을 실행 가능한 운영 규칙으로 컴파일하는 구조. 한 번에 완결된 harness를 세우는 방식이 아니라, ROI가 검증된 component를 순차적으로 추가하는 점진적 구성이 전제다.
+> 근거: Anthropic CLAUDE.md, OpenAI AGENTS.md, Google GEMINI.md, Cursor .cursorrules 등 독립 프로젝트들이 동일한 패턴(반복 실패 → 규칙 문서화 → agent 지침 반영)으로 수렴. everything-claude-code (~84k stars), awesome-cursorrules (~10k stars) 참조.
 
 **Operational Envelope**
 Harness가 agent에게 부여하는 행동 범위. Memory 보호, 권한 경계, 복구 경로, evaluation hook 등으로 구성된다.
@@ -122,9 +131,9 @@ Harness가 agent에게 부여하는 행동 범위. Memory 보호, 권한 경계,
 
 ## S
 
-**Self-Immune System**
-AgentOps → Harness → Agent 내재화의 경로를 통해 agent가 스스로 복구하고 학습하는 상태.
-Agent-2 전환의 핵심 조건.
+**Self-Immune System** *(이 책의 비유. 관련: self-healing, Reflexion, self-refine)*
+AgentOps → Harness → Agent 내재화의 경로를 통해 agent가 스스로 복구하고 학습하는 상태. Agent-2 전환의 핵심 조건.
+> 근거: Shinn et al., *Reflexion* (NeurIPS 2023, ~443 citations) — agent의 자기 반성 루프. Madaan et al., *Self-Refine* (NeurIPS 2023) — iterative self-improvement. "Self-healing systems"는 autonomic computing (IBM, 2001) 이후 시스템 엔지니어링에서 확립된 개념.
 
 **Snapshot Principle (스냅샷 원칙)**
 이 책은 2026년 상반기의 스냅샷이다. 과도한 학문적 해석 없이 관찰된 것을 기록한다.

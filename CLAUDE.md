@@ -3,7 +3,7 @@
 ## 이 프로젝트는 무엇인가
 "Observing What Makes Agents Work — and What Breaks Them"
 2026년 상반기 agent runtime 현실의 스냅샷이자 실험서.
-Beta 마감: 2026-05-13. 한국어 초고 → 영어 번역.
+Beta 마감: 2026-04-30. 한국어 초고 → 영어 번역.
 
 ## 글쓰기 원칙 — Voice Rules
 
@@ -112,7 +112,7 @@ Beta 마감: 2026-05-13. 한국어 초고 → 영어 번역.
 
 ## 챕터 구조
 Ch.1 지금 무슨 일이 | Ch.2 모델 상속 | Ch.3 Harness+AgentOps 정의
-Ch.4 의도적 실패 20개 | Ch.5 실험 결과 분석 | Ch.6 Operational Compiler | Ch.7 Self-immune
+Ch.4 의도적 실패 22개 | Ch.5 실험 결과 분석 | Ch.6 Operational Compiler | Ch.7 Self-immune
 
 ## 서술 장치
 - 5변수 참조: "1차 병목은 [변수명]이었다"

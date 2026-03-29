@@ -24,8 +24,8 @@ OpenAI 팀이 정의한 harness engineering 프레임워크 — Context Engineer
 
 | 마일스톤 | 목표일 |
 | --- | --- |
-| Beta manuscript (7챕터 초고) | 2026년 3월 25일 |
-| Polished release manuscript (납기) | 2026년 4월 1일 |
+| Beta manuscript (7챕터 초고) | 2026년 4월 30일 |
+| Polished release manuscript | 완성도 우선, 일정 미확정 |
 
 
 **책의 근본 자세**
@@ -291,7 +291,7 @@ Ch.2  Agent는 모델로부터 무엇을 물려받는가 (관찰, 측정)
 Ch.3  Harness engineering이란 무엇인가 + AgentOps란 무엇인가
       (정의 → Ch.4-5의 실험을 위한 프레임 설정)
   ↓
-Ch.4  의도적 실패 실험: 20개 시나리오
+Ch.4  의도적 실패 실험: 22개 시나리오
       (제약 환경에서 AgentOps와 harness engineering이 겪는 상황들)
   ↓
 Ch.5  실험 결과에서 배운 것: AgentOps와 Harness의 실무
@@ -375,7 +375,7 @@ Ch.7  Harness → Agent 내재화 → Self-Immune System
 
 ---
 
-### Chapter 4. 의도적 실패 실험: 20개 시나리오
+### Chapter 4. 의도적 실패 실험: 22개 시나리오
 
 **핵심 메시지:** 의도적으로 실패시키고, 무엇이 어떤 조건에서 깨지는지를 체계적으로 기록한다.
 
@@ -385,7 +385,7 @@ Ch.7  Harness → Agent 내재화 → Self-Immune System
 - 5변수 중 어떤 것이 1차 병목인지를 시나리오별로 식별
 - 풍선 효과 관찰: 한 요소를 바꾸면 다른 곳에서 에러가 터짐
 
-**20개 실험 시나리오** (→ 섹션 8에서 상세 기술)
+**22개 실험 시나리오** (→ 섹션 8에서 상세 기술)
 
 **필요한 deep research:**
 - `DR-4.1`: "Chaos engineering applied to AI agent systems" — chaos engineering 원리의 agent 시스템 적용 가능성.
@@ -399,10 +399,10 @@ Ch.7  Harness → Agent 내재화 → Self-Immune System
 
 ### Chapter 5. 실험 결과에서 배운 것: AgentOps와 Harness의 실무
 
-**핵심 메시지:** Ch.4의 20개 실험에서 패턴을 추출하고, AgentOps와 harness engineering의 구체적 실무로 전환한다.
+**핵심 메시지:** Ch.4의 22개 실험에서 패턴을 추출하고, AgentOps와 harness engineering의 구체적 실무로 전환한다.
 
 **핵심 구성:**
-1. 20개 실험 결과 종합: 어떤 변수가 어떤 조건에서 1차 병목이었는가
+1. 22개 실험 결과 종합: 어떤 변수가 어떤 조건에서 1차 병목이었는가
 2. 패턴 추출: 반복되는 실패 유형 분류
 3. Computation 요구사항: harness에 요구되는 능력 수준별 필요 사양
 4. Token efficiency를 운영 규율로
@@ -493,16 +493,16 @@ Ch.1에서 도입, Ch.7에서 Agent-1→2 전환에 집중.
 | Ch.1 | OpenClaw anchor, OpenAI 연구 분석, 생태계 survey | DR-1.1, DR-1.2, DR-1.3 |
 | Ch.2 | 모델 교체 실험 (Cluster A) | DR-2.1, DR-2.2, DR-2.3 |
 | Ch.3 | Cluster C, D + CLI-Anything + harness 부재 사례 | DR-3.1~3.4 |
-| Ch.4 | **20개 의도적 실패 실험** | DR-4.1~4.4 |
+| Ch.4 | **22개 의도적 실패 실험** | DR-4.1~4.4 |
 | Ch.5 | Ch.4 결과 분석 + computation 측정 | DR-5.1~5.3 |
 | Ch.6 | 반복 실패 패턴 → Operational Compiler 설계 | DR-6.1, DR-6.2 |
 | Ch.7 | 전체 종합 + self-recovery 초기 실험 | DR-7.1, DR-7.2 |
 
 ---
 
-## 8. 실험 프로그램: 20개 의도적 실패 시나리오
+## 8. 실험 프로그램: 22개 의도적 실패 시나리오
 
-> 이 20개 시나리오가 Ch.4의 핵심이며, Ch.5 분석의 입력이다.
+> 이 22개 시나리오가 Ch.4의 핵심이며, Ch.5 분석의 입력이다.
 > 각 시나리오는 5변수 중 어떤 것을 조작하는지 명시한다.
 
 ### 관찰 축별 실험 배치
@@ -628,7 +628,7 @@ Experimenter C: E17~E22 실행 → Experimenter B가 E19, E20 교차검증
 - GitHub repo 생성, 폴더 구조 배포
 - 실험 로깅 템플릿 생성 + OpenRouter 환경 셋업
 - 팀원 3명 역할 확정, 교차검증 배정
-- 20개 실험 시나리오 최종 확정
+- 22개 실험 시나리오 최종 확정
 - Deep research DR-1.1~1.3 실행
 
 **산출물:** 프로젝트 브리프, 챕터 맵, 실험 시트, repo 초기 커밋
@@ -684,7 +684,7 @@ Experimenter C: E17~E22 실행 → Experimenter B가 E19, E20 교차검증
 
 **해야 하는 일:**
 - Deep research DR-5.1~5.3 실행
-- 20개 실험 결과 종합 분석
+- 22개 실험 결과 종합 분석
 - 패턴 추출: 반복 실패 유형 분류
 - Computation 요구사항 정리
 - 1차 병목 변수 분석표 작성
@@ -770,7 +770,7 @@ Experimenter C: E17~E22 실행 → Experimenter B가 E19, E20 교차검증
 ### Beta 성공 기준
 
 - 안정적인 7챕터 구조
-- 20개 실험 중 최소 15개 완료 및 문서화
+- 22개 실험 중 최소 15개 완료 및 문서화
 - 교차검증 최소 6건 완료
 - 5변수 프레임워크가 전 챕터에 일관 적용
 - 반례 2건 이상 포함
@@ -785,7 +785,7 @@ Experimenter C: E17~E22 실행 → Experimenter B가 E19, E20 교차검증
 | 이원론에 빠짐 (모델 vs. harness) | 5변수 프레임워크를 전 챕터에 적용, 반례 포함 |
 | 결론을 미리 정하고 증거 끼워맞춤 | 관찰 원칙: 결과가 예상과 다르면 결과를 기록 |
 | 실험 재현 불가 | 교차검증 설계, 실험 로그 상세 기록 |
-| Ch.4-5가 데이터 부족 | 20개 시나리오 + 교차검증으로 충분한 양 확보 |
+| Ch.4-5가 데이터 부족 | 22개 시나리오 + 교차검증으로 충분한 양 확보 |
 | 학문적 해석에 빠짐 | 스냅샷 원칙: 기록하되 과도하게 해석하지 않음 |
 | 팀 동기화 실패 | 교차검증이 자연스러운 sync 포인트 역할 |
 | Operational Compiler를 한 번에 완성하려 함 | 점진적 업데이트 원칙 명시 |
@@ -807,7 +807,7 @@ Experimenter C: E17~E22 실행 → Experimenter B가 E19, E20 교차검증
 ### 오늘
 - 핵심 탐구 질문 확정
 - 7챕터 구조 확인
-- 20개 실험 시나리오 최종 검토
+- 22개 실험 시나리오 최종 검토
 - GitHub repo 생성
 
 ### 이번 주
@@ -830,7 +830,7 @@ Experimenter C: E17~E22 실행 → Experimenter B가 E19, E20 교차검증
 "모델이 중요한가, harness가 중요한가"라는 이원론을 넘어서,
 **"어떤 조건에서 무엇이 1차 병목이 되는가"**를 5개 변수의 상호작용 속에서 관찰하고 측정한다.
 
-20개의 의도적 실패 실험을 통해 agent 시스템이 어디서 깨지는지를 기록하고,
+22개의 의도적 실패 실험을 통해 agent 시스템이 어디서 깨지는지를 기록하고,
 그 기록에서 harness engineering과 AgentOps의 윤곽을 그린다.
 
 그리고 그 교훈을 Operational Compiler로 점진적으로 컴파일하여,

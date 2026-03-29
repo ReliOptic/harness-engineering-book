@@ -20,13 +20,13 @@
 **탐구 질문**:
 - 2026년 상반기 agent runtime 현장은 어떤 상태인가?
 - OpenClaw는 무엇을 가능하게 했고 무엇이 아직 모자란가?
-- TeamClaws/PicoClaw 실패는 무엇을 보여주는가?
+- 초기 agent runtime의 반복 실패가 무엇을 보여주는가?
 
 **핵심 구성**:
 1. 2026년 상반기: agent 운영의 현재 풍경
 2. OpenClaw — 무엇이 특별하고 무엇이 아직 모자란가
 3. 생태계 스냅샷: OpenClaw 주변 프로젝트들
-4. TeamClaws/PicoClaw — 이 책을 쓰게 된 이유
+4. 초기 agent runtime 실패 사례 — 이 책을 쓰게 된 이유
 5. 왜 지금이 중요한가 — harness engineering 초기에 알 수 있는 것
 6. 5변수 프레임워크 소개
 7. Agent-1 ~ Agent-5 방향 설정
@@ -85,23 +85,6 @@
 ## Ch.3 — Harness Engineering과 AgentOps: 정의와 프레임워크
 
 **파일**: `chapters/ch03-harness-and-agentops-defined.md`
-**핵심 메시지**: Ch.4-5의 실험을 위해, harness engineering과 AgentOps를 먼저 정의하고 실험 프레임을 설정한다.
-
-**탐구 질문**:
-- Harness engineering은 guardrails, scaffolding과 어떻게 다른가?
-- AgentOps는 MLOps, DevOps와 어떻게 다른가?
-- 무엇을 의도적으로 실패시킬 것인가?
-
-**핵심 구성**:
-1. Harness engineering이란 무엇인가 — operational envelope 정의
-2. 보호와 enablement의 이중 구조
-3. Harness를 guardrails, scaffolding, orchestration과 구분
-4. AgentOps란 무엇인가 — profession으로서의 정의
-5. 5변수 프레임워크에서 harness와 AgentOps의 위치
-6. Harness 부재의 비용: TeamClaws/PicoClaw 사후 분석 (반례 2)
-7. CLI-Anything HARNESS.md — 독립적 수렴 사례
-8. Ch.4-5에서 실험할 것에 대한 프레임 설정
-
 **핵심 메시지**: Harness는 failure를 제거하지 않는다. Failure의 성격을 바꾼다 — Failure Budget Reallocation. HOR(Harness Overhead Ratio)과 MTTR이 AgentOps의 1차 운영 지표다. 이 챕터 말미에서 Ch.4 실험의 가설과 판단 기준을 pre-registration 방식으로 announce한다.
 
 **탐구 질문**:
@@ -117,7 +100,7 @@
 4. Failure Budget Reallocation — harness의 효과를 프레이밍하는 방법
 5. HOR (Harness Overhead Ratio) — harness의 비용을 측정하는 방법
 6. AgentOps란 무엇인가 — profession으로서의 정의
-7. Harness 부재의 비용: TeamClaws/PicoClaw 사후 분석
+7. Harness 부재의 비용 — 반례 사례 분석
 8. Ch.4 실험 프레임 설정 — 가설과 판단 기준의 pre-registration
 
 **학습 결과**:

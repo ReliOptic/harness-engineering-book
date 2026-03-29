@@ -35,11 +35,11 @@
 - [ ] E04 harness-on/off baseline
 - [ ] E05~E08 harness component ablation
 - [ ] E09~E12 constraint/compute bottleneck 실험
-- [ ] E13~E15 operator intervention 실험
-- [ ] E16~E18 harness internalization 실험
-- [ ] E19~E20 counterexamples
-- [ ] E21 task ambiguity 반례
-- [ ] E22 compute saturation 반례
+- [ ] E09~E14 constraint/compute bottleneck 실험
+- [ ] E15~E17 operator intervention 실험
+- [ ] E18~E20 harness internalization 실험
+- [ ] E21 task ambiguity 반례 (counterexample)
+- [ ] E22 compute saturation 반례 (counterexample)
 
 ## Analysis & Figures
 - [ ] ARCC 구성 검증 (holdout R² ≥ 0.65 확인)
@@ -50,6 +50,7 @@
 
 ## Chapter Drafts
 - [x] Preface 정리 (핵심 framing과 외부 사례 연결)
+- [ ] Ch.1 PicoClaw 참조 익명화 재작성
 - [x] Ch.1 생태계 스냅샷 + OpenAI 연구 좌표 정합
 - [x] Ch.2 `[X]` 플레이스홀더 제거 및 수치 반영
 - [x] Ch.3 harness/AgentOps 정의 완성
