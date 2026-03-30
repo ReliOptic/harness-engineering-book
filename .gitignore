@@ -1,6 +1,9 @@
 # Windows Zone Identifier metadata files (WSL artifact)
 *.Zone.Identifier
 
+# macOS Finder metadata
+.DS_Store
+
 # API keys / secrets
 experiments/API.txt
 secret_keys/
