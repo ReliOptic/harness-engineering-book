@@ -130,7 +130,7 @@ Ch.4 의도적 실패 22개 | Ch.5 실험 결과 분석 | Ch.6 Operational Compi
 **3-layer 구조** (7-agent 상시 가동 대신):
 
 - **Layer 1 — Drafter**: 단일 drafting agent. 챕터 전환 시 chapter-map 해당 섹션 + glossary + 이전 챕터 요약을 context로 주입. Voice consistency 구조적 보장.
-- **Layer 2 — Editor**: voice-check, 용어 일관성 체크리스트(ARCC·HOR·Failure Budget Reallocation 등 핵심 용어 조작적 정의 포함), PASS/REVISE/REJECT 판정.
+- **Layer 2 — Editor**: voice-check, 용어 일관성 체크리스트(HOR·Failure Budget Reallocation 등 핵심 용어 조작적 정의 포함), PASS/REVISE/REJECT 판정.
 - **Layer 3 — Specialist (on-demand)**: Vera(정량 측정/Figure 해석), Felix(실험 설계 검토) — 상시 가동 아님. 특정 섹션 작성 시 consultation call로만 호출.
 
 **저자**: Kiwon — Ch.1/3/6/7 담당. 방향 결정, 반례 의식, 최종 판단.
