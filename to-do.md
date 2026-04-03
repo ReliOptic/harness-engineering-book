@@ -52,7 +52,8 @@
 - [x] Ch.2 압축 렌즈 스켈레톤 작성
 - [x] Ch.3 정렬에서 자율로 스켈레톤 작성
 - [x] Ch.4 도구, 추론, 기억 스켈레톤 작성
-- [ ] Ch.1~4 본문 집필 (beta 이후)
+- [x] Ch.1 본문 집필 (dialogue 재료 기반 full draft, 2026-04-04)
+- [ ] Ch.2~4 본문 집필
 
 ## Chapter Drafts (v6 Ch.5~11)
 - [x] Preface 정리 (핵심 framing과 외부 사례 연결)
