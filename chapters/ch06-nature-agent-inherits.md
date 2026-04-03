@@ -1,4 +1,4 @@
-# Ch.2 — Agent가 모델로부터 무엇을 물려받는가
+# Ch.6 — Agent가 모델로부터 무엇을 물려받는가
 
 > 상태: 🔴 초고 v0.1 (2026-03-20) — §1~§7 초고 완성, [X] 플레이스홀더는 실험 데이터 보완 필요
 > 담당: TBD (Experimenter A primary)
@@ -14,7 +14,7 @@ Agent는 모델 선택에서 비롯된 capability 편향을 상속하며, 이 �
 
 이 챕터의 서사를 vendor 이름이나 모델 계열 중심으로 전개하지 않고 feature 중심으로 전개하는 이유는 방법론적 필수조건 때문이다. 실험서의 설명 단위는 "개입 가능한 변수"여야 한다. 모델 벤더는 관찰 가능한 라벨이지만, 엔지니어가 직접 조작할 수 있는 것은 TCA/IFR/MSRD/CUE 같은 feature와 그 feature를 바꾸는 runtime 구성이다. 설명 단위를 라벨에 두면 처방은 "모델 교체"로 수렴하고, 설명 단위를 feature에 두면 처방은 "어떤 실패를 어떤 메커니즘으로 줄일 것인가"로 분해된다.
 
-둘째, feature 중심 서사는 task 간 해석 안정성이 높다. 동일 모델도 T1과 T2에서 성과 순서가 달라질 수 있지만, 실패 양상(예: tool-call failure, silent logical drift)과 instruction 준수 패턴은 feature 축에서 비교 가능하다. 즉 모델 순위는 변해도 실패 메커니즘의 분류 체계는 유지된다. 이 안정성이 있어야 Ch.2의 결과를 Ch.4/Ch.5 운영 해석으로 연결할 수 있다.
+둘째, feature 중심 서사는 task 간 해석 안정성이 높다. 동일 모델도 T1과 T2에서 성과 순서가 달라질 수 있지만, 실패 양상(예: tool-call failure, silent logical drift)과 instruction 준수 패턴은 feature 축에서 비교 가능하다. 즉 모델 순위는 변해도 실패 메커니즘의 분류 체계는 유지된다. 이 안정성이 있어야 Ch.6의 결과를 Ch.8/Ch.9 운영 해석으로 연결할 수 있다.
 
 셋째, feature 중심 서사만이 반증 가능하다. "어느 벤더가 더 낫다"는 진술은 조건이 바뀌면 쉽게 붕괴하지만, "ARCC가 task별 cliff 이하이면 TCR이 급락한다"는 진술은 실험 설계와 통계 검정으로 반증 가능하다. 따라서 이 챕터는 vendor 우열 서사가 아니라 feature-메커니즘-결과의 인과 사슬을 기준으로 작성한다. 2026-03-20/21 파일럿 모델 매트릭스 결과는 이 방향을 탐색적으로 지지하지만(표본이 작아 보정 후 유의성 미달), 본문의 확정적 결론은 scale-up 실험 결과에만 의존한다.
 
@@ -98,9 +98,9 @@ Agent는 모델 선택에서 비롯된 capability 편향을 상속하며, 이 �
 
 7. **모델 변수가 1차 병목이 되는 조건**
    - ARCC가 cliff 이하인 경우에만 모델이 1차 병목이다
-   - ARCC가 cliff 이상일 때 1차 병목은 harness 또는 compute로 이동한다 (Ch.3/Ch.4 예고)
+   - ARCC가 cliff 이상일 때 1차 병목은 harness 또는 compute로 이동한다 (Ch.7/Ch.8 예고)
    - 이 조건 분류 없이 "모델 교체"를 처방하면 잘못된 개입이 될 수 있다
-   - E10: self-monitoring을 위한 model capability floor — Agent-2 전환의 하한 조건 (Ch.7 예고)
+   - E10: self-monitoring을 위한 model capability floor — Agent-2 전환의 하한 조건 (Ch.11 예고)
 
 ---
 
@@ -129,7 +129,7 @@ Agent는 모델 선택에서 비롯된 capability 편향을 상속하며, 이 �
 
 > 상태: 🔴 초고 v0.1 (2026-03-18)
 
-Ch.1에서 관찰한 것 — 동일한 모델, 다른 실행 조건, 다른 결과 — 은 모델 변수를 1차 병목에서 배제하는 근거였다. 그러나 모델 변수를 배제한다는 것이 모델 선택이 중요하지 않다는 뜻은 아니다. 모델이 agent runtime에 도입하는 편향은 실재하며, 그 편향이 어떤 task 유형에서 어떤 방식으로 증폭되는가가 이 챕터의 분석 대상이다.
+Ch.5에서 관찰한 것 — 동일한 모델, 다른 실행 조건, 다른 결과 — 은 모델 변수를 1차 병목에서 배제하는 근거였다. 그러나 모델 변수를 배제한다는 것이 모델 선택이 중요하지 않다는 뜻은 아니다. 모델이 agent runtime에 도입하는 편향은 실재하며, 그 편향이 어떤 task 유형에서 어떤 방식으로 증폭되는가가 이 챕터의 분석 대상이다.
 
 모델은 확률적 텍스트 생성기이며, 그 확률 분포는 학습 데이터와 학습 방법에 의해 형성된다. 단일 LLM 호출에서 이 확률 분포의 차이는 출력 품질의 차이로 나타난다. 그러나 agent가 수행하는 것은 단일 호출이 아니다 — 각 step의 출력이 다음 step의 입력이 되는 multi-step chain에서, 초기 단계의 확률 분포 차이는 downstream step에서 증폭된다. 수학적으로 표현하면: 각 단계에서 오류가 발생할 확률이 p이고 n단계 chain이 있다면, 오류 없이 완료할 확률은 (1-p)^n이다. p=0.05이면 10단계 chain의 성공률은 약 60%이고, 40단계에서는 약 13%다. 이 비선형 감소가 Capability Cliff의 수학적 기반이다.
 
@@ -141,7 +141,7 @@ Reasoning의 문제는 multi-step constraint tracking에서 시작된다. 어떤
 
 Calibration이 이 cascade를 recovery 시스템이 감지하기 어렵게 만든다. Calibration이란 모델이 자신의 출력에 부여하는 확신도와 실제 출력 정확도의 일치 정도를 말한다. Calibration이 낮은 모델은 틀린 출력을 확신과 함께 생성하기 때문에, agent의 recovery 메커니즘이 이 출력을 재시도 대상으로 식별하기 어렵다. Tool call이 schema를 통과하고 출력이 형식적으로 완결된 상태에서 방향이 틀린 경우가 여기에 해당한다.
 
-이 네 가지 편향이 task 유형에 따라 다르게 증폭되는 구조를 측정하는 것이 ARCC이며, 그 측정에서 드러나는 비선형 패턴이 Capability Cliff다. Ch.1에서 관찰 수준으로 언급된 이 패턴을 Ch.2에서 측정 가능한 형태로 정의하고, Ch.4에서 실험적으로 검증한다.
+이 네 가지 편향이 task 유형에 따라 다르게 증폭되는 구조를 측정하는 것이 ARCC이며, 그 측정에서 드러나는 비선형 패턴이 Capability Cliff다. Ch.5에서 관찰 수준으로 언급된 이 패턴을 Ch.6에서 측정 가능한 형태로 정의하고, Ch.8에서 실험적으로 검증한다.
 
 ---
 
@@ -223,11 +223,11 @@ Switching의 충격은 model family 간 거리에 비례할 가능성이 높다.
 
 모델 변수가 1차 병목인 조건은 하나다: 현재 배포된 모델의 ARCC가 실행할 task의 Agent-Viable Minimum 이하에 있을 때. 이 조건에서는 harness를 정교하게 설계하거나 compute를 추가해도 TCR이 구조적으로 제한된다. §3의 sigmoid fit에서 cliff 이하 구간의 기울기가 가파르다는 것은, 이 구간에서의 성능 개선이 모델 ARCC를 올리지 않고는 어렵다는 것을 의미한다. 이 조건이 진단된다면 모델 업그레이드 또는 quantization 수준 재검토가 1순위 개입이다.
 
-ARCC가 Agent-Viable Minimum 이상에 있을 때 1차 병목은 모델 변수가 아니다. §1의 편향들 — reasoning, tool use, consistency, calibration — 이 실재하더라도, 그 편향이 만드는 실패를 harness가 관리 가능한 형태로 전환할 수 있다면 모델 교체보다 harness 변수 조작이 효율적이다. Ch.3에서 정의하는 Failure Budget Reallocation이 이 조작의 효과를 측정하는 방법이고, Ch.4 E05~E08에서 harness 변수를 격리하여 실험적으로 검증한다.
+ARCC가 Agent-Viable Minimum 이상에 있을 때 1차 병목은 모델 변수가 아니다. §1의 편향들 — reasoning, tool use, consistency, calibration — 이 실재하더라도, 그 편향이 만드는 실패를 harness가 관리 가능한 형태로 전환할 수 있다면 모델 교체보다 harness 변수 조작이 효율적이다. Ch.7에서 정의하는 Failure Budget Reallocation이 이 조작의 효과를 측정하는 방법이고, Ch.8 E05~E08에서 harness 변수를 격리하여 실험적으로 검증한다.
 
 이 조건 분류 없이 "성능이 나쁘다 → 모델을 교체한다"는 처방 경로는 구조적으로 취약하다. ARCC가 Agent-Viable Minimum 이상인 상태에서 더 비싼 모델로 교체하면 compute 비용이 증가하지만 TCR 개선이 기대에 미치지 못한다 — 병목이 모델 변수가 아니었기 때문이다. 반대로 ARCC가 Agent-Viable Minimum 이하인 상태에서 harness를 강화하면 HOR만 올라가고 fundamental failure rate는 변하지 않는다. 5변수 프레임워크에서 모델 변수의 역할은 이 분류 기준을 제공하는 것이다.
 
-E10은 이 분류의 하한을 측정한다. Agent가 자신의 ARCC sub-components를 self-estimate하는 self-monitoring 능력은 그 자체로 ARCC를 요구한다. E10은 self-monitoring이 신뢰 가능하게 작동하기 시작하는 최소 ARCC threshold를 탐색한다. 이 threshold가 중요한 것은 Ch.7에서 서술하는 Agent-2 전환과 직결되기 때문이다 — self-immune system의 하한 조건은 "self-monitoring이 신뢰 가능한 ARCC 이상"이라는 가설이다. E10의 측정값 `[X]`이 채워지기 전까지는 하한의 존재만 잠정적으로 제시한다.
+E10은 이 분류의 하한을 측정한다. Agent가 자신의 ARCC sub-components를 self-estimate하는 self-monitoring 능력은 그 자체로 ARCC를 요구한다. E10은 self-monitoring이 신뢰 가능하게 작동하기 시작하는 최소 ARCC threshold를 탐색한다. 이 threshold가 중요한 것은 Ch.11에서 서술하는 Agent-2 전환과 직결되기 때문이다 — self-immune system의 하한 조건은 "self-monitoring이 신뢰 가능한 ARCC 이상"이라는 가설이다. E10의 측정값 `[X]`이 채워지기 전까지는 하한의 존재만 잠정적으로 제시한다.
 
 ---
 ## §8 정량적 스냅샷과 추가 관찰 (2026-03 업데이트)

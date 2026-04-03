@@ -1,4 +1,4 @@
-# Ch.6 — 관찰에서 도구로: Operational Compiler
+# Ch.10 — 관찰에서 도구로: Operational Compiler
 
 > 상태: 🔴 초고 v0.1 (2026-03-18)
 > 담당: Kiwon
@@ -8,11 +8,11 @@
 
 ## 핵심 메시지
 
-Operational Compiler는 HOR × RSuccR trade-off의 pareto frontier를 따라 점진적으로 구성된다. Ch.5의 component ablation에서 marginal ROI가 가장 높은 component부터 운영 규칙으로 컴파일하고, 각 단계에서 HOR 증가가 MTTR 감소를 정당화하는지 확인한다. "한 번에 전체 harness를 구축한다"는 접근은 HOR을 최적점 이상으로 높여 harness 자체를 1차 병목으로 만든다. 우선순위의 근거는 설계 직관이 아니라, 반복 관찰된 failure pattern과 ΔMTTR / ΔHOR 측정값이다.
+Operational Compiler는 HOR × RSuccR trade-off의 pareto frontier를 따라 점진적으로 구성된다. Ch.9의 component ablation에서 marginal ROI가 가장 높은 component부터 운영 규칙으로 컴파일하고, 각 단계에서 HOR 증가가 MTTR 감소를 정당화하는지 확인한다. "한 번에 전체 harness를 구축한다"는 접근은 HOR을 최적점 이상으로 높여 harness 자체를 1차 병목으로 만든다. 우선순위의 근거는 설계 직관이 아니라, 반복 관찰된 failure pattern과 ΔMTTR / ΔHOR 측정값이다.
 
 ## 학습 결과
 
-- Ch.5의 ablation 결과에서 Operational Compiler 구성 우선순위를 결정하는 방법을 이해한다.
+- Ch.9의 ablation 결과에서 Operational Compiler 구성 우선순위를 결정하는 방법을 이해한다.
 - HOR × MTTR trade-off를 관리하는 점진적 Operational Compiler 업데이트 전략을 설계할 수 있다.
 - 각 Operational Compiler component가 어떤 failure 유형을 어떻게 처리하는지 설명할 수 있다.
 - 도구화 대상이 아닌 것(task 모호성, compute saturation)을 도구화 대상과 구분할 수 있다.
@@ -25,7 +25,7 @@ Operational Compiler는 HOR × RSuccR trade-off의 pareto frontier를 따라 점
 - 관련 Figure: Fig 8 (Cost-Reliability Frontier), Fig 10 (Harness Ablation)
 
 **Operational Compiler 구성 원칙 (조작적):**
-- 원칙: Ch.5 ablation에서 marginal ROI = ΔMTTR / ΔHOR 순서로 component 도입.
+- 원칙: Ch.9 ablation에서 marginal ROI = ΔMTTR / ΔHOR 순서로 component 도입.
 - 각 component 추가 시 CostIndex 변화를 측정한다. CostIndex가 증가하면 그 component는 현재 조건에서 이익이 없다.
 - Operational Compiler는 harness component의 부분집합이다 — 전체 harness가 아니라 현재 실험 조건에서 ROI가 양수인 subset.
 
@@ -44,7 +44,7 @@ Operational Compiler는 HOR × RSuccR trade-off의 pareto frontier를 따라 점
 
 **계획된 섹션:**
 
-1. **Ch.4-5에서 추출한 반복 실패 패턴 → 도구화 후보 식별**
+1. **Ch.8-9에서 추출한 반복 실패 패턴 → 도구화 후보 식별**
 2. **Operational Compiler 설계 원칙**
 3. **점진적 업데이트 원칙: pareto frontier를 따라 이동하는 전략**
 4. **Skill로 쓸 수 있는 능력의 극대화**
@@ -54,8 +54,8 @@ Operational Compiler는 HOR × RSuccR trade-off의 pareto frontier를 따라 점
 
 **핵심 Figure:**
 
-- **Fig 8** (Ch.4/5 기반, Ch.6에서 활용) — Cost-Reliability Frontier: HOR × RSuccR trade-off 곡선. Optimal HOR 위치. Operational Compiler 구성의 나침반.
-- **Fig 10** (Ch.4/5 기반, Ch.6에서 활용) — Harness Ablation: component별 marginal ROI. Operational Compiler 구성 우선순위의 근거.
+- **Fig 8** (Ch.8/9 기반, Ch.10에서 활용) — Cost-Reliability Frontier: HOR × RSuccR trade-off 곡선. Optimal HOR 위치. Operational Compiler 구성의 나침반.
+- **Fig 10** (Ch.8/9 기반, Ch.10에서 활용) — Harness Ablation: component별 marginal ROI. Operational Compiler 구성 우선순위의 근거.
 
 <!-- 섹션별 초고는 /draft ch06 N 으로 작성 -->
 
@@ -73,17 +73,17 @@ Operational Compiler는 HOR × RSuccR trade-off의 pareto frontier를 따라 점
 
 ---
 
-## §1 Ch.4-5에서 추출한 반복 실패 패턴 → 도구화 후보 식별
+## §1 Ch.8-9에서 추출한 반복 실패 패턴 → 도구화 후보 식별
 
 > 상태: 🔴 초고 v0.1 (2026-03-18)
 
-Ch.4와 Ch.5는 실험 조건에서 무엇이 실패하는가를 보여준다. Ch.6의 질문은 그 다음 단계에 있다 — 반복 관찰된 실패 패턴 중 어떤 것이 운영 규칙으로 컴파일될 가치가 있는가. 모든 실패가 컴파일의 대상이 되는 것은 아니다. 판단 기준은 세 가지다: 반복 빈도, 컴파일 이후의 marginal ROI(ΔMTTR / ΔHOR), 그리고 규칙 기반 처리로 환원 가능한 패턴인지 여부.
+Ch.8와 Ch.9는 실험 조건에서 무엇이 실패하는가를 보여준다. Ch.10의 질문은 그 다음 단계에 있다 — 반복 관찰된 실패 패턴 중 어떤 것이 운영 규칙으로 컴파일될 가치가 있는가. 모든 실패가 컴파일의 대상이 되는 것은 아니다. 판단 기준은 세 가지다: 반복 빈도, 컴파일 이후의 marginal ROI(ΔMTTR / ΔHOR), 그리고 규칙 기반 처리로 환원 가능한 패턴인지 여부.
 
 Failure taxonomy 6축 중 도구화 후보로 먼저 부상하는 것은 tool call failure와 output format error다. 이 두 유형은 반복 빈도가 높고, 구조적으로 감지 가능하며, 규칙 기반 처리가 가능하다. Tool call이 schema를 위반하면 즉시 감지되고 retry 로직이 작동할 수 있다. Output format이 예상 스키마에서 벗어나면 format correction hook이 개입할 수 있다. 두 경우 모두 명시적 구조를 검증하는 것이기 때문에 하드코딩된 규칙으로 표현 가능하다.
 
 Context overflow는 다른 성격의 도구화 후보다. 발생 자체는 예측 가능하다 — token 소비가 budget threshold에 근접하는 것은 점진적으로 모니터링할 수 있다. 그러나 대응의 적절성은 task 상태에 따라 달라진다. 현재 step이 중요한 맥락에 있다면 context compression보다 operator escalation이 더 적절할 수 있다. 이것은 규칙으로 처리할 수 없는 판단 요소를 포함한다 — 도구화가 가능하지만 도구의 설계가 복잡하다.
 
-Silent logical drift는 현 세대 컴파일 범위 밖에 있다. Ch.7에서 서술하는 것처럼, 이것은 harness가 접근할 수 없는 semantic 레이어의 문제다. Tool call이 schema를 통과하고 출력이 형식을 만족하면서도 방향이 틀린 경우 — 규칙 기반 검증이 통과를 신호로 내보낸 상황에서 drift를 감지하는 것은 agent 자신의 ARCC self-monitoring에 의존한다. Self-immune system(Ch.7)의 영역이지 Operational Compiler component의 영역이 아니다.
+Silent logical drift는 현 세대 컴파일 범위 밖에 있다. Ch.11에서 서술하는 것처럼, 이것은 harness가 접근할 수 없는 semantic 레이어의 문제다. Tool call이 schema를 통과하고 출력이 형식을 만족하면서도 방향이 틀린 경우 — 규칙 기반 검증이 통과를 신호로 내보낸 상황에서 drift를 감지하는 것은 agent 자신의 ARCC self-monitoring에 의존한다. Self-immune system(Ch.11)의 영역이지 Operational Compiler component의 영역이 아니다.
 
 도구화하면 안 되는 두 가지 유형은 명확히 구분한다. E21이 보여준 task 모호성 — instruction 자체의 암묵적 constraint 부재 — 은 harness component로 해결할 수 없다. IFR이 낮은 이유가 constraint가 명시되지 않아서라면, recovery hook을 추가해도 IFR이 개선되지 않는다. 이 경우 처방은 도구화가 아니라 task 재설계다. E22가 보여준 compute saturation — HOR이 이미 token budget 임계점에 근접한 조건 — 에서는 새 component 추가가 TCR을 오히려 낮춘다. 도구를 더하는 것이 아니라 줄이는 것이 처방이다.
 
@@ -109,13 +109,13 @@ Operational Compiler component를 추가하는 결정은 네 가지 원칙이 �
 
 HOR-RSuccR 공간의 pareto frontier는 동일한 HOR에서 가장 높은 RSuccR을 달성하는 configuration들의 집합이다. Fig 8(Cost-Reliability Frontier)에서 이 frontier는 HOR이 낮은 쪽에서 시작해 optimal HOR을 지나 HOR이 과도해지는 영역으로 이어지는 곡선 형태를 취한다. Frontier 위에 있는 configuration은 현재 조건에서 더 이상 개선할 수 없는 최적 상태다. Frontier 아래에 있는 configuration은 동일한 HOR로 더 높은 RSuccR을 달성할 수 있는 여지가 있다.
 
-Operational Compiler 업데이트의 전략적 목표는 이 frontier를 따라 이동하는 것이다 — frontier 아래에서 frontier 위로, 그리고 frontier 위에서 더 나은 (더 낮은 HOR, 더 낮은 MTTR) 방향으로. Ch.5 ablation이 제안하는 component 추가 순서는 이 이동의 첫 번째 경로다. Marginal ROI가 가장 높은 component부터 추가하면 frontier를 따라 이동하는 것과 동일한 효과가 있다.
+Operational Compiler 업데이트의 전략적 목표는 이 frontier를 따라 이동하는 것이다 — frontier 아래에서 frontier 위로, 그리고 frontier 위에서 더 나은 (더 낮은 HOR, 더 낮은 MTTR) 방향으로. Ch.9 ablation이 제안하는 component 추가 순서는 이 이동의 첫 번째 경로다. Marginal ROI가 가장 높은 component부터 추가하면 frontier를 따라 이동하는 것과 동일한 효과가 있다.
 
 E22에서 관찰한 바에 따르면, HOR이 token budget의 임계점에 근접한 상태에서 component를 추가하면 TCR이 감소했다. 전체 component를 동시에 활성화하면 HOR이 한번에 크게 상승하고, 그 HOR이 optimal point를 넘어서는지 여부를 중간 과정 없이 알 수 없다. E22가 보여주는 것처럼 HOR이 optimal을 넘으면 TCR이 감소하기 시작한다 — harness가 agent의 실행 공간을 잠식하는 시점. 이 시점에서 어떤 component가 문제인지를 역추적하는 것은 component를 하나씩 추가하면서 측정했을 때보다 훨씬 어렵다.
 
 E20(mini self-immune)이 이 원칙의 극단적 사례다. Self-monitoring 자체가 token을 소비한다. Agent가 자신의 ARCC를 estimate하고, cliff-proximity를 계산하며, recovery 필요 여부를 판단하는 과정에 HOR이 추가된다. 이 overhead가 self-immune이 제공하는 MTTR 감소를 정당화하는지 여부는 ARCC 수준과 task 복잡도에 따라 달라진다. ARCC가 충분히 높고 task가 충분히 복잡할 때는 self-immune의 HOR 추가가 MTTR 개선을 통해 회수된다. ARCC가 낮거나 task가 단순하면 self-immune은 비용이 이익을 초과하는 component다.
 
-Bayesian optimization은 이 frontier 탐색을 가속하는 방법이다. Fig 8의 Cost-Reliability Frontier는 E18의 Bayesian optimization 결과가 제안하는 component 추가 경로를 포함한다. 각 iteration에서 현재까지의 측정값을 기반으로 다음에 시도할 HOR 지점을 선택하고, 그 지점에서 RSuccR을 측정한다. Bayesian optimization이 제안하는 경로가 수동 시도보다 frontier를 더 효율적으로 탐색하는가 — 이것이 E18의 confirmatory 가설이다. 수치는 Ch.5 결과에서 보완된다 (`[X]` 플레이스홀더).
+Bayesian optimization은 이 frontier 탐색을 가속하는 방법이다. Fig 8의 Cost-Reliability Frontier는 E18의 Bayesian optimization 결과가 제안하는 component 추가 경로를 포함한다. 각 iteration에서 현재까지의 측정값을 기반으로 다음에 시도할 HOR 지점을 선택하고, 그 지점에서 RSuccR을 측정한다. Bayesian optimization이 제안하는 경로가 수동 시도보다 frontier를 더 효율적으로 탐색하는가 — 이것이 E18의 confirmatory 가설이다. 수치는 Ch.9 결과에서 보완된다 (`[X]` 플레이스홀더).
 
 ---
 
@@ -127,7 +127,7 @@ Skill과 Operational Compiler component는 다른 레이어에서 작동한다. 
 
 반복 가능한 개입 패턴이 skill화의 대상이 되는 기준은 두 가지다. 동일한 input 조건에서 동일한 output을 반복적으로 생산할 수 있고, 충분한 반복 관찰을 거쳐 도구화의 효과가 확인된 작업이 skill화의 대상이다. 두 조건 중 하나라도 충족되지 않으면, 해당 작업은 skill이 아니라 operator의 맥락 판단을 요구하는 실행이다.
 
-Token budget 관리가 skill 실행의 사전 조건인 이유는 HOR과의 관계에서 나온다. Skill 실행에는 token이 필요하다. Operational Compiler component의 HOR이 높으면 skill 실행에 사용 가능한 token 공간이 줄어든다. Optimal HOR이 존재한다는 가설 — Ch.5 §4에서 Fig 8을 통해 검증하는 — 은 이 관점에서 다시 표현할 수 있다: skill 실행 공간을 최대화하면서 harness의 보호 기능을 유지하는 HOR 지점이 있다. Operational Compiler는 그 지점을 찾고 유지하는 구조다.
+Token budget 관리가 skill 실행의 사전 조건인 이유는 HOR과의 관계에서 나온다. Skill 실행에는 token이 필요하다. Operational Compiler component의 HOR이 높으면 skill 실행에 사용 가능한 token 공간이 줄어든다. Optimal HOR이 존재한다는 가설 — Ch.9 §4에서 Fig 8을 통해 검증하는 — 은 이 관점에서 다시 표현할 수 있다: skill 실행 공간을 최대화하면서 harness의 보호 기능을 유지하는 HOR 지점이 있다. Operational Compiler는 그 지점을 찾고 유지하는 구조다.
 
 어떤 종류의 반복 작업이 skill화 가능하고, 어떤 것은 harness component로 처리해야 하는가. Rule of thumb은 이렇다: 판단이 필요한 것은 harness component로, 판단이 없는 것은 skill로. Token 사용량 모니터링은 판단이 필요 없다 — 숫자를 추적하고 threshold를 확인하는 것은 명확한 규칙으로 표현 가능하다. 이것은 harness component다. Synthesis task에서 output 품질을 평가하는 것은 판단이 필요하다 — 어떤 기준으로 평가하는가, 어떤 weight를 부여하는가가 context에 따라 달라진다. 이것은 operator 또는 agent의 ARCC에 의존하는 영역이다.
 

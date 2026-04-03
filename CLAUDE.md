@@ -110,9 +110,11 @@ Beta 마감: 2026-04-30. 한국어 초고 → 영어 번역.
 - Operational Compiler: 반복 실패와 intervention rule을 운영 규칙으로 컴파일하는 구조. Dog food 결과물.
 - Self-immune system: AgentOps → Harness → Agent 내재화. Agent-2 전환 조건.
 
-## 챕터 구조
-Ch.1 지금 무슨 일이 | Ch.2 모델 상속 | Ch.3 Harness+AgentOps 정의
-Ch.4 의도적 실패 22개 | Ch.5 실험 결과 분석 | Ch.6 Operational Compiler | Ch.7 Self-immune
+## 챕터 구조 (v6)
+Part I: Ch.1 Attention+Context | Ch.2 압축 렌즈 | Ch.3 정렬→자율 | Ch.4 도구·추론·기억
+Part II: Ch.5 지금 무슨 일이 | Ch.6 모델 상속 | Ch.7 Harness+AgentOps 정의
+Part III: Ch.8 의도적 실패 22개 | Ch.9 실험 결과 분석
+Part IV: Ch.10 Operational Compiler | Ch.11 Self-immune
 
 ## 서술 장치
 - 5변수 참조: "1차 병목은 [변수명]이었다"

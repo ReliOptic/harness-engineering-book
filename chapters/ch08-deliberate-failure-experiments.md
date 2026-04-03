@@ -1,4 +1,4 @@
-# Ch.4 — 의도적 실패 실험: 22개 시나리오
+# Ch.8 — 의도적 실패 실험: 22개 시나리오
 
 > 상태: 🔴 초고 v0.1 (2026-03-18) — §1~§2 초고, §3~§8 마커
 > 담당: Kiwon (narrative) + Experimenter A/B/C (실험)
@@ -8,7 +8,7 @@
 
 ## 핵심 메시지
 
-의도적으로 실패시키는 것이 이 챕터의 방법론이다. 22개 시나리오는 pre-registration 원칙 하에 설계되었다 — 가설, 판단 기준, 검정 방법이 데이터 수집 전에 `experiments/design-specification.md`에 고정되었다. 이것이 Ch.5의 분석을 post-hoc rationalization이 아닌 confirmatory analysis로 만드는 구조적 조건이다. 실험은 5변수 프레임워크의 각 변수를 격리하여 조작하고, 어떤 변수가 어떤 조건에서 1차 병목이 되는가를 측정한다.
+의도적으로 실패시키는 것이 이 챕터의 방법론이다. 22개 시나리오는 pre-registration 원칙 하에 설계되었다 — 가설, 판단 기준, 검정 방법이 데이터 수집 전에 `experiments/design-specification.md`에 고정되었다. 이것이 Ch.9의 분석을 post-hoc rationalization이 아닌 confirmatory analysis로 만드는 구조적 조건이다. 실험은 5변수 프레임워크의 각 변수를 격리하여 조작하고, 어떤 변수가 어떤 조건에서 1차 병목이 되는가를 측정한다.
 
 ## 학습 결과
 
@@ -51,7 +51,7 @@
    - Deliberate failure experiment의 방법론적 근거: 정상 조건에서 드러나지 않는 구조적 취약점
    - Pre-registration 원칙의 적용: `experiments/design-specification.md`가 이 챕터 전체의 가설 레지스트리
    - Confirmatory vs. exploratory의 사전 구분: "이것을 확인하러 간다"와 "이것을 발견했다"는 다른 주장 강도를 가진다
-   - Task 조작적 정의 recap (Ch.3에서 announce된 내용): T1/T2/T3/T4 성공 기준
+   - Task 조작적 정의 recap (Ch.7에서 announce된 내용): T1/T2/T3/T4 성공 기준
    - ARCC validation 선행 조건: R² ≥ 0.65 미달 시 main experiment에 어떤 조건이 붙는가
 
 2. **실험 환경: GCP 무료 티어, OpenRouter, 측정 인프라**
@@ -99,7 +99,7 @@ Deliberate failure experiment는 이 모호함을 줄이기 위한 방법론적 
 
 Pre-registration이 이 실험 설계에서 필수인 이유는 분석 유연성의 위험 때문이다. 실험 데이터를 수집한 이후에 가설을 설정하면 — 또는 수집 도중에 가설을 수정하면 — 연구자는 데이터에 맞는 가설을 사후에 구성하는 위험에 노출된다. 이것은 의식적 부정직이 아니라 인지적 편향의 자연스러운 결과다. Pre-registration은 가설과 판단 기준을 데이터 수집 전에 고정함으로써 이 편향의 작동 공간을 구조적으로 제한한다.
 
-`experiments/design-specification.md`는 이 챕터 전체의 가설 레지스트리다. Ch.3 §8에서 announce한 confirmatory 가설 목록 — H1부터 H6까지 — 이 그 파일에 날짜와 함께 기록되어 있다. 이 announce 이후에 판단 기준이 변경된다면, 변경 사항이 기록되고 해당 가설의 검증 결과는 exploratory로 재분류된다. 이것이 Deviation Protocol이다.
+`experiments/design-specification.md`는 이 챕터 전체의 가설 레지스트리다. Ch.7 §8에서 announce한 confirmatory 가설 목록 — H1부터 H6까지 — 이 그 파일에 날짜와 함께 기록되어 있다. 이 announce 이후에 판단 기준이 변경된다면, 변경 사항이 기록되고 해당 가설의 검증 결과는 exploratory로 재분류된다. 이것이 Deviation Protocol이다.
 
 Confirmatory와 exploratory의 구분은 주장 강도의 차이다. "H2가 참이다 — failure budget이 harness-on 조건에서 재배분된다"는 confirmatory 가설이 지지되는 경우의 주장이다. "실험 중 관찰된 X 패턴이 흥미롭다"는 exploratory 발견이다. 두 주장은 다른 replication 기준을 갖는다. 이 챕터에서 두 유형을 명시적으로 레이블링하는 것은 독자가 각 결과에 적절한 수준의 확신을 부여할 수 있도록 하기 위한 것이다.
 
@@ -147,11 +147,11 @@ Surface 변수를 조작한 E07은 1막의 마지막 격리 실험이다. CLI와
 
 E08에서 token budget을 100%에서 25%까지 단계적으로 감소시키는 동안, agent의 자기평가 정확도를 매 단계에서 측정했다. Budget이 75% 수준에서 자기평가 정확도는 `[X]%`로 실질적 변화가 없었다. 50% 구간에서 `[X]%`로 감소하기 시작했고, 25% 구간에서 `[X]%`로 급락했다. 그러나 정확도 수치보다 중요한 관찰은 *어떻게* 부정확해지는가였다 — budget이 낮아질수록 agent는 자신의 상태를 "정상"이라고 더 자주 보고했다. 제한된 자원은 자기 인식 능력을 감소시키는 동시에 자기 확신을 증가시켰다. Harness가 이 乖離 시점을 사전에 감지할 수 있는 신호는 agent 응답의 *형태 변화*였다 — 자기평가 요청에 대한 응답 길이가 budget 감소보다 선행하여 줄어들기 시작했다(`[X]K token` 시점).
 
-E09의 40-step task 실험은 goal drift가 두 가지 형태로 존재함을 보여주었다. 일부 실행에서 drift는 harness가 측정 가능한 신호를 동반했다 — tool call 패턴의 변화, 이전 단계 맥락 참조 감소. 다른 실행에서 drift는 무증상이었다: 매 10-step 체크포인트에서 agent는 초기 목표와 일치하는 언어를 사용했지만, 실제 행동은 `[X]%p` 이상 이탈해 있었다. 이 무증상 drift 케이스는 Ch.5에서 exploratory 발견으로 기록한다.
+E09의 40-step task 실험은 goal drift가 두 가지 형태로 존재함을 보여주었다. 일부 실행에서 drift는 harness가 측정 가능한 신호를 동반했다 — tool call 패턴의 변화, 이전 단계 맥락 참조 감소. 다른 실행에서 drift는 무증상이었다: 매 10-step 체크포인트에서 agent는 초기 목표와 일치하는 언어를 사용했지만, 실제 행동은 `[X]%p` 이상 이탈해 있었다. 이 무증상 drift 케이스는 Ch.9에서 exploratory 발견으로 기록한다.
 
-E11은 OpenClaw 1세대 실험의 구조적 재현이다. Ch.1에서 서술한 CPU 고착 오진 패턴을, 이 실험은 격리된 조건 위에서 재구성했다. 2개 agent를 동일 VM에서 실행할 때, 필자가 처음에 관찰한 것은 CPU 사용률 급등이었다 — 그래서 모델 문제로 판단했다. 그러나 E11의 측정에서 context 오염은 CPU 경쟁보다 평균 `[X]분` 선행하여 발생했다. 자원 경쟁이 원인이 아니라 context 오염이 선행했고, 오염된 context를 처리하려는 agent의 연산이 CPU를 소비했다. 원인과 증상의 순서가 반전되어 있었다.
+E11은 OpenClaw 1세대 실험의 구조적 재현이다. Ch.5에서 서술한 CPU 고착 오진 패턴을, 이 실험은 격리된 조건 위에서 재구성했다. 2개 agent를 동일 VM에서 실행할 때, 필자가 처음에 관찰한 것은 CPU 사용률 급등이었다 — 그래서 모델 문제로 판단했다. 그러나 E11의 측정에서 context 오염은 CPU 경쟁보다 평균 `[X]분` 선행하여 발생했다. 자원 경쟁이 원인이 아니라 context 오염이 선행했고, 오염된 context를 처리하려는 agent의 연산이 CPU를 소비했다. 원인과 증상의 순서가 반전되어 있었다.
 
-E10과 E12는 2막의 두 경계를 규정한다. E10은 하한 — self-immune 운용을 지탱할 수 있는 모델 capability의 최소 기준이다. Self-reporting 정확도가 self-immune에 부적합한 수준으로 떨어지는 모델 tier의 경계는 quantized 모델에서 `[X]%` 정확도로 관찰되었다(exploratory). E12는 상한 — self-immune harness 자체가 병목이 되는 overhead 임계치다. E18의 mini self-immune을 resource 제약 환경에서 실행했을 때, harness monitoring loop의 token 소비가 agent task 용량의 `[X]%`를 초과하는 지점에서 시스템 전체의 TCR이 오히려 harness-off 조건보다 낮아졌다. 이것이 §6 반례(E20)와 Ch.5 optimal HOR 논의의 하한 조건이 된다.
+E10과 E12는 2막의 두 경계를 규정한다. E10은 하한 — self-immune 운용을 지탱할 수 있는 모델 capability의 최소 기준이다. Self-reporting 정확도가 self-immune에 부적합한 수준으로 떨어지는 모델 tier의 경계는 quantized 모델에서 `[X]%` 정확도로 관찰되었다(exploratory). E12는 상한 — self-immune harness 자체가 병목이 되는 overhead 임계치다. E18의 mini self-immune을 resource 제약 환경에서 실행했을 때, harness monitoring loop의 token 소비가 agent task 용량의 `[X]%`를 초과하는 지점에서 시스템 전체의 TCR이 오히려 harness-off 조건보다 낮아졌다. 이것이 §6 반례(E20)와 Ch.9 optimal HOR 논의의 하한 조건이 된다.
 
 ---
 
@@ -165,7 +165,7 @@ E13은 개입 수준을 세 가지로 구분했다: 개입 없음, 힌트 제공
 
 E15는 3막의 경첩이다. Operator가 개입하는 것과 agent가 스스로 자신의 상태를 보고하는 것은 다른 문제이며, E15는 그 차이를 측정했다. Agent에게 "현재 task에서 어느 단계에 있는가", "어떤 제약에 처해 있는가"를 보고하도록 요청했을 때, 보고 정확도는 `[X]%`였다 — E08에서 관찰한 token budget 정상 조건의 자기평가 정확도(`[X]%`)와 비교할 수 있다. E15 결과가 `[X]%` 이상이었기 때문에 E16과 E17 설계가 진행되었다 — 이 기준 미달이었다면 내재화 시도를 보류했을 것이다.
 
-E16과 E17은 내재화의 두 단위다. Token 사용량 자동 보고(E16)는 harness에 추가했을 때 overhead가 HOR 기준 `[X]%p` 증가하는 수준이었고, self-reporting 정확도는 E15 수동 보고와 비교했을 때 `[X]%p` 차이를 보였다. 실패 감지 + 자동 재시도(E17)는 `[X]%`의 실패를 추가 operator 개입 없이 복구했지만, 재시도가 무한 루프로 진입하는 조건이 관찰되었다 — exit condition이 없는 harness 설계에서 재시도 횟수가 `[X]`회를 초과하는 경우였다. E18에서 두 기능을 통합했을 때, 상호 간섭 케이스는 전체 실행의 `[X]%`에서 발생했다(exploratory 발견). 이 통합 overhead는 E12의 임계치 `[X]%` 대비 `[X]%p` 아래에 머물렀다 — mini self-immune은 자기 자신이 병목이 되지 않는 범위에서 작동했다. 이것이 Ch.7에서 다루는 self-immune system 설계의 출발 조건이다.
+E16과 E17은 내재화의 두 단위다. Token 사용량 자동 보고(E16)는 harness에 추가했을 때 overhead가 HOR 기준 `[X]%p` 증가하는 수준이었고, self-reporting 정확도는 E15 수동 보고와 비교했을 때 `[X]%p` 차이를 보였다. 실패 감지 + 자동 재시도(E17)는 `[X]%`의 실패를 추가 operator 개입 없이 복구했지만, 재시도가 무한 루프로 진입하는 조건이 관찰되었다 — exit condition이 없는 harness 설계에서 재시도 횟수가 `[X]`회를 초과하는 경우였다. E18에서 두 기능을 통합했을 때, 상호 간섭 케이스는 전체 실행의 `[X]%`에서 발생했다(exploratory 발견). 이 통합 overhead는 E12의 임계치 `[X]%` 대비 `[X]%p` 아래에 머물렀다 — mini self-immune은 자기 자신이 병목이 되지 않는 범위에서 작동했다. 이것이 Ch.11에서 다루는 self-immune system 설계의 출발 조건이다.
 
 ---
 
@@ -177,16 +177,16 @@ E19와 E20은 이 책의 주장이 성립하지 않는 조건을 기록한다. H
 
 E19는 task 정의 자체를 불안정하게 설계했다. Harness는 정상이었고, 모델은 SOTA였으며, compute 제약도 없었다. Task 지시만 의도적으로 모호하게 작성했다 — 성공 기준이 해석에 따라 달라지는 방식으로. 이 조건에서 실패율은 `[X]%`였고, harness의 recovery hook은 `[X]%`의 케이스에서 재시도를 트리거했으나 재시도는 원래 실패와 동일한 형태로 반복되었다. Harness는 task가 불완전하게 수행되었다는 신호를 만들었지만, 무엇이 불완전한가를 규정하는 기준이 task 정의 자체에 없었기 때문에 recovery가 작동하지 않았다. 이것은 harness 설계 실패가 아니라 task 설계 실패이며, 이 구분이 E19가 제공하는 반례의 내용이다.
 
-E20은 다른 종류의 한계다. 완벽한 harness 구성과 SOTA 모델에 극단적 resource 제약을 적용했을 때, `[X]%` resource 수준 이하에서 harness monitoring loop의 token 소비가 task 실행 가용량을 초과했다 — E12의 overhead 임계치와 동일한 구조다. 이 지점에서 TCR은 harness-off 조건보다 `[X]%p` 낮아졌다. Harness는 agent 능력을 보호하려 했지만, 보호 행동 자체가 자원을 소비했고 그 소비가 보호 대상을 잠식했다. Ch.5의 optimal HOR 논의에서 이 임계치가 HOR 상한의 실험적 근거가 된다.
+E20은 다른 종류의 한계다. 완벽한 harness 구성과 SOTA 모델에 극단적 resource 제약을 적용했을 때, `[X]%` resource 수준 이하에서 harness monitoring loop의 token 소비가 task 실행 가용량을 초과했다 — E12의 overhead 임계치와 동일한 구조다. 이 지점에서 TCR은 harness-off 조건보다 `[X]%p` 낮아졌다. Harness는 agent 능력을 보호하려 했지만, 보호 행동 자체가 자원을 소비했고 그 소비가 보호 대상을 잠식했다. Ch.9의 optimal HOR 논의에서 이 임계치가 HOR 상한의 실험적 근거가 된다.
 
 ---
 
 ## §7
 
-> [Ch.4 §3~§6 통합 후 전환 섹션 — 추후 집필]
+> [Ch.8 §3~§6 통합 후 전환 섹션 — 추후 집필]
 
 ---
 
 ## §8
 
-> [Ch.4 §3~§6 통합 후 전환 섹션 — 추후 집필]
+> [Ch.8 §3~§6 통합 후 전환 섹션 — 추후 집필]

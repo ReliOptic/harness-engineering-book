@@ -23,9 +23,9 @@
 - [x] DR-5.1 failure analysis methods 정리
 - [x] DR-5.2 compute cost optimization 정리
 - [x] DR-5.3 VM resource management 정리
-- [ ] DR-6.1 CLI design patterns 정리
+- [x] DR-6.1 CLI design patterns 정리
 - [x] DR-6.2 incremental capability injection 정리
-- [ ] DR-7.1 self-healing agents 정리
+- [x] DR-7.1 self-healing agents 정리
 - [x] DR-7.2 continuous learning in deployed agents 정리
 
 ## Experiments (E01–E22)
@@ -34,7 +34,6 @@
 - [ ] E03 mid-run model switching
 - [ ] E04 harness-on/off baseline
 - [ ] E05~E08 harness component ablation
-- [ ] E09~E12 constraint/compute bottleneck 실험
 - [ ] E09~E14 constraint/compute bottleneck 실험
 - [ ] E15~E17 operator intervention 실험
 - [ ] E18~E20 harness internalization 실험
@@ -48,21 +47,31 @@
 - [ ] Fig 8/10 (Cost-Reliability Frontier / Ablation) 작성
 - [ ] HOR/RSuccR/MTTR/CostIndex 계산 결과 반영
 
-## Chapter Drafts
+## Part I — 스켈레톤 (v6 Ch.1~4)
+- [x] Ch.1 Attention과 Context 스켈레톤 작성
+- [x] Ch.2 압축 렌즈 스켈레톤 작성
+- [x] Ch.3 정렬에서 자율로 스켈레톤 작성
+- [x] Ch.4 도구, 추론, 기억 스켈레톤 작성
+- [ ] Ch.1~4 본문 집필 (beta 이후)
+
+## Chapter Drafts (v6 Ch.5~11)
 - [x] Preface 정리 (핵심 framing과 외부 사례 연결)
-- [ ] Ch.1 PicoClaw 참조 익명화 재작성
-- [x] Ch.1 생태계 스냅샷 + OpenAI 연구 좌표 정합
-- [x] Ch.2 `[X]` 플레이스홀더 제거 및 수치 반영
-- [x] Ch.3 harness/AgentOps 정의 완성
-- [ ] Ch.4 deliberate failure 실험 서술 완성
-- [ ] Ch.5 결과 분석 + 비용/운영 지표 번역 완성
-- [ ] Ch.6 Operational Compiler 설계 원칙 완성
-- [ ] Ch.7 self-immune 전환 조건 완성
+- [x] Ch.5 PicoClaw 참조 익명화 재작성 (본문에 이미 없음)
+- [x] Ch.5 생태계 스냅샷 + OpenAI 연구 좌표 정합
+- [x] Ch.6 `[X]` 플레이스홀더 제거 및 수치 반영
+- [x] Ch.7 harness/AgentOps 정의 완성
+- [x] Ch.7 세 축 비교 중심 재구성 (§1 공식담론, §3 공개실물패턴, §5 출간시장, §7 산업실무 추가)
+- [ ] Ch.8 deliberate failure 실험 서술 완성 (E01~E08)
+- [ ] Ch.9 결과 분석 + 비용/운영 지표 번역 완성
+- [ ] Ch.10 Operational Compiler 설계 원칙 완성 + §5 공개 harness 비교 강화
+- [ ] Ch.11 self-immune 전환 조건 완성 + 미해결 질문 정리
 
 ## References & Consistency
-- [ ] 모든 참조 파일 존재 여부 확인 (DR/FD/evidence 경로 정합)
+- [x] 모든 참조 파일 존재 여부 확인 (DR/FD/evidence 경로 정합)
+- [ ] Appendix 파일 생성 (appendix-a~e.md — chapter-map에 참조되나 미생성)
 - [ ] 수치 인용에 근거 링크/근거 문서 연결
-- [ ] 용어/표기 일관성 최종 점검 (ARCC/HOR/RSuccR 등)
+- [x] 용어/표기 일관성 최종 점검 (ARCC/HOR/RSuccR 등)
+- [x] 챕터 내부 교차 참조 v6 넘버링 업데이트 (Ch.1~7 → Ch.5~11)
 
 ## Finalization
 - [ ] 챕터별 voice-check 통과 (CLAUDE.md 기준)

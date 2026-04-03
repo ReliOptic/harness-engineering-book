@@ -1,4 +1,4 @@
-# Ch.7 — Harness에서 Agent로: Self-Immune System을 향하여
+# Ch.11 — Harness에서 Agent로: Self-Immune System을 향하여
 
 > 상태: 🔴 초고 v0.1 (2026-03-18) — §1~§2 기존 유지, §3~§9 신규 작성
 > 담당: Kiwon
@@ -105,7 +105,7 @@ E21은 이 한계의 반례로 설계되었다. Task 자체를 모호하게 정�
 
 외부 harness에서 agent 내부로 기능이 이동하는 것이 이 섹션의 주제다. 이 이동이 왜 가능한지, 어떤 기능이 먼저 이동할 수 있는지, 그리고 어떤 기능은 구조적으로 외부에 남아야 하는지를 분석한다.
 
-AgentOps 실무에서 출발한다. 운영자가 반복적으로 수행하는 개입 패턴이 있다 — token 사용량이 threshold에 근접하면 압축을 수행하고, failure가 특정 유형으로 발생하면 retry를 시도하며, IFR이 낮아지는 신호가 보이면 context를 재설정한다. 이 패턴들은 초기에는 운영자의 수동 개입이다. 반복 빈도가 충분히 높아지면 harness component로 구현된다 — 규칙으로 표현 가능하고, 실행 가능하며, 측정 가능한 형태로. Ch.6 Operational Compiler의 설계 원칙이 이 경로를 따른다.
+AgentOps 실무에서 출발한다. 운영자가 반복적으로 수행하는 개입 패턴이 있다 — token 사용량이 threshold에 근접하면 압축을 수행하고, failure가 특정 유형으로 발생하면 retry를 시도하며, IFR이 낮아지는 신호가 보이면 context를 재설정한다. 이 패턴들은 초기에는 운영자의 수동 개입이다. 반복 빈도가 충분히 높아지면 harness component로 구현된다 — 규칙으로 표현 가능하고, 실행 가능하며, 측정 가능한 형태로. Ch.10 Operational Compiler의 설계 원칙이 이 경로를 따른다.
 
 Harness component로 구현된 기능이 agent 내부로 이동하는 것은 다음 단계다. E18이 보여주는 것처럼 token auto-report는 harness component로 구현된 이후, agent 자신이 token 사용량을 tracking하고 threshold를 감지하는 방향으로 내재화할 수 있다. E19의 failure detect auto-retry도 유사한 경로를 따른다 — 외부 harness가 failure를 감지하고 retry를 실행하던 것이, agent 자신이 failure 신호를 인식하고 재시도 경로를 실행하는 방향으로 이동한다.
 
@@ -125,13 +125,13 @@ Self-immune system의 조작적 정의는 세 요소의 연결이다. ARCC self-
 
 각 단계의 설계에서 고려해야 할 것들을 구체화한다. ARCC self-estimate를 위해 agent는 자신의 최근 tool call들의 schema validity와 semantic correctness를 돌아보고, instruction constraint 충족 여부를 재평가하며, multi-step chain의 논리적 연속성을 확인해야 한다. 이것은 별도의 self-reflection loop를 요구한다 — task 실행 루프와 병렬로 실행되는, 자신의 실행 품질을 추적하는 루프. 이 루프 자체가 HOR에 추가된다.
 
-Cliff-proximity detection은 self-estimate 결과를 task-specific threshold와 비교하는 단계다. Ch.2에서 측정한 cliff position이 T1, T2, T3에서 다르다는 결과가 여기서 사용된다 — 동일한 ARCC estimate라도 task 유형에 따라 cliff에 가깝거나 멀다는 판단이 달라진다. 이 판단이 올바르려면 agent가 자신이 실행 중인 task의 유형을 정확히 분류할 수 있어야 한다.
+Cliff-proximity detection은 self-estimate 결과를 task-specific threshold와 비교하는 단계다. Ch.6에서 측정한 cliff position이 T1, T2, T3에서 다르다는 결과가 여기서 사용된다 — 동일한 ARCC estimate라도 task 유형에 따라 cliff에 가깝거나 멀다는 판단이 달라진다. 이 판단이 올바르려면 agent가 자신이 실행 중인 task의 유형을 정확히 분류할 수 있어야 한다.
 
 Self-initiated recovery의 세 경로는 각각 다른 조건에서 선택된다. Context reset은 IFR decay가 감지되었으나 task 방향 자체는 여전히 올바를 때 적용한다 — 누적된 context 오염을 제거하고 동일 목표로 재시작. Task decomposition 재시도는 현재 plan이 constraint를 충족하지 못할 때 적용한다 — 더 작은 단계로 task를 분해하고 각 단계를 별도 검증. Operator escalation 요청은 두 경로가 모두 적절하지 않을 때 — 또는 ARCC estimate 자체의 신뢰도가 낮을 때 — 외부 판단을 요청한다.
 
 재귀적 한계는 이 설계의 구조적 취약점이다. Agent가 자신의 ARCC를 estimate하려면 그 estimate를 수행하는 데 필요한 ARCC가 먼저 확보되어야 한다. ARCC가 cliff 이하로 내려간 상황에서는 self-estimate도 신뢰할 수 없다 — cliff에 근접했다는 신호가 나와야 할 때 정상 신호가 나올 수 있다. Self-immune이 가장 필요한 순간이 self-immune이 가장 신뢰하기 어려운 순간이라는 역설이 여기에 있다. 이것이 Agent-2 전환의 ARCC 하한 조건이 존재하는 이유다.
 
-E20(mini self-immune)은 이 설계의 최소 조건 실험이다. 완전한 self-immune 루프가 아니라, token 사용량 monitoring과 간단한 failure detection만을 내재화한 최소 구성에서 무엇이 성립하고 무엇이 성립하지 않는가. 이 실험의 결과가 Ch.5에서 보완된다.
+E20(mini self-immune)은 이 설계의 최소 조건 실험이다. 완전한 self-immune 루프가 아니라, token 사용량 monitoring과 간단한 failure detection만을 내재화한 최소 구성에서 무엇이 성립하고 무엇이 성립하지 않는가. 이 실험의 결과가 Ch.9에서 보완된다.
 
 ---
 
@@ -173,7 +173,7 @@ Agent-1에서 Agent-2로의 전환을 정의하기 전에, Agent-1의 작동 방
 
 Agent-2는 감시자 기능의 일부를 내재화한다. ARCC self-monitoring이 작동하고, cliff-proximity가 감지되며, recovery 경로가 자동 실행된다. Operator는 agent가 escalation을 요청할 때만 개입한다 — HER이 구조적으로 낮아진다.
 
-E10에서 측정하는 ARCC threshold가 이 루프의 하한이다. self-monitoring 루프가 신뢰 가능하게 작동하는 최소 ARCC 수준으로, 이 조건이 충족되지 않으면 self-immune 루프를 추가해도 신뢰 가능한 Agent-2 상태가 되지 않는다 — self-monitoring이 틀린 신호를 내보내고, recovery 경로가 잘못된 상황에서 실행된다. 그 하한을 충족하는 것만으로는 전환이 성립하지 않는다 — self-immune 루프가 외부 개입 없이 72시간 유지된다는 것이 충분조건 후보로 제안되나, 이 기준의 타당성 자체가 Ch.5 결과를 기다리는 미검증 가설이다. 72시간이라는 기준은 임의적이지 않다 — OpenClaw 1세대 실험에서 장애가 72시간 이내에 재현된다는 패턴에서 도출된 운영 horizon이다.
+E10에서 측정하는 ARCC threshold가 이 루프의 하한이다. self-monitoring 루프가 신뢰 가능하게 작동하는 최소 ARCC 수준으로, 이 조건이 충족되지 않으면 self-immune 루프를 추가해도 신뢰 가능한 Agent-2 상태가 되지 않는다 — self-monitoring이 틀린 신호를 내보내고, recovery 경로가 잘못된 상황에서 실행된다. 그 하한을 충족하는 것만으로는 전환이 성립하지 않는다 — self-immune 루프가 외부 개입 없이 72시간 유지된다는 것이 충분조건 후보로 제안되나, 이 기준의 타당성 자체가 Ch.9 결과를 기다리는 미검증 가설이다. 72시간이라는 기준은 임의적이지 않다 — OpenClaw 1세대 실험에서 장애가 72시간 이내에 재현된다는 패턴에서 도출된 운영 horizon이다.
 
 이 두 조건이 달성되지 않으면 self-immune 구조 자체가 새로운 failure source가 된다는 것이 이 챕터의 핵심 경고다. ARCC가 threshold 이하인 상태에서 self-immune을 활성화하면 — 잘못된 self-estimate를 기반으로 잘못된 recovery를 실행하는 루프 — HOR이 증가하고 실제 recovery 성공률은 올라가지 않는다. Agent-1에 harness를 추가하는 것보다 더 나쁜 상태가 될 수 있다.
 
@@ -201,9 +201,9 @@ DR-3.4(ontology as agent memory structure)가 제안하는 것은 Agent-2 상태
 
 이 책은 multi-agent 협업 구조로 작성되었다. 필자가 챕터 방향과 핵심 주장을 설정하고, drafting agent가 섹션별 초고를 생성하며, editor agent가 voice-check와 용어 일관성을 검토하는 3-layer 구조. 이 구조 자체가 AgentOps 실무 원칙의 dogfooding이다.
 
-Token 배분에서 관찰된 패턴이 있다. 한 챕터를 단일 세션에서 완성하려 할 때 context window 후반부에서 drafting agent의 IFR이 저하되는 징후가 나타났다 — 초반 섹션에서 확립한 용어 구분을 후반 섹션에서 혼용하거나, 문체 규칙이 느슨해지는 패턴. 이것은 Ch.2에서 서술하는 IFR decay의 실제 사례다. 섹션 단위로 작업을 분리하고 세션을 전환하는 것이 이 decay를 구조적으로 억제하는 운영 규칙으로 자리잡았다.
+Token 배분에서 관찰된 패턴이 있다. 한 챕터를 단일 세션에서 완성하려 할 때 context window 후반부에서 drafting agent의 IFR이 저하되는 징후가 나타났다 — 초반 섹션에서 확립한 용어 구분을 후반 섹션에서 혼용하거나, 문체 규칙이 느슨해지는 패턴. 이것은 Ch.6에서 서술하는 IFR decay의 실제 사례다. 섹션 단위로 작업을 분리하고 세션을 전환하는 것이 이 decay를 구조적으로 억제하는 운영 규칙으로 자리잡았다.
 
-Coordination overhead도 측정 가능한 형태로 나타났다. Drafting agent와 editor agent 사이의 revision cycle에서 소요되는 token은 초고 생성 token의 [X]%에 달했다 — 이것이 집필 workflow의 HOR에 해당한다. 이 overhead가 voice consistency 향상으로 정당화되는가는 Chapter-level voice-check 통과율로 측정할 수 있는데, 수치는 Ch.5가 완료된 이후 기록될 예정이다.
+Coordination overhead도 측정 가능한 형태로 나타났다. Drafting agent와 editor agent 사이의 revision cycle에서 소요되는 token은 초고 생성 token의 [X]%에 달했다 — 이것이 집필 workflow의 HOR에 해당한다. 이 overhead가 voice consistency 향상으로 정당화되는가는 Chapter-level voice-check 통과율로 측정할 수 있는데, 수치는 Ch.9가 완료된 이후 기록될 예정이다.
 
 집필에 agent를 사용했다는 사실이 이 책의 주장을 강화하지 않는다. Multi-agent 집필 구조가 AgentOps 원칙과 구조적 유사성을 가진다는 것을 관찰 수준에서 기록하는 것이다. 이 구조가 더 나은 책을 만든다는 주장은 별도의 검증 기준을 요구한다 — 그것은 독자의 판단에 위임한다.
 

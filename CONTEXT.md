@@ -41,13 +41,13 @@ OpenAI 팀이 정의한 harness engineering 프레임워크(Context Engineering,
 ## 파일 구조 요약
 
 ```
-chapters/          preface + ch01~ch07 (초고 존재)
+chapters/          preface + ch01~ch04 (Part I 스켈레톤) + ch05~ch11 (Part II~IV 초고)
 deep-research/     DR reference 파일 (정의 출처 아님, 인용 전 원문 확인)
   └ harness_engineering_glossary.md  [DR reference, backbone 아님]
 evidence/          외부 사례 기록
 experiments/       E01~E22 실험 로그
 CLAUDE.md          voice rules + AI 지침 (필수)
-writing-plan.md    마스터 계획서 v5 (핵심 결정 로그 포함)
+writing-plan.md    마스터 계획서 v6 (핵심 결정 로그 포함)
 chapter-map.md     챕터별 상세 아웃라인
 ```
 

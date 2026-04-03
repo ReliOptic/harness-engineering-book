@@ -25,7 +25,7 @@ Part I은 Transformer, 정보이론, alignment, tool use 연구를 역사적 좌
 | 마일스톤 | 목표일 |
 | --- | --- |
 | Part I 초고 (Ch.1~4) | 2026년 4월 15일 |
-| Beta manuscript (11챕터 초고) | 2026년 5월 31일 |
+| Beta manuscript (11챕터 초고) | 2026년 4월 30일 |
 | Polished release manuscript | 완성도 우선, 일정 미확정 |
 
 **책의 근본 자세**
