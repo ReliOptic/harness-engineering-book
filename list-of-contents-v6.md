@@ -13,7 +13,7 @@ v4까지의 구조는 실험서로서의 정체성을 중심에 두었다. v6는
 
 이유는 세 가지다.
 
-첫째, 현재 원고의 핵심 개념들(Capability Cliff, Failure Budget Reallocation, Self-immune, 모델 관찰 지표)은 정보이론, attention 메커니즘, alignment 계보, tool use 연구 위에 서 있으나, 그 기반이 본문에서 암묵적으로 전제되어 있다. 독자가 이 전제를 공유하지 않으면 Ch.5 이후의 실험 해석이 부유한다.
+첫째, 현재 원고의 핵심 개념들(성능 급락, 실패 재분류, Self-immune, 모델 관찰 지표)은 정보이론, attention 메커니즘, alignment 계보, tool use 연구 위에 서 있으나, 그 기반이 본문에서 암묵적으로 전제되어 있다. 독자가 이 전제를 공유하지 않으면 Ch.5 이후의 실험 해석이 부유한다.
 
 둘째, compression lens 챕터가 증명한 것은 **논문 하나를 backbone으로 삼아 prerequisite 개념부터 agent operations 번역까지 한 챕터 안에서 완결하는 구조**가 실무서의 속도를 유지하면서도 개념적 기반을 확보할 수 있다는 점이다. 이 패턴을 핵심 논문 4편에 확장한다.
 
@@ -133,7 +133,7 @@ v5 초고 유지. 단, 마지막 문장("이정표를 얻게 될 것이다") 재
 
 ## Ch.2 — 압축 렌즈: 모든 언어 모델은 압축기다
 
-**한 줄**: 언어 모델이 확률적 텍스트 생성기인 동시에 압축 알고리즘이라는 사실을 정보이론으로 보이고, 이 등가성이 agent runtime 현상을 읽는 하나의 해석 렌즈가 됨을 보여준다. 이 챕터는 HOR이나 모델 관찰 지표의 직접 근거를 세우는 것이 아니라, Part II 이후에서 사용할 정보이론적 어휘를 제공한다.
+**한 줄**: 언어 모델이 확률적 텍스트 생성기인 동시에 압축 알고리즘이라는 사실을 정보이론으로 보이고, 이 등가성이 agent runtime 현상을 읽는 하나의 해석 렌즈가 됨을 보여준다. 이 챕터는 harness overhead이나 모델 관찰 지표의 직접 근거를 세우는 것이 아니라, Part II 이후에서 사용할 정보이론적 어휘를 제공한다.
 
 **Backbone 논문**:
 - Delétang et al., *Language Modeling Is Compression* (ICLR 2024)
@@ -298,7 +298,7 @@ v5 초고 유지. 단, 마지막 문장("이정표를 얻게 될 것이다") 재
 - ReAct의 핵심 발견: reasoning과 acting을 interleave하면 hallucination이 감소한다.
 **운영 번역**:
 - Multi-step task에서 agent가 각 단계의 결과를 관찰하고 다음 추론에 반영하는 것이 multi-step reasoning depth 측정의 기반이다.
-- Reasoning trace가 context를 소비한다 — HOR(Harness Overhead Ratio)과 동일한 trade-off. 추론의 깊이와 token 효율 사이의 긴장.
+- Reasoning trace가 context를 소비한다 — harness overhead(Harness Overhead Ratio)과 동일한 trade-off. 추론의 깊이와 token 효율 사이의 긴장.
 
 ### §3. 실패에서 배우기 — Reflexion
 
@@ -382,7 +382,7 @@ Chip Huyen의 *AI Engineering*(2025)이 application layer를 다뤘다면, 이 �
 
 ## Ch.6 — Agent가 모델로부터 무엇을 물려받는가
 
-**한 줄**: 5변수 중 "모델" 변수를 격리하여 관찰한다. 네 가지 관찰 지표(도구 사용 정확도, instruction following rate, multi-step reasoning depth, context 활용 효율)를 정의하고, Capability Cliff의 비선형적 급락을 측정한다.
+**한 줄**: 5변수 중 "모델" 변수를 격리하여 관찰한다. 네 가지 관찰 지표(도구 사용 정확도, instruction following rate, multi-step reasoning depth, context 활용 효율)를 정의하고, 성능 급락의 비선형적 급락을 측정한다.
 
 **기반**: 현행 Ch.2
 
@@ -391,7 +391,7 @@ Chip Huyen의 *AI Engineering*(2025)이 application layer를 다뤘다면, 이 �
 - Instruction following rate의 배경: Ch.3 §1 InstructGPT — 학습적 기원
 - Multi-step reasoning depth의 배경: Ch.4 §2 ReAct — 학술적 기원
 - Context 활용 효율의 배경: Ch.1 §5 Lost in the Middle — 실증적 근거
-- Capability Cliff의 해석 렌즈: Ch.2 §3 cross-entropy — 오류 누적을 정보이론적으로 읽는 하나의 방법
+- 성능 급락의 해석 렌즈: Ch.2 §3 cross-entropy — 오류 누적을 정보이론적으로 읽는 하나의 방법
 
 ### §1. 물려받는 경향: reasoning, tool use, consistency, calibration
 
@@ -401,9 +401,9 @@ Chip Huyen의 *AI Engineering*(2025)이 application layer를 다뤘다면, 이 �
 
 ### §2. 모델 관찰 지표 — 네 항목의 정의와 측정
 
-**변경**: 현행 Ch.2 §2에서 4개 지표가 한 섹션에 동시 도입되던 문제(learning curve guideline 위반)를 해소. 도구 사용 정확도 + instruction following rate / multi-step reasoning depth + context 활용 효율로 2+2 분리. ARCC라는 합성 지표는 사용하지 않고, 개별 관찰 지표로 제시한다.
+**변경**: 현행 Ch.2 §2에서 4개 지표가 한 섹션에 동시 도입되던 문제(learning curve guideline 위반)를 해소. 도구 사용 정확도 + instruction following rate / multi-step reasoning depth + context 활용 효율로 2+2 분리. 모델 능력 지표라는 합성 지표는 사용하지 않고, 개별 관찰 지표로 제시한다.
 
-### §3. Capability Cliff — 선형이 아닌 급락이 발생하는 조건
+### §3. 성능 급락 — 선형이 아닌 급락이 발생하는 조건
 
 Ch.2 §1의 (1-p)^n 공식은 Ch.2(압축 렌즈)의 cross-entropy 프레임으로 읽을 수 있다. 이 연결은 해석적 유용성이지 정의적 의존은 아니다.
 
@@ -421,7 +421,7 @@ Ch.2 §1의 (1-p)^n 공식은 Ch.2(압축 렌즈)의 cross-entropy 프레임으�
 
 ## Ch.7 — Harness Engineering과 AgentOps
 
-**한 줄**: 5변수 중 "harness"와 "intervention" 변수를 정의한다. Failure Budget Reallocation 프레임워크로 harness의 효과를 재규정하고, Ch.8 실험의 가설을 pre-register한다.
+**한 줄**: 5변수 중 "harness"와 "intervention" 변수를 정의한다. 실패 재분류 프레임워크로 harness의 효과를 재규정하고, Ch.8 실험의 가설을 pre-register한다.
 
 **기반**: 현행 Ch.3
 
@@ -440,15 +440,15 @@ Ch.2 §1의 (1-p)^n 공식은 Ch.2(압축 렌즈)의 cross-entropy 프레임으�
 
 **변경**: RAG 원논문(Ch.4 §4)이 baseline으로 이미 확립되었으므로, 바로 "일반 RAG와 Ontology RAG의 차이"로 진입 가능.
 
-### §4. Failure Budget Reallocation
+### §4. 실패 재분류
 
 **변경**: 직관 앵커 추가 — "harness를 달았는데 왜 실패 횟수가 똑같은가? 횟수가 아니라 종류가 바뀌었기 때문이다."
 
-### §5. AgentOps와 운영 지표 (HOR, MTTR, HER)
+### §5. AgentOps와 운영 지표 (harness overhead, MTTR, HER)
 
 ### §6. Ch.8 실험 프레임 설정 — 가설과 판단 기준의 Pre-registration
 
-**학습 결과**: Harness와 AgentOps를 정의하고, Failure Budget Reallocation으로 harness 효과를 설명할 수 있다. Ch.8 실험의 가설을 이해한다.
+**학습 결과**: Harness와 AgentOps를 정의하고, 실패 재분류으로 harness 효과를 설명할 수 있다. Ch.8 실험의 가설을 이해한다.
 
 ---
 
@@ -479,9 +479,9 @@ Ch.2 §1의 (1-p)^n 공식은 Ch.2(압축 렌즈)의 cross-entropy 프레임으�
 **기반**: 현행 Ch.5 (scaffold → 초고로 끌어올리기 필요)
 
 ### §1. 22개 실험 결과 종합: 어떤 변수가 어떤 조건에서 1차 병목이었는가
-### §2. Failure Budget Reallocation 정량 분석
+### §2. 실패 재분류 정량 분석
 ### §3. 운영 metric 번역: MTTR과 Human Escalation Rate
-### §4. 비용 metric 번역: TotalCost와 optimal HOR
+### §4. 비용 metric 번역: TotalCost와 optimal harness overhead
 ### §5. Component ablation: 무엇이 얼마나 기여하는가
 ### §6. Token efficiency를 운영 규율로
 ### §7. Scaling과 temporal stability
@@ -548,7 +548,7 @@ Ch.2 §1의 (1-p)^n 공식은 Ch.2(압축 렌즈)의 cross-entropy 프레임으�
 | v4 Ch.3 (5변수) | 별도 챕터 | v6 Ch.5에 통합 | Part I이 기반을 제공하므로 별도 챕터 불필요 |
 | 교육 설계 | 암묵적 | **learning curve 3단계 명시적 적용** | editorial-learning-curve-guideline.md 전 챕터 적용 |
 | 문헌 위치 | 본문 내 산발적 인용 | **Part I에서 backbone으로 체계화** | 권위 장식이 아니라 개념적 기반으로 기능 |
-| compression lens | 미포함 | **Ch.2로 배치 (Direction A)** | 정보이론이 HOR, prompt 최적화, 모델 관찰 지표의 해석 렌즈 |
+| compression lens | 미포함 | **Ch.2로 배치 (Direction A)** | 정보이론이 harness overhead, prompt 최적화, 모델 관찰 지표의 해석 렌즈 |
 | Attention Is All You Need | 기각 (v4에서 "직접 활용도 제한적") | **Ch.1 backbone** | Part I 구조에서는 attention이 context/hallucination 이해의 필수 기반 |
 | Lost in the Middle | Ch.1/Ch.3 조건부 | **Ch.1 companion** | Attention과 함께 읽으면 context 활용 효율의 메커니즘이 완결 |
 | Constitutional AI | Ch.7 조건부 | **Ch.3 backbone** | 학습-runtime 경계를 구분하는 핵심 좌표 |

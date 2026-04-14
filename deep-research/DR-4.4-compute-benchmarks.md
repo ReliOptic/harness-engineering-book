@@ -31,7 +31,7 @@
 
 ### 3.2 에이전트 지표와 결합
 
-- TCR, IFR, TCA, MTTR, HOR과 시스템 지표를 동일 run id로 묶어서 저장
+- TCR, IFR, TCA, MTTR, harness overhead과 시스템 지표를 동일 run id로 묶어서 저장
 - 동일 task라도 "성공 run"과 "실패 run"의 리소스 곡선 차이를 비교
 
 ## 4. 환경 계층화 제안 (Ch.4 실험용)

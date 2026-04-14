@@ -16,7 +16,7 @@ This document maps the generated deep-research summary files (`DR-X.X-summary.md
 
 ## Ch.2 — Agent가 모델로부터 무엇을 물려받는가
 
-*   **Section 3. Capability Cliff & Benchmarks**
+*   **Section 3. 성능 급락 & Benchmarks**
     *   **Context File:** `DR-2.1-summary.md`
     *   **Instructions:** Use `DR-2.1-summary.md` to explain how agent capabilities drop off dramatically under certain model benchmarks (e.g., SWE-bench, WebArena) and the taxonomy of failures.
 *   **Section 5. Distillation Efficiency Frontier & Quantization Tax**
@@ -36,7 +36,7 @@ This document maps the generated deep-research summary files (`DR-X.X-summary.md
     *   **Instructions:** Use `DR-3.2-summary.md` to explain the CLI-Anything approach as a prime example of making software agent-native through HARNESS.md, showing practical application of harness engineering.
 *   **Section 6 & 8. AgentOps 및 모니터링 생태계**
     *   **Context File:** `DR-3.3-summary.md`
-    *   **Instructions:** Use `DR-3.3-summary.md` to describe the observability frameworks (Helicone, AgentOps, Weave, Braintrust) that enable tracking metrics like HOR (Harness Overhead Ratio) and MTTR.
+    *   **Instructions:** Use `DR-3.3-summary.md` to describe the observability frameworks (Helicone, AgentOps, Weave, Braintrust) that enable tracking metrics like harness overhead (Harness Overhead Ratio) and MTTR.
 *   **Agent Memory & Ontology (Supplementary for Harness)**
     *   **Context File:** `DR-3.4-summary.md`
     *   **Instructions:** Use `DR-3.4-summary.md` to incorporate ontology and memory structures as part of the agent's contextual engine and scaffold design.

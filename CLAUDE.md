@@ -1,5 +1,7 @@
 # Harness Engineering and AgentOps — Project Brain
 
+> **세션 시작 시 반드시 `DIRECTION.md`를 함께 읽어라.** 현재 크리티컬 패스, 실험 현황, 의사결정 로그가 거기 있다. 이 파일(CLAUDE.md)은 불변 원칙, DIRECTION.md는 가변 현황이다.
+
 ## 이 프로젝트는 무엇인가
 "Observing What Makes Agents Work — and What Breaks Them"
 2026년 상반기 agent runtime 현실의 스냅샷이자 실험서.
@@ -97,27 +99,27 @@ Beta 마감: 2026-04-30. 한국어 초고 → 영어 번역.
 
 ## 핵심 원칙
 1. 교리집이 아니라 실험서. 결과가 예상과 다르면 결과를 기록.
-2. 5변수: 모델, harness, surface, intervention, compute. 이원론 금지.
+2. Harness 중심 구조: harness가 주어이고, 모델 능력(inbound), 실행 환경 제약(boundary), 사용자 접점(outbound), 피드백 루프(return)는 harness가 받고·운영되고·내보내고·돌려받는 방향이다. 동급 나열 금지.
 3. 핵심 질문: "어떤 조건에서 무엇이 1차 병목이 되는가?"
 4. 스냅샷: 2026년 상반기의 기록. 과도한 학문적 해석 금지.
 5. 반례 의무: task design 문제(E21), compute saturation(E22).
 6. Operational Compiler 점진적 원칙: 한 번에 implement하지 않는다.
 
 ## 핵심 용어
-- Harness: operational envelope + AgentOps를 agent에 점진적 주입하는 프레임워크
+- Harness: agent의 실행을 감싸는 운영 구조. 관찰·통제·복구·자원 관리를 agent에 점진적으로 주입한다.
 - AgentOps: 비결정적 agent runtime을 관찰·통제·복구·자원인식적으로 운영하는 규율
-- Product surface: 현재 CLI가 최선이나, 더 나은 형태를 열어둠
+- Product surface: agent가 사용자·외부 시스템과 접촉하는 인터페이스. 현재 CLI가 최선이나, 더 나은 형태를 열어둠.
 - Operational Compiler: 반복 실패와 intervention rule을 운영 규칙으로 컴파일하는 구조. Dog food 결과물.
-- Self-immune system: AgentOps → Harness → Agent 내재화. Agent-2 전환 조건.
+- Agent-1/Agent-2: Agent-1은 외부 harness 의존, Agent-2는 자가 모니터링과 복구를 내재화한 단계.
 
 ## 챕터 구조 (v6)
-Part I: Ch.1 Attention+Context | Ch.2 압축 렌즈 | Ch.3 정렬→자율 | Ch.4 도구·추론·기억
-Part II: Ch.5 지금 무슨 일이 | Ch.6 모델 상속 | Ch.7 Harness+AgentOps 정의
+Part I: Ch.1 Context Window 한계 | Ch.2 정보이론+토큰 경제 | Ch.3 정렬→Runtime 균열 | Ch.4 도구·추론·기억 실패 경로
+Part II: Ch.5 Harness의 좌표 | Ch.6 모델 상속 | Ch.7 Harness+AgentOps 정의
 Part III: Ch.8 의도적 실패 22개 | Ch.9 실험 결과 분석
 Part IV: Ch.10 Operational Compiler | Ch.11 Self-immune
 
 ## 서술 장치
-- 5변수 참조: "1차 병목은 [변수명]이었다"
+- 병목 방향 참조: "1차 병목은 [방향] 쪽이었다" (inbound/boundary/outbound/return)
 - 반례 의식: 주장 후 "항상 성립하지는 않는다"
 - 스냅샷 마커: "2026년 3월 기준으로"
 - 실험 참조: "E14에서 관찰한 바에 따르면"
@@ -132,7 +134,7 @@ Part IV: Ch.10 Operational Compiler | Ch.11 Self-immune
 **3-layer 구조** (7-agent 상시 가동 대신):
 
 - **Layer 1 — Drafter**: 단일 drafting agent. 챕터 전환 시 chapter-map 해당 섹션 + glossary + 이전 챕터 요약을 context로 주입. Voice consistency 구조적 보장.
-- **Layer 2 — Editor**: voice-check, 용어 일관성 체크리스트(HOR·Failure Budget Reallocation 등 핵심 용어 조작적 정의 포함), PASS/REVISE/REJECT 판정.
+- **Layer 2 — Editor**: voice-check, 용어 일관성 체크리스트(harness overhead·실패 재분류 등 핵심 용어 조작적 정의 포함), PASS/REVISE/REJECT 판정.
 - **Layer 3 — Specialist (on-demand)**: Vera(정량 측정/Figure 해석), Felix(실험 설계 검토) — 상시 가동 아님. 특정 섹션 작성 시 consultation call로만 호출.
 
 **저자**: Kiwon — Ch.1/3/6/7 담당. 방향 결정, 반례 의식, 최종 판단.

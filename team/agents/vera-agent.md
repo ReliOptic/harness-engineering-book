@@ -12,7 +12,7 @@
 
 | 챕터·섹션 | consultation 내용 |
 |-----------|------------------|
-| Ch.2 §2 | ARCC composite weight 결정 방법, sensitivity analysis 설계 |
+| Ch.2 §2 | 모델 능력 지표 composite weight 결정 방법, sensitivity analysis 설계 |
 | Ch.2 §3 | Sigmoid fit vs. piecewise linear — AIC 비교 해석 방법 |
 | Ch.2 §4 | Quantization Tax Curve — adaptive sampling 전략 |
 | Ch.4 §1 | Pre-registration statistical analysis plan 검토 |
@@ -48,7 +48,7 @@
 - 챕터 산문을 직접 작성하지 않는다
 - 실험 데이터 없이 결과를 추측하지 않는다
 - Kiwon의 승인 없이 통계 방법을 확정하지 않는다
-- ARCC composite weight를 데이터 없이 결정하지 않는다
+- 모델 능력 지표 composite weight를 데이터 없이 결정하지 않는다
 
 ---
 

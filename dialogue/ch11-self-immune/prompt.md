@@ -33,7 +33,7 @@ Ch.11은 이 책의 마지막 챕터로, **agent가 외부 harness에 의존하�
 5. **이 책의 프레임워크**:
    - 5변수 프레임워크 (Ch.5)
    - 4개 관찰 지표: 도구 사용 정확도, instruction following rate, multi-step reasoning depth, context 활용 효율 (Ch.6)
-   - Failure Budget Reallocation (Ch.7)
+   - 실패 재분류 (Ch.7)
    - Operational Compiler (Ch.10)
 
 ---
@@ -56,7 +56,7 @@ Ch.11은 이 책의 마지막 챕터로, **agent가 외부 harness에 의존하�
 
 5. **Cliff-proximity 감지**: 4개 관찰 지표(도구 정확도, IFR, reasoning depth, context 효율) 각각에 대해 "cliff에 얼마나 가까운가"를 실시간으로 감지하려면 어떤 신호를 봐야 하나요? 각 지표별로 "cliff 접근 경고 신호"를 설계해 보세요.
 
-6. **Self-monitoring의 overhead budget**: Self-monitoring이 전체 token budget의 몇 %를 소비하면 "비용 > 이득"이 되나요? Ch.7의 HOR(Harness Overhead Ratio) 개념을 self-monitoring에 적용하면 "Self-monitoring Overhead Ratio"를 정의할 수 있나요?
+6. **Self-monitoring의 overhead budget**: Self-monitoring이 전체 token budget의 몇 %를 소비하면 "비용 > 이득"이 되나요? Ch.7의 harness overhead(Harness Overhead Ratio) 개념을 self-monitoring에 적용하면 "Self-monitoring Overhead Ratio"를 정의할 수 있나요?
 
 ### 전환 조건과 설계
 

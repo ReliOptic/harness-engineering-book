@@ -29,7 +29,7 @@
 - [x] DR-7.2 continuous learning in deployed agents 정리
 
 ## Experiments (E01–E22)
-- [ ] E01 Capability Cliff 측정
+- [ ] E01 성능 급락 측정
 - [ ] E02 frontier vs distilled 비교
 - [ ] E03 mid-run model switching
 - [ ] E04 harness-on/off baseline
@@ -41,11 +41,11 @@
 - [ ] E22 compute saturation 반례 (counterexample)
 
 ## Analysis & Figures
-- [ ] ARCC 구성 검증 (holdout R² ≥ 0.65 확인)
-- [ ] Capability Cliff 시그모이드 vs piecewise AIC 비교
+- [ ] 모델 능력 지표 구성 검증 (holdout R² ≥ 0.65 확인)
+- [ ] 성능 급락 시그모이드 vs piecewise AIC 비교
 - [ ] Fig 1/1b/1c (Cliff/Quantization/Distillation) 작성
 - [ ] Fig 8/10 (Cost-Reliability Frontier / Ablation) 작성
-- [ ] HOR/RSuccR/MTTR/CostIndex 계산 결과 반영
+- [ ] harness overhead/RSuccR/MTTR/CostIndex 계산 결과 반영
 
 ## Part I — 스켈레톤 (v6 Ch.1~4)
 - [x] Ch.1 Attention과 Context 스켈레톤 작성
@@ -71,7 +71,7 @@
 - [x] 모든 참조 파일 존재 여부 확인 (DR/FD/evidence 경로 정합)
 - [ ] Appendix 파일 생성 (appendix-a~e.md — chapter-map에 참조되나 미생성)
 - [ ] 수치 인용에 근거 링크/근거 문서 연결
-- [x] 용어/표기 일관성 최종 점검 (ARCC/HOR/RSuccR 등)
+- [x] 용어/표기 일관성 최종 점검 (모델 능력 지표/harness overhead/RSuccR 등)
 - [x] 챕터 내부 교차 참조 v6 넘버링 업데이트 (Ch.1~7 → Ch.5~11)
 
 ## Finalization

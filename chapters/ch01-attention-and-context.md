@@ -1,6 +1,6 @@
-# Ch.1 — Attention과 Context: 모델은 어떻게 보는가
+# Ch.1 — Context Window의 구조적 한계
 
-> **Part I — 기반: Agent를 만든 논문들**
+> **Part I — Agent Runtime의 기술적 전제**
 
 > 상태: 🟡 초고 (2026-04-04) — dialogue 재료 기반 full draft
 > 담당: Kiwon
@@ -118,7 +118,7 @@ Attention 메커니즘에 대한 이해를 agent 운영의 언어로 번역하�
 
 **Autoregressive 오류 전파.** Transformer의 추론이 순방향 전용(autoregressive)이라는 사실은, 한번 잘못된 방향으로 진행된 agent가 자력으로 되돌아오기 어렵다는 것을 의미한다. 잘못된 tool call의 결과가 context에 추가되면, 이후의 모든 결정이 그 오류를 전제로 이루어진다. 이것은 "agent가 멈추는 것이 아니라 잘못된 방향으로 계속 진행하는" 실패 패턴의 기계적 기원이다.
 
-**KV Cache 누적과 compute 병목.** Agent의 장기 실행에서 KV Cache의 메모리 소비는 선형으로 증가하며, 자원이 제한된 환경에서 이것은 모델의 추론 능력과 무관하게 시스템을 정지시킬 수 있다. 이 병목은 모델 변수나 harness 변수가 아니라 compute 변수에 해당하며, 5변수 프레임워크가 이원론(모델 vs 시스템)을 넘어야 하는 이유의 하나다.
+**KV Cache 누적과 execution boundary 병목.** Agent의 장기 실행에서 KV Cache의 메모리 소비는 선형으로 증가하며, 자원이 제한된 환경에서 이것은 모델의 추론 능력과 무관하게 시스템을 정지시킬 수 있다. 이 병목은 inbound(model capability)나 harness 설계가 아니라 boundary(실행 환경 제약)에 해당하며, harness 중심 프레임워크가 이원론(모델 vs 시스템)을 넘어야 하는 이유의 하나다.
 
 **Attention ≠ 이해.** Attention weight가 높다는 것은 두 토큰 사이의 통계적 상관관계가 높다는 뜻이지, 모델이 그 관계의 논리적 정합성을 검증했다는 뜻이 아니다. "서울의 수도는 한국이다"라는 문장에서 모델이 "서울"과 "수도"에 높은 attention을 줄 수 있으나, 그것은 두 단어가 학습 데이터에서 자주 함께 등장했기 때문이지, 모델이 이 문장의 사실 관계를 이해했기 때문이 아니다. Attention은 상관관계를 포착하지 인과관계를 검증하지 않는다.
 

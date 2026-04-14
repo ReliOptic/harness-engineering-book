@@ -13,8 +13,8 @@ Harness는 failure를 제거하지 않는다. Harness가 하는 것은 failure�
 ## 학습 결과
 
 - Harness engineering의 정의(operational envelope)와 guardrails/scaffolding/orchestration과의 구분을 설명할 수 있다.
-- Failure Budget Reallocation 프레임워크를 이해하고, harness의 효과를 "failure 제거"가 아닌 "failure 성격 전환"으로 설명할 수 있다.
-- HOR(Harness Overhead Ratio, token overhead %)의 정의를 이해하고, HOR × RSuccR trade-off에서 optimal configuration을 판단하는 기준을 설명할 수 있다.
+- 실패 재분류 프레임워크를 이해하고, harness의 효과를 "failure 제거"가 아닌 "failure 성격 전환"으로 설명할 수 있다.
+- harness overhead(Harness Overhead Ratio, token overhead %)의 정의를 이해하고, harness overhead × RSuccR trade-off에서 optimal configuration을 판단하는 기준을 설명할 수 있다.
 - AgentOps의 정의와 MLOps/DevOps와의 차이를 설명할 수 있다.
 - Ch.4 실험의 pre-registration 원칙과 task T1/T2/T3/T4 조작적 정의를 이해한다.
 - Ground truth 3-layer 구조(test suite → LLM judge → human rater)의 각 역할을 설명할 수 있다.
@@ -25,17 +25,17 @@ Harness는 failure를 제거하지 않는다. Harness가 하는 것은 failure�
 - 관련 실험: E05 (harness 있음/없음), E06 (memory 보호), E07 (permission + surface), E08 (token budget sweep)
 - 관련 증거: `evidence/case-studies/teamclaws-picoclaw-postmortem.md`, `evidence/case-studies/cli-anything-harness-analysis.md`
 
-**Failure Budget Reallocation 정의 (조작적):**
+**실패 재분류 정의 (조작적):**
 - 총 failure budget = 주어진 실험 조건에서 발생하는 failure event의 총 수. Harness 유무에 관계없이 이 수치가 유사하게 유지된다는 가설.
 - Harness는 이 budget이 어떤 failure taxonomy(6축)로 구성되는가를 재배분한다.
 - 6축 taxonomy: tool call failure / context overflow / output format error / silent logical drift / recovery attempted & succeeded / recovery attempted & failed
 - Fig 2 (Failure Profile Radar)가 이 재배분을 시각화한다.
 
-**HOR 정의 (조작적):**
-- HOR = (harness가 추가하는 token 수) / (base task token 수) × 100%
-- HOR은 운영 비용의 직접 구성요소: Cost_compute = Cost_compute_base × (1 + HOR/100)
-- HOR × RSuccR trade-off에 optimal point가 존재한다는 가설을 Ch.4에서 검증.
-- HOR이 과도하면 token budget을 잠식하고 TCR이 오히려 감소한다 (E22 반례 예고).
+**harness overhead 정의 (조작적):**
+- harness overhead = (harness가 추가하는 token 수) / (base task token 수) × 100%
+- harness overhead은 운영 비용의 직접 구성요소: Cost_compute = Cost_compute_base × (1 + harness overhead/100)
+- harness overhead × RSuccR trade-off에 optimal point가 존재한다는 가설을 Ch.4에서 검증.
+- harness overhead이 과도하면 token budget을 잠식하고 TCR이 오히려 감소한다 (E22 반례 예고).
 
 **Pre-registration 원칙:**
 - Ch.4의 실험은 이 챕터 말미에서 가설과 판단 기준을 announce한다.
@@ -63,7 +63,7 @@ Harness는 failure를 제거하지 않는다. Harness가 하는 것은 failure�
    - Harness가 제약이면서 동시에 enabler인 이유
    - 보호: 알려진 실패 패턴의 구조적 차단
    - Enablement: agent가 실패를 복구하고 계속 실행할 수 있는 조건 형성
-   - 이 이중 구조가 없으면 harness는 overhead만 추가하는 bureaucracy가 된다 — HOR이 높고 RSuccR이 개선되지 않는 경우
+   - 이 이중 구조가 없으면 harness는 overhead만 추가하는 bureaucracy가 된다 — harness overhead이 높고 RSuccR이 개선되지 않는 경우
 
 3. **Harness를 guardrails, scaffolding, orchestration과 구분**
    - Guardrails: 입출력 필터링 (정적, post-hoc). 실행이 끝난 후 작동.
@@ -72,17 +72,17 @@ Harness는 failure를 제거하지 않는다. Harness가 하는 것은 failure�
    - Harness: operational envelope — 권한·메모리·리소스·복구를 runtime에 동적으로 관리. 세 개념을 포함하되 runtime 상태 관리를 핵심으로 한다.
    - 네 개념이 겹치는 경우와 겹치지 않는 경우: 실제 구현에서의 경계선
 
-4. **Failure Budget Reallocation — harness의 효과를 프레이밍하는 방법**
+4. **실패 재분류 — harness의 효과를 프레이밍하는 방법**
    - 기존 프레이밍의 문제: "harness가 failure를 줄인다" → 이것은 부분적으로만 맞다
-   - Failure Budget Reallocation: 총 failure budget이 유사하게 유지되면서 구성 유형이 바뀐다
+   - 실패 재분류: 총 failure budget이 유사하게 유지되면서 구성 유형이 바뀐다
    - Failure 6축 taxonomy의 정의와 각 축이 운영 비용에 미치는 영향 (silent drift가 가장 비싸다)
    - Fig 2 예고: Failure Profile Radar가 harness-on/off 전환 시 어떻게 이동하는가
    - 이 프레이밍이 더 정직한 이유: "failure가 줄었다"고 보고하면 보이지 않는 failure가 누적된다
 
-5. **HOR (Harness Overhead Ratio) — harness의 비용을 측정하는 방법**
-   - HOR 정의: token overhead 비율. Harness가 도입하는 운영 비용의 1차 지표.
-   - HOR × RSuccR trade-off: optimal point가 존재하는가 (Ch.4 실험 가설)
-   - HOR = 0은 harness 없음. HOR 과도 → token budget 잠식 → TCR 감소 (E22 예고).
+5. **harness overhead (Harness Overhead Ratio) — harness의 비용을 측정하는 방법**
+   - harness overhead 정의: token overhead 비율. Harness가 도입하는 운영 비용의 1차 지표.
+   - harness overhead × RSuccR trade-off: optimal point가 존재하는가 (Ch.4 실험 가설)
+   - harness overhead = 0은 harness 없음. harness overhead 과도 → token budget 잠식 → TCR 감소 (E22 예고).
    - 이 trade-off를 실험적으로 측정하는 것이 Fig 8 (Cost-Reliability Frontier)의 역할
 
 6. **AgentOps란 무엇인가 — profession으로서의 정의**
@@ -93,7 +93,7 @@ Harness는 failure를 제거하지 않는다. Harness가 하는 것은 failure�
 
 7. **Harness 부재의 비용: TeamClaws/PicoClaw 사후 분석**
    - 5변수 프레임워크로 실패를 재진단: 실제 1차 병목은 어디에 있었는가
-   - Failure Budget Reallocation 관점의 분석: harness가 있었다면 failure가 어떤 유형으로 재배분되었을까
+   - 실패 재분류 관점의 분석: harness가 있었다면 failure가 어떤 유형으로 재배분되었을까
    - CLI-Anything의 독립적 수렴: 다른 맥락에서 같은 문제를 발견하고 같은 방향으로 수렴한 사례
    - 독립 수렴이 의미하는 것: harness engineering은 특정 프로젝트의 ad-hoc 해결책이 아니다
 

@@ -9,7 +9,7 @@
 ## 1. 이 문서가 존재하는 이유
 
 이 책의 독자는 agent runtime 실무자이지, 정보이론 연구자나 ML 논문 저자가 아니다.
-그러나 이 책은 cross-entropy, ARCC, KL divergence, capability cliff 같은 개념을 도구로 사용한다.
+그러나 이 책은 cross-entropy, 모델 능력 지표, KL divergence, capability cliff 같은 개념을 도구로 사용한다.
 
 **문제:** 이런 개념을 설명 없이 던지면 독자가 이탈한다. 너무 길게 설명하면 실무서의 속도가 무너진다.
 
@@ -114,11 +114,11 @@ Bits-per-byte / Compression ratio
 뒤쪽 챕터는 앞쪽 챕터에서 정의된 개념을 전제한다. 그러나 **재도입 문장** 하나는 필수이다.
 
 **좋은 재도입:**
-> "Ch.2에서 측정한 ARCC(Agent-Relevant Capability Composite)를 여기서 harness-off 기준선으로 사용한다."
+> "Ch.2에서 측정한 모델 능력 지표(Agent-Relevant Capability Composite)를 여기서 harness-off 기준선으로 사용한다."
 
 **나쁜 재도입:**
-> "ARCC를 사용한다." (정의를 가정)
-> Ch.2의 ARCC 설명을 3문단 반복 (적층이 아니라 중복)
+> "모델 능력 지표를 사용한다." (정의를 가정)
+> Ch.2의 모델 능력 지표 설명을 3문단 반복 (적층이 아니라 중복)
 
 ---
 
@@ -129,10 +129,10 @@ Bits-per-byte / Compression ratio
 | 챕터 | 신규 핵심 개념 | 직관 앵커 소재 | 챕터 종료 시 독자 상태 |
 |------|---------------|---------------|----------------------|
 | Ch.1 | 5변수 프레임워크, Agent-1~5 스펙트럼 | "어제까지 잘 돌던 agent가 오늘 깨졌다" | 현재 agent 생태계를 파악하고, 왜 5변수 분석이 필요한지 설명 가능 |
-| Ch.2 | ARCC, Capability Cliff, Quantization Tax | "같은 코드인데 모델 바꾸니까 결과가 다르다" | 모델 변수의 취약성을 식별하고 ARCC 기반 측정을 설계 가능 |
-| Ch.3 | Harness, AgentOps, HOR, Failure Budget Reallocation | "guardrails랑 뭐가 다른데?" | Harness와 AgentOps를 정의하고, Ch.4 실험의 가설을 이해 |
+| Ch.2 | 모델 능력 지표, 성능 급락, Quantization Tax | "같은 코드인데 모델 바꾸니까 결과가 다르다" | 모델 변수의 취약성을 식별하고 모델 능력 지표 기반 측정을 설계 가능 |
+| Ch.3 | Harness, AgentOps, harness overhead, 실패 재분류 | "guardrails랑 뭐가 다른데?" | Harness와 AgentOps를 정의하고, Ch.4 실험의 가설을 이해 |
 | Ch.4 | Pre-registration, 22개 실험 설계, T1-T4 task 정의 | "일부러 망가뜨려 보면 뭐가 보이나?" | 의도적 실패 실험을 자신의 환경에서 설계 가능 |
-| Ch.5 | MTTR, HER, TotalCost, Optimal HOR | "실험 결과 숫자를 운영 언어로 어떻게 바꾸지?" | 실험실 metric → 운영 metric → 비용 metric 번역 가능 |
+| Ch.5 | MTTR, HER, TotalCost, Optimal harness overhead | "실험 결과 숫자를 운영 언어로 어떻게 바꾸지?" | 실험실 metric → 운영 metric → 비용 metric 번역 가능 |
 | Ch.6 | Operational Compiler, Marginal ROI | "어떤 규칙부터 도구로 만들어야 하나?" | Ablation 결과에서 도구화 우선순위 결정 가능 |
 | Ch.7 | Self-immune system, Agent-1→2 전환 조건 | "agent가 자기 실패를 스스로 감지하면?" | 자기면역 시스템의 조건과 한계를 구분하여 설명 가능 |
 

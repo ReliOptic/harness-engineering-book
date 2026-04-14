@@ -4,7 +4,7 @@
 **Date**: 2026-03-20~2026-03-21 (pilot)
 **Experimenter**: A
 **Cross-validator**: B (E03, E05)
-**Target chapter**: Ch.2 (§3 Capability Cliff), Ch.4 (1막)
+**Target chapter**: Ch.2 (§3 성능 급락), Ch.4 (1막)
 **Status**: [ ] 계획 / [x] 진행중 / [ ] 완료 / [ ] 교차검증 완료
 
 ---
@@ -36,9 +36,9 @@ Task 정의: `experiments/design-specification.md §1` 기준.
 - tool call 패턴 (TCA: Tool Call Accuracy)
 - task 완료율 (TCR per task type)
 - 실패 지점의 성격 (tool call 실패 vs. reasoning 실패 vs. format 오류)
-- ARCC sub-component 측정 (TCA, IFR, MSRD_n, CUE)
+- 모델 능력 지표 sub-component 측정 (TCA, IFR, MSRD_n, CUE)
 
-**핵심 가설 (pre-registered)**: ARCC가 특정 threshold 이하에서 TCR이 선형이 아닌 급락한다 (Capability Cliff). Cliff position은 task type(T1/T2)에 따라 다르다.
+**핵심 가설 (pre-registered)**: 모델 능력 지표가 특정 threshold 이하에서 TCR이 선형이 아닌 급락한다 (성능 급락). Cliff position은 task type(T1/T2)에 따라 다르다.
 
 ---
 
@@ -77,8 +77,8 @@ Task 정의: `experiments/design-specification.md §1` 기준.
 - google/gemini-2.5-flash-lite: 1.000 (2/2 success)
 - qwen/qwen3.5-9b: 0.000 (2/2 fail)
 
-**ARCC (SOTA)**: 미계산 (MSRD_n/CUE/T3 데이터 미수집)
-**ARCC (소형)**: 미계산 (MSRD_n/CUE/T3 데이터 미수집)
+**모델 능력 지표 (SOTA)**: 미계산 (MSRD_n/CUE/T3 데이터 미수집)
+**모델 능력 지표 (소형)**: 미계산 (MSRD_n/CUE/T3 데이터 미수집)
 
 ---
 
@@ -125,8 +125,8 @@ Task 정의: `experiments/design-specification.md §1` 기준.
 
 ## Lesson Learned
 
-- E01 완료 조건은 단순 TCR 집계가 아니라 ARCC 구성요소(TCA/IFR/MSRD_n/CUE) 동시 계측이다.
-- 현 상태는 T1/T2 pilot만 존재하고 T3 데이터가 없어 Capability Cliff 위치를 확정할 수 없다.
+- E01 완료 조건은 단순 TCR 집계가 아니라 모델 능력 지표 구성요소(TCA/IFR/MSRD_n/CUE) 동시 계측이다.
+- 현 상태는 T1/T2 pilot만 존재하고 T3 데이터가 없어 성능 급락 위치를 확정할 수 없다.
 - sandbox 네트워크 모드에서는 API 오류가 섞일 수 있어, 실행 모드(승격/비승격)를 실험 메타데이터로 기록해야 한다.
 
 ---
@@ -150,5 +150,5 @@ Task 정의: `experiments/design-specification.md §1` 기준.
 
 ## 관련 Figure
 
-- Fig 1 — Agent Capability Cliff (E01 확장): ARCC scatter plot + task-conditional sigmoid fit
+- Fig 1 — Agent 성능 급락 (E01 확장): 모델 능력 지표 scatter plot + task-conditional sigmoid fit
 - Fig 1b — Quantization Tax Curve (E02 연결)

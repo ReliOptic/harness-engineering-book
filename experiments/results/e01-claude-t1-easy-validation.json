@@ -1,0 +1,22 @@
+{
+  "experiment": "E01",
+  "model": "claude-haiku-4-5",
+  "task": "T1_code_review",
+  "difficulty": "EASY",
+  "ground_truth_count": 3,
+  "detected_count": 3,
+  "true_positives": 3,
+  "false_positives": 0,
+  "false_negatives": 0,
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1_score": 1.0,
+  "tcr": 1.0,
+  "bugs_found": [
+    {"line_number": 15, "bug_type": "off-by-one", "severity": "high"},
+    {"line_number": 20, "bug_type": "null_check", "severity": "high"},
+    {"line_number": 31, "bug_type": "type_mismatch", "severity": "medium"}
+  ],
+  "bugs_missed": [],
+  "false_alarms": []
+}

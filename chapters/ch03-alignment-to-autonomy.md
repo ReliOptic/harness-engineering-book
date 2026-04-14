@@ -1,6 +1,6 @@
-# Ch.3 — 정렬에서 자율로: 모델은 어떻게 행동을 배우는가
+# Ch.3 — 학습된 정렬이 Runtime에서 깨지는 지점
 
-> **Part I — 기반: Agent를 만든 논문들**
+> **Part I — Agent Runtime의 기술적 전제**
 
 **한 줄**: RLHF에서 Constitutional AI까지의 계보를 따라, 모델이 행동을 학습하는 메커니즘을 이해하고, 학습 단계의 정렬이 왜 runtime 문제를 해결하지 못하는지를 규명한다.
 

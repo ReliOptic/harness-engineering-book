@@ -17,15 +17,15 @@ Harness는 failure를 제거하지 않는다. Harness가 하는 일은 failure�
 
 ---
 
-## §1 Harness Engineering이란 무엇인가 — Operational Envelope의 정의
-
-> **축: 공식 담론** — OpenAI의 harness engineering 연구(2026)가 이 정의의 1차 좌표.
+## §1 Harness Engineering이란 무엇인가 — 운영 경계의 정의
 
 모델 변수가 더 이상 1차 병목이 아닌 조건에 도달했을 때 무엇을 설계해야 하는가라는 질문은 필연적으로 개념의 경계 문제에 부딪힌다. 대규모 언어 모델(LLM)의 크기 확장에서 에이전트의 신뢰성 보장으로 엔지니어링의 중심이 이동하면서 "harness"라는 단어가 현장에 혼용되고 있으나, 그 정확한 위치는 구분되어야 한다. 이 책에서 harness는 에이전트의 권한, 메모리, 리소스 경계, 복구 경로, 개입 조건을 런타임(runtime)에 명시적으로 관리하는 동적 제어 인프라를 의미하며, 이를 통해 에이전트가 작동하는 허용 공간인 'operational envelope'을 형성한다.
 
 이 정의의 핵심은 "런타임에 명시적으로"라는 한정에 있다. 에이전트가 envelope 안에 머무는 한 권한은 예상 범위 내에 있고 메모리는 오염되지 않으며 리소스 소비는 측정 가능하고 실패가 발생해도 사전에 정의된 복구 경로가 존재한다. OpenClaw 기반 선행 실험에서 필자가 관찰한 실패의 증상들은 다양했으나, 각각의 증상이 발생하기 전 에이전트의 현재 상태가 어디에도 기록되지 않고 있었다는 공통된 선행 조건이 존재했다. Harness의 역할은 에이전트의 런타임 상태를 측정 가능하게 만들어 이 공백을 메우는 것이다.
 
-OpenAI의 harness engineering 연구(2026)는 Codex와 터미널의 결합을 통해 이 operational envelope의 이상적 형태를 제시했다. 샌드박스 환경, 명시적 권한 경계, 구조화된 출력 형식이 그 구성 요소다. 이 책이 그 연구와 다른 지점은 이상적 환경이 아니라 제약 환경 — 공유 vCPU, 제한된 메모리, 불안정한 네트워크 — 에서 동일한 원칙을 실험한다는 것이다. 제약 환경에서는 envelope의 경계가 더 좁고, 경계 위반의 결과가 더 즉각적이며, harness 설계의 trade-off가 더 선명하게 드러난다.
+2026년 현재, 장기 실행 agent 시스템을 운영하는 조직들은 독립적으로 유사한 아키텍처 분리에 도달하고 있다. 에이전트의 구성 요소를 session(이벤트 로그), harness(agent loop), sandbox(실행 환경), tools(도구 인터페이스)로 분리하고, 각 컴포넌트가 독립적으로 실패하고 교체될 수 있도록 설계하는 패턴이다. 단일 컨테이너에 모든 구성 요소를 결합했을 때 발생하는 문제 — 컨테이너 실패 시 세션 손실, 디버깅 불가, 실행 환경과 인증 정보의 결합으로 인한 보안 경계 부재 — 가 이 분리를 추동했다. 이 4-component 분리는 하나의 컴포넌트가 죽어도 나머지를 살려 교체할 수 있는 구조를 만들며, harness crash 시 session log에서 마지막 이벤트를 읽어 새 harness를 기동하는 복구 경로를 제공한다.
+
+이 책의 harness 정의는 이 산업적 분리 패턴보다 넓다. 산업계의 4-component는 "에이전트 시스템의 부품은 무엇인가"에 답하는 아키텍처 분해이며, 자사 모델과 자사 인프라에 최적화된 구조다. 이 책의 독자는 모델을 선택해야 하고, 자원 제약 아래에서 운영해야 하며, 인간 개입의 시점을 결정해야 한다. 이 세 조건이 Ch.5에서 도입한 네 영역 — 모델 능력(inbound), 실행 환경 제약(boundary), 사용자 접점(outbound), 피드백 루프(return) — 을 harness 정의 안에 포함하는 이유다. 제약 환경에서는 envelope의 경계가 더 좁고, 경계 위반의 결과가 더 즉각적이며, harness 설계의 trade-off가 더 선명하게 드러난다.
 
 ## §2 경계의 확정: Guardrails, Scaffolding, Orchestration과의 구분
 
@@ -64,21 +64,21 @@ Harness가 에이전트 행동의 물리적 경계를 제어한다면, 온톨로
 
 일반적인 텍스트 유사도 기반의 RAG가 지식을 단순히 발견하는 것에 그친다면, Ontology RAG는 엄격한 제약을 우선하여 에이전트의 영구 메모리를 구조화한다. Cognee나 TrustGraph와 같은 도구들은 메모리 변형(mutation)이 발생하기 전 스키마 검증을 강제하는 시맨틱 방화벽 역할을 수행하며, 이는 다중 에이전트 환경에서 맥락의 손실 없이 정보를 교환하게 하는 필수적인 공유 언어가 된다. 이 구조화된 기억은 단순한 정보 검색을 넘어 에이전트가 자신의 상태를 자가 교정하고 진화하기 위한 전제 조건이다.
 
-## §5 Failure Budget Reallocation — Harness 효과의 재규정
+## §5 실패 재분류 — Harness 효과의 재규정
 
 > **축: 출간 시장** — 현재 출간된 harness/context engineering 서적 중 이 프레임워크를 조작적으로 정의한 것은 없다.
 
-실험 데이터는 "harness를 적용하면 실패가 감소한다"는 단순한 명제를 기각한다. Harness가 작동하는 환경에서 특정 실패의 표면적 빈도는 줄어들지만, 실제로는 실패가 다른 범주로 재분류된 것에 가깝다. Failure Budget Reallocation 프레임워크는 주어진 조건에서 발생하는 실패 이벤트의 총량은 유사하게 유지된다는 가설 위에 서 있다.
+실험 데이터는 "harness를 적용하면 실패가 감소한다"는 단순한 명제를 기각한다. Harness가 작동하는 환경에서 특정 실패의 표면적 빈도는 줄어들지만, 실제로는 실패가 다른 범주로 재분류된 것에 가깝다. 실패 재분류 프레임워크는 주어진 조건에서 발생하는 실패 이벤트의 총량은 유사하게 유지된다는 가설 위에 서 있다.
 
 필자는 실패를 6축 분류 체계(taxonomy)로 나누어 관찰했다: tool call failure, context overflow, output format error, silent logical drift, recovery attempted & succeeded, recovery attempted & failed. 이 중 운영 비용이 가장 높은 것은 silent logical drift다. 발생과 감지 사이의 간격이 길어 오류가 누적된 후 전체 파이프라인을 폐기해야 하기 때문이다. Harness는 이 치명적인 silent logical drift의 비중을 낮추고, 실패를 발생 즉시 포착하여 복구 루프로 진입시키는 recovery attempted 영역으로 예산을 재배분한다. 이 프레임워크는 단순히 표면적 성공률을 과장하는 대신 실패의 본질적 전환을 명시적으로 추적하게 한다.
 
-경쟁서와의 좌표: Rothman의 *Context Engineering* (2026, 예정)은 context window 관리를 체계화하지만, 실패의 재배분이라는 프레임은 다루지 않는다. Huyen의 *AI Engineering* (2025)은 application layer의 평가 프레임워크를 제시하지만, runtime 실패의 운영적 전환은 범위 밖이다. 이 책이 Failure Budget Reallocation을 조작적으로 정의하고 실험적으로 검증하는 것은, 출간 시장에서 아직 점유되지 않은 영역이다.
+경쟁서와의 좌표: Rothman의 *Context Engineering* (2026, 예정)은 context window 관리를 체계화하지만, 실패의 재배분이라는 프레임은 다루지 않는다. Huyen의 *AI Engineering* (2025)은 application layer의 평가 프레임워크를 제시하지만, runtime 실패의 운영적 전환은 범위 밖이다. 이 책이 실패 재분류를 조작적으로 정의하고 실험적으로 검증하는 것은, 출간 시장에서 아직 점유되지 않은 영역이다.
 
-## §6 AgentOps와 운영 지표 (HOR, MTTR)
+## §6 AgentOps와 운영 지표 (harness overhead, MTTR)
 
 단일 에이전트의 상태 관리를 넘어, 비결정론적 특성을 지닌 복합 에이전트 시스템을 관측하고 디버깅하며 최적화하는 특화 인프라가 AgentOps다. 모델 자체의 생애주기를 관리하는 MLOps나 결정론적 코드 배포를 다루는 DevOps와 달리, AgentOps는 실행 중인 에이전트의 런타임 행동 관찰과 개입에 집중한다. LangSmith, Weave, AgentOps.ai, Helicone, Braintrust와 같은 프레임워크들은 각각 생태계 통합, 세션 추적, 비용 통제, 평가 주도 테스트 등의 강점을 가지며 이 관측성을 제공한다.
 
-이 운영 규율의 1차 지표는 MTTR(Mean Time To Recovery)과 HER(Human Escalation Rate)이다. 이 지표들은 장애 발생 시 시스템이 자체 복구하거나 인간 엔지니어가 개입해야 하는 시간을 실질적 비용으로 환산한다. 또한 Harness의 운영 비용 자체를 측정하기 위해 HOR(Harness Overhead Ratio)이라는 토큰 오버헤드 비율 지표를 도입한다. HOR이 과도하게 높아지면 토큰 예산을 잠식하여 오히려 작업 완료율(TCR)이 감소하는 현상이 발생하므로, HOR과 복구 성공률(RSuccR) 사이의 최적점(optimal point)을 찾는 것이 운영 설계의 핵심이다.
+이 운영 규율의 1차 지표는 MTTR(Mean Time To Recovery)과 HER(Human Escalation Rate)이다. 이 지표들은 장애 발생 시 시스템이 자체 복구하거나 인간 엔지니어가 개입해야 하는 시간을 실질적 비용으로 환산한다. 또한 Harness의 운영 비용 자체를 측정하기 위해 harness overhead라는 토큰 오버헤드 비율 지표를 도입한다. harness overhead가 과도하게 높아지면 토큰 예산을 잠식하여 오히려 작업 완료율(TCR)이 감소하는 현상이 발생하므로, harness overhead와 복구 성공률(RSuccR) 사이의 최적점(optimal point)을 찾는 것이 운영 설계의 핵심이다.
 
 ## §7 산업계 AgentOps 실무: 도구화된 것과 아직 안 된 것
 
@@ -88,7 +88,7 @@ Harness가 에이전트 행동의 물리적 경계를 제어한다면, 온톨로
 
 **도구화된 것**: 트레이스 수집과 시각화(LangSmith, Weave), 토큰 비용 추적(Helicone), 세션 단위 재현(AgentOps.ai replay), A/B 테스트 기반 프롬프트 평가(Braintrust). 이 도구들이 제공하는 것은 관측성(observability)이다 — 무엇이 일어났는가를 사후에 재구성할 수 있게 한다.
 
-**아직 안 된 것**: 실시간 drift 감지, 자동 복구 판단(재시도 vs 에스컬레이션 vs 중단), 다중 에이전트 환경에서의 오류 전파 추적, HOR 최적점의 동적 조정. 이 영역들이 도구화되지 않은 이유는 기술적 난이도만이 아니라, 판단 기준이 task와 context에 의존하여 범용 도구로 추상화하기 어렵기 때문이다.
+**아직 안 된 것**: 실시간 drift 감지, 자동 복구 판단(재시도 vs 에스컬레이션 vs 중단), 다중 에이전트 환경에서의 오류 전파 추적, harness overhead 최적점의 동적 조정. 이 영역들이 도구화되지 않은 이유는 기술적 난이도만이 아니라, 판단 기준이 task와 context에 의존하여 범용 도구로 추상화하기 어렵기 때문이다.
 
 이 경계가 중요한 이유는 Ch.10의 Operational Compiler가 정확히 이 "아직 안 된 것"의 영역에서 운영 규칙을 점진적으로 도구화하려는 시도이기 때문이다. Ch.8-9의 실험이 측정하는 것은 이 도구화의 효과와 한계다.
 
@@ -109,4 +109,4 @@ Harness가 에이전트 행동의 물리적 경계를 제어한다면, 온톨로
 - **Layer 2 (LLM Judge):** T4 합성 과제 및 Layer 1 판정이 모호한 약 30%의 사례에 적용. 인간 평가자와의 일치도(κ ≥ 0.70) 조건을 만족해야 함.
 - **Layer 3 (Human Rater):** 계층화 표집(stratified sample)된 15~20%의 결과에 대해 2인의 독립된 평가자가 판정하며, 불일치 시 별도의 해결 프로토콜을 적용함.
 
-이후 분석 과정에서 기준이 변경될 경우 반드시 Deviation Protocol에 따라 기록되며 확증적(confirmatory) 발견에서 탐색적(exploratory) 발견으로 강등된다. 이 실험 프레임은 5변수 중 어떤 요소가 어떤 조건에서 1차 병목으로 작용하는지를 정밀하게 타격하기 위한 기반이다.
+이후 분석 과정에서 기준이 변경될 경우 반드시 Deviation Protocol에 따라 기록되며 확증적(confirmatory) 발견에서 탐색적(exploratory) 발견으로 강등된다. 이 실험 프레임은 harness의 네 영역 중 어떤 영역에서 어떤 조건이 1차 병목으로 작용하는지를 정밀하게 타격하기 위한 기반이다.

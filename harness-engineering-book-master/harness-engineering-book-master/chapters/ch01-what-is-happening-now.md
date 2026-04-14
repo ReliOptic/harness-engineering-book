@@ -15,7 +15,7 @@
 - 2026년 상반기 agent runtime 생태계의 구조와 주요 축을 설명할 수 있다.
 - TeamClaws/PicoClaw 실패가 왜 이 책의 출발점인지 이해한다.
 - 5변수 프레임워크(모델, harness, surface, intervention, compute)의 개념을 이해하고, 이후 챕터에서 각 변수가 어떻게 격리·측정될지 예상할 수 있다.
-- ARCC(Agent-Relevant Capability Composite)와 Capability Cliff의 개념을 예비적으로 이해한다.
+- 모델 능력 지표(Agent-Relevant Capability Composite)와 성능 급락의 개념을 예비적으로 이해한다.
 - Agent-1 ~ Agent-5 스펙트럼에서 현재 대부분의 배포 agent가 어디에 위치하는지, 그리고 그 이유를 설명할 수 있다.
 
 ## 집필 노트
@@ -23,11 +23,11 @@
 - 관련 DR: DR-1.1 (OpenClaw 생태계), DR-1.2 (agent-first surface), DR-1.3 (AIE 영향)
 - 관련 증거: `evidence/case-studies/openclaw-anchor.md`, `evidence/case-studies/teamclaws-picoclaw-postmortem.md`
 - 관련 dispatch: `#ecosystem` 태그, `FD-2026-03-17-002-cli-renaissance.md`, `FD-2026-03-17-002-wide-survey.md`
-- **이 챕터의 역할**: 독자에게 실험의 이유와 배경을 제공하면서, Ch.2에서 본격 등장하는 ARCC와 Capability Cliff 개념의 씨앗을 뿌린다. 도입이지 분석이 아니다. 답을 내지 않는다 — 질문을 정의한다.
+- **이 챕터의 역할**: 독자에게 실험의 이유와 배경을 제공하면서, Ch.2에서 본격 등장하는 모델 능력 지표와 성능 급락 개념의 씨앗을 뿌린다. 도입이지 분석이 아니다. 답을 내지 않는다 — 질문을 정의한다.
 - **예고해야 할 개념들**:
-  - **ARCC** (§6): 5변수 중 모델 변수를 어떻게 측정할지의 질문을 열어두는 곳. "vendor tier가 왜 불충분한가"를 관찰 사례로 암시.
-  - **Capability Cliff** (§5): "왜 지금이 중요한가"에서, harness 없이 작동하는 모델을 고르는 것 자체가 어렵다는 관찰. 선형이 아닌 경계가 존재한다는 암시.
-  - **Failure Budget Reallocation** (§4): TeamClaws 실패 서술 시, 실패의 성격이 변하지 않고 유형만 바뀌었다는 관찰을 자연스럽게 노출.
+  - **모델 능력 지표** (§6): 5변수 중 모델 변수를 어떻게 측정할지의 질문을 열어두는 곳. "vendor tier가 왜 불충분한가"를 관찰 사례로 암시.
+  - **성능 급락** (§5): "왜 지금이 중요한가"에서, harness 없이 작동하는 모델을 고르는 것 자체가 어렵다는 관찰. 선형이 아닌 경계가 존재한다는 암시.
+  - **실패 재분류** (§4): TeamClaws 실패 서술 시, 실패의 성격이 변하지 않고 유형만 바뀌었다는 관찰을 자연스럽게 노출.
 - **문체 원칙**: 이 챕터는 관찰과 기록이다. TeamClaws/PicoClaw 실패를 서술할 때 결론을 선언하지 않는다 — 관찰된 것을 기록하고, 남은 질문을 다음 챕터로 넘긴다. "따라서 harness가 필요하다"를 이 챕터에서 쓰면 안 된다.
 - **AIE shout-out은 §8에서**: Chip Huyen의 *AI Engineering*(2025)이 foundation model 위의 application layer를 다룬다면, 이 책은 그 위의 agent runtime 운영 구조를 다룬다. 계층 구분이 핵심.
 
@@ -69,7 +69,7 @@
    - 모델, harness, surface, intervention, compute — 이원론("모델 vs. 운영 구조")에서 5변수로
    - 각 변수가 이후 챕터에서 어떻게 격리·측정되는가
    - "1차 병목은 무엇인가"라는 질문이 이 프레임워크에서 어떻게 답해질 수 있는가
-   - 모델 변수 측정의 문제 예고: vendor tier나 벤치마크가 왜 부족한가, 그리고 ARCC라는 대안이 Ch.2에서 등장하는 이유
+   - 모델 변수 측정의 문제 예고: vendor tier나 벤치마크가 왜 부족한가, 그리고 모델 능력 지표라는 대안이 Ch.2에서 등장하는 이유
 
 7. **Agent-1 ~ Agent-5 방향 설정**
    - 자율성 스펙트럼으로서의 Agent-1 ~ Agent-5
@@ -125,7 +125,7 @@ MiroFish는 이 수렴 방향에서 흥미로운 위치에 있다. 학부생 개
 
 Anthropic의 Project Vend는 이 생태계 관찰에 외부 실험 좌표를 제공한다. 사내 자판기를 Claude 기반 단일 에이전트로 자율 운영하게 한 Phase 1에서, 운영 첫 달에 초기 자본금의 20%가 사라졌다. CRM이 없는 상태에서 에이전트는 원가를 추론에 의존했고, context window가 리셋될 때마다 이전 세션에서 결정된 할인 정책이 복귀했다 — 메모리가 아닌 context에 상태를 보관한 구조가 만든 학습 리셋 현상이었다. Phase 2는 CRM 도구, 원가 가시성 구조, 결제 선처리 메커니즘, CEO 에이전트를 추가하여 주간 흑자 전환에 성공했다. 개선의 실제 동인은 모델 버전 교체(Sonnet 3.7→4.0→4.5)가 아니라 harness component의 점진적 추가였다. 그러나 CEO 에이전트도 동일한 구조적 취약점을 공유했고, WSJ 레드팀은 조작된 기업 지배구조 문서 하나로 3주 안에 시스템을 무너뜨렸다. 5변수 프레임워크로 이 패턴을 읽으면 Phase 1의 1차 병목은 harness였고, Phase 2에서 그 병목은 intervention 구조 — 외부 조작을 차단하는 레이어의 부재 — 로 이동했다. Phase 1→2 개선은 Ch.6 Fieldkit 점진적 도구화의 외부 사례로 재등장하고, CEO 에이전트의 실패는 E09~E14에서 측정하는 multi-agent coordination overhead의 현실 대응물이 된다.
 
-플랫폼 레이어에서도 같은 방향의 움직임이 확인된다. 2026년 초, Anthropic은 multi-agent coordination을 공식 기능(experimental)으로 출시하면서 공식 문서에 이 문장을 포함시켰다 — "agent teams add coordination overhead and use significantly more tokens than a single session." 플랫폼이 자신의 기능 출시 문서에서 coordination overhead의 존재를 명시한 것은, TeamClaws가 2025년에 직접 겪었던 CPU saturation과 context fragmentation 패턴을 생태계가 공식적으로 인식하기 시작했다는 신호다. 시점에는 차이가 있지만 문제의 구조는 동일하다 — 그리고 이 구조는 Ch.3에서 HOR(Harness Overhead Ratio)로 정식화된다.
+플랫폼 레이어에서도 같은 방향의 움직임이 확인된다. 2026년 초, Anthropic은 multi-agent coordination을 공식 기능(experimental)으로 출시하면서 공식 문서에 이 문장을 포함시켰다 — "agent teams add coordination overhead and use significantly more tokens than a single session." 플랫폼이 자신의 기능 출시 문서에서 coordination overhead의 존재를 명시한 것은, TeamClaws가 2025년에 직접 겪었던 CPU saturation과 context fragmentation 패턴을 생태계가 공식적으로 인식하기 시작했다는 신호다. 시점에는 차이가 있지만 문제의 구조는 동일하다 — 그리고 이 구조는 Ch.3에서 harness overhead(Harness Overhead Ratio)로 정식화된다.
 
 2026년 3월 기준으로 이 생태계가 아직 표준화하지 못한 것이 있다. Surface 변수는 빠르게 수렴 중이고, harness operational layer는 독립적 수렴 신호를 보내고 있으며, 플랫폼은 coordination overhead를 공식 비용으로 인식하기 시작했다 — 그러나 개별 CLI 도구와 프레임워크를 agent들이 조율하는 harness 레이어는 여전히 각 팀에 위임된 채 생태계 표준으로 자리잡지 못했다.
 
@@ -161,9 +161,9 @@ OpenClaw 1세대 실패와 PicoClaw 6-Gate 결과 사이의 간격이 이 책의
 
 Agent 시스템이 아직 성숙하지 않은 지금이 관찰의 적기라는 주장은 반직관적으로 들릴 수 있다. 시스템이 성숙할수록 더 많은 것을 알 수 있을 것처럼 보이기 때문이다. 그러나 구조적 취약점의 관찰이라는 목적에서는 반대 방향이 참이다. 취약점은 추상화 레이어가 얇을 때 가장 선명하게 보인다. GC Death Spiral이 72시간 이내에 재현된 것은 harness와 프로세스 격리 없이 운영했기 때문이다. 더 성숙한 시스템에서는 동일한 메커니즘이 더 높은 수준의 추상화 뒤에서 작동하며, 원인과 증상 사이의 거리가 멀어진다.
 
-모델 선택만으로는 agent 안정성을 보장할 수 없다는 관찰은 이 책 전체를 관통하는 출발 질문이다. 동일한 모델, 동일한 task 유형, 다른 실행 조건에서 출력 품질이 다르게 나타나는 패턴을 필자는 반복적으로 관찰했다. 모델 벤치마크가 예측하는 것과 실제 agent viability 사이의 간격이 어디서 오는가 — 이것이 Ch.2에서 ARCC를 측정하는 이유다. 그러나 그 측정을 시작하기 전에, 간격이 존재한다는 관찰 사실 자체를 Ch.1에서 확인하는 것이 필요하다.
+모델 선택만으로는 agent 안정성을 보장할 수 없다는 관찰은 이 책 전체를 관통하는 출발 질문이다. 동일한 모델, 동일한 task 유형, 다른 실행 조건에서 출력 품질이 다르게 나타나는 패턴을 필자는 반복적으로 관찰했다. 모델 벤치마크가 예측하는 것과 실제 agent viability 사이의 간격이 어디서 오는가 — 이것이 Ch.2에서 모델 능력 지표를 측정하는 이유다. 그러나 그 측정을 시작하기 전에, 간격이 존재한다는 관찰 사실 자체를 Ch.1에서 확인하는 것이 필요하다.
 
-TeamClaws 실험에서 필자가 가장 오래 붙잡혔던 것은 경계가 선형이지 않다는 패턴이었다. 어떤 task-모델 조합은 수백 step이 지나도 안정적으로 실행되고, 다른 조합은 예고 없이 무너진다. 무너지는 패턴이 선형이었다면 — step 수가 늘어날수록 실패 확률이 조금씩 증가한다면 — 임계점을 예측할 수 있었을 것이다. 관찰된 패턴은 달랐다. 오랫동안 정상적으로 보이다가 어떤 시점에서 급격히 무너지는 비선형 패턴. 이 경계가 어디에 위치하고 무엇이 그것을 결정하는가가 Ch.2에서 Capability Cliff를 측정하는 배경이다.
+TeamClaws 실험에서 필자가 가장 오래 붙잡혔던 것은 경계가 선형이지 않다는 패턴이었다. 어떤 task-모델 조합은 수백 step이 지나도 안정적으로 실행되고, 다른 조합은 예고 없이 무너진다. 무너지는 패턴이 선형이었다면 — step 수가 늘어날수록 실패 확률이 조금씩 증가한다면 — 임계점을 예측할 수 있었을 것이다. 관찰된 패턴은 달랐다. 오랫동안 정상적으로 보이다가 어떤 시점에서 급격히 무너지는 비선형 패턴. 이 경계가 어디에 위치하고 무엇이 그것을 결정하는가가 Ch.2에서 성능 급락를 측정하는 배경이다.
 
 지금 이것을 기록하는 것은 고도화된 이후에도 의미를 갖는다. 더 강력한 모델이 동일한 메커니즘에 더 높은 저항성을 가질 수 있지만 메커니즘 자체는 사라지지 않으며, 그 메커니즘을 지금 관찰해야만 Agent-2가 self-immune system으로 방어해야 하는 failure 유형의 목록을 도출할 수 있다.
 
@@ -177,9 +177,9 @@ TeamClaws 실패를 진단하는 과정에서 이원론이 먼저 작동했다. 
 
 5변수 프레임워크는 이 설명 실패를 해소하기 위해 도입했다. 모델, harness, product surface, operator intervention, compute — 이 다섯 변수가 agent 성능에 독립적으로 영향을 미치며, 각 변수는 다른 변수를 고정한 채 격리·조작할 수 있다. 1차 병목이 무엇인가라는 질문은 이 다섯 변수 중 어느 것이 현재 조건에서 성능을 가장 크게 제한하고 있는가를 묻는 것이다. 그 답은 실험 조건에 따라 달라지며, 같은 시스템에서도 운영 phase에 따라 1차 병목이 전환된다.
 
-각 변수가 이후 챕터에서 어떻게 다루어지는가를 미리 정리한다. 모델 변수는 Ch.2에서 ARCC를 통해 측정된다 — vendor tier나 벤치마크 점수가 왜 agent viability의 유효한 predictor가 아닌지, 그리고 어떤 측정이 그것을 대체하는지. Harness 변수는 Ch.3에서 정의되고 Ch.4의 E05~E08에서 조작된다 — failure budget이 harness 유무에 따라 어떻게 재배분되는가. Product surface 변수는 Ch.1~Ch.3에 걸쳐 OpenClaw 생태계 관찰로 다루어진다. Operator intervention 변수는 Ch.4의 E15~E17에서 격리된다 — 개입 타이밍과 방법이 MTTR에 미치는 영향. Compute 변수는 Ch.4의 E09~E14에서 조작된다 — GCP 무료 티어 제약이 실험 조건으로 작동하는 방식.
+각 변수가 이후 챕터에서 어떻게 다루어지는가를 미리 정리한다. 모델 변수는 Ch.2에서 모델 능력 지표를 통해 측정된다 — vendor tier나 벤치마크 점수가 왜 agent viability의 유효한 predictor가 아닌지, 그리고 어떤 측정이 그것을 대체하는지. Harness 변수는 Ch.3에서 정의되고 Ch.4의 E05~E08에서 조작된다 — failure budget이 harness 유무에 따라 어떻게 재배분되는가. Product surface 변수는 Ch.1~Ch.3에 걸쳐 OpenClaw 생태계 관찰로 다루어진다. Operator intervention 변수는 Ch.4의 E15~E17에서 격리된다 — 개입 타이밍과 방법이 MTTR에 미치는 영향. Compute 변수는 Ch.4의 E09~E14에서 조작된다 — GCP 무료 티어 제약이 실험 조건으로 작동하는 방식.
 
-모델 변수 측정에서 문제가 되는 것을 미리 짚는다. Vendor tier(GPT-4, Claude Opus 등의 분류)나 표준 벤치마크(MMLU, HumanEval 등)는 단일 LLM 호출 품질을 측정하도록 설계되었다. Agent가 수행하는 것은 단일 호출이 아니라 multi-step chain이다 — 각 단계의 출력이 다음 단계의 입력이 되고, 초기 오류가 downstream에서 증폭되는 구조. 이 구조에서 의미 있는 모델 변수 측정은 단일 호출 품질이 아니라 multi-step chain에서의 오류 누적 저항성을 다루어야 한다. ARCC(Agent-Relevant Capability Composite)가 Ch.2에서 이 측정 문제를 다루는 이유가 여기 있다.
+모델 변수 측정에서 문제가 되는 것을 미리 짚는다. Vendor tier(GPT-4, Claude Opus 등의 분류)나 표준 벤치마크(MMLU, HumanEval 등)는 단일 LLM 호출 품질을 측정하도록 설계되었다. Agent가 수행하는 것은 단일 호출이 아니라 multi-step chain이다 — 각 단계의 출력이 다음 단계의 입력이 되고, 초기 오류가 downstream에서 증폭되는 구조. 이 구조에서 의미 있는 모델 변수 측정은 단일 호출 품질이 아니라 multi-step chain에서의 오류 누적 저항성을 다루어야 한다. 모델 능력 지표(Agent-Relevant Capability Composite)가 Ch.2에서 이 측정 문제를 다루는 이유가 여기 있다.
 
 ---
 
@@ -191,7 +191,7 @@ TeamClaws 실패를 진단하는 과정에서 이원론이 먼저 작동했다. 
 
 Agent-1이라고 부르는 것은 이 상태다 — tool-using이지만 취약한, 외부 harness와 operator intervention 없이는 장기 자율 루프를 신뢰 가능하게 유지하지 못하는 세대. Agent-1이 취약한 이유는 능력의 부재가 아니라 self-monitoring의 부재다. cliff 근접을 감지하지 못하기 때문에 failure budget이 silent drift 방향으로 이동하는 것을 포착할 수 없고, 포착이 없으면 recovery 경로는 실행 조건 자체를 갖지 못한다.
 
-Agent-2는 self-immune system을 보유한다 — ARCC self-monitoring, cliff-proximity detection, self-initiated recovery가 agent 내부에 주입된 상태. Agent-1이 외부 harness에 의존해 관찰되고 복구되는 것과 달리, Agent-2는 이 기능을 내부화한다. 그러나 Agent-2 전환에는 하한 조건이 있다. Self-monitoring 자체가 ARCC를 소비한다 — agent가 자신의 capability를 estimate하려면 그 estimate를 수행할 수 있는 capability가 먼저 확보되어야 한다. ARCC가 cliff threshold 이하인 agent에서는 self-monitoring이 신뢰 가능하지 않다. Self-immune system이 무너지는 순간이 정확히 self-monitoring이 필요한 순간이기도 하다는 재귀적 구조가 여기서 나온다.
+Agent-2는 self-immune system을 보유한다 — 모델 능력 지표 self-monitoring, cliff-proximity detection, self-initiated recovery가 agent 내부에 주입된 상태. Agent-1이 외부 harness에 의존해 관찰되고 복구되는 것과 달리, Agent-2는 이 기능을 내부화한다. 그러나 Agent-2 전환에는 하한 조건이 있다. Self-monitoring 자체가 모델 능력 지표를 소비한다 — agent가 자신의 capability를 estimate하려면 그 estimate를 수행할 수 있는 capability가 먼저 확보되어야 한다. 모델 능력 지표가 cliff threshold 이하인 agent에서는 self-monitoring이 신뢰 가능하지 않다. Self-immune system이 무너지는 순간이 정확히 self-monitoring이 필요한 순간이기도 하다는 재귀적 구조가 여기서 나온다.
 
 Agent-3부터 Agent-5는 이 책의 범위 밖에 있다. Agent-3은 Agent-2의 self-immune 루프 위에서 새로운 task를 스스로 생성하는 능력을 추가하고, Agent-4와 Agent-5는 더 높은 수준의 자율성과 사회적 역량을 포함하는 방향으로 예측되지만, 2026년 상반기 시점에서 이것은 관찰이 아니라 추론이다. 이 책의 실험이 탐색하는 경계는 Agent-1과 Agent-2 사이다 — 어떤 조건에서 self-immune 구조가 신뢰 가능하게 작동하기 시작하는가.
 

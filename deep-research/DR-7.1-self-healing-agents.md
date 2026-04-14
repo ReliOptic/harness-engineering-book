@@ -8,7 +8,7 @@
 Self-healing agent = runtime 중 자기 상태를 감지하고, 실패를 탐지하며, 외부 개입 없이 복구를 시도하는 agent 능력.
 
 핵심 구조:
-1. **Self-monitoring** — ARCC 지표 기반 자기 상태 추정 (cliff-proximity detection)
+1. **Self-monitoring** — 모델 능력 지표 지표 기반 자기 상태 추정 (cliff-proximity detection)
 2. **Failure detection** — 실행 궤적에서 비정상 패턴 식별 (hallucination, loop, drift)
 3. **Self-initiated recovery** — 재시도, 롤백, 도구 전환, 인간 에스컬레이션 판단
 
@@ -21,8 +21,8 @@ Self-healing agent = runtime 중 자기 상태를 감지하고, 실패를 탐지
 ## Ch.11 연결
 
 - Self-immune system = self-healing의 harness 내재화 버전
-- 재귀적 한계: self-monitoring 자체가 ARCC를 소비 → monitoring overhead가 cliff를 당길 수 있음
-- Agent-1 → Agent-2 전환 조건: self-healing이 신뢰 가능한 ARCC 하한이 존재하는가?
+- 재귀적 한계: self-monitoring 자체가 모델 능력 지표를 소비 → monitoring overhead가 cliff를 당길 수 있음
+- Agent-1 → Agent-2 전환 조건: self-healing이 신뢰 가능한 모델 능력 지표 하한이 존재하는가?
 
 ## 미정리 질문 (DR 단계)
 

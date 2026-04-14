@@ -30,7 +30,7 @@
 1. **Ch.1** (attention) → 2. **Ch.3** (alignment) → 3. **Ch.4** (tools) → 4. **Ch.5** (5변수) → 5. **Ch.7** (FBR) → 6. **Ch.11** (self-immune)
 
 Ch.5는 Ch.1~4 대화를 모두 마친 후에 시작해야 Part I 회수가 가능합니다.
-Ch.11은 Ch.7 대화 이후에 시작해야 FBR/HOR 개념이 전제로 작동합니다.
+Ch.11은 Ch.7 대화 이후에 시작해야 FBR/harness overhead 개념이 전제로 작동합니다.
 
 ## 결과 파일 네이밍 규칙
 

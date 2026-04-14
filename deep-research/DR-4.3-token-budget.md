@@ -35,14 +35,14 @@ Ch.4에서는 ETB를 task 단위로 기록해야 budget 효과를 정확히 비�
 - IFR (Instruction-Following Rate)
 - TCA (Tool-Call Accuracy)
 - Overconfidence Gap = `Self-assessment - Actual outcome`
-- HOR (Harness Overhead Ratio) = `Harness Overhead / Total Budget`
+- harness overhead (Harness Overhead Ratio) = `Harness Overhead / Total Budget`
 
 ## 4. Ch.4 실험 설계로의 직접 매핑
 
 | 실험 | budget 관련 조작 | 기대 관찰 |
 |---|---|---|
 | E08 | 100%→75%→50%→25% 단계 감소 | calibration cliff 지점 확인 |
-| E12 | self-immune monitoring 강도 증가 | HOR 임계치 및 순효과 역전 확인 |
+| E12 | self-immune monitoring 강도 증가 | harness overhead 임계치 및 순효과 역전 확인 |
 | E20 | 극단 budget 제약 + harness=ON/OFF 비교 | "보호 비용 > 실행 비용" 구간 확인 |
 
 ## 5. 최적화 전략 계층 (실험 설계 관점)
@@ -65,7 +65,7 @@ Ch.4에서는 ETB를 task 단위로 기록해야 budget 효과를 정확히 비�
 
 ## 6. 보고 규약 (원고 반영용)
 
-- 각 실험에서 `Total Budget`, `ETB`, `HOR`, `TCR`, `IFR`, `TCA`를 함께 보고.
+- 각 실험에서 `Total Budget`, `ETB`, `harness overhead`, `TCR`, `IFR`, `TCA`를 함께 보고.
 - "성능 저하" 서술은 반드시 임계 구간(예: 50% 이하)과 함께 제시.
 - 자기평가 지표는 실제 성능과 분리해 보고하고, 괴리(Overconfidence Gap)를 별도 표로 제시.
 

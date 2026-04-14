@@ -8,7 +8,7 @@
 
 ## Ch.7 핵심 논제
 
-Self-immune system = agent 내부의 ARCC self-monitoring + cliff-proximity detection + self-initiated recovery. 이 능력은 현재의 harness를 통해 점진적으로 주입 가능하다 — 단, ARCC 하한 조건이 충족될 때만 신뢰 가능하다. 그 조건이 충족되지 않으면 self-immune 구조 자체가 새로운 failure source가 된다. Agent-1 → Agent-2 전환은 이 하한 조건의 달성 여부에 의존한다.
+Self-immune system = agent 내부의 모델 능력 지표 self-monitoring + cliff-proximity detection + self-initiated recovery. 이 능력은 현재의 harness를 통해 점진적으로 주입 가능하다 — 단, 모델 능력 지표 하한 조건이 충족될 때만 신뢰 가능하다. 그 조건이 충족되지 않으면 self-immune 구조 자체가 새로운 failure source가 된다. Agent-1 → Agent-2 전환은 이 하한 조건의 달성 여부에 의존한다.
 
 ---
 
@@ -21,7 +21,7 @@ Self-immune system = agent 내부의 ARCC self-monitoring + cliff-proximity dete
 
 ## 섹션 구조 (9개)
 
-1. 실험이 남긴 것 — Failure Budget Reallocation 재프레이밍 (초고 v0.2 존재, §1 먼저 읽기)
+1. 실험이 남긴 것 — 실패 재분류 재프레이밍 (초고 v0.2 존재, §1 먼저 읽기)
 2. 현 세대 harness가 아직 풀 수 없는 문제
 3. AgentOps → Harness → Agent 내재화: 점진적 경로
 4. Self-immune system 초기 설계 (조작적 정의 포함)
@@ -35,8 +35,8 @@ Self-immune system = agent 내부의 ARCC self-monitoring + cliff-proximity dete
 
 ## 이 챕터의 서술 제약
 
-- **재귀적 한계를 명시한다**: "ARCC가 cliff 이하이면 self-monitoring도 신뢰할 수 없다." 이것이 self-immune의 하한 조건을 만드는 구조적 이유다.
-- **§7 전환 조건 서술**: 충분조건과 필요조건을 구분한다. "ARCC ≥ X이면 Agent-2가 된다"(충분조건 후보)와 "ARCC ≥ X이어야 Agent-2가 가능하다"(필요조건)는 다른 주장이다.
+- **재귀적 한계를 명시한다**: "모델 능력 지표가 cliff 이하이면 self-monitoring도 신뢰할 수 없다." 이것이 self-immune의 하한 조건을 만드는 구조적 이유다.
+- **§7 전환 조건 서술**: 충분조건과 필요조건을 구분한다. "모델 능력 지표 ≥ X이면 Agent-2가 된다"(충분조건 후보)와 "모델 능력 지표 ≥ X이어야 Agent-2가 가능하다"(필요조건)는 다른 주장이다.
 - **§8 미해결 질문들**: "앞으로 연구되어야 한다"는 선언 대신, 측정 가능한 형태로 기술한다. "가설 X를 검증하려면 [구체적 실험 조건]이 필요하다."
 - **§9 메타 관찰**: 이 집필 프로젝트 자체의 token 배분, agent coordination overhead를 DR-3.4 §9 기준으로 기록한다. 집필 방식을 self-referential하게 관찰하되, 자기 정당화("이 책의 방식이 옳다")가 되지 않도록 한다.
 - Fig 11, Fig 12 해석 시 Vera 에이전트 consultation을 고려한다.

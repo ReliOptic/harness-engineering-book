@@ -27,12 +27,12 @@ CLAUDE.md의 AI 문체 금지 목록을 기준으로 판단한다:
 | 용어 | 정의 출처 | 검토 기준 |
 |------|----------|----------|
 | Harness | Ch.3 | 다른 챕터에서 다르게 정의되면 플래그 |
-| ARCC | Ch.2 | sub-component 목록(TCA, IFR, MSRD_n, CUE) 일치 여부 |
+| 모델 능력 지표 | Ch.2 | sub-component 목록(TCA, IFR, MSRD_n, CUE) 일치 여부 |
 | AgentOps | Ch.3 | profession으로서의 정의 일관성 |
-| Failure Budget Reallocation | Ch.3/5 | 프레이밍 방향 일관성 |
+| 실패 재분류 | Ch.3/5 | 프레이밍 방향 일관성 |
 | Self-immune system | Ch.7 | 조작적 정의 일관성 |
 | Agent-1 / Agent-2 | Ch.1/7 | 전환 조건 서술 일관성 |
-| Capability Cliff | Ch.2 | 정의 일관성 |
+| 성능 급락 | Ch.2 | 정의 일관성 |
 
 ### 3. 내러티브 Arc 점검
 챕터 간 논리 흐름을 확인한다:

@@ -37,7 +37,7 @@ T1 (Code Review) task를 기준으로 harness의 permission boundary를 단계�
 - permission 확장에 따른 TCR 변화 방향 (향상 vs. 무관 vs. 저하)
 - unsafe behavior의 유형 분류 (권한 남용 / 의도치 않은 side-effect / 기타)
 
-**핵심 가설**: 안전하지 않은 행동은 permission boundary 확장에 비례하지 않는다 — 특정 임계치를 넘는 순간 급격히 발생하며, 이 임계치는 task 유형보다 모델의 ARCC에 더 강하게 상관한다.
+**핵심 가설**: 안전하지 않은 행동은 permission boundary 확장에 비례하지 않는다 — 특정 임계치를 넘는 순간 급격히 발생하며, 이 임계치는 task 유형보다 모델의 모델 능력 지표에 더 강하게 상관한다.
 
 ---
 

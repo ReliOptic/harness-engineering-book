@@ -114,7 +114,7 @@
 
 | 실험 | 사용 Task | 난이도 | 비고 |
 |------|-----------|--------|------|
-| E01 (Capability Cliff) | T1, T2, T3 | ALL 3단계 | ARCC 측정용 |
+| E01 (성능 급락) | T1, T2, T3 | ALL 3단계 | 모델 능력 지표 측정용 |
 | E04 (Harness Effect) | T1, T2, T3 | MODERATE | harness on/off 비교 |
 | E07 (Surface Effect) | T1, T2 | MODERATE | 4개 surface 비교 |
 | E08 (SAA Degradation) | T3 | MODERATE | token budget sweep |
@@ -128,7 +128,7 @@
 
 ---
 
-## 2. ARCC — Agent-Relevant Capability Composite
+## 2. 모델 능력 지표 — Agent-Relevant Capability Composite
 
 Figure 1의 X축. 모델을 vendor tier가 아닌 연속 capability spectrum 위에 위치시키는 척도.
 
@@ -179,22 +179,22 @@ CUE = (relevant_chunks_cited_or_used) / (total_relevant_chunks_available)
   - CUE = 참조된 relevant passage / 전체 relevant passage
 ```
 
-### 2.2 ARCC 계산
+### 2.2 모델 능력 지표 계산
 
 ```
-ARCC = w₁·TCA + w₂·IFR + w₃·MSRD_n + w₄·CUE
+모델 능력 지표 = w₁·TCA + w₂·IFR + w₃·MSRD_n + w₄·CUE
 
 초기 가중치: w₁ = w₂ = w₃ = w₄ = 0.25 (equal weighting)
 범위: [0, 1]
 ```
 
-### 2.3 ARCC Construct Validation Protocol
+### 2.3 모델 능력 지표 Construct Validation Protocol
 
-ARCC가 실제로 TCR을 예측하는가를 검증한다. 이 단계가 실패하면 Figure 1의 X축 전체가 무효화된다.
+모델 능력 지표가 실제로 TCR을 예측하는가를 검증한다. 이 단계가 실패하면 Figure 1의 X축 전체가 무효화된다.
 
 ```
 Step 1: 측정
-  - 모델 풀 (N ≥ 12개 variant) 전체에서 ARCC 4개 하위 지표 측정
+  - 모델 풀 (N ≥ 12개 variant) 전체에서 모델 능력 지표 4개 하위 지표 측정
   - 동일 조건에서 TCR(T1), TCR(T2), TCR(T3) 측정
 
 Step 2: 분할
@@ -202,13 +202,13 @@ Step 2: 분할
   - 20% holdout set
 
 Step 3: 피팅
-  - Linear regression: TCR ~ ARCC (equal weight)
+  - Linear regression: TCR ~ 모델 능력 지표 (equal weight)
   - 추가: Ridge regression (regularized)
 
 Step 4: 검증 기준
-  - Holdout R² ≥ 0.65 → ARCC 유효 (사용 가능)
+  - Holdout R² ≥ 0.65 → 모델 능력 지표 유효 (사용 가능)
   - Holdout R² ∈ [0.50, 0.65) → 경고 표시 후 사용
-  - Holdout R² < 0.50 → ARCC 재설계 필요 (가중치 재최적화)
+  - Holdout R² < 0.50 → 모델 능력 지표 재설계 필요 (가중치 재최적화)
 
 Step 5: Sensitivity Analysis
   - 각 가중치를 ±0.15 범위에서 grid search
@@ -217,8 +217,8 @@ Step 5: Sensitivity Analysis
   - sensitive하면 데이터 기반 최적 가중치 사용 + 이유 명시
 
 보고:
-  - Table: 각 모델 variant의 (TCA, IFR, MSRD_n, CUE, ARCC, TCR_observed, TCR_predicted)
-  - Figure 1 Appendix: ARCC validation scatter plot (predicted vs observed TCR)
+  - Table: 각 모델 variant의 (TCA, IFR, MSRD_n, CUE, 모델 능력 지표, TCR_observed, TCR_predicted)
+  - Figure 1 Appendix: 모델 능력 지표 validation scatter plot (predicted vs observed TCR)
 ```
 
 ---
@@ -538,11 +538,11 @@ Dollar translation의 근거. 임의적 수치가 아닌 명시적 가정에서 
   Output: 800 tokens/step × 20 steps = 16,000 tokens = $0.24 (sonnet)
   Cost_compute = $0.36 per run
 
-Harness overhead (HOR = 20% 기준):
+Harness overhead (harness overhead = 20% 기준):
   Harness token 추가: 40,000 × 0.20 = 8,000 tokens = $0.024 (input)
   Cost_harness = $0.024 per run
 
-HOR이 x%일 때:
+harness overhead이 x%일 때:
   Cost_compute(x) = Cost_compute_base × (1 + x/100)
 ```
 
@@ -568,19 +568,19 @@ Cost_failure = MTTR_hours × $150 + P_undetected × $500
 ### 6.3 Total Operational Cost Index
 
 ```
-TotalCost(HOR) = Cost_compute(HOR) + Cost_failure(RSuccR(HOR)) + Cost_escalation
+TotalCost(harness overhead) = Cost_compute(harness overhead) + Cost_failure(RSuccR(harness overhead)) + Cost_escalation
 
-Cost_escalation = Human_Escalation_Rate(HOR) × 0.25hr × $150
+Cost_escalation = Human_Escalation_Rate(harness overhead) × 0.25hr × $150
 
 정규화:
-  CostIndex(HOR) = TotalCost(HOR) / TotalCost(HOR=0)
-  → HOR=0일 때 CostIndex=1.0 (no harness baseline)
-  → 최적점: argmin_HOR CostIndex(HOR)
+  CostIndex(harness overhead) = TotalCost(harness overhead) / TotalCost(harness overhead=0)
+  → harness overhead=0일 때 CostIndex=1.0 (no harness baseline)
+  → 최적점: argmin_harness_overhead CostIndex(harness overhead)
 
 보고:
-  - 3개 scenario 각각에서 optimal HOR 비교
+  - 3개 scenario 각각에서 optimal harness overhead 비교
   - Robust conclusion: 3개 scenario에서 모두 동일 optimal 구간이면 결론 강화
-  - Sensitivity: engineer rate ±50% 변동 시 optimal HOR 변화 보고
+  - Sensitivity: engineer rate ±50% 변동 시 optimal harness overhead 변화 보고
 ```
 
 ---
@@ -613,7 +613,7 @@ Cost_escalation = Human_Escalation_Rate(HOR) × 0.25hr × $150
 
 ```
 [ ] Task specification 파일 존재 및 ground truth 기록 완료
-[ ] ARCC validation 완료 (R² ≥ 0.65)
+[ ] 모델 능력 지표 validation 완료 (R² ≥ 0.65)
 [ ] Ground truth infrastructure (Layer 1 + 2) 가동 확인
 [ ] Power analysis 통과 (목표 n 확인)
 [ ] Statistical analysis plan 이 문서에 사전 기록됨

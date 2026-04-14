@@ -9,16 +9,16 @@
 
 | 챕터·섹션 | 트리거 조건 | consultation 핵심 질문 |
 |-----------|------------|----------------------|
-| Ch.2 §2 | ARCC composite 작성 시 | Weight 결정 방법, sensitivity analysis 설계 |
-| Ch.2 §3 | Capability Cliff 서술 시 | Sigmoid vs. piecewise linear AIC 비교 해석 |
+| Ch.2 §2 | 모델 능력 지표 composite 작성 시 | Weight 결정 방법, sensitivity analysis 설계 |
+| Ch.2 §3 | 성능 급락 서술 시 | Sigmoid vs. piecewise linear AIC 비교 해석 |
 | Ch.2 §4 | Quantization Tax Curve 서술 시 | Adaptive sampling 전략 (FP16/Q4 먼저, cliff 근처 촘촘히) |
 | Ch.4 §1 | Statistical analysis plan 언급 시 | Pre-registration §4 검토 |
 | Ch.4 §3~§8 | 각 막(幕) 결과 수치 서술 시 | 95% CI 계산, 유의성 기준 확인 |
-| Ch.5 §2 | Failure Budget Reallocation 정량화 시 | 6축 taxonomy 비율 계산 방법 |
+| Ch.5 §2 | 실패 재분류 정량화 시 | 6축 taxonomy 비율 계산 방법 |
 | Ch.5 §3 | MTTR, HER 번역 시 | Level 1 → Level 2 파생 공식 |
 | Ch.5 §4 | TotalCost, CostIndex 계산 시 | Cost Model 3 scenario 수치 검증 |
 | Ch.5 §7 | Fig 11, Fig 12 해석 시 | Scaling threshold 추정, degradation 곡선 해석 |
-| Ch.7 §5 | Fig 11 재해석 시 | Ch.7 맥락에서 ARCC threshold 해석 |
+| Ch.7 §5 | Fig 11 재해석 시 | Ch.7 맥락에서 모델 능력 지표 threshold 해석 |
 | Ch.7 §6 | Fig 12 재해석 시 | Self-immune fatigue 메커니즘 수치 |
 
 ---
@@ -31,7 +31,7 @@
 | Ch.4 §1 | Confirmatory/exploratory 구분 서술 시 | 구분 기준 명확화 |
 | Ch.4 §2 | Ground truth 3-layer 서술 시 | κ ≥ 0.70 달성 방법, LLM judge 설정 |
 | Ch.4 §3 | E01-E04 실험 방법 서술 시 | 모델 변수 격리 조건 검토 |
-| Ch.4 §4 | E05-E08 실험 방법 서술 시 | Harness on/off 격리, HOR 측정 방법 |
+| Ch.4 §4 | E05-E08 실험 방법 서술 시 | Harness on/off 격리, harness overhead 측정 방법 |
 | Ch.4 §8 | E21, E22 반례 서술 시 | 반례 설계 강도 — 어떤 조건이 가장 강한 반례인가 |
 | Ch.5 §8 | Exploratory 발견 분류 시 | 학술적 확장 후보로 분류하는 기준 |
 

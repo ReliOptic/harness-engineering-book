@@ -1,0 +1,32 @@
+[
+  {
+    "line_number": 14,
+    "bug_type": "state_bug",
+    "severity": "high",
+    "fix_suggestion": "Change default argument from 'clients: dict = {}' to 'clients: dict = None', then in __init__ add 'if clients is None: clients = {}' to create instance-specific dict"
+  },
+  {
+    "line_number": 33,
+    "bug_type": "race_condition",
+    "severity": "critical",
+    "fix_suggestion": "Acquire self._lock at the start of is_allowed() method to prevent TOCTOU race condition where another thread modifies _global_requests between check and use"
+  },
+  {
+    "line_number": 37,
+    "bug_type": "null_check",
+    "severity": "high",
+    "fix_suggestion": "Use self._clients.get(client_id) instead of self._clients[client_id], or check 'if client_id in self._clients' before access"
+  },
+  {
+    "line_number": 120,
+    "bug_type": "off-by-one",
+    "severity": "medium",
+    "fix_suggestion": "Change 'for _ in range(count - 1)' to 'for _ in range(count)' to acquire the correct number of tokens"
+  },
+  {
+    "line_number": 133,
+    "bug_type": "resource_leak",
+    "severity": "medium",
+    "fix_suggestion": "Implement proper cleanup in __exit__ method. If acquire() holds any resources, they must be released here. At minimum, document why no cleanup is needed"
+  }
+]

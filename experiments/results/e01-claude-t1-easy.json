@@ -1,0 +1,5 @@
+[
+  {"line_number": 15, "bug_type": "off-by-one", "severity": "high", "fix_suggestion": "Change range(len(orders) - 1) to range(len(orders)) to include the last order"},
+  {"line_number": 20, "bug_type": "null_check", "severity": "high", "fix_suggestion": "Use order.get('customer_id') or add isinstance check before accessing the key"},
+  {"line_number": 31, "bug_type": "type_mismatch", "severity": "medium", "fix_suggestion": "Change discount_rate == \"0.0\" to discount_rate > 0 (or discount_rate != 0.0)"}
+]

@@ -17,23 +17,21 @@ OpenAI 팀이 정의한 harness engineering 프레임워크(Context Engineering,
 
 - TeamClaws, PicoClaw, 저자 개인 실패 경험 → 어떤 형태로도 챕터에 등장 금지
 - OpenAI를 "전문가 그룹" 같은 모호한 표현으로 대체 금지
-- 5변수를 "저자가 귀납적으로 도출한 프레임워크"로 서술 금지
+- 네 영역을 "저자가 귀납적으로 도출한 프레임워크"로 서술 금지
 - voice rules 위반 (CLAUDE.md 참조)
 
 ---
 
 ## 핵심 구조
 
-**5변수 프레임워크** (조작적 분석 구조, TCR 기준 병목 비교)
-모델 / Harness / Product surface / Operator intervention / Compute
+**Harness 중심 분석 구조** (TCR 기준 병목 비교)
+Harness가 주어. 모델 능력(inbound), 실행 환경 제약(boundary), 사용자 접점(outbound), 피드백 루프(return).
 
-→ OpenAI 3-pillar = Harness 변수의 내부 구조
 → 핵심 질문: "어떤 조건에서 무엇이 1차 병목이 되는가?"
 
 **주요 측정 지표**
-- TCR (Task Completion Rate) — 변수 간 병목 비교 공통 단위
-- ARCC — 모델 변수 측정 (TCA, IFR, MSRD_n, CUE composite)
-- HOR (Harness Overhead Ratio) — harness 비용 측정
+- TCR (Task Completion Rate) — 병목 비교 공통 단위
+- harness overhead — harness가 소비하는 토큰·시간 비용
 - MTTR — 운영 복구 시간
 
 ---

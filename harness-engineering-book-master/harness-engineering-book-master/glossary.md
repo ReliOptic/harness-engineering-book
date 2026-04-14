@@ -79,7 +79,7 @@ Memory, privacy, 권한, 핵심 context를 보호하면서 bounded capability, �
 제약 실험에서 반복적으로 확인된 실패 패턴과 운영 교훈을 범용 도구로 구체화한 CLI 유틸리티 레이어.
 한 번에 harness에 embedding하는 것이 아니라 점진적으로 발전시키는 것이 조건이다.
 
-**Operational Envelope**
+**운영 경계**
 Harness가 agent에게 부여하는 행동 범위. Memory 보호, 권한 경계, 복구 경로, evaluation hook 등으로 구성된다.
 
 **Operator Intervention (운영자 개입)**

@@ -55,7 +55,7 @@
 
 | 발견 지점 | 연결 |
 |-----------|------|
-| Q6: attention sink (고빈도 토큰의 attention 흡수) | E01 Capability Cliff 측정에서 attention 패턴 분석이 포함되는 경우, 이 현상의 정량적 측정 가능. |
+| Q6: attention sink (고빈도 토큰의 attention 흡수) | E01 성능 급락 측정에서 attention 패턴 분석이 포함되는 경우, 이 현상의 정량적 측정 가능. |
 | Q8: autoregressive 오류 전파 | E04 harness-on/off baseline에서 "오류 전파 차단율"을 측정할 때, Ch.1의 메커니즘 설명이 이론적 근거. |
 
 ---

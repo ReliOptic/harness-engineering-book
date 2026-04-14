@@ -93,7 +93,7 @@
 |------|------|------------|
 | Autoregressive | 이전 출력 → 다음 입력 | 토큰 생성, tool call 순차 실행 |
 | Recursive | 자기 자신 호출, 들어갔다 나옴 | Reflexion, self-critique 루프 |
-| Regression | 통계적 회귀분석 | ARCC 모델링 (Ch.8) |
+| Regression | 통계적 회귀분석 | 모델 능력 지표 모델링 (Ch.8) |
 
 ---
 

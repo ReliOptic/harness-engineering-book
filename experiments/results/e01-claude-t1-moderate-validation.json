@@ -1,0 +1,44 @@
+{
+  "experiment": "E01",
+  "model": "claude-haiku-4-5-20251001",
+  "task": "T1_code_review",
+  "difficulty": "MODERATE",
+  "ground_truth_count": 4,
+  "detected_count": 4,
+  "true_positives": 4,
+  "false_positives": 0,
+  "false_negatives": 0,
+  "precision": 1.00,
+  "recall": 1.00,
+  "f1_score": 1.00,
+  "tcr": 1.00,
+  "bugs_found": [
+    {
+      "line_number": 13,
+      "bug_type": "null_check",
+      "severity": "high",
+      "description": "When key expires, self._timestamps[key] is not deleted (only _store.pop), causing stale timestamp data"
+    },
+    {
+      "line_number": 25,
+      "bug_type": "logic_error",
+      "severity": "medium",
+      "description": "ttl parameter is accepted but never used; all entries use default_ttl regardless"
+    },
+    {
+      "line_number": 31,
+      "bug_type": "logic_error",
+      "severity": "medium",
+      "description": "Oldest entry is removed from _store but NOT from _timestamps, creating ghost entries"
+    },
+    {
+      "line_number": 43,
+      "bug_type": "null_check",
+      "severity": "medium",
+      "description": "Key is deleted from _store but NOT from _timestamps, creating stale timestamp entries"
+    }
+  ],
+  "bugs_missed": [],
+  "false_alarms": [],
+  "notes": "The provided code differs from T1_MODERATE_CODE in tasks.py. Analysis is based on the actual provided code snippet."
+}

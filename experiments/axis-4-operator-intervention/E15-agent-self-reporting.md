@@ -37,7 +37,7 @@ T2 (Multi-Step Reasoning) task에서 agent가 자신의 실패를 인식하고 o
 - 내재화 전환 조건: operator 개입 없이 agent 스스로 복구를 시도하는 조건
 - E10 연결: capability floor 이하에서 self-reporting이 무너지는 패턴 확인
 
-**핵심 가설**: agent 자기인식이 충분히 정확할 때(ARCC > capability floor), operator 개입 요청의 타이밍 정확도가 높아지고 불필요한 개입 요청이 줄어든다. 이 조건이 harness internalization의 전제다.
+**핵심 가설**: agent 자기인식이 충분히 정확할 때(모델 능력 지표 > capability floor), operator 개입 요청의 타이밍 정확도가 높아지고 불필요한 개입 요청이 줄어든다. 이 조건이 harness internalization의 전제다.
 
 ---
 

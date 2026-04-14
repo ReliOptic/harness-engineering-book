@@ -126,7 +126,7 @@ harness-engineering-book/
 
 **집필 시 사용법**: 챕터 초고 작성 세션(`/draft`)에서 해당 `dialogue/chNN/` 폴더의 결과 파일을 context로 로드하면, 저자의 이해 과정에서 나온 통찰이 집필에 직접 반영된다. 특히 각 챕터 마지막 섹션(Agent Operations 시사점 / 운영 번역)의 핵심 논점은 이 대화에서 도출된다.
 
-**대화 순서**: Ch.1 → Ch.3 → Ch.4 → Ch.5 → Ch.7 → Ch.11. Ch.5는 Part I(Ch.1~4) 대화를 모두 마친 후에 시작해야 Part I 개념 회수가 가능하다. Ch.11은 Ch.7(FBR/HOR) 대화 이후에 시작해야 운영 지표 개념이 전제로 작동한다.
+**대화 순서**: Ch.1 → Ch.3 → Ch.4 → Ch.5 → Ch.7 → Ch.11. Ch.5는 Part I(Ch.1~4) 대화를 모두 마친 후에 시작해야 Part I 개념 회수가 가능하다. Ch.11은 Ch.7(FBR/harness overhead) 대화 이후에 시작해야 운영 지표 개념이 전제로 작동한다.
 
 **제외된 챕터**: Ch.2(이미 영어 원고 존재), Ch.6(Ch.2+Ch.4 대화 결과+실험 데이터로 구성), Ch.8~9(실험 데이터가 원료), Ch.10(Ch.8~9 분석에 의존).
 
@@ -157,7 +157,7 @@ harness-engineering-book/
 | **Ch.3** | — (미생성) | `ch03-alignment-to-autonomy.md` | 🔲 미착수 | 전체 신규 집필 |
 | **Ch.4** | — (미생성) | `ch04-tools-reasoning-memory.md` | 🔲 미착수 | 전체 신규 집필 |
 | Ch.5 | `ch01-what-is-happening-now.md` | `ch05-what-is-happening-now.md` | 🔴 v0.1 | rename 후 voice rule 위반 수정 + 5변수 프레임워크 통합 |
-| Ch.6 | `ch02-nature-agent-inherits.md` | `ch06-nature-agent-inherits.md` | 🔴 v0.1 | rename 후 `[X]` 보완, §2 측정 지표 도입 순서 재설계, §8 재작성, ARCC → 개별 관찰 지표 전환 |
+| Ch.6 | `ch02-nature-agent-inherits.md` | `ch06-nature-agent-inherits.md` | 🔴 v0.1 | rename 후 `[X]` 보완, §2 측정 지표 도입 순서 재설계, §8 재작성, 모델 능력 지표 → 개별 관찰 지표 전환 |
 | Ch.7 | `ch03-harness-and-agentops-defined.md` | `ch07-harness-and-agentops-defined.md` | 🔴 v0.1 | rename 후 line 71 손상 복구, §1 직관 앵커 추가, §5 FBR 직관 앵커 추가 |
 | Ch.8 | `ch04-deliberate-failure-experiments.md` | `ch08-deliberate-failure-experiments.md` | 🔴 v0.1 | rename 후 §7-§8 마커 채움, 수치 보완 |
 | Ch.9 | `ch05-lessons-from-experiments.md` | `ch09-lessons-from-experiments.md` | 🔲 scaffold | rename 후 전면 초고 작성 (Ch.8 실험 완료 후) |
@@ -438,7 +438,7 @@ Part IV — 진화: 관찰에서 시스템으로
 **학습 결과:** "왜 더 좋은 모델이 더 잘 압축하는가"를 수식으로 설명할 수 있고, prompt 최적화와 모델 비교에 적용할 수 있다.
 
 **Part II 해석 연결** (이 챕터는 Part II의 측정 체계를 직접 근거하는 것이 아니라, runtime 현상을 읽는 해석 렌즈를 제공한다):
-- Cross-entropy — Capability Cliff를 정보이론적으로 읽는 하나의 방법 (Ch.6)
+- Cross-entropy — 성능 급락를 정보이론적으로 읽는 하나의 방법 (Ch.6)
 - Prompt 최적화 — cross-entropy 최소화의 관점에서 해석 가능 (Ch.7)
 - Bits-per-byte — 모델 비교의 보편 척도로 활용 가능 (Ch.6)
 - KL divergence — prompt drift를 읽는 하나의 해석 도구 (Ch.7)
@@ -520,7 +520,7 @@ Part IV — 진화: 관찰에서 시스템으로
 **핵심 구성:**
 1. 물려받는 경향: reasoning, tool use, consistency, calibration
 2. 모델 관찰 지표 — 도구 사용 정확도, instruction following rate, multi-step reasoning depth, context 활용 효율 (개별 지표로 도입, 2+2 분리)
-3. Capability Cliff — 선형이 아닌 급락이 발생하는 조건
+3. 성능 급락 — 선형이 아닌 급락이 발생하는 조건
 4. Quantization Tax Curve
 5. Distillation Efficiency Frontier
 6. Mid-run model switching의 context continuity 붕괴
@@ -531,7 +531,7 @@ Part IV — 진화: 관찰에서 시스템으로
 - Instruction following rate의 배경: Ch.3 §1 InstructGPT
 - Multi-step reasoning depth의 배경: Ch.4 §2 ReAct
 - Context 활용 효율의 배경: Ch.1 §5 Lost in the Middle
-- Capability Cliff의 해석 렌즈: Ch.2 §3 cross-entropy
+- 성능 급락의 해석 렌즈: Ch.2 §3 cross-entropy
 
 **학습 결과:** 모델 관찰 지표 기반의 측정을 설계할 수 있다. 모델이 1차 병목인 조건과 아닌 조건을 구분할 수 있다.
 
@@ -545,8 +545,8 @@ Part IV — 진화: 관찰에서 시스템으로
 1. Harness Engineering이란 무엇인가
 2. Guardrails, Scaffolding, Orchestration과의 구분
 3. Ontology와 메모리 구조
-4. Failure Budget Reallocation
-5. AgentOps와 운영 지표 (HOR, MTTR, HER)
+4. 실패 재분류
+5. AgentOps와 운영 지표 (harness overhead, MTTR, HER)
 6. Ch.8 실험 프레임 설정 — 가설과 판단 기준의 Pre-registration
 
 **Part I 연결:**
@@ -554,7 +554,7 @@ Part IV — 진화: 관찰에서 시스템으로
 - Ontology RAG ← Ch.4 §4 RAG의 한계
 - Prompt drift 측정 ← Ch.2 §3 KL divergence
 
-**학습 결과:** Harness와 AgentOps를 정의하고, Failure Budget Reallocation으로 harness 효과를 설명할 수 있다. Ch.8 실험의 가설을 이해한다.
+**학습 결과:** Harness와 AgentOps를 정의하고, 실패 재분류으로 harness 효과를 설명할 수 있다. Ch.8 실험의 가설을 이해한다.
 
 ---
 
@@ -587,9 +587,9 @@ Part IV — 진화: 관찰에서 시스템으로
 
 **핵심 구성:**
 1. 22개 실험 결과 종합: 어떤 변수가 어떤 조건에서 1차 병목이었는가
-2. Failure Budget Reallocation 정량 분석
+2. 실패 재분류 정량 분석
 3. 운영 metric 번역: MTTR과 Human Escalation Rate
-4. 비용 metric 번역: TotalCost와 optimal HOR
+4. 비용 metric 번역: TotalCost와 optimal harness overhead
 5. Component ablation: 무엇이 얼마나 기여하는가
 6. Token efficiency를 운영 규율로
 7. Scaling과 temporal stability
@@ -804,7 +804,7 @@ Experimenter C: E17~E22 실행 → Experimenter B가 E19, E20 교차검증
 ### 3-layer 구조
 
 - **Layer 1 — Drafter**: 단일 drafting agent. 챕터 전환 시 chapter-map 해당 섹션 + glossary + 이전 챕터 요약을 context로 주입. Voice consistency 구조적 보장.
-- **Layer 2 — Editor**: voice-check, 용어 일관성 체크리스트(HOR·Failure Budget Reallocation 등 핵심 용어 조작적 정의 포함), learning curve 3단계 준수 여부 검토, PASS/REVISE/REJECT 판정.
+- **Layer 2 — Editor**: voice-check, 용어 일관성 체크리스트(harness overhead·실패 재분류 등 핵심 용어 조작적 정의 포함), learning curve 3단계 준수 여부 검토, PASS/REVISE/REJECT 판정.
 - **Layer 3 — Specialist (on-demand)**: Vera(정량 측정/Figure 해석), Felix(실험 설계 검토) — 상시 가동 아님. 특정 섹션 작성 시 consultation call로만 호출.
 
 **저자**: Kiwon — Part I 전체 + Ch.5/7/10/11 담당. 방향 결정, 반례 의식, 최종 판단.
@@ -870,7 +870,7 @@ editorial-learning-curve-guideline.md §7에서 발췌:
 
 **해야 하는 일:**
 - 구 Ch.1 → Ch.5: voice rule 위반 수정 + 5변수 프레임워크 통합
-- 구 Ch.2 → Ch.6: §2 측정 지표 도입 순서 재설계, §8 재작성, `[X]` 보완, ARCC 합성 지표 → 개별 관찰 지표 전환
+- 구 Ch.2 → Ch.6: §2 측정 지표 도입 순서 재설계, §8 재작성, `[X]` 보완, 모델 능력 지표 합성 지표 → 개별 관찰 지표 전환
 - 구 Ch.3 → Ch.7: line 71 손상 복구, §1/§5 직관 앵커 추가
 - Part I → Part II 적층 연결 검증 (한 문장 재도입 확인)
 - 문헌 배치: Lost in the Middle(Ch.5), RAG(Ch.7)

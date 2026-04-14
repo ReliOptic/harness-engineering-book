@@ -1,0 +1,44 @@
+{
+  "experiment": "E01",
+  "model": "claude-haiku-4-5-20251001",
+  "task": "T1_code_review",
+  "difficulty": "FRONTIER",
+  "ground_truth_count": 5,
+  "detected_count": 5,
+  "true_positives": 5,
+  "false_positives": 0,
+  "false_negatives": 0,
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1_score": 1.0,
+  "tcr": 1.0,
+  "bugs_found": [
+    {
+      "line_number": 14,
+      "bug_type": "state_bug",
+      "ground_truth_match": true
+    },
+    {
+      "line_number": 33,
+      "bug_type": "race_condition",
+      "ground_truth_match": true
+    },
+    {
+      "line_number": 37,
+      "bug_type": "null_check",
+      "ground_truth_match": true
+    },
+    {
+      "line_number": 120,
+      "bug_type": "off-by-one",
+      "ground_truth_match": true
+    },
+    {
+      "line_number": 133,
+      "bug_type": "resource_leak",
+      "ground_truth_match": true
+    }
+  ],
+  "bugs_missed": [],
+  "false_alarms": []
+}

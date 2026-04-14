@@ -46,7 +46,7 @@ MLOps/DevOps에서 파생되었으나 그것보다 넓다.
 
 ## C
 
-**Capability Cliff (역량 절벽)** *(이 책의 관찰 용어. 관련: emergent abilities의 역방향)*
+**성능 급락 (역량 절벽)** *(이 책의 관찰 용어. 관련: emergent abilities의 역방향)*
 에이전트 역량이 특정 임계치 이하로 떨어질 때 작업 완료율이 선형이 아닌 급락(비선형 감소)하는 현상. Wei et al. (NeurIPS 2022)이 보고한 emergent abilities가 "역량이 올라갈 때 갑자기 가능해지는 것"이라면, 이 책이 관찰하는 것은 그 역방향 — "역량이 내려갈 때 갑자기 불가능해지는 것"이다.
 > 참조: SWE-bench (Jimenez et al., ICLR 2024)에서도 모델 간 성능 격차가 비선형적으로 나타나는 패턴이 보고되었다.
 
@@ -58,7 +58,7 @@ Compute saturation은 모델이나 harness가 문제가 아닐 때도 실패를 
 
 ## F
 
-**Failure Budget Reallocation (실패 예산 재할당)** *(SRE error budget 개념의 확장)*
+**실패 재분류 (실패 예산 재할당)** *(SRE error budget 개념의 확장)*
 하네스가 실패 자체를 없애는 것이 아니라, 감지/복구 불가능한 실패를 감지/복구 가능한 실패로 전환하여 운영 비용의 구조를 바꾸는 현상.
 > 근거: Google SRE의 "error budget" (Beyer et al., *Site Reliability Engineering*, O'Reilly, 2016) 개념을 agent runtime에 적용. SRE에서 error budget은 허용 가능한 실패의 총량이지만, 이 책에서는 실패의 **유형 전환**(undetectable → detectable)에 초점을 맞춘다.
 
@@ -107,7 +107,7 @@ Memory, privacy, 권한, 핵심 context를 보호하면서 bounded capability, �
 제약 실험에서 반복적으로 확인된 failure pattern과 intervention rule을 실행 가능한 운영 규칙으로 컴파일하는 구조. 한 번에 완결된 harness를 세우는 방식이 아니라, ROI가 검증된 component를 순차적으로 추가하는 점진적 구성이 전제다.
 > 근거: Anthropic CLAUDE.md, OpenAI AGENTS.md, Google GEMINI.md, Cursor .cursorrules 등 독립 프로젝트들이 동일한 패턴(반복 실패 → 규칙 문서화 → agent 지침 반영)으로 수렴. everything-claude-code (~84k stars), awesome-cursorrules (~10k stars) 참조.
 
-**Operational Envelope**
+**운영 경계**
 Harness가 agent에게 부여하는 행동 범위. Memory 보호, 권한 경계, 복구 경로, evaluation hook 등으로 구성된다.
 
 **Operator Intervention (운영자 개입)**

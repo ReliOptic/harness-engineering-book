@@ -19,7 +19,7 @@
 |------|---------|------------|------------|-----|------|
 | SOTA | `google/gemini-3.1-flash-lite-preview` | $0.25 | $1.50 | 1M | Gemini 2.5 Flash 수준 접근 |
 | MID | `openai/gpt-5.4-nano` | $0.20 | $1.25 | 400K | GPT-5.4 family, sub-agent 최적화 |
-| SMALL | `google/gemini-2.5-flash-lite` | $0.10 | $0.40 | 1M | Capability Cliff 기준점 |
+| SMALL | `google/gemini-2.5-flash-lite` | $0.10 | $0.40 | 1M | 성능 급락 기준점 |
 | SMALL (OAI) | `openai/gpt-5-mini` | $0.25 | $2.00 | 400K | 이전 세대 기준점 |
 | ref | `openai/gpt-5.2` | $1.75 | $14.00 | 400K | 비교 reference 전용 |
 
@@ -30,7 +30,7 @@ OpenRouter base URL: `https://openrouter.ai/api/v1` (OpenAI SDK 호환)
 ## 실험 실행 순서 (권고)
 
 ### Experimenter A (E01~E07)
-1. E01 먼저 실행 — ARCC 측정 baseline 확보
+1. E01 먼저 실행 — 모델 능력 지표 측정 baseline 확보
 2. E02 실행 — Quantization Tax Curve
 3. E03 실행 — mid-run switching
 4. E04 실행 — harness on/off baseline (가장 중요한 실험)
@@ -67,7 +67,7 @@ OpenRouter base URL: `https://openrouter.ai/api/v1` (OpenAI SDK 호환)
 - 실행 시간: wall clock time (time.time() 기준)
 - 비용: `framework/config.py`의 `compute_cost(model, input_tokens, output_tokens)` 사용
   - 예시: gemini-2.5-flash 32K in / 4K out → $0.0096 + $0.010 = $0.020
-- ARCC 측정: `framework/arcc.py`의 `compute_arcc()` 함수 사용
+- 모델 능력 지표 측정: `framework/arcc.py`의 `compute_arcc()` 함수 사용
 
 ## 이상 발생 시
 

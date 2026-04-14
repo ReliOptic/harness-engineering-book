@@ -8,45 +8,45 @@
 
 ## 핵심 메시지
 
-Agent는 모델 선택에서 비롯된 capability 편향을 상속하며, 이 편향은 task 유형에 따라 비선형적으로 작동한다. Vendor tier나 벤치마크 점수는 agent viability의 유효한 predictor가 아니다. ARCC(Agent-Relevant Capability Composite)로 측정된 모델-task 조합은 특정 threshold 이하에서 TCR(Task Completion Rate)이 선형이 아닌 급락하는 Capability Cliff를 형성하며, 이 cliff의 위치는 task 유형마다 다르다. Quantization과 distillation은 이 cliff를 다른 속도로 이동시킨다.
+Agent는 모델 선택에서 비롯된 capability 편향을 상속하며, 이 편향은 task 유형에 따라 비선형적으로 작동한다. Vendor tier나 벤치마크 점수는 agent viability의 유효한 predictor가 아니다. 모델 능력 지표(Agent-Relevant Capability Composite)로 측정된 모델-task 조합은 특정 threshold 이하에서 TCR(Task Completion Rate)이 선형이 아닌 급락하는 성능 급락를 형성하며, 이 cliff의 위치는 task 유형마다 다르다. Quantization과 distillation은 이 cliff를 다른 속도로 이동시킨다.
 
 ## 학습 결과
 
-- ARCC(TCA, IFR, MSRD_n, CUE)의 조작적 정의와 측정 절차를 이해하고, 자신의 환경에서 유사한 composite metric을 설계할 수 있다.
-- ARCC construct validation의 기준(holdout R² ≥ 0.65)과 그 의미를 이해한다.
-- Capability Cliff의 존재와 메커니즘(multi-step chain에서의 오류 증폭)을 이해하고, "이 양자화 모델로 이 task는 된다"를 판단하는 근거를 갖는다.
+- 모델 능력 지표(TCA, IFR, MSRD_n, CUE)의 조작적 정의와 측정 절차를 이해하고, 자신의 환경에서 유사한 composite metric을 설계할 수 있다.
+- 모델 능력 지표 construct validation의 기준(holdout R² ≥ 0.65)과 그 의미를 이해한다.
+- 성능 급락의 존재와 메커니즘(multi-step chain에서의 오류 증폭)을 이해하고, "이 양자화 모델로 이 task는 된다"를 판단하는 근거를 갖는다.
 - Quantization Tax Curve와 Distillation Efficiency Frontier의 차이를 이해하고, 동일 parameter budget에서 어느 전략이 agent viability 관점에서 더 효율적인지 판단할 수 있다.
-- 모델 변수가 1차 병목이 되는 조건과, ARCC가 cliff 이상일 때 1차 병목이 harness 또는 compute로 이동하는 조건을 구분할 수 있다.
+- 모델 변수가 1차 병목이 되는 조건과, 모델 능력 지표가 cliff 이상일 때 1차 병목이 harness 또는 compute로 이동하는 조건을 구분할 수 있다.
 
 ## 집필 노트
 
 - 관련 DR: DR-2.1 (agent 벤치마크), DR-2.2 (OpenRouter routing), DR-2.3 (distillation/quantization)
-- 관련 실험: E01 (Capability Cliff — ARCC × task type × TCR), E02 (frontier vs. distilled), E03 (mid-run model switching), E10 (model capability floor for self-monitoring)
-- 관련 Figure: Fig 1 (Capability Cliff scatter + sigmoid fit), Fig 1b (Quantization Tax Curve), Fig 1c (Distillation Efficiency Frontier)
+- 관련 실험: E01 (성능 급락 — 모델 능력 지표 × task type × TCR), E02 (frontier vs. distilled), E03 (mid-run model switching), E10 (model capability floor for self-monitoring)
+- 관련 Figure: Fig 1 (성능 급락 scatter + sigmoid fit), Fig 1b (Quantization Tax Curve), Fig 1c (Distillation Efficiency Frontier)
 
-**ARCC 정의 (조작적):**
+**모델 능력 지표 정의 (조작적):**
 - TCA (Tool Call Accuracy): 전체 tool call 중 schema-valid이고 semantically-correct한 비율
 - IFR (Instruction Following Rate): 주어진 instruction의 명시적 constraint를 모두 충족한 output 비율
 - MSRD_n (Multi-Step Reasoning Depth): n-step chain 완료 시 논리적 오류 없이 유지된 단계 수 / n
 - CUE (Context Utilization Efficiency): relevant context proportion 변화가 output quality에 미치는 영향
-- ARCC = weighted composite. weights는 task type별로 다르며 sensitivity analysis가 필수.
+- 모델 능력 지표 = weighted composite. weights는 task type별로 다르며 sensitivity analysis가 필수.
 
-**ARCC Construct Validation:**
-- holdout task set에서 TCR을 예측하는 R² ≥ 0.65이어야 ARCC를 유효한 predictor로 사용.
+**모델 능력 지표 Construct Validation:**
+- holdout task set에서 TCR을 예측하는 R² ≥ 0.65이어야 모델 능력 지표를 유효한 predictor로 사용.
 - R² < 0.65이면 weight 재조정 또는 이 챕터의 주요 주장을 잠정적으로 표시.
 - Validation이 실패할 경우의 처리 방식도 사전에 기록 (`experiments/design-specification.md` §2).
 
-**Capability Cliff 메커니즘 (mechanism-first):**
+**성능 급락 메커니즘 (mechanism-first):**
 - 왜 급락인가: 각 sub-task가 이전 sub-task의 출력에 의존하는 구조에서, 초기 오류가 증폭된다.
-- ARCC가 낮은 모델은 단일 단계는 통과하더라도 multi-step chain에서 오류 누적이 임계점을 초과한다.
+- 모델 능력 지표가 낮은 모델은 단일 단계는 통과하더라도 multi-step chain에서 오류 누적이 임계점을 초과한다.
 - Sigmoid fit이 이 non-linearity를 포착한다. Piecewise linear vs. sigmoid: AIC 비교로 결정.
 
 **예상 반박 대비:**
-- "벤치마크가 agent capability proxy로 부족하다는 것은 알려진 사실": ARCC는 agent-specific composite이며, 기존 벤치마크가 포착하지 못하는 차원(tool call accuracy, multi-step)을 명시적으로 포함한다. 이것이 측정 기여다.
+- "벤치마크가 agent capability proxy로 부족하다는 것은 알려진 사실": 모델 능력 지표는 agent-specific composite이며, 기존 벤치마크가 포착하지 못하는 차원(tool call accuracy, multi-step)을 명시적으로 포함한다. 이것이 측정 기여다.
 - "Cliff가 아니라 측정 노이즈": 95% CI band를 그리고, cliff position의 신뢰구간을 보고한다. CI가 좁으면 cliff가 신호다.
 - "양자화 방법마다 다른데 뭘 비교하는가": 양자화 방법을 통제변수가 아닌 독립변수로 취급. 같은 bit-width에서 방법 간 TCR 차이가 유의하면 그 자체가 발견이다.
 
-**스냅샷 마커:** "2026년 3월 기준으로 측정한 모델별 ARCC 분포와 cliff position"
+**스냅샷 마커:** "2026년 3월 기준으로 측정한 모델별 모델 능력 지표 분포와 cliff position"
 
 ---
 
@@ -59,27 +59,27 @@ Agent는 모델 선택에서 비롯된 capability 편향을 상속하며, 이 �
    - 왜 이 네 가지가 서로 다른 task 유형에서 다르게 작동하는가
    - Mechanism first: 동일 input, 다른 모델, 다른 결과가 나타나는 구조적 이유 — 확률 분포의 차이가 multi-step에서 어떻게 증폭되는가
 
-2. **ARCC — agent-relevant capability를 측정하는 방법**
+2. **모델 능력 지표 — agent-relevant capability를 측정하는 방법**
    - Vendor tier와 벤치마크가 agent viability의 유효한 predictor가 아닌 이유 (측정 내용의 불일치)
    - TCA, IFR, MSRD_n, CUE의 조작적 정의 및 측정 절차
-   - ARCC composite weight 결정 원리와 sensitivity analysis
+   - 모델 능력 지표 composite weight 결정 원리와 sensitivity analysis
    - Construct validation: holdout R² ≥ 0.65 기준과 그 기준의 의미 — 이 기준이 통과되지 않으면 이후 분석에 어떤 조건이 붙는가
 
-3. **Capability Cliff — 선형이 아닌 급락이 발생하는 조건**
-   - E01 실험 설계: ARCC scatter plot × task type × TCR (harness-off 조건)
+3. **성능 급락 — 선형이 아닌 급락이 발생하는 조건**
+   - E01 실험 설계: 모델 능력 지표 scatter plot × task type × TCR (harness-off 조건)
    - Task-conditional sigmoid fit: T1(Code Review), T2(Multi-Step), T3(Long-Horizon)에서 cliff position이 다른 이유
-   - Agent-Viable Minimum: task별 최소 ARCC threshold의 실무적 의미
+   - 최소 모델 능력 임계점: task별 최소 모델 능력 지표 threshold의 실무적 의미
    - 예상 반박: cliff가 아니라 측정 노이즈일 수 있다 — 95% CI와 AIC 비교로 검증
 
 4. **Quantization Tax Curve — 같은 base model, 다른 bit-width**
-   - FP16 → Q8 → Q6 → Q4 → Q3 → Q2 경로에서 ARCC가 감소하는 비율
+   - FP16 → Q8 → Q6 → Q4 → Q3 → Q2 경로에서 모델 능력 지표가 감소하는 비율
    - Adaptive sampling 전략: FP16과 Q4 먼저, cliff 근처에서 Q8/Q6/Q3로 촘촘하게
    - Model family마다 quantization tax가 다른 이유 — base model의 어떤 특성이 tax를 결정하는가
    - 실무적 처방: 어느 bit-width에서 cliff를 건너게 되는가 (task별로 다른 답)
 
 5. **Distillation Efficiency Frontier — 같은 parameter budget, 다른 전략**
    - Distillation vs. quantization: 동일 parameter budget에서 agent viability 관점의 효율성 비교
-   - Pareto frontier 존재 여부: 같은 비용에서 어느 전략이 더 높은 ARCC를 제공하는가
+   - Pareto frontier 존재 여부: 같은 비용에서 어느 전략이 더 높은 모델 능력 지표를 제공하는가
    - 예상 반박: distillation은 학습 데이터 의존적 — 학습 domain 외 task에서의 generalization 한계
 
 6. **Mid-run model switching의 context continuity 붕괴 (E03)**
@@ -89,8 +89,8 @@ Agent는 모델 선택에서 비롯된 capability 편향을 상속하며, 이 �
    - Fig 1b (Quantization Tax Curve)와의 연결: 동일 family 내 switching은 continuity를 얼마나 보존하는가
 
 7. **모델 변수가 1차 병목이 되는 조건**
-   - ARCC가 cliff 이하인 경우에만 모델이 1차 병목이다
-   - ARCC가 cliff 이상일 때 1차 병목은 harness 또는 compute로 이동한다 (Ch.3/Ch.4 예고)
+   - 모델 능력 지표가 cliff 이하인 경우에만 모델이 1차 병목이다
+   - 모델 능력 지표가 cliff 이상일 때 1차 병목은 harness 또는 compute로 이동한다 (Ch.3/Ch.4 예고)
    - 이 조건 분류 없이 "모델 교체"를 처방하면 잘못된 개입이 될 수 있다
    - E10: self-monitoring을 위한 model capability floor — Agent-2 전환의 하한 조건 (Ch.7 예고)
 
@@ -98,9 +98,9 @@ Agent는 모델 선택에서 비롯된 capability 편향을 상속하며, 이 �
 
 **핵심 Figure:**
 
-- **Fig 1** — Agent Capability Cliff: ARCC scatter plot + task-conditional sigmoid fit + 95% CI band. Cliff position per task type. Harness-off 조건 기준. (E01 확장)
-- **Fig 1b** — Quantization Tax Curve: 동일 base model 4종 × 5단계 bit-width → ARCC 변화 경로. Model family별 cliff crossing point 표시.
-- **Fig 1c** — Distillation Efficiency Frontier: 동일 parameter budget에서 distill vs. quantize의 ARCC 비교. Pareto frontier 표시.
+- **Fig 1** — Agent 성능 급락: 모델 능력 지표 scatter plot + task-conditional sigmoid fit + 95% CI band. Cliff position per task type. Harness-off 조건 기준. (E01 확장)
+- **Fig 1b** — Quantization Tax Curve: 동일 base model 4종 × 5단계 bit-width → 모델 능력 지표 변화 경로. Model family별 cliff crossing point 표시.
+- **Fig 1c** — Distillation Efficiency Frontier: 동일 parameter budget에서 distill vs. quantize의 모델 능력 지표 비교. Pareto frontier 표시.
 
 <!-- 섹션별 초고는 /draft ch02 N 으로 작성 -->
 
@@ -109,8 +109,8 @@ Agent는 모델 선택에서 비롯된 capability 편향을 상속하며, 이 �
 - `deep-research/DR-2.1-agent-benchmarks.md`
 - `deep-research/DR-2.2-openrouter-routing.md`
 - `deep-research/DR-2.3-distillation-tool-use.md`
-- `experiments/design-specification.md` — §1 (Task specification T1/T2/T3), §2 (ARCC composite), §4 (Statistical analysis plan)
-- `experiments/figure_expansion.md` — Figure 1 재설계 (Capability Cliff, Quantization Tax, Distillation Frontier)
+- `experiments/design-specification.md` — §1 (Task specification T1/T2/T3), §2 (모델 능력 지표 composite), §4 (Statistical analysis plan)
+- `experiments/figure_expansion.md` — Figure 1 재설계 (성능 급락, Quantization Tax, Distillation Frontier)
 - `experiments/framework/arcc.py`
 - `experiments/framework/metrics.py`
 - `experiments/framework/ground_truth.py`

@@ -2,7 +2,7 @@
 
 ## 이 에이전트의 역할
 
-당신은 Ch.3 전담 집필 에이전트다. Kiwon이 primary 담당이며, 이 챕터의 지정된 섹션을 초고로 작성하거나 수정하는 것이 유일한 임무다. **이 챕터는 책 전체 용어의 기준점이다** — 여기서 정의된 용어(harness, AgentOps, Failure Budget Reallocation, HOR)는 이후 챕터에서 변형 없이 사용된다. 편집자 승인 없이 용어 정의를 수정하지 않는다.
+당신은 Ch.3 전담 집필 에이전트다. Kiwon이 primary 담당이며, 이 챕터의 지정된 섹션을 초고로 작성하거나 수정하는 것이 유일한 임무다. **이 챕터는 책 전체 용어의 기준점이다** — 여기서 정의된 용어(harness, AgentOps, 실패 재분류, harness overhead)는 이후 챕터에서 변형 없이 사용된다. 편집자 승인 없이 용어 정의를 수정하지 않는다.
 
 ---
 
@@ -14,8 +14,8 @@ Harness는 failure를 제거하지 않는다. Harness가 하는 것은 failure�
 
 ## 이전 챕터에서 오는 것 / 다음 챕터로 보내는 것
 
-- **이전 Ch.2에서 오는 것**: "ARCC가 cliff 이상일 때 1차 병목은 harness 또는 compute로 이동한다"는 조건. 모델 변수 병목을 식별한 후, 다음 병목으로 넘어가는 논리적 전제.
-- **다음 Ch.4로 보내는 것**: Harness와 AgentOps의 정의(Ch.4 실험 프레임의 기반). Failure Budget Reallocation의 가설(Ch.4에서 실험으로 검증). §8에서 announce되는 Ch.4 실험 가설과 판단 기준(pre-registration).
+- **이전 Ch.2에서 오는 것**: "모델 능력 지표가 cliff 이상일 때 1차 병목은 harness 또는 compute로 이동한다"는 조건. 모델 변수 병목을 식별한 후, 다음 병목으로 넘어가는 논리적 전제.
+- **다음 Ch.4로 보내는 것**: Harness와 AgentOps의 정의(Ch.4 실험 프레임의 기반). 실패 재분류의 가설(Ch.4에서 실험으로 검증). §8에서 announce되는 Ch.4 실험 가설과 판단 기준(pre-registration).
 
 ---
 
@@ -24,8 +24,8 @@ Harness는 failure를 제거하지 않는다. Harness가 하는 것은 failure�
 1. Harness engineering이란 무엇인가 — operational envelope 정의
 2. 보호와 enablement의 이중 구조
 3. Harness를 guardrails, scaffolding, orchestration과 구분
-4. Failure Budget Reallocation — harness의 효과를 프레이밍하는 방법
-5. HOR (Harness Overhead Ratio) — harness의 비용을 측정하는 방법
+4. 실패 재분류 — harness의 효과를 프레이밍하는 방법
+5. harness overhead (Harness Overhead Ratio) — harness의 비용을 측정하는 방법
 6. AgentOps란 무엇인가 — profession으로서의 정의
 7. Harness 부재의 비용: TeamClaws/PicoClaw 사후 분석
 8. Ch.4 실험 프레임 설정 — 가설과 판단 기준의 pre-registration
@@ -34,11 +34,11 @@ Harness는 failure를 제거하지 않는다. Harness가 하는 것은 failure�
 
 ## 이 챕터의 서술 제약
 
-- **용어 정의는 이 챕터에서 최초 확정된다**. §1에서 정의된 harness, §4에서 정의된 Failure Budget Reallocation, §5에서 정의된 HOR은 이후 챕터에서 재정의 없이 사용된다.
+- **용어 정의는 이 챕터에서 최초 확정된다**. §1에서 정의된 harness, §4에서 정의된 실패 재분류, §5에서 정의된 harness overhead은 이후 챕터에서 재정의 없이 사용된다.
 - §7(TeamClaws/PicoClaw 사후 분석)에서 결론을 선언하지 않는다. "따라서 harness가 필요하다"는 이 챕터에서도, 이전 챕터에서도 쓰지 않는다. 비용 데이터와 failure taxonomy가 결론을 만들게 한다.
 - §8에서 pre-registration을 announce할 때: 가설과 판단 기준을 구체적으로 기술하되, 결과를 예측하는 형식으로 쓰지 않는다. "이것을 확인하러 간다"의 형식.
 - CLI-Anything(§7)을 언급할 때: "독립적 수렴"의 증거로만 사용. 이 접근이 더 낫다는 주장을 하지 않는다.
-- HOR 정의에서 운영 비용 공식을 명시한다: Cost_compute = Cost_compute_base × (1 + HOR/100).
+- harness overhead 정의에서 운영 비용 공식을 명시한다: Cost_compute = Cost_compute_base × (1 + harness overhead/100).
 
 ---
 

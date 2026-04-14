@@ -12,7 +12,7 @@
 ## Task
 
 T1 (Code Review) task를 동일 조건에서 frontier 모델 vs. distilled 모델로 실행.
-동일 base model의 FP16→Q8→Q4→Q2 경로에서 ARCC 변화 측정 포함.
+동일 base model의 FP16→Q8→Q4→Q2 경로에서 모델 능력 지표 변화 측정 포함.
 
 ---
 
@@ -34,10 +34,10 @@ T1 (Code Review) task를 동일 조건에서 frontier 모델 vs. distilled 모�
 ## 관찰 대상
 
 - 리뷰 품질 차이가 일관되는가 (task 구조에 따라 달라지는가)
-- Quantization Tax Curve: bit-width별 ARCC 감소 비율
-- Distillation Efficiency Frontier: 동일 parameter budget에서 전략별 ARCC 비교
+- Quantization Tax Curve: bit-width별 모델 능력 지표 감소 비율
+- Distillation Efficiency Frontier: 동일 parameter budget에서 전략별 모델 능력 지표 비교
 
-**핵심 가설**: Quantization Tax Curve — FP16→Q2 경로에서 ARCC가 비선형 감소. Distillation이 동일 parameter budget에서 quantization보다 agent viability 관점에서 효율적이다.
+**핵심 가설**: Quantization Tax Curve — FP16→Q2 경로에서 모델 능력 지표가 비선형 감소. Distillation이 동일 parameter budget에서 quantization보다 agent viability 관점에서 효율적이다.
 
 ---
 
@@ -56,9 +56,9 @@ T1 (Code Review) task를 동일 조건에서 frontier 모델 vs. distilled 모�
 ## 결과
 
 **TCR per 모델**:
-**ARCC per 모델**:
+**모델 능력 지표 per 모델**:
 
-| 모델 | bit-width | ARCC | TCR(T1) |
+| 모델 | bit-width | 모델 능력 지표 | TCR(T1) |
 |------|-----------|------|---------|
 | | FP16 | | |
 | | Q8 | | |

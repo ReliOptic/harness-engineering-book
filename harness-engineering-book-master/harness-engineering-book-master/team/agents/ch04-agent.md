@@ -14,7 +14,7 @@
 
 ## 이전 챕터에서 오는 것 / 다음 챕터로 보내는 것
 
-- **이전 Ch.3에서 오는 것**: Harness와 AgentOps의 정의. Failure Budget Reallocation 가설. Ch.4 실험의 pre-registration(가설 + 판단 기준 — §1에서 recap).
+- **이전 Ch.3에서 오는 것**: Harness와 AgentOps의 정의. 실패 재분류 가설. Ch.4 실험의 pre-registration(가설 + 판단 기준 — §1에서 recap).
 - **다음 Ch.5로 보내는 것**: 22개 실험의 원시 결과(측정값, 관찰된 패턴, confirmatory/exploratory 레이블). "풍선 효과" 관찰(한 변수 제어 시 다른 변수가 1차 병목으로 부상). 반례(E21, E22)의 조건 기술.
 
 ---
@@ -23,8 +23,8 @@
 
 1. 실험 설계 원칙: 왜 의도적으로 실패시키는가 (pre-registration + confirmatory/exploratory 구분)
 2. 실험 환경: GCP 무료 티어, OpenRouter, 측정 인프라, ground truth 3-layer
-3. 1막 (E01-E04): 모델 변수 조작 — Capability Cliff, Quantization Tax, Distillation Frontier
-4. 2막 (E05-E08): Harness·Surface 변수 조작 — Failure Budget Reallocation, HOR 측정
+3. 1막 (E01-E04): 모델 변수 조작 — 성능 급락, Quantization Tax, Distillation Frontier
+4. 2막 (E05-E08): Harness·Surface 변수 조작 — 실패 재분류, harness overhead 측정
 5. 3막 (E09-E14): 제약 환경의 병목 — compute saturation, multi-agent coordination
 6. 4막 (E15-E17): Operator intervention의 효과 — timing, codification
 7. 5막 (E18-E20): AgentOps 내재화 — token monitoring, failure detection, mini self-immune

@@ -13,7 +13,7 @@
 
 ---
 
-## Figure 1 — Agent Capability Cliff: Quantization & the Minimum Viable Model
+## Figure 1 — Agent 성능 급락: Quantization & the Minimum Viable Model
 
 ← E01 확장
 
@@ -24,19 +24,19 @@
 ### 재설계
 
 **형식:** Scatter plot with sigmoid regression fit, task-conditional  
-**X축:** Agent-Relevant Capability Composite (ARCC) — tool call accuracy, instruction following rate, multi-step reasoning depth, context utilization efficiency의 weighted composite  
+**X축:** Agent-Relevant Capability Composite (모델 능력 지표) — tool call accuracy, instruction following rate, multi-step reasoning depth, context utilization efficiency의 weighted composite  
 **Y축:** TCR (Task Completion Rate, %)  
 **Marker encoding:** color = base model family, shape = quantization method (GPTQ / AWQ / GGUF variants)  
 **Overlay:** task type별 sigmoid fit 3개 + 95% CI band  
-**Annotation:** cliff position (ARCC threshold at TCR=50%) per task type
+**Annotation:** cliff position (모델 능력 지표 threshold at TCR=50%) per task type
 
-### 핵심 통찰: Capability Cliff
+### 핵심 통찰: 성능 급락
 
-일정 capability 이하에서 TCR이 선형으로 떨어지는 것이 아니라 급락하는 지점이 존재한다. 이 "Agent-Viable Minimum"을 task별로 수치화하는 것 자체가 독립적 기여다.
+일정 capability 이하에서 TCR이 선형으로 떨어지는 것이 아니라 급락하는 지점이 존재한다. 이 "최소 모델 능력 임계점"을 task별로 수치화하는 것 자체가 독립적 기여다.
 
 **세부 요소:**
 
-1. **Task-Conditional Cliff Position** — 코드 리뷰, 다단계 추론, 반복 실행 각각에서 cliff가 다른 ARCC 값에서 발생. 실무적 처방: "이 양자화 모델로 이 task는 된다"의 근거
+1. **Task-Conditional Cliff Position** — 코드 리뷰, 다단계 추론, 반복 실행 각각에서 cliff가 다른 모델 능력 지표 값에서 발생. 실무적 처방: "이 양자화 모델로 이 task는 된다"의 근거
 2. **Quantization Tax Curve** — 동일 base model의 FP16→Q8→Q6→Q4→Q3→Q2 경로를 선으로 연결. 양자화가 agent capability를 깎는 비율이 model family마다 다르면 그 자체가 발견
 3. **Distillation Efficiency Frontier** — 같은 parameter budget에서 distill model과 양자화 model의 TCR 비교. 어느 전략이 agent viability 관점에서 더 효율적인가
 
@@ -57,7 +57,7 @@ Figure 1을 harness-off에서 먼저 그리고, Figure 2 결과와 결합하여 
 
 - Adaptive sampling: FP16과 Q4만 먼저 → cliff 근처만 Q8/Q6/Q3으로 촘촘하게
 - Base model 4종 × 양자화 5단계 × task 3종 × 반복 5회 = 300 runs → adaptive로 ~100 runs
-- ARCC composite weight에 대한 sensitivity analysis 필수
+- 모델 능력 지표 composite weight에 대한 sensitivity analysis 필수
 
 ---
 
@@ -92,7 +92,7 @@ Figure 1을 harness-off에서 먼저 그리고, Figure 2 결과와 결합하여 
 - 우하향해야 함: harness가 MTTR을 줄이고 human escalation을 줄인다
 - **이 panel이 존재하는 이유:** RSuccR은 실험실 metric이다. MTTR과 human escalation rate는 엔지니어의 on-call rotation에 직접 영향을 미치는 operational metric이다. 이게 없으면 "so what?" 질문에 답할 수 없다.
 
-### 핵심 통찰: Failure Budget Reallocation
+### 핵심 통찰: 실패 재분류
 
 Harness의 진짜 효과를 "failure budget reallocation"이라는 프레임으로 설명한다:
 
@@ -222,7 +222,7 @@ Line chart: SAA vs token budget + HDL overlay. 합리적이지만 두 가지가 
 
 ### Figure 1 연결
 
-Figure 1의 capability cliff와 Figure 4의 SAA phase transition이 **같은 ARCC 값**에서 발생하는지 검증:
+Figure 1의 capability cliff와 Figure 4의 SAA phase transition이 **같은 모델 능력 지표 값**에서 발생하는지 검증:
 - Cliff와 phase transition이 동일 지점 → "모델이 task를 못하면 그걸 모른다"
 - Cliff가 먼저 → "성능은 떨어졌지만 agent는 아직 인지한다" (graceful degradation)
 - Phase transition이 먼저 → "agent가 모르는 사이에 판단력이 먼저 무너진다" (catastrophic — harness 필수 근거)
@@ -414,12 +414,12 @@ else:
 
 ### 기존 설계
 
-Scatter plot: HOR vs RSuccR, Pareto frontier. 좋지만 "왜 그 점이 optimal인지"의 mechanism이 없다.
+Scatter plot: harness overhead vs RSuccR, Pareto frontier. 좋지만 "왜 그 점이 optimal인지"의 mechanism이 없다.
 
 ### 재설계: Pareto Frontier + Ablation + Cost Translation
 
 **Panel A — Pareto Frontier with Configuration Annotation (기존 확장)**
-- X축: HOR (Harness Overhead Ratio, %)
+- X축: harness overhead (Harness Overhead Ratio, %)
 - Y축: RSuccR (Recovery Success Rate, %)
 - 각 점 = harness configuration
 - Pareto frontier curve + dominated region shading
@@ -443,12 +443,12 @@ Scatter plot: HOR vs RSuccR, Pareto frontier. 좋지만 "왜 그 점이 optimal�
 - 만약 component 2개가 RSuccR의 80%를 설명한다면 → "minimum viable harness"는 이 2개면 충분
 
 **Panel C — Dollar Translation (신규) ★**
-- X축: HOR (%, 동일)
+- X축: harness overhead (%, 동일)
 - Y축: Total Operational Cost Index (정규화)
-  - = compute cost (HOR에 비례) + failure cost (1 − RSuccR에 비례) + human intervention cost
+  - = compute cost (harness overhead에 비례) + failure cost (1 − RSuccR에 비례) + human intervention cost
 - Cost curve가 U-shape를 형성해야 함:
-  - HOR이 너무 낮으면 failure cost가 높고
-  - HOR이 너무 높으면 compute cost가 높고
+  - harness overhead이 너무 낮으면 failure cost가 높고
+  - harness overhead이 너무 높으면 compute cost가 높고
   - 최적점이 존재
 - **핵심:** Pareto frontier의 "최적"이 기술적 최적이 아니라 경제적 최적이 되면, CTO에게 보여줄 수 있는 그림이 된다
 
@@ -457,7 +457,7 @@ Scatter plot: HOR vs RSuccR, Pareto frontier. 좋지만 "왜 그 점이 optimal�
 | 예상 반박 | 실험 설계 반영 |
 |-----------|---------------|
 | Configuration 공간이 너무 넓어서 충분히 탐색했는가? | Bayesian Optimization으로 configuration 탐색. Random search baseline과 비교하여 탐색 효율 보고 |
-| HOR 정의가 환경 의존적이지 않은가? | HOR = (harness 사용 total token) / (task 자체 total token). 상대적 비율이므로 환경 독립적 |
+| harness overhead 정의가 환경 의존적이지 않은가? | harness overhead = (harness 사용 total token) / (task 자체 total token). 상대적 비율이므로 환경 독립적 |
 | Ablation의 순서 효과가 있지 않은가? | Full factorial ablation은 비용 과다 → Shapley value 기반 기여도 분해로 순서 독립적 추정 |
 | Cost model이 arbitrary하지 않은가? | 3가지 cost scenario (API pricing, self-hosted GPU, hybrid) 각각에서 optimal point 비교. Robust하면 결론 강화 |
 
@@ -569,7 +569,7 @@ Figure 8B에 포함시키기엔 너무 중요하다. Harness의 각 component가
 
 **형식:** Dual-axis line chart with extrapolation
 
-**X축:** Model capability (ARCC, Figure 1과 동일 척도)
+**X축:** Model capability (모델 능력 지표, Figure 1과 동일 척도)
 **Y축 (좌):** Harness Marginal Value = RSuccR(harness on) − RSuccR(harness off)
 **Y축 (우):** Task complexity (동시에 수행하는 sub-goal 수, context 요구량, tool chain 길이 등의 composite)
 
@@ -658,7 +658,7 @@ Harness는 처음 1시간과 10시간째에 동일하게 효과적인가? Harnes
 
 ```
 Chapter 1: The Landscape
-  Fig 1  Capability Cliff          ─── "어디부터 agent가 되는가?"
+  Fig 1  성능 급락          ─── "어디부터 agent가 되는가?"
                                         │
 Chapter 2: The Core Effect              │ (cliff-edge 모델 선별)
   Fig 2  Failure Profile Shift     ─── "harness가 뭘 바꾸는가?"
@@ -706,7 +706,7 @@ Chapter 7: The Future                   │
 ### Phase 1 (기반 — 다른 모든 실험의 전제)
 1. **Failure Taxonomy Pilot** (Figure 3 전제): 100+ raw failure 수집 → coding → codebook
 2. **Ground Truth Infrastructure** (Figure 9 전제): 외부 LLM + test suite + human eval pipeline
-3. **E01 확장** → Figure 1: Quantization variant pool 구성 + ARCC 정의
+3. **E01 확장** → Figure 1: Quantization variant pool 구성 + 모델 능력 지표 정의
 
 ### Phase 2 (핵심 실험)
 4. **E04** → Figure 2: Harness effect (가장 중요, 이 결과가 책의 존재를 정당화)
@@ -766,7 +766,7 @@ Dollar translation의 수치 근거. 임의값이 아닌 명시적 가정.
 **Compute cost (2026-03 기준):**
 - claude-sonnet-4-6: $3.00/MTok input, $15.00/MTok output
 - T2 MODERATE 20-step run 기준: 약 $0.36/run
-- HOR x%일 때: Cost_compute × (1 + x/100)
+- harness overhead x%일 때: Cost_compute × (1 + x/100)
 
 **Failure cost 구성:**
 - MTTR × $150/hr (시니어 엔지니어 rate)
@@ -778,7 +778,7 @@ Dollar translation의 수치 근거. 임의값이 아닌 명시적 가정.
 - B: Self-hosted GPU (compute × 0.4)
 - C: Hybrid (compute × 0.7, engineer × 1.2 on-call premium)
 
-3개 scenario 모두에서 동일 optimal HOR 구간 → 결론 robust
+3개 scenario 모두에서 동일 optimal harness overhead 구간 → 결론 robust
 상세 수식: `design-specification.md` §6
 
 ---

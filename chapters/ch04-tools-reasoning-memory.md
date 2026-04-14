@@ -1,6 +1,6 @@
-# Ch.4 — 도구, 추론, 기억: Agent는 어떻게 행동하는가
+# Ch.4 — 도구 호출, 추론, 기억의 실패 경로
 
-> **Part I — 기반: Agent를 만든 논문들**
+> **Part I — Agent Runtime의 기술적 전제**
 
 **한 줄**: Agent의 세 가지 핵심 능력 — 도구 사용, 추론-행동 통합, 자기 성찰과 기억 — 의 학술적 기원을 이해하고, 각 능력이 runtime에서 어떻게 실패하는지를 연결한다.
 
@@ -48,7 +48,7 @@
 
 **운영 번역**:
 - Multi-step task에서 agent가 각 단계의 결과를 관찰하고 다음 추론에 반영하는 것이 multi-step reasoning depth 측정의 기반이다.
-- Reasoning trace가 context를 소비한다 — HOR(Harness Overhead Ratio)과 동일한 trade-off. 추론의 깊이와 token 효율 사이의 긴장.
+- Reasoning trace가 context를 소비한다 — harness overhead와 동일한 trade-off. 추론의 깊이와 token 효율 사이의 긴장.
 
 **탐구 질문**: reasoning trace의 길이와 task completion rate 사이에 최적점이 존재하는가? 그 최적점이 task 복잡도에 따라 이동하는가?
 

@@ -12,7 +12,7 @@
 ## Task
 
 다양한 모델 tier에서 self-reporting (자기 능력 보고) 정확도를 측정한다.
-E01 데이터(ARCC 측정값)를 기반으로 tier별 self-reporting calibration을 분석한다.
+E01 데이터(모델 능력 지표 측정값)를 기반으로 tier별 self-reporting calibration을 분석한다.
 
 ---
 
@@ -20,8 +20,8 @@ E01 데이터(ARCC 측정값)를 기반으로 tier별 self-reporting calibration
 
 | 변수 | 설정 |
 |------|------|
-| **조작 변수** | 모델 tier (ARCC 기준 분류) |
-| **모델** | tier-A (ARCC > 0.8) / tier-B (0.5 < ARCC ≤ 0.8) / tier-C (ARCC ≤ 0.5): TBD (E01 결과 기반) |
+| **조작 변수** | 모델 tier (모델 능력 지표 기준 분류) |
+| **모델** | tier-A (모델 능력 지표 > 0.8) / tier-B (0.5 < 모델 능력 지표 ≤ 0.8) / tier-C (모델 능력 지표 ≤ 0.5): TBD (E01 결과 기반) |
 | **Harness config** | harness=ON |
 | **Surface** | CLI |
 | **Compute environment** | GCP e2-micro |
@@ -34,10 +34,10 @@ E01 데이터(ARCC 측정값)를 기반으로 tier별 self-reporting calibration
 ## 관찰 대상
 
 - self-reporting 정확도 per tier: 모델이 자신의 성능을 얼마나 정확히 예측하는가
-- capability floor 식별: self-reporting 자체가 불가능해지는 ARCC 하한
+- capability floor 식별: self-reporting 자체가 불가능해지는 모델 능력 지표 하한
 - E15와의 연결: agent 자기인식 정확도가 operator intervention 가능성에 미치는 영향
 
-**핵심 가설**: self-reporting 정확도에는 capability floor가 존재한다 — ARCC가 특정 값 이하로 떨어지면 self-reporting 자체가 신뢰할 수 없게 되며, 이것이 Agent-2 전환의 전제조건이다.
+**핵심 가설**: self-reporting 정확도에는 capability floor가 존재한다 — 모델 능력 지표가 특정 값 이하로 떨어지면 self-reporting 자체가 신뢰할 수 없게 되며, 이것이 Agent-2 전환의 전제조건이다.
 
 ---
 
@@ -59,7 +59,7 @@ E01 데이터(ARCC 측정값)를 기반으로 tier별 self-reporting calibration
 
 **Failure type**:
 
-| 모델 tier | ARCC (E01 참조) | self-reporting 정확도 | capability floor 도달 |
+| 모델 tier | 모델 능력 지표 (E01 참조) | self-reporting 정확도 | capability floor 도달 |
 |----------|----------------|---------------------|---------------------|
 | tier-A | | | |
 | tier-B | | | |
@@ -116,5 +116,5 @@ E01 데이터(ARCC 측정값)를 기반으로 tier별 self-reporting calibration
 
 ## 연결 실험
 
-- E01: ARCC 측정 기준값 제공
+- E01: 모델 능력 지표 측정 기준값 제공
 - E15: agent 자기인식과 operator intervention 연결
