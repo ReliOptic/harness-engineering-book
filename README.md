@@ -65,6 +65,7 @@
 
 | Path | Description |
 | --- | --- |
+| [`list-of-contents.md`](./list-of-contents.md) | 전체 상세 목차 (섹션 단위) |
 | [`chapter-map.md`](./chapter-map.md) | 챕터별 목적, 핵심 질문, 학습 결과 |
 | [`chapters/`](./chapters) | 챕터 원고 (한국어) |
 | [`experiments/`](./experiments) | E01~E22 실험 설계, runbook, 결과 데이터 |
